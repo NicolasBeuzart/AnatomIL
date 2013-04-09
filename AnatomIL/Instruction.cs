@@ -8,36 +8,70 @@ namespace AnatomIL
 {
     public class Methode
     {
-        public string name;
-
-        public void Execute(string []args)
-        {
-
-        }
-    }
-
-    public class add : Methode
-    {
         string _name;
-
-        public add()
-        {
-            Name = "add";
-        }
 
         public string Name
         {
             get { return _name; }
+
             set
             {
                 _name = value;
             }
         }
 
-        public void Execute(string []args)
+        public void Execute()
         {
-
         }
+    }
 
+    public class add : Methode
+    {
+
+        public void Execute()
+        {
+            base.Execute();
+            this.Name = "lol";
+        }
+    }
+
+    public class sub : Methode
+    {
+
+        public void Execute()
+        {
+            base.Execute();
+            this.Name = "lol";
+        }
+    }
+
+    public class mul : Methode
+    {
+
+        public void Execute()
+        {
+            base.Execute();
+            this.Name = "lol";
+        }
+    }
+
+    public class div : Methode
+    {
+
+        public void Execute()
+        {
+            base.Execute();
+            this.Name = "lol";
+        }
+    }
+
+    public class rem : Methode
+    {
+
+        public void Execute()
+        {
+            base.Execute();
+            this.Name = "lol";
+        }
     }
 }

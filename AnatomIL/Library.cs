@@ -17,7 +17,7 @@ namespace AnatomIL
         }
         public void AddMethode(Methode methode)
         {
-            _library.Add(methode.name, methode);
+            _library.Add(methode.Name, methode);
         }
 
         public bool IsMethodeExiste(string name)
@@ -26,7 +26,7 @@ namespace AnatomIL
             return (result);
         }
 
-        public Methode FoundMethode(string name)
+        public Methode FindMethode(string name)
         {
             return (_library[name]);
         }
