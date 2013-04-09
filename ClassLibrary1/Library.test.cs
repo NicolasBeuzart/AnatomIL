@@ -13,6 +13,13 @@ namespace AnatomIL.test
         [Test]
         public void TestForLybrary()
         {
+            var lib = new Library();
+            Methode newmethode = new add();
+            Assert.That(lib.IsMethodeExiste("toto"), Is.False);
+            newmethode.name = "add";
+
+            Assert.That(newmethode.name, Is.EqualTo("add"));
+
 
         }
     }
