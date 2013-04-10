@@ -58,11 +58,8 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="Parser.cs" />
-=======
     <Compile Include="Node.cs" />
->>>>>>> 312d6a1b490d8857a94689d72b3d2d37123a9bcd
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stack.cs" />
