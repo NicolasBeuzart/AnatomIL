@@ -27,7 +27,19 @@ namespace AnatomIL
             }
         }
 
-        public void Push(object elt) // Add element on stack
+        public object FirstElement()  // Return first element from stack
+        {
+            if (first == null)
+            {
+                throw new InvalidOperationException("Empty Stack");
+            }
+            else
+            {
+                return first.Value;
+            }
+        }
+
+        public void Push(object elt) // Add 1  on stack
         {
             first = new Node(elt, first);
             nbr_elt++;
