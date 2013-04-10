@@ -42,10 +42,11 @@ namespace AnatomIL.test
         public void TestForParser()
         {
             parser p = new parser();
-            string[] s = new string[2];
+            string[] s = new string[3];
 
-            s[0] = "sub";
-            s[1] = "add";
+            s[0] = "ldc.i4.13";
+            s[1] = "ldc.i4.12";
+            s[2] = "add";
             Methode m = p.Lib.FindMethode("add");
             Assert.That(m.Name, Is.EqualTo("add"));
 
@@ -60,14 +61,20 @@ namespace AnatomIL.test
 
             m = p.Lib.FindMethode("rem");
             Assert.That(m.Name, Is.EqualTo("rem"));
-
+            m = p.Lib.FindMethode("ldc");
+            Assert.That(m.Name, Is.EqualTo("ldc"));
             p.Code.Instructions = s;
+            string[] s2 = s[0].Split('.');
+            Assert.That(s2[0], Is.EqualTo("ldc"));
+            Assert.That(s2[1], Is.EqualTo("i4"));
+            Assert.That(Convert.ToInt32(s2[2]), Is.EqualTo(13));
+
             p.ExecuteNextInstruction();
+            Assert.That(p.s.Count, Is.EqualTo(1));
+            p.ExecuteNextInstruction();
+            Assert.That(p.s.Count, Is.EqualTo(2));
             p.ExecuteNextInstruction();
             //p.Lib.FindMethode("sub").Name = "good";
-            sub test = new sub();
-            Assert.That(p.Lib.FindMethode("sub").GetType(), Is.EqualTo(test.GetType()));
-            Assert.That(p.Lib.FindMethode("sub").Name, Is.EqualTo("good"));
             Assert.That(p.s.Count, Is.EqualTo(1));
         }
         

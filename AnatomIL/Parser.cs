@@ -13,6 +13,8 @@ namespace AnatomIL
         Methode _methode;
         code _code;
         Stack _s;
+        string[] instructions;
+
         public parser()
         {
             _pc = 0;
@@ -25,6 +27,7 @@ namespace AnatomIL
             _lib.AddMethode(new mul());
             _lib.AddMethode(new div());
             _lib.AddMethode(new rem());
+            _lib.AddMethode(new ldc());
         }
 
         public Stack s
@@ -48,36 +51,45 @@ namespace AnatomIL
         }
         public void ExecuteNextInstruction()
         {
-            string instruction = _code.CurentInstruction(_pc);
-            _methode = _lib.FindMethode(instruction);
+          //  "Ldc.i4.33"
+          // 0 "ldc"
+           // 1 "i4"
+            // 2 "33"
+            instructions = _code.CurentInstruction(_pc).Split('.');
+            _methode = _lib.FindMethode(instructions[0]);
             _methode.GetType();
-            _methode.Execute(_code.Instructions, _s);
-            if (_lib.IsMethodeExiste(instruction))
+            _methode.Execute(instructions, _s);
+            if (_lib.IsMethodeExiste(instructions[0]))
             {
-                if (instruction == "add")
+                if (instructions[0] == "add")
                 {
-                    add tmp = (add)_lib.FindMethode(instruction);
-                    tmp.Execute(_code.Instructions, _s);
+                    add tmp = (add)_lib.FindMethode(instructions[0]);
+                    _s = tmp.Execute(instructions, _s);
                 }
-                else if (instruction == "sub")
+                else if (instructions[0] == "sub")
                 {
-                    sub tmp = (sub)_lib.FindMethode(instruction);
-                    tmp.Execute(_code.Instructions, _s);
+                    sub tmp = (sub)_lib.FindMethode(instructions[0]);
+                    _s = tmp.Execute(instructions, _s);
                 }
-                else if (instruction == "mul")
+                else if (instructions[0] == "mul")
                 {
-                    mul tmp = (mul)_lib.FindMethode(instruction);
-                    tmp.Execute(_code.Instructions, _s);
+                    mul tmp = (mul)_lib.FindMethode(instructions[0]);
+                    _s = tmp.Execute(instructions, _s);
                 }
-                else if (instruction == "div")
+                else if (instructions[0] == "div")
                 {
-                    div tmp = (div)_lib.FindMethode(instruction);
-                    tmp.Execute(_code.Instructions, _s);
+                    div tmp = (div)_lib.FindMethode(instructions[0]);
+                    _s = tmp.Execute(instructions, _s);
                 }
-                else if (instruction == "rem")
+                else if (instructions[0] == "rem")
                 {
-                    rem tmp = (rem)_lib.FindMethode(instruction);
-                    tmp.Execute(_code.Instructions, _s);
+                    rem tmp = (rem)_lib.FindMethode(instructions[0]);
+                    _s = tmp.Execute(instructions, _s);
+                }
+                else if (instructions[0] == "ldc")
+                {
+                    ldc tmp = (ldc)_lib.FindMethode(instructions[0]);
+                    tmp.Execute(instructions, _s);
                 }
               //  _lib.FindMethode(instruction).Execute(_code.Instructions, _s);
             }

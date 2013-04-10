@@ -20,7 +20,7 @@ namespace AnatomIL
             }
         }
 
-        public void Execute(string[] args, Stack s) { this.Name = "bad"; }
+        public Stack Execute(string[] args, Stack s) { this.Name = "bad"; return (s); }
     }
 
     public class add : Methode
@@ -31,9 +31,12 @@ namespace AnatomIL
             this.Name = "add";
         }
 
-        new public void Execute(string[] args, Stack s)
+        new public Stack Execute(string[] args, Stack s)
         {
-            s.Push("coucou");
+            int i1 = Convert.ToInt32(s.Pop());
+            int i2 = Convert.ToInt32(s.Pop());
+            s.Push(i1 + i2);
+            return (s);
             
         }
     }
@@ -46,9 +49,10 @@ namespace AnatomIL
             this.Name = "sub";
         }
 
-        new public void Execute(string[] args, Stack s)
+        new public Stack Execute(string[] args, Stack s)
         {
             this.Name = "good";
+            return (s);
         }
     }
 
@@ -60,9 +64,10 @@ namespace AnatomIL
             this.Name = "mul";
         }
 
-        new public void Execute(string[] args, Stack s)
+        new public Stack Execute(string[] args, Stack s)
         {
             this.Name = "lol";
+            return (s);
         }
     }
 
@@ -74,9 +79,10 @@ namespace AnatomIL
             this.Name = "div";
         }
 
-        new public void Execute(string[] args, Stack s)
+        new public Stack Execute(string[] args, Stack s)
         {
             this.Name = "lol";
+            return (s);
         }
     }
 
@@ -88,25 +94,27 @@ namespace AnatomIL
             this.Name = "rem";
         }
 
-        new public void Execute(string[] args, Stack s)
+        new public Stack Execute(string[] args, Stack s)
         {
             this.Name = "lol";
+            return (s);
         }
     }
 
-    public class Ldc : Methode
+    public class ldc : Methode
     {
-        public Ldc()
+        public ldc()
         {
-            this.Name = "Ldc";
+            this.Name = "ldc";
         }
 
-        new public void Execute(string[] args, Stack s)
+        new public Stack Execute(string[] args, Stack s)
         {
-            if (args[0] == "i4")
+            if (args[1].Equals("i4"))
             {
-                s.Push(Convert.ToInt32(args[1]));
+                s.Push(Convert.ToInt32(args[2]));
             }
+            return (s);
         }
     }
 
