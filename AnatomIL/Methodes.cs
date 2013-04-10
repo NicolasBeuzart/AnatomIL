@@ -20,7 +20,7 @@ namespace AnatomIL
             }
         }
 
-        public void Execute(string[] args) { this.Name = "bad"; }
+        public void Execute(string[] args, Stack s) { this.Name = "bad"; }
     }
 
     public class add : Methode
@@ -31,9 +31,10 @@ namespace AnatomIL
             this.Name = "add";
         }
 
-        new public void Execute(string[] args)
+        new public void Execute(string[] args, Stack s)
         {
-            this.Name = "good";
+            s.Push("coucou");
+            
         }
     }
 
@@ -45,7 +46,7 @@ namespace AnatomIL
             this.Name = "sub";
         }
 
-        new public void Execute(string[] args)
+        new public void Execute(string[] args, Stack s)
         {
             this.Name = "good";
         }
@@ -59,7 +60,7 @@ namespace AnatomIL
             this.Name = "mul";
         }
 
-        new public void Execute(string[] args)
+        new public void Execute(string[] args, Stack s)
         {
             this.Name = "lol";
         }
@@ -73,7 +74,7 @@ namespace AnatomIL
             this.Name = "div";
         }
 
-        new public void Execute(string[] args)
+        new public void Execute(string[] args, Stack s)
         {
             this.Name = "lol";
         }
@@ -87,9 +88,25 @@ namespace AnatomIL
             this.Name = "rem";
         }
 
-        new public void Execute(string[] args)
+        new public void Execute(string[] args, Stack s)
         {
             this.Name = "lol";
+        }
+    }
+
+    public class Ldc : Methode
+    {
+        public Ldc()
+        {
+            this.Name = "Ldc";
+        }
+
+        new public void Execute(string[] args, Stack s)
+        {
+            if (args[0] == "i4")
+            {
+                s.Push(Convert.ToInt32(args[1]));
+            }
         }
     }
 

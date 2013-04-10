@@ -12,18 +12,24 @@ namespace AnatomIL
         Library _lib;
         Methode _methode;
         code _code;
-
+        Stack _s;
         public parser()
         {
             _pc = 0;
             _lib = new Library();
             _code = new code();
             _methode = new Methode();
+            _s = new Stack();
             _lib.AddMethode(new add());
             _lib.AddMethode(new sub());
             _lib.AddMethode(new mul());
             _lib.AddMethode(new div());
             _lib.AddMethode(new rem());
+        }
+
+        public Stack s
+        {
+            get { return _s; }
         }
 
         public Library Lib
@@ -43,10 +49,37 @@ namespace AnatomIL
         public void ExecuteNextInstruction()
         {
             string instruction = _code.CurentInstruction(_pc);
+            _methode = _lib.FindMethode(instruction);
+            _methode.GetType();
+            _methode.Execute(_code.Instructions, _s);
             if (_lib.IsMethodeExiste(instruction))
             {
-                _methode = _lib.FindMethode(instruction);
-                _lib.FindMethode(instruction).Execute(_code.Instructions);
+                if (instruction == "add")
+                {
+                    add tmp = (add)_lib.FindMethode(instruction);
+                    tmp.Execute(_code.Instructions, _s);
+                }
+                else if (instruction == "sub")
+                {
+                    sub tmp = (sub)_lib.FindMethode(instruction);
+                    tmp.Execute(_code.Instructions, _s);
+                }
+                else if (instruction == "mul")
+                {
+                    mul tmp = (mul)_lib.FindMethode(instruction);
+                    tmp.Execute(_code.Instructions, _s);
+                }
+                else if (instruction == "div")
+                {
+                    div tmp = (div)_lib.FindMethode(instruction);
+                    tmp.Execute(_code.Instructions, _s);
+                }
+                else if (instruction == "rem")
+                {
+                    rem tmp = (rem)_lib.FindMethode(instruction);
+                    tmp.Execute(_code.Instructions, _s);
+                }
+              //  _lib.FindMethode(instruction).Execute(_code.Instructions, _s);
             }
             _pc++;
         }

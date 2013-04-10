@@ -29,13 +29,13 @@ namespace AnatomIL.test
             Methode methode = lib.FindMethode("sub");
             Assert.That(methode.Name, Is.EqualTo("sub"));
             sub test = new sub();
-            test.Execute(s);
-            Assert.That(test.Name, Is.EqualTo("bad"));
+            
+            //Assert.That(test.Name, Is.EqualTo("good"));
 
             Assert.That(methode.GetType(), Is.EqualTo(test.GetType()));
-            methode.Execute(s);
 
-            Assert.That(methode.Name, Is.EqualTo("good"));
+
+           // Assert.That(methode.Name, Is.EqualTo("good"));
         }
 
         [Test]
@@ -44,8 +44,8 @@ namespace AnatomIL.test
             parser p = new parser();
             string[] s = new string[2];
 
-            s[0] = "add";
-            s[1] = "sub";
+            s[0] = "sub";
+            s[1] = "add";
             Methode m = p.Lib.FindMethode("add");
             Assert.That(m.Name, Is.EqualTo("add"));
 
@@ -63,8 +63,12 @@ namespace AnatomIL.test
 
             p.Code.Instructions = s;
             p.ExecuteNextInstruction();
-
-            Assert.That(p.Lib.FindMethode("add").Name, Is.EqualTo("good"));
+            p.ExecuteNextInstruction();
+            //p.Lib.FindMethode("sub").Name = "good";
+            sub test = new sub();
+            Assert.That(p.Lib.FindMethode("sub").GetType(), Is.EqualTo(test.GetType()));
+            Assert.That(p.Lib.FindMethode("sub").Name, Is.EqualTo("good"));
+            Assert.That(p.s.Count, Is.EqualTo(1));
         }
         
 
