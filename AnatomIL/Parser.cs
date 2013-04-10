@@ -55,7 +55,7 @@ namespace AnatomIL
           // 0 "ldc"
            // 1 "i4"
             // 2 "33"
-            instructions = _code.CurentInstruction(_pc).Split('.');
+            instructions = _code.CurentInstruction(_pc).Split(new char[] {'.',' '});
             _methode = _lib.FindMethode(instructions[0]);
             _methode.GetType();
             _methode.Execute(instructions, _s);

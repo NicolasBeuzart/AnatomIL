@@ -42,11 +42,20 @@ namespace AnatomIL.test
         public void TestForParser()
         {
             parser p = new parser();
-            string[] s = new string[3];
+            string[] s = new string[11];
 
             s[0] = "ldc.i4.13";
             s[1] = "ldc.i4.12";
             s[2] = "add";
+            s[3] = "ldc.i4.30";
+            s[4] = "sub";
+            s[5] = "ldc.i4.20";
+            s[6] = "div";
+            s[7] = "ldc.i4.5";
+            s[8] = "mul";
+            s[9] = "ldc.i4.25";
+            s[10] = "rem";
+            
             Methode m = p.Lib.FindMethode("add");
             Assert.That(m.Name, Is.EqualTo("add"));
 
@@ -63,19 +72,63 @@ namespace AnatomIL.test
             Assert.That(m.Name, Is.EqualTo("rem"));
             m = p.Lib.FindMethode("ldc");
             Assert.That(m.Name, Is.EqualTo("ldc"));
-            p.Code.Instructions = s;
-            string[] s2 = s[0].Split('.');
-            Assert.That(s2[0], Is.EqualTo("ldc"));
-            Assert.That(s2[1], Is.EqualTo("i4"));
-            Assert.That(Convert.ToInt32(s2[2]), Is.EqualTo(13));
 
+            p.Code.Instructions = s;
+
+            // ldc.i4.13
             p.ExecuteNextInstruction();
             Assert.That(p.s.Count, Is.EqualTo(1));
+            Assert.That(p.s.FirstElement(), Is.EqualTo(13));
+
+            //ldc.i4.12
             p.ExecuteNextInstruction();
             Assert.That(p.s.Count, Is.EqualTo(2));
+            Assert.That(p.s.FirstElement(), Is.EqualTo(12));
+
+            //add
             p.ExecuteNextInstruction();
-            //p.Lib.FindMethode("sub").Name = "good";
             Assert.That(p.s.Count, Is.EqualTo(1));
+            Assert.That(p.s.FirstElement(), Is.EqualTo(25));
+
+            //ldc.i4.30
+            p.ExecuteNextInstruction();
+            Assert.That(p.s.Count, Is.EqualTo(2));
+            Assert.That(p.s.FirstElement(), Is.EqualTo(30));
+
+            //sub
+            p.ExecuteNextInstruction();
+            Assert.That(p.s.Count, Is.EqualTo(1));
+            Assert.That(p.s.FirstElement(), Is.EqualTo(5));
+
+            //ldc.i4.20
+            p.ExecuteNextInstruction();
+            Assert.That(p.s.Count, Is.EqualTo(2));
+            Assert.That(p.s.FirstElement(), Is.EqualTo(20));
+
+            //div
+            p.ExecuteNextInstruction();
+            Assert.That(p.s.Count, Is.EqualTo(1));
+            Assert.That(p.s.FirstElement(), Is.EqualTo(4));
+
+            //ldc.i4.5
+            p.ExecuteNextInstruction();
+            Assert.That(p.s.Count, Is.EqualTo(2));
+            Assert.That(p.s.FirstElement(), Is.EqualTo(5));
+
+            //mull
+            p.ExecuteNextInstruction();
+            Assert.That(p.s.Count, Is.EqualTo(1));
+            Assert.That(p.s.FirstElement(), Is.EqualTo(20));
+
+            //ldc.i4.5
+            p.ExecuteNextInstruction();
+            Assert.That(p.s.Count, Is.EqualTo(2));
+            Assert.That(p.s.FirstElement(), Is.EqualTo(25));
+
+            //rem
+            p.ExecuteNextInstruction();
+            Assert.That(p.s.Count, Is.EqualTo(1));
+            Assert.That(p.s.FirstElement(), Is.EqualTo(5));
         }
         
 

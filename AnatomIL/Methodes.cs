@@ -51,7 +51,9 @@ namespace AnatomIL
 
         new public Stack Execute(string[] args, Stack s)
         {
-            this.Name = "good";
+            int i1 = Convert.ToInt32(s.Pop());
+            int i2 = Convert.ToInt32(s.Pop());
+            s.Push(i1 - i2);
             return (s);
         }
     }
@@ -66,7 +68,9 @@ namespace AnatomIL
 
         new public Stack Execute(string[] args, Stack s)
         {
-            this.Name = "lol";
+            int i1 = Convert.ToInt32(s.Pop());
+            int i2 = Convert.ToInt32(s.Pop());
+            s.Push(i1 * i2);
             return (s);
         }
     }
@@ -81,7 +85,9 @@ namespace AnatomIL
 
         new public Stack Execute(string[] args, Stack s)
         {
-            this.Name = "lol";
+            int i1 = Convert.ToInt32(s.Pop());
+            int i2 = Convert.ToInt32(s.Pop());
+            s.Push(i1 / i2);
             return (s);
         }
     }
@@ -96,7 +102,9 @@ namespace AnatomIL
 
         new public Stack Execute(string[] args, Stack s)
         {
-            this.Name = "lol";
+            int i1 = Convert.ToInt32(s.Pop());
+            int i2 = Convert.ToInt32(s.Pop());
+            s.Push(i1 % i2);
             return (s);
         }
     }
