@@ -20,37 +20,47 @@ namespace AnatomIL
             }
         }
 
-        public void Execute()
-        {
-        }
+        public void Execute(string[] args) { this.Name = "bad"; }
     }
 
     public class add : Methode
     {
 
-        public void Execute()
+        public add()
         {
-            base.Execute();
-            this.Name = "lol";
+            this.Name = "add";
+        }
+
+        new public void Execute(string[] args)
+        {
+            this.Name = "good";
         }
     }
 
     public class sub : Methode
     {
 
-        public void Execute()
+        public sub()
         {
-            base.Execute();
-            this.Name = "lol";
+            this.Name = "sub";
+        }
+
+        new public void Execute(string[] args)
+        {
+            this.Name = "good";
         }
     }
 
     public class mul : Methode
     {
 
-        public void Execute()
+        public mul()
         {
-            base.Execute();
+            this.Name = "mul";
+        }
+
+        new public void Execute(string[] args)
+        {
             this.Name = "lol";
         }
     }
@@ -58,9 +68,13 @@ namespace AnatomIL
     public class div : Methode
     {
 
-        public void Execute()
+        public div()
         {
-            base.Execute();
+            this.Name = "div";
+        }
+
+        new public void Execute(string[] args)
+        {
             this.Name = "lol";
         }
     }
@@ -68,10 +82,16 @@ namespace AnatomIL
     public class rem : Methode
     {
 
-        public void Execute()
+        public rem()
         {
-            base.Execute();
+            this.Name = "rem";
+        }
+
+        new public void Execute(string[] args)
+        {
             this.Name = "lol";
         }
     }
+
+
 }

@@ -11,28 +11,44 @@ namespace AnatomIL
         int _pc;
         Library _lib;
         Methode _methode;
+        code _code;
 
-        public void Initialisation()
+        public parser()
         {
-            var temp1 = new add();
-            temp1.Name = "add";
-            _lib.AddMethode(temp1);
+            _pc = 0;
+            _lib = new Library();
+            _code = new code();
+            _methode = new Methode();
+            _lib.AddMethode(new add());
+            _lib.AddMethode(new sub());
+            _lib.AddMethode(new mul());
+            _lib.AddMethode(new div());
+            _lib.AddMethode(new rem());
+        }
 
-            var temp2 = new sub();
-            temp2.Name = "sub";
-            _lib.AddMethode(temp2);
+        public Library Lib
+        {
+            get { return _lib; }
+        }
 
-            var temp3 = new mul();
-            temp3.Name = "mul";
-            _lib.AddMethode(temp3);
-
-            var temp4 = new div();
-            temp4.Name = "div";
-            _lib.AddMethode(temp4);
-
-            var temp5 = new rem();
-            temp5.Name = "div";
-            _lib.AddMethode(temp5);
+        public code Code
+        {
+            get { return _code; }
+            
+            set
+            {
+                _code = value;
+            }
+        }
+        public void ExecuteNextInstruction()
+        {
+            string instruction = _code.CurentInstruction(_pc);
+            if (_lib.IsMethodeExiste(instruction))
+            {
+                _methode = _lib.FindMethode(instruction);
+                _lib.FindMethode(instruction).Execute(_code.Instructions);
+            }
+            _pc++;
         }
 
     }
