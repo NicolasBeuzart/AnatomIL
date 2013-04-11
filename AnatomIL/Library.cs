@@ -8,26 +8,26 @@ namespace AnatomIL
 {
     public class Library
     {
-        Dictionary<string, Methode> _library;
+        Dictionary<string, CodeOpRoot> _library;
 
         public Library()
         {
-            _library = new Dictionary<string, Methode>();
+            _library = new Dictionary<string, CodeOpRoot>();
             
         }
 
-        public void AddMethode(Methode methode)
+        public void LibAddOpCodeRoot(CodeOpRoot methode)
         {
             _library.Add(methode.Name, methode);
         }
 
-        public bool IsMethodeExiste(string name)
+        public bool LibIsOpCodeRootExiste(string name)
         {
             bool result = _library.ContainsKey(name);
             return (result);
         }
 
-        public Methode FindMethode(string name)
+        public CodeOpRoot LibFindOpCodeRoot(string name)
         {
             return (_library[name]);
         }
