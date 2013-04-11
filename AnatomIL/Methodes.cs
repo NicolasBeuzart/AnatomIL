@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AnatomIL
 {
-    public class Methode
+    public class Methode // classe "père" de toute les méthodes InstObjRoot
     {
         string _name;
 
@@ -20,7 +20,7 @@ namespace AnatomIL
             }
         }
 
-        public Stack Execute(string[] args, Stack s) { this.Name = "bad"; return (s); }
+        virtual public void Execute(string[] args, Stack s) {  }
     }
 
     public class add : Methode
@@ -31,13 +31,11 @@ namespace AnatomIL
             this.Name = "add";
         }
 
-        new public Stack Execute(string[] args, Stack s)
+        override public void Execute(string[] args, Stack s)
         {
             int i1 = Convert.ToInt32(s.Pop());
             int i2 = Convert.ToInt32(s.Pop());
             s.Push(i1 + i2);
-            return (s);
-            
         }
     }
 
@@ -49,12 +47,11 @@ namespace AnatomIL
             this.Name = "sub";
         }
 
-        new public Stack Execute(string[] args, Stack s)
+        override public void Execute(string[] args, Stack s)
         {
             int i1 = Convert.ToInt32(s.Pop());
             int i2 = Convert.ToInt32(s.Pop());
             s.Push(i1 - i2);
-            return (s);
         }
     }
 
@@ -66,12 +63,11 @@ namespace AnatomIL
             this.Name = "mul";
         }
 
-        new public Stack Execute(string[] args, Stack s)
+        override public void Execute(string[] args, Stack s)
         {
             int i1 = Convert.ToInt32(s.Pop());
             int i2 = Convert.ToInt32(s.Pop());
             s.Push(i1 * i2);
-            return (s);
         }
     }
 
@@ -83,12 +79,11 @@ namespace AnatomIL
             this.Name = "div";
         }
 
-        new public Stack Execute(string[] args, Stack s)
+        override public void Execute(string[] args, Stack s)
         {
             int i1 = Convert.ToInt32(s.Pop());
             int i2 = Convert.ToInt32(s.Pop());
             s.Push(i1 / i2);
-            return (s);
         }
     }
 
@@ -100,12 +95,11 @@ namespace AnatomIL
             this.Name = "rem";
         }
 
-        new public Stack Execute(string[] args, Stack s)
+        override public void Execute(string[] args, Stack s)
         {
             int i1 = Convert.ToInt32(s.Pop());
             int i2 = Convert.ToInt32(s.Pop());
             s.Push(i1 % i2);
-            return (s);
         }
     }
 
@@ -116,13 +110,12 @@ namespace AnatomIL
             this.Name = "ldc";
         }
 
-        new public Stack Execute(string[] args, Stack s)
+        override public void Execute(string[] args, Stack s)
         {
             if (args[1].Equals("i4"))
             {
                 s.Push(Convert.ToInt32(args[2]));
             }
-            return (s);
         }
     }
 
