@@ -13,54 +13,65 @@ namespace AnatomIL.test
         [Test]
         public void FirstStackCreated()
         {
-             Stack s = new Stack();
+            Stack s = new Stack();
 
-             Assert.That(s.IsEmpty, Is.Not.False, "The stack is not empty : bad initialisation");
+            Assert.That(s.Count == 0, "The stack is not empty : bad initialisation");
 
-             s.Push(22);
+            StackItem si = new StackItem();
 
-             Assert.That(s.IsEmpty, Is.False, "The stack is empty but 22 has been push on");
+            si.value = 22;
+            si.type = typeof(Int32);
+
+            s.Push(si);
+
+            StackItem si2 = new StackItem();
+
+            si2 = s.CurrentStack();
+
+            Assert.That(s.Count != 0, "The stack is empty but si has been push on");
+
+            Assert.That(si2.type, Is.EqualTo(typeof(Int32)), "Bad initialisation of the type");
+
+            Assert.That(si2.value, Is.EqualTo(22), "Bad initialisation of the value");
         }
 
         [Test]
-        public void PushAndPopElements()
+        public void PushAndPopItems()
         {
             Stack s = new Stack();
-            object o = null;
 
-            s.Push(22);
+            StackItem si = new StackItem();
+            StackItem si2 = new StackItem();
+            StackItem sip = new StackItem();
 
-            s.Push("gzg");
+            si.value = 22;
+            si.type = typeof(Int32);
 
-            o = s.Pop();
+            si2.value = "vrezvr";
+            si2.type = typeof(String);
 
-            Assert.That(o.Equals("gzg"), "The string \"gzg\" hasn't been pop of the stack");
+            s.Push(si);
+            s.Push(si2);
 
-            o = s.Pop();
+            Assert.That(s.Count == 2, "2 item has been push in stack but there is actually {0} item in stack",s.Count);
 
-            Assert.That(o.Equals(22), "The number 22 hasn't been pop of the stack");
+            sip = s.Pop();
 
-            Assert.That(s.IsEmpty, Is.Not.Null, "The stack is not empty but should be");
-        }
+            Assert.That(sip.type, Is.EqualTo(typeof(string)), "Bad initialisation of the type or Pop method");
 
-        [Test]
-        public void NumberOfElementsInStack()
-        {
-            Stack s = new Stack();
-            object o = null;
+            Assert.That(sip.value, Is.EqualTo("vrezvr"), "Bad initialisation of the value or Pop method");
 
-            s.Push(22);
-            s.Push(34);
-            s.Push(57);
-            s.Push("tttt");
+            Assert.That(s.Count == 1, "2 item has been push in stack and one has been pop but there is actually {0} item in stack", s.Count);
 
-            Assert.That(s.Count, Is.EqualTo(4), "4 item has been push in stack but there is actually {0}",s.Count);
+            sip = s.CurrentStack();
 
-            o = s.Pop();
+            Assert.That(sip.type, Is.EqualTo(typeof(Int32)), "Bad initialisation of the type or CurrentStack method");
 
-            Assert.That(o.Equals("tttt"), "The string \"tttt\" hasn't been pop of the stack");
+            Assert.That(sip.value, Is.EqualTo(22), "Bad initialisation of the value or CurrentStack method");
 
-            Assert.That(s.Count, Is.EqualTo(3), "4 item has been push in stack and one has been pop but there is actually {0} items in stack", s.Count);
+            sip = s.Pop();
+
+            Assert.That(s.Count == 0, "The stack has to be empty but there is still {0} items in", s.Count);
         }
 
     }
