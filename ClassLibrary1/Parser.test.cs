@@ -14,12 +14,16 @@ namespace AnatomIL.test
         public void TestForLybrary()
         {
             Library lib = new Library();
-            lib.LibAddOpCodeRoot(new AddCodeOpRoot());
-            lib.LibAddOpCodeRoot(new SubCodeOpRoot());
-            Assert.That(lib.LibIsOpCodeRootExiste("toto"), Is.False);
-            Assert.That(lib.LibIsOpCodeRootExiste("add"), Is.True);
+            lib.LibAddCodeOpRoot(new AddCodeOpRoot());
+            lib.LibAddCodeOpRoot(new SubCodeOpRoot());
+
+            // on test la methode LibIsOpCodeRootExiste
+            Assert.That(lib.LibIsCodeOpRootExiste("toto"), Is.False);
+            Assert.That(lib.LibIsCodeOpRootExiste("add"), Is.True);
 
             CodeOpRoot operation = lib.LibFindOpCodeRoot("sub");
+
+            // on test qu'un CodeOpRoot est crée correctement
             Assert.That(operation.Name, Is.EqualTo("sub"));
             Assert.That(operation.GetType(), Is.EqualTo(typeof(SubCodeOpRoot)));
         }

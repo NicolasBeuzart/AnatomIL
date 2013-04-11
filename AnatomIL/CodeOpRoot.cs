@@ -15,7 +15,7 @@ namespace AnatomIL
             get { return _name; }
         }
 
-        virtual public CodeOp Parse(string args, Stack s) { return null; }
+        virtual public CodeOp Parse(string args, Stack s) { return null; } // methode de parse des opérations qui retourne un CodeOp pres a être Executer correctement
     }
 
     public class AddCodeOpRoot : CodeOpRoot

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AnatomIL
 {
-    public class CodeOp
+    public class CodeOp // classe "père" de tout les CodeOp
     {
         internal string _name;
 
@@ -20,7 +20,7 @@ namespace AnatomIL
             get { return (_name); }
         }
 
-        virtual public void Execute(Stack s) { }
+        virtual public void Execute(Stack s) { } // méthode d'éxécution des opérations
     }
 
     public class AddCodeOp : CodeOp

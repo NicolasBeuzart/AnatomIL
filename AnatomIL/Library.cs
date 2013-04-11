@@ -16,12 +16,12 @@ namespace AnatomIL
             
         }
 
-        public void LibAddOpCodeRoot(CodeOpRoot methode)
+        public void LibAddCodeOpRoot(CodeOpRoot methode)
         {
             _library.Add(methode.Name, methode);
         }
 
-        public bool LibIsOpCodeRootExiste(string name)
+        public bool LibIsCodeOpRootExiste(string name)
         {
             bool result = _library.ContainsKey(name);
             return (result);

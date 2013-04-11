@@ -21,12 +21,12 @@ namespace AnatomIL
             _code = new code();
             _methode = new CodeOpRoot();
             _s = new Stack();
-            _lib.LibAddOpCodeRoot(new AddCodeOpRoot());
-            _lib.LibAddOpCodeRoot(new SubCodeOpRoot());
-            _lib.LibAddOpCodeRoot(new MulCodeOpRoot());
-            _lib.LibAddOpCodeRoot(new DivCodeOpRoot());
-            _lib.LibAddOpCodeRoot(new RemCodeOpRoot());
-            _lib.LibAddOpCodeRoot(new LdcCodeOpRoot());
+            _lib.LibAddCodeOpRoot(new AddCodeOpRoot());
+            _lib.LibAddCodeOpRoot(new SubCodeOpRoot());
+            _lib.LibAddCodeOpRoot(new MulCodeOpRoot());
+            _lib.LibAddCodeOpRoot(new DivCodeOpRoot());
+            _lib.LibAddCodeOpRoot(new RemCodeOpRoot());
+            _lib.LibAddCodeOpRoot(new LdcCodeOpRoot());
         }
 
         public Stack s
