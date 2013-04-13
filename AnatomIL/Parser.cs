@@ -61,7 +61,7 @@ namespace AnatomIL
             }
 
             // on recupére le nom de la méthode et les arguments
-            string operation = instruction.Split(new char[] { '.', ' ' })[0];
+            string operation = instruction.Split('.', ' ')[0];
 
             CodeOp Operation = _lib.LibFindOpCodeRoot(operation).Parse(instruction, _s);
 

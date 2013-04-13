@@ -17,7 +17,7 @@ namespace AnatomIL
 
         virtual public CodeOp Parse(string args, Stack s) { return null; } // methode de parse des opérations qui retourne un CodeOp pres a être Executer correctement
     }
-
+    
     public class AddCodeOpRoot : CodeOpRoot
     {
 
@@ -30,7 +30,12 @@ namespace AnatomIL
         {
             Type t;
 
-            t = s.FirstElement().GetType();
+            t = s.CurrentStack[s.Count - 1].Type;
+
+            if (t != s.CurrentStack[s.Count - 2].Type)
+            {
+                throw new InvalidOperationException("can't add two value using different type");
+            }
 
             return new AddCodeOp(t);
         }
@@ -48,7 +53,7 @@ namespace AnatomIL
         {
             Type t;
 
-            t = s.FirstElement().GetType();
+            t = s.CurrentStack[s.Count - 1].Type;
 
             return new SubCodeOp(t);
         }
@@ -66,7 +71,7 @@ namespace AnatomIL
         {
             Type t;
 
-            t = s.FirstElement().GetType();
+            t = s.CurrentStack[s.Count - 1].Type;
 
             return new MulCodeOp(t);
         }
@@ -84,7 +89,7 @@ namespace AnatomIL
         {
             Type t;
 
-            t = s.FirstElement().GetType();
+            t = s.CurrentStack[s.Count - 1].Type;
 
             return new DivCodeOp(t);
         }
@@ -102,7 +107,7 @@ namespace AnatomIL
         {
             Type t;
 
-            t = s.FirstElement().GetType();
+            t = s.CurrentStack[s.Count - 1].Type;
 
             return new RemCodeOp(t);
         }
@@ -119,10 +124,14 @@ namespace AnatomIL
         override public CodeOp Parse(string args, Stack s)
         {
             string[] instruction = args.Split('.');
-            Type t = typeof(Int64);
+            Type t;
             object value = Convert.ToInt64(instruction[2]);
 
-
+            if (instruction[1].Equals("i8"))
+            {
+                t = typeof(Int64);
+                value = Convert.ToInt32(instruction[2]);
+            }
             if (instruction[1].Equals("i4"))
             {
                 t = typeof(Int32);
@@ -132,6 +141,10 @@ namespace AnatomIL
             {
                 t = typeof(Int16);
                 value = Convert.ToInt16(instruction[2]);
+            }
+            else
+            {
+                throw new Exception();
             }
 
             return (new LdcCodeOp(t, value));

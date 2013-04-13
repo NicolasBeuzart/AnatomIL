@@ -3,8 +3,9 @@ C:\Users\Nicolas\documents\visual studio 2012\Projects\AnatomIL\AnatomIL\bin\Deb
 C:\Users\Nicolas\documents\visual studio 2012\Projects\AnatomIL\AnatomIL\bin\Debug\AnatomIL.pdb
 C:\Users\Nicolas\documents\visual studio 2012\Projects\AnatomIL\AnatomIL\bin\Debug\nunit.framework.dll
 C:\Users\Nicolas\documents\visual studio 2012\Projects\AnatomIL\AnatomIL\bin\Debug\nunit.framework.xml
-C:\Users\Nicolas\documents\visual studio 2012\Projects\AnatomIL\AnatomIL\obj\Debug\AnatomIL.csprojResolveAssemblyReference.cache
 C:\Users\Nicolas\documents\visual studio 2012\Projects\AnatomIL\AnatomIL\obj\Debug\AnatomIL.Properties.Resources.resources
 C:\Users\Nicolas\documents\visual studio 2012\Projects\AnatomIL\AnatomIL\obj\Debug\AnatomIL.csproj.GenerateResource.Cache
 C:\Users\Nicolas\documents\visual studio 2012\Projects\AnatomIL\AnatomIL\obj\Debug\AnatomIL.exe
 C:\Users\Nicolas\documents\visual studio 2012\Projects\AnatomIL\AnatomIL\obj\Debug\AnatomIL.pdb
+C:\Users\Nicolas\documents\visual studio 2012\Projects\AnatomIL\AnatomIL\obj\Debug\AnatomIL.Form1.resources
+C:\Users\Nicolas\documents\visual studio 2012\Projects\AnatomIL\AnatomIL\obj\Debug\AnatomIL.csprojResolveAssemblyReference.cache

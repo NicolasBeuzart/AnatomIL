@@ -37,21 +37,21 @@ namespace AnatomIL
         {
             if (_t == typeof(Int64))
             {
-                Int64 i1 = Convert.ToInt32(s.Pop());
-                Int64 i2 = Convert.ToInt32(s.Pop());
-                s.Push(i1 + i2);
+                Int64 i1 = Convert.ToInt64(s.Pop().Value);
+                Int64 i2 = Convert.ToInt64(s.Pop().Value);
+                s.Push(_t, i1 + i2);
             }
             else if (_t == typeof(Int32))
             {
-                Int32 i1 = Convert.ToInt32(s.Pop());
-                Int32 i2 = Convert.ToInt32(s.Pop());
-                s.Push(i1 + i2);
+                Int32 i1 = Convert.ToInt32(s.Pop().Value);
+                Int32 i2 = Convert.ToInt32(s.Pop().Value);
+                s.Push(_t, i1 + i2);
             }
             else if (_t == typeof(Int16))
             {
-                Int16 i1 = Convert.ToInt16(s.Pop());
-                Int16 i2 = Convert.ToInt16(s.Pop());
-                s.Push(i1 + i2);
+                Int16 i1 = Convert.ToInt16(s.Pop().Value);
+                Int16 i2 = Convert.ToInt16(s.Pop().Value);
+                s.Push(_t, i1 + i2);
             }
         }
     }
@@ -70,21 +70,21 @@ namespace AnatomIL
         {
             if (_t == typeof(Int64))
             {
-                Int64 i1 = Convert.ToInt32(s.Pop());
-                Int64 i2 = Convert.ToInt32(s.Pop());
-                s.Push(i1 - i2);
+                Int64 i1 = Convert.ToInt32(s.Pop().Value);
+                Int64 i2 = Convert.ToInt32(s.Pop().Value);
+                s.Push(_t, i1 - i2);
             }
             else if (_t == typeof(Int32))
             {
-                Int32 i1 = Convert.ToInt32(s.Pop());
-                Int32 i2 = Convert.ToInt32(s.Pop());
-                s.Push(i1 - i2);
+                Int32 i1 = Convert.ToInt32(s.Pop().Value);
+                Int32 i2 = Convert.ToInt32(s.Pop().Value);
+                s.Push(_t, i1 - i2);
             }
             else if (_t == typeof(Int16))
             {
-                Int16 i1 = Convert.ToInt16(s.Pop());
-                Int16 i2 = Convert.ToInt16(s.Pop());
-                s.Push(i1 - i2);
+                Int16 i1 = Convert.ToInt16(s.Pop().Value);
+                Int16 i2 = Convert.ToInt16(s.Pop().Value);
+                s.Push(_t, i1 - i2);
             }
         }
     }
@@ -103,21 +103,21 @@ namespace AnatomIL
         {
             if (_t == typeof(Int64))
             {
-                Int64 i1 = Convert.ToInt32(s.Pop());
-                Int64 i2 = Convert.ToInt32(s.Pop());
-                s.Push(i1 * i2);
+                Int64 i1 = Convert.ToInt32(s.Pop().Value);
+                Int64 i2 = Convert.ToInt32(s.Pop().Value);
+                s.Push(_t, i1 * i2);
             }
             else if (_t == typeof(Int32))
             {
-                Int32 i1 = Convert.ToInt32(s.Pop());
-                Int32 i2 = Convert.ToInt32(s.Pop());
-                s.Push(i1 * i2);
+                Int32 i1 = Convert.ToInt32(s.Pop().Value);
+                Int32 i2 = Convert.ToInt32(s.Pop().Value);
+                s.Push(_t, i1 * i2);
             }
             else if (_t == typeof(Int16))
             {
-                Int16 i1 = Convert.ToInt16(s.Pop());
-                Int16 i2 = Convert.ToInt16(s.Pop());
-                s.Push(i1 * i2);
+                Int16 i1 = Convert.ToInt16(s.Pop().Value);
+                Int16 i2 = Convert.ToInt16(s.Pop().Value);
+                s.Push(_t, i1 * i2);
             }
         }
     }
@@ -136,21 +136,21 @@ namespace AnatomIL
         {
             if (_t == typeof(Int64))
             {
-                Int64 i1 = Convert.ToInt32(s.Pop());
-                Int64 i2 = Convert.ToInt32(s.Pop());
-                s.Push(i1 / i2);
+                Int64 i1 = Convert.ToInt32(s.Pop().Value);
+                Int64 i2 = Convert.ToInt32(s.Pop().Value);
+                s.Push(_t, i1 / i2);
             }
             else if (_t == typeof(Int32))
             {
-                Int32 i1 = Convert.ToInt32(s.Pop());
-                Int32 i2 = Convert.ToInt32(s.Pop());
-                s.Push(i1 / i2);
+                Int32 i1 = Convert.ToInt32(s.Pop().Value);
+                Int32 i2 = Convert.ToInt32(s.Pop().Value);
+                s.Push(_t, i1 / i2);
             }
             else if (_t == typeof(Int16))
             {
-                Int16 i1 = Convert.ToInt16(s.Pop());
-                Int16 i2 = Convert.ToInt16(s.Pop());
-                s.Push(i1 / i2);
+                Int16 i1 = Convert.ToInt16(s.Pop().Value);
+                Int16 i2 = Convert.ToInt16(s.Pop().Value);
+                s.Push(_t, i1 / i2);
             }
         }
     }
@@ -169,21 +169,21 @@ namespace AnatomIL
         {
             if (_t == typeof(Int64))
             {
-                Int64 i1 = Convert.ToInt32(s.Pop());
-                Int64 i2 = Convert.ToInt32(s.Pop());
-                s.Push(i1 % i2);
+                Int64 i1 = Convert.ToInt32(s.Pop().Value);
+                Int64 i2 = Convert.ToInt32(s.Pop().Value);
+                s.Push(_t, i1 % i2);
             }
             else if (_t == typeof(Int32))
             {
-                Int32 i1 = Convert.ToInt32(s.Pop());
-                Int32 i2 = Convert.ToInt32(s.Pop());
-                s.Push(i1 % i2);
+                Int32 i1 = Convert.ToInt32(s.Pop().Value);
+                Int32 i2 = Convert.ToInt32(s.Pop().Value);
+                s.Push(_t, i1 % i2);
             }
             else if (_t == typeof(Int16))
             {
-                Int16 i1 = Convert.ToInt16(s.Pop());
-                Int16 i2 = Convert.ToInt16(s.Pop());
-                s.Push(i1 % i2);
+                Int16 i1 = Convert.ToInt16(s.Pop().Value);
+                Int16 i2 = Convert.ToInt16(s.Pop().Value);
+                s.Push(_t, i1 % i2);
             }
         }
     }
@@ -201,7 +201,7 @@ namespace AnatomIL
 
         override public void Execute(Stack s)
         {
-            s.Push(_value);
+            s.Push(_t, _value);
         }
     }
 }

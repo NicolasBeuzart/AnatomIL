@@ -6,9 +6,25 @@ using System.Threading.Tasks;
 
 namespace AnatomIL
 {
-    class StackItem
+    public class StackItem
     {
-        public Type t;
-        public object Value;
+        Type _t;
+        object _value;
+
+        public object Value
+        {
+            get { return _value; }
+        }
+
+        public Type Type
+        {
+            get { return _t; }
+        }
+
+        public StackItem(Type t, object Value)
+        {
+            _t = t;
+            _value = Value;
+        }
     }
 }
