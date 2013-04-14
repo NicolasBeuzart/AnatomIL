@@ -25,14 +25,9 @@ namespace AnatomIL
             return tmp;
         }
 
-        public StackItem CurrentStack()
+        public List<StackItem> CurrentStack
         {
-            if (_currentstack.Count == 0)
-            {
-                throw new InvalidOperationException("Empty Stack");
-            }
-
-            return _currentstack[_currentstack.Count - 1];
+            get { return _currentstack; }
         }
 
         public void Push(Type t, object value) // Add 1 element on stack

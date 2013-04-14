@@ -8,7 +8,13 @@ namespace AnatomIL
 {
     public class StackItem
     {
-        public Type type;
-        public object value;
+        public Type Type;
+        public object Value;
+
+        public StackItem(Type t, object o)
+        {
+            Type = t;
+            Value = o;
+        }
     }
 }
