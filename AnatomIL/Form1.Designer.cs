@@ -32,19 +32,20 @@
             this.lbInstructions = new System.Windows.Forms.Label();
             this.btExecuteOneStep = new System.Windows.Forms.Button();
             this.panLeft = new System.Windows.Forms.Panel();
-            this.panToolbar = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.panInstructions = new System.Windows.Forms.Panel();
+            this.listBoxInstructions = new System.Windows.Forms.ListBox();
+            this.panMarginLeft = new System.Windows.Forms.Panel();
+            this.panToolbar = new System.Windows.Forms.Panel();
+            this.btStart = new System.Windows.Forms.Button();
             this.splitPanelLeft = new System.Windows.Forms.Splitter();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fichierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panMarginLeft = new System.Windows.Forms.Panel();
-            this.listBoxInstructions = new System.Windows.Forms.ListBox();
+            this.btStop = new System.Windows.Forms.Button();
             this.panLeft.SuspendLayout();
-            this.panToolbar.SuspendLayout();
             this.panInstructions.SuspendLayout();
+            this.panToolbar.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,6 +77,7 @@
             this.btExecuteOneStep.TabIndex = 2;
             this.btExecuteOneStep.Text = "&Pas à pas";
             this.btExecuteOneStep.UseVisualStyleBackColor = true;
+            this.btExecuteOneStep.Visible = false;
             this.btExecuteOneStep.Click += new System.EventHandler(this.btExecuteOneStep_Click);
             // 
             // panLeft
@@ -89,26 +91,6 @@
             this.panLeft.Size = new System.Drawing.Size(358, 488);
             this.panLeft.TabIndex = 3;
             // 
-            // panToolbar
-            // 
-            this.panToolbar.Controls.Add(this.button1);
-            this.panToolbar.Controls.Add(this.btExecuteOneStep);
-            this.panToolbar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panToolbar.Location = new System.Drawing.Point(0, 0);
-            this.panToolbar.Name = "panToolbar";
-            this.panToolbar.Size = new System.Drawing.Size(358, 32);
-            this.panToolbar.TabIndex = 3;
-            // 
-            // button1
-            // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button1.Location = new System.Drawing.Point(67, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 32);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // panInstructions
             // 
             this.panInstructions.Controls.Add(this.listBoxInstructions);
@@ -120,6 +102,48 @@
             this.panInstructions.Name = "panInstructions";
             this.panInstructions.Size = new System.Drawing.Size(358, 456);
             this.panInstructions.TabIndex = 4;
+            // 
+            // listBoxInstructions
+            // 
+            this.listBoxInstructions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBoxInstructions.Enabled = false;
+            this.listBoxInstructions.FormattingEnabled = true;
+            this.listBoxInstructions.Items.AddRange(new object[] {
+            "ldc.i4.56"});
+            this.listBoxInstructions.Location = new System.Drawing.Point(19, 13);
+            this.listBoxInstructions.Name = "listBoxInstructions";
+            this.listBoxInstructions.Size = new System.Drawing.Size(339, 443);
+            this.listBoxInstructions.TabIndex = 6;
+            // 
+            // panMarginLeft
+            // 
+            this.panMarginLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panMarginLeft.Location = new System.Drawing.Point(0, 0);
+            this.panMarginLeft.Name = "panMarginLeft";
+            this.panMarginLeft.Size = new System.Drawing.Size(19, 456);
+            this.panMarginLeft.TabIndex = 6;
+            // 
+            // panToolbar
+            // 
+            this.panToolbar.Controls.Add(this.btStop);
+            this.panToolbar.Controls.Add(this.btStart);
+            this.panToolbar.Controls.Add(this.btExecuteOneStep);
+            this.panToolbar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panToolbar.Location = new System.Drawing.Point(0, 0);
+            this.panToolbar.Name = "panToolbar";
+            this.panToolbar.Size = new System.Drawing.Size(358, 32);
+            this.panToolbar.TabIndex = 3;
+            // 
+            // btStart
+            // 
+            this.btStart.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btStart.Location = new System.Drawing.Point(67, 0);
+            this.btStart.Name = "btStart";
+            this.btStart.Size = new System.Drawing.Size(75, 32);
+            this.btStart.TabIndex = 3;
+            this.btStart.Text = "Start";
+            this.btStart.UseVisualStyleBackColor = true;
+            this.btStart.Click += new System.EventHandler(this.btStart_Click);
             // 
             // splitPanelLeft
             // 
@@ -152,36 +176,27 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
             this.saveToolStripMenuItem.Text = "save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
             this.loadToolStripMenuItem.Text = "load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
-            // panMarginLeft
+            // btStop
             // 
-            this.panMarginLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panMarginLeft.Location = new System.Drawing.Point(0, 0);
-            this.panMarginLeft.Name = "panMarginLeft";
-            this.panMarginLeft.Size = new System.Drawing.Size(19, 456);
-            this.panMarginLeft.TabIndex = 6;
-            // 
-            // listBoxInstructions
-            // 
-            this.listBoxInstructions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBoxInstructions.Enabled = false;
-            this.listBoxInstructions.FormattingEnabled = true;
-            this.listBoxInstructions.Items.AddRange(new object[] {
-            "ldc.i4.56"});
-            this.listBoxInstructions.Location = new System.Drawing.Point(19, 13);
-            this.listBoxInstructions.Name = "listBoxInstructions";
-            this.listBoxInstructions.Size = new System.Drawing.Size(339, 443);
-            this.listBoxInstructions.TabIndex = 6;
+            this.btStop.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btStop.Location = new System.Drawing.Point(142, 0);
+            this.btStop.Name = "btStop";
+            this.btStop.Size = new System.Drawing.Size(75, 32);
+            this.btStop.TabIndex = 4;
+            this.btStop.Text = "Stop";
+            this.btStop.UseVisualStyleBackColor = true;
+            this.btStop.Click += new System.EventHandler(this.btStop_Click);
             // 
             // Form1
             // 
@@ -196,9 +211,9 @@
             this.Text = "Form1";
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.panLeft.ResumeLayout(false);
-            this.panToolbar.ResumeLayout(false);
             this.panInstructions.ResumeLayout(false);
             this.panInstructions.PerformLayout();
+            this.panToolbar.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -214,7 +229,7 @@
         private System.Windows.Forms.Panel panLeft;
         private System.Windows.Forms.Panel panInstructions;
         private System.Windows.Forms.Panel panToolbar;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btStart;
         private System.Windows.Forms.Splitter splitPanelLeft;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fichierToolStripMenuItem;
@@ -222,6 +237,7 @@
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
         private System.Windows.Forms.Panel panMarginLeft;
         private System.Windows.Forms.ListBox listBoxInstructions;
+        private System.Windows.Forms.Button btStop;
     }
 }
 
