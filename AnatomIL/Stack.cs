@@ -8,56 +8,39 @@ namespace AnatomIL
 {
     public class Stack
     {
-        private Node first = null;
-        private int nbr_elt = 0;
+        private List<StackItem> _currentstack;
 
-
-        public object Pop()  // Return first element from stack and delete it from stack
+        public StackItem Pop()  // Return first element from stack and delete it from stack
         {
-            if (first == null)
+            StackItem tmp;
+
+            if (_currentstack.Count == 0)
             {
                 throw new InvalidOperationException("Empty Stack");
             }
-            else
-            {
-                object tmp = first.Value;
-                first = first.Next;
-                nbr_elt--;
-                return tmp;
-            }
+            tmp = _currentstack[_currentstack.Count - 1];
+
+            _currentstack.Remove(tmp);
+
+            return tmp;
         }
 
-        public object FirstElement()  // Return first element from stack
+        public List<StackItem> CurrentStack
         {
-            if (first == null)
-            {
-                throw new InvalidOperationException("Empty Stack");
-            }
-            else
-            {
-                return first.Value;
-            }
+            get { return _currentstack; }
         }
 
-        public void Push(object elt) // Add 1  on stack
+        public void Push(StackItem elt) // Add 1 element on stack
         {
-            first = new Node(elt, first);
-            nbr_elt++;
+            _currentstack.Add(elt);
         }
 
-        public bool IsEmpty  // Return TRUE if the stack is empty, else FALSE
-        {
-            get
-            {
-                return (first == null);
-            }
-        }
 
         public int Count  // Return number of elements in stack
         {
             get
             {
-                return nbr_elt;
+                return _currentstack.Count;
             }
         }
 

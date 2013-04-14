@@ -13,24 +13,19 @@ namespace AnatomIL.test
         [Test]
         public void TestForLybrary()
         {
-            var lib = new Library();
-            var newmethode = new add();
-            var sub = new sub();
-            string[] s = new string[1];
-            Assert.That(lib.IsMethodeExiste("toto"), Is.False);
-            newmethode.Name = "add";
-            Assert.That(sub.Name, Is.EqualTo("sub"));
-            Assert.That(newmethode.Name, Is.EqualTo("add"));
-            lib.AddMethode(new add());
-            lib.AddMethode(new sub());
-            Assert.That(lib.IsMethodeExiste("add"), Is.True);
+            Library lib = new Library();
+            lib.LibAddCodeOpRoot(new AddCodeOpRoot());
+            lib.LibAddCodeOpRoot(new SubCodeOpRoot());
 
-            Methode methode = lib.FindMethode("sub");
-            Assert.That(methode.Name, Is.EqualTo("sub"));
-            sub test = new sub();
-            
-            Assert.That(methode.GetType(), Is.EqualTo(test.GetType()));
+            // on test la methode LibIsOpCodeRootExiste
+            Assert.That(lib.LibIsCodeOpRootExiste("toto"), Is.False);
+            Assert.That(lib.LibIsCodeOpRootExiste("add"), Is.True);
 
+            CodeOpRoot operation = lib.LibFindOpCodeRoot("sub");
+
+            // on test qu'un CodeOpRoot est crée correctement
+            Assert.That(operation.Name, Is.EqualTo("sub"));
+            Assert.That(operation.GetType(), Is.EqualTo(typeof(SubCodeOpRoot)));
         }
 
         [Test]
@@ -53,22 +48,22 @@ namespace AnatomIL.test
             s[10] = "rem";
             
             // on verifi que les méthodes on bien était ajouter a la library
-            Methode m = p.Lib.FindMethode("add");
+            CodeOpRoot m = p.Lib.LibFindOpCodeRoot("add");
             Assert.That(m.Name, Is.EqualTo("add"), "Méthode add inéxistant ou mal nomé");
 
-            m = p.Lib.FindMethode("sub");
+            m = p.Lib.LibFindOpCodeRoot("sub");
             Assert.That(m.Name, Is.EqualTo("sub"), "Méthode sub inéxistant ou mal nomé");
 
-            m = p.Lib.FindMethode("mul");
+            m = p.Lib.LibFindOpCodeRoot("mul");
             Assert.That(m.Name, Is.EqualTo("mul"), "Méthode mul inéxistant ou mal nomé");
 
-            m = p.Lib.FindMethode("div");
+            m = p.Lib.LibFindOpCodeRoot("div");
             Assert.That(m.Name, Is.EqualTo("div"), "Méthode div inéxistant ou mal nomé");
 
-            m = p.Lib.FindMethode("rem");
+            m = p.Lib.LibFindOpCodeRoot("rem");
             Assert.That(m.Name, Is.EqualTo("rem"), "Méthode rem inéxistant ou mal nomé");
 
-            m = p.Lib.FindMethode("ldc");
+            m = p.Lib.LibFindOpCodeRoot("ldc");
             Assert.That(m.Name, Is.EqualTo("ldc"), "Méthode ldc inéxistant ou mal nomé");
 
             p.Code.Instructions = s;
