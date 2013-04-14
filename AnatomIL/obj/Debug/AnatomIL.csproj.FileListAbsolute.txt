@@ -8,3 +8,5 @@ C:\Users\Nicolas\documents\visual studio 2012\Projects\AnatomIL\AnatomIL\obj\Deb
 C:\Users\Nicolas\documents\visual studio 2012\Projects\AnatomIL\AnatomIL\obj\Debug\AnatomIL.csproj.GenerateResource.Cache
 C:\Users\Nicolas\documents\visual studio 2012\Projects\AnatomIL\AnatomIL\obj\Debug\AnatomIL.exe
 C:\Users\Nicolas\documents\visual studio 2012\Projects\AnatomIL\AnatomIL\obj\Debug\AnatomIL.pdb
+C:\Users\Corentin\Documents\GitExtensions\AnatomIL\AnatomIL\obj\Debug\AnatomIL.Properties.Resources.resources
+C:\Users\Corentin\Documents\GitExtensions\AnatomIL\AnatomIL\obj\Debug\AnatomIL.csproj.GenerateResource.Cache

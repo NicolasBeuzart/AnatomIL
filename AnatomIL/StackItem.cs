@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace AnatomIL
 {
-    class StackItem
+    public class StackItem
     {
-        public Type t;
-        public object Value;
+        public Type type;
+        public object value;
     }
 }
