@@ -39,9 +39,10 @@ namespace AnatomIL
                 {
                     // on recupére le nom de la méthode et les arguments
                     string operation = instruction.Split('.', ' ')[0];
-                    if (_lib.LibIsCodeOpRootExiste(operation))
+                    if (_lib.LibIsCodeOpRootExiste(operation)) _operations.Add(_lib.LibFindOpCodeRoot(operation));
+                    else
                     {
-                        _operations.Add(_lib.LibFindOpCodeRoot(operation));
+                        throw new Exception("Compilation error : line " + (i + 1).ToString() + ", instruction : \"" + operation + "\" can't be found in lybrary");
                     }
                 }
                 else

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AnatomIL
 {
-    public class controleur
+    public class Controleur
     {
         public int _pc; // registre
         Stack _s; // pile
@@ -14,7 +14,7 @@ namespace AnatomIL
         List<CodeOpRoot> _operations;
         string[] _instructions;
 
-        public controleur() // initialisation
+        public Controleur() // initialisation
         {
             _pc = 0;
             _s = new Stack();
@@ -41,7 +41,7 @@ namespace AnatomIL
         }
 
 
-        public int FirstInstrucion()
+        public int FirstInstruction()
         {
             _pc = 0;
             return _pc;

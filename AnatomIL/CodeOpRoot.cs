@@ -132,7 +132,7 @@ namespace AnatomIL
                 t = typeof(Int64);
                 value = Convert.ToInt32(instruction[2]);
             }
-            if (instruction[1].Equals("i4"))
+            else if (instruction[1].Equals("i4"))
             {
                 t = typeof(Int32);
                 value = Convert.ToInt32(instruction[2]);

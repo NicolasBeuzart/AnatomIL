@@ -31,7 +31,7 @@ namespace AnatomIL.test
         [Test]
         public void TestForParser()
         {
-            controleur p = new controleur();
+            Controleur p = new Controleur();
 
             // simulation de code rentré par l'utilisateur
             string[] s = new string[11];
