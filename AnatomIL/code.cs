@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AnatomIL
 {
-    public class code // base de code rentré par l'utilisateur
+    public class Code // base de code rentré par l'utilisateur
     {
         string[] _instructions;
 
@@ -24,5 +24,6 @@ namespace AnatomIL
         {
             return (_instructions[pc]);
         }
+
     }
 }

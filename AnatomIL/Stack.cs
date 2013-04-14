@@ -8,7 +8,7 @@ namespace AnatomIL
 {
     public class Stack
     {
-        private List<StackItem> _currentstack;
+        private List<StackItem> _currentstack = new List<StackItem>();
 
         public StackItem Pop()  // Return first element from stack and delete it from stack
         {
@@ -35,11 +35,16 @@ namespace AnatomIL
             return _currentstack[_currentstack.Count - 1];
         }
 
-        public void Push(StackItem elt) // Add 1 element on stack
+        public void Push(Type t, object value) // Add 1 element on stack
         {
+            StackItem elt = new StackItem(t, value);
             _currentstack.Add(elt);
         }
 
+        public bool IsEmpty
+        {
+            get { return (this.Count == 0); }
+        }
 
         public int Count  // Return number of elements in stack
         {
@@ -48,6 +53,7 @@ namespace AnatomIL
                 return _currentstack.Count;
             }
         }
+
 
     }
 }
