@@ -110,6 +110,16 @@ namespace AnatomIL
             tbCodeZone.Visible = true;
         }
 
+        private void panMarginLeftInstructions_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void tbCodeZone_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         
     }
 }
