@@ -39,7 +39,7 @@ namespace AnatomIL
 
             if (t != s.CurrentStack[s.Count - 2].Type)
             {
-                throw new InvalidOperationException("can't add two value using different type");
+                throw new InvalidOperationException("can't add two values using different type");
             }
 
             return new AddCodeOp(t);
@@ -60,6 +60,11 @@ namespace AnatomIL
 
             t = s.CurrentStack[s.Count - 1].Type;
 
+            if (t != s.CurrentStack[s.Count - 2].Type)
+            {
+                throw new InvalidOperationException("can't sub two values using different type");
+            }
+
             return new SubCodeOp(t);
         }
     }
@@ -77,6 +82,11 @@ namespace AnatomIL
             Type t;
 
             t = s.CurrentStack[s.Count - 1].Type;
+
+            if (t != s.CurrentStack[s.Count - 2].Type)
+            {
+                throw new InvalidOperationException("can't mul two values using different type");
+            }
 
             return new MulCodeOp(t);
         }
@@ -96,6 +106,11 @@ namespace AnatomIL
 
             t = s.CurrentStack[s.Count - 1].Type;
 
+            if (t != s.CurrentStack[s.Count - 2].Type)
+            {
+                throw new InvalidOperationException("can't div two values using different type");
+            }
+
             return new DivCodeOp(t);
         }
     }
@@ -113,6 +128,11 @@ namespace AnatomIL
             Type t;
 
             t = s.CurrentStack[s.Count - 1].Type;
+
+            if (t != s.CurrentStack[s.Count - 2].Type)
+            {
+                throw new InvalidOperationException("can't rem two values using different type");
+            }
 
             return new RemCodeOp(t);
         }
