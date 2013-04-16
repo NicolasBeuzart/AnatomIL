@@ -10,6 +10,11 @@ namespace AnatomIL
     {
         internal string _name;
 
+        public CodeOpRoot()
+        {
+            _name = "none";
+        }
+
         public string Name
         {
             get { return _name; }
@@ -125,29 +130,29 @@ namespace AnatomIL
         {
             string[] instruction = args.Split('.');
             Type t;
-            object value = Convert.ToInt64(instruction[2]);
+            object Value;
 
             if (instruction[1].Equals("i8"))
             {
                 t = typeof(Int64);
-                value = Convert.ToInt32(instruction[2]);
+                Value = Convert.ToInt64(instruction[2]);
             }
             else if (instruction[1].Equals("i4"))
             {
                 t = typeof(Int32);
-                value = Convert.ToInt32(instruction[2]);
+                Value = Convert.ToInt32(instruction[2]);
             }
             else if (instruction[1].Equals("i2"))
             {
                 t = typeof(Int16);
-                value = Convert.ToInt16(instruction[2]);
+                Value = Convert.ToInt16(instruction[2]);
             }
             else
             {
-                throw new Exception();
+                throw new Exception("lcd operation can't have first argument : " + instruction[1]);
             }
 
-            return (new LdcCodeOp(t, value));
+            return (new LdcCodeOp(t, Value));
         }
     }
 

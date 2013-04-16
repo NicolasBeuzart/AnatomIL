@@ -30,6 +30,17 @@ namespace AnatomIL
         {
             _instructions = insts;
             _operations = _compilator.compile(insts, _s);
+            _pc = FirstInstruction();
+        }
+
+        public int GoToNextInst(int pc)
+        {
+            int result = pc + 1;
+            while (result < _operations.Count && _operations[result] == null)
+            {
+                result++;
+            }
+            return result;
         }
 
         public void ExecuteNextInstruction()
@@ -37,14 +48,14 @@ namespace AnatomIL
             _operations[_pc].Parse(_instructions[_pc],_s).Execute(_s);
 
             //on passe à l'instruction suivante
-            _pc++;
+            _pc = GoToNextInst(_pc);
+            //_pc++;
         }
 
 
         public int FirstInstruction()
         {
-            _pc = 0;
-            return _pc;
+            return GoToNextInst(-1);
         }
 
         public void reset()

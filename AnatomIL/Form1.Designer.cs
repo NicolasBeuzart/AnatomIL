@@ -45,14 +45,17 @@
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listboxStack = new System.Windows.Forms.ListBox();
             this.panMarginLeftStack = new System.Windows.Forms.Panel();
+            this.textBoxError = new System.Windows.Forms.TextBox();
             this.panTopOfStack = new System.Windows.Forms.Panel();
             this.labStack = new System.Windows.Forms.Label();
-            this.textBoxError = new System.Windows.Forms.TextBox();
+            this.panLeftStack = new System.Windows.Forms.Panel();
+            this.panStack = new System.Windows.Forms.Panel();
             this.panLeft.SuspendLayout();
             this.panInstructions.SuspendLayout();
             this.panToolbar.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panMarginLeftStack.SuspendLayout();
+            this.panStack.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbCodeZone
@@ -213,7 +216,7 @@
             this.listboxStack.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listboxStack.FormattingEnabled = true;
             this.listboxStack.ItemHeight = 25;
-            this.listboxStack.Location = new System.Drawing.Point(656, 54);
+            this.listboxStack.Location = new System.Drawing.Point(-1, 13);
             this.listboxStack.Name = "listboxStack";
             this.listboxStack.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.listboxStack.Size = new System.Drawing.Size(135, 458);
@@ -221,30 +224,13 @@
             // 
             // panMarginLeftStack
             // 
+            this.panMarginLeftStack.Controls.Add(this.panLeftStack);
             this.panMarginLeftStack.Controls.Add(this.textBoxError);
             this.panMarginLeftStack.Dock = System.Windows.Forms.DockStyle.Left;
             this.panMarginLeftStack.Location = new System.Drawing.Point(361, 24);
             this.panMarginLeftStack.Name = "panMarginLeftStack";
             this.panMarginLeftStack.Size = new System.Drawing.Size(296, 488);
             this.panMarginLeftStack.TabIndex = 7;
-            // 
-            // panTopOfStack
-            // 
-            this.panTopOfStack.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panTopOfStack.Location = new System.Drawing.Point(657, 24);
-            this.panTopOfStack.Name = "panTopOfStack";
-            this.panTopOfStack.Size = new System.Drawing.Size(134, 17);
-            this.panTopOfStack.TabIndex = 8;
-            // 
-            // labStack
-            // 
-            this.labStack.AutoSize = true;
-            this.labStack.Dock = System.Windows.Forms.DockStyle.Top;
-            this.labStack.Location = new System.Drawing.Point(657, 41);
-            this.labStack.Name = "labStack";
-            this.labStack.Size = new System.Drawing.Size(41, 13);
-            this.labStack.TabIndex = 9;
-            this.labStack.Text = "Stack :";
             // 
             // textBoxError
             // 
@@ -258,13 +244,48 @@
             this.textBoxError.TabIndex = 0;
             this.textBoxError.Visible = false;
             // 
+            // panTopOfStack
+            // 
+            this.panTopOfStack.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panTopOfStack.Location = new System.Drawing.Point(657, 24);
+            this.panTopOfStack.Name = "panTopOfStack";
+            this.panTopOfStack.Size = new System.Drawing.Size(134, 17);
+            this.panTopOfStack.TabIndex = 8;
+            // 
+            // labStack
+            // 
+            this.labStack.AutoSize = true;
+            this.labStack.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labStack.Location = new System.Drawing.Point(0, 0);
+            this.labStack.Name = "labStack";
+            this.labStack.Size = new System.Drawing.Size(41, 13);
+            this.labStack.TabIndex = 9;
+            this.labStack.Text = "Stack :";
+            // 
+            // panLeftStack
+            // 
+            this.panLeftStack.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panLeftStack.Location = new System.Drawing.Point(0, 105);
+            this.panLeftStack.Name = "panLeftStack";
+            this.panLeftStack.Size = new System.Drawing.Size(296, 383);
+            this.panLeftStack.TabIndex = 1;
+            // 
+            // panStack
+            // 
+            this.panStack.Controls.Add(this.listboxStack);
+            this.panStack.Controls.Add(this.labStack);
+            this.panStack.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panStack.Location = new System.Drawing.Point(657, 41);
+            this.panStack.Name = "panStack";
+            this.panStack.Size = new System.Drawing.Size(134, 471);
+            this.panStack.TabIndex = 9;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(791, 512);
-            this.Controls.Add(this.listboxStack);
-            this.Controls.Add(this.labStack);
+            this.Controls.Add(this.panStack);
             this.Controls.Add(this.panTopOfStack);
             this.Controls.Add(this.panMarginLeftStack);
             this.Controls.Add(this.splitPanelLeft);
@@ -282,6 +303,8 @@
             this.menuStrip1.PerformLayout();
             this.panMarginLeftStack.ResumeLayout(false);
             this.panMarginLeftStack.PerformLayout();
+            this.panStack.ResumeLayout(false);
+            this.panStack.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -309,6 +332,8 @@
         private System.Windows.Forms.Panel panTopOfStack;
         private System.Windows.Forms.Label labStack;
         private System.Windows.Forms.TextBox textBoxError;
+        private System.Windows.Forms.Panel panLeftStack;
+        private System.Windows.Forms.Panel panStack;
     }
 }
 

@@ -23,7 +23,15 @@ namespace AnatomIL
 
         private void btExecuteOneStep_Click(object sender, EventArgs e)
         {
-            c.ExecuteNextInstruction();
+            try
+            {
+                c.ExecuteNextInstruction();
+            }
+            catch (Exception exception)
+            {
+                textBoxError.Text = exception.Message;
+                textBoxError.Visible = true;
+            }
             if (c._pc < listBoxInstructions.Items.Count)
             {
                 listBoxInstructions.SelectedIndex = c._pc;
@@ -50,6 +58,7 @@ namespace AnatomIL
         private void Form1_Resize(object sender, EventArgs e)
         {
             panLeft.Size = new Size(this.Size.Width / 3, panLeft.Size.Height);
+            panTopOfStack.Height = panMarginLeftStack.Height - (listboxStack.ItemHeight * (listboxStack.Items.Count + 1));
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -64,15 +73,17 @@ namespace AnatomIL
 
         private void btStart_Click(object sender, EventArgs e)
         {
+            textBoxError.Visible = false;
             c = new Controleur();
             string s = tbCodeZone.Text.Replace("\r", "");
             string[] s2 = s.Split(new char[] { '\n' });
             listBoxInstructions.Items.Clear();
             listBoxInstructions.Items.AddRange(s2);
             listboxStack.Items.Clear();
+            panTopOfStack.Height = panMarginLeftStack.Height - (listboxStack.ItemHeight * (listboxStack.Items.Count + 1));
             btStart.Visible = false;
             btExecuteOneStep.Visible = true;
-            listBoxInstructions.SelectedIndex = c.FirstInstruction();
+
             listBoxInstructions.Visible = true;
             tbCodeZone.Visible = false;
             try
@@ -88,7 +99,7 @@ namespace AnatomIL
                 listBoxInstructions.Visible = false;
                 tbCodeZone.Visible = true;
             }
-
+            listBoxInstructions.SelectedIndex = c._pc;
         }
 
         private void btStop_Click(object sender, EventArgs e)
@@ -99,5 +110,6 @@ namespace AnatomIL
             tbCodeZone.Visible = true;
         }
 
+        
     }
 }

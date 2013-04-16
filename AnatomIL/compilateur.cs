@@ -42,7 +42,7 @@ namespace AnatomIL
                     if (_lib.LibIsCodeOpRootExiste(operation)) _operations.Add(_lib.LibFindOpCodeRoot(operation));
                     else
                     {
-                        throw new Exception("Compilation error : line " + (i + 1).ToString() + ", instruction : \"" + operation + "\" can't be found in lybrary");
+                        throw new Exception("Compilation error : line " + (i + 1).ToString() + ", instruction : \"" + operation + "\" can't be found in library");
                     }
                 }
                 else

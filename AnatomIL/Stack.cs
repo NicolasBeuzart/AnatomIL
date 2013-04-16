@@ -36,6 +36,15 @@ namespace AnatomIL
             _currentstack.Add(elt);
         }
 
+        public StackItem FirstElement()
+        {
+            if (_currentstack.Count == 0)
+            {
+                throw new InvalidOperationException("Empty Stack");
+            }
+            return (_currentstack[_currentstack.Count - 1]);
+        }
+
         public bool IsEmpty
         {
             get { return (this.Count == 0); }
