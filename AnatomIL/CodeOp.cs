@@ -70,8 +70,8 @@ namespace AnatomIL
         {
             if (_t == typeof(Int64))
             {
-                Int64 i1 = Convert.ToInt32(s.Pop().Value);
-                Int64 i2 = Convert.ToInt32(s.Pop().Value);
+                Int64 i1 = Convert.ToInt64(s.Pop().Value);
+                Int64 i2 = Convert.ToInt64(s.Pop().Value);
                 s.Push(_t, i1 - i2);
             }
             else if (_t == typeof(Int32))
@@ -103,8 +103,8 @@ namespace AnatomIL
         {
             if (_t == typeof(Int64))
             {
-                Int64 i1 = Convert.ToInt32(s.Pop().Value);
-                Int64 i2 = Convert.ToInt32(s.Pop().Value);
+                Int64 i1 = Convert.ToInt64(s.Pop().Value);
+                Int64 i2 = Convert.ToInt64(s.Pop().Value);
                 s.Push(_t, i1 * i2);
             }
             else if (_t == typeof(Int32))
@@ -136,8 +136,8 @@ namespace AnatomIL
         {
             if (_t == typeof(Int64))
             {
-                Int64 i1 = Convert.ToInt32(s.Pop().Value);
-                Int64 i2 = Convert.ToInt32(s.Pop().Value);
+                Int64 i1 = Convert.ToInt64(s.Pop().Value);
+                Int64 i2 = Convert.ToInt64(s.Pop().Value);
                 s.Push(_t, i1 / i2);
             }
             else if (_t == typeof(Int32))
@@ -169,8 +169,8 @@ namespace AnatomIL
         {
             if (_t == typeof(Int64))
             {
-                Int64 i1 = Convert.ToInt32(s.Pop().Value);
-                Int64 i2 = Convert.ToInt32(s.Pop().Value);
+                Int64 i1 = Convert.ToInt64(s.Pop().Value);
+                Int64 i2 = Convert.ToInt64(s.Pop().Value);
                 s.Push(_t, i1 % i2);
             }
             else if (_t == typeof(Int32))
