@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AnatomIL
 {
-    class Registre
+    public class Registre
     {
         public int Pc;
     }
