@@ -1,6 +1,6 @@
 ﻿namespace AnatomIL
 {
-    partial class Form1
+    partial class Anatomil
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
@@ -45,10 +45,10 @@
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listboxStack = new System.Windows.Forms.ListBox();
             this.panMarginLeftStack = new System.Windows.Forms.Panel();
+            this.panLeftStack = new System.Windows.Forms.Panel();
             this.textBoxError = new System.Windows.Forms.TextBox();
             this.panTopOfStack = new System.Windows.Forms.Panel();
             this.labStack = new System.Windows.Forms.Label();
-            this.panLeftStack = new System.Windows.Forms.Panel();
             this.panStack = new System.Windows.Forms.Panel();
             this.panLeft.SuspendLayout();
             this.panInstructions.SuspendLayout();
@@ -232,6 +232,14 @@
             this.panMarginLeftStack.Size = new System.Drawing.Size(296, 488);
             this.panMarginLeftStack.TabIndex = 7;
             // 
+            // panLeftStack
+            // 
+            this.panLeftStack.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panLeftStack.Location = new System.Drawing.Point(0, 105);
+            this.panLeftStack.Name = "panLeftStack";
+            this.panLeftStack.Size = new System.Drawing.Size(296, 383);
+            this.panLeftStack.TabIndex = 1;
+            // 
             // textBoxError
             // 
             this.textBoxError.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
@@ -262,14 +270,6 @@
             this.labStack.TabIndex = 9;
             this.labStack.Text = "Stack :";
             // 
-            // panLeftStack
-            // 
-            this.panLeftStack.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panLeftStack.Location = new System.Drawing.Point(0, 105);
-            this.panLeftStack.Name = "panLeftStack";
-            this.panLeftStack.Size = new System.Drawing.Size(296, 383);
-            this.panLeftStack.TabIndex = 1;
-            // 
             // panStack
             // 
             this.panStack.Controls.Add(this.listboxStack);
@@ -280,7 +280,7 @@
             this.panStack.Size = new System.Drawing.Size(134, 471);
             this.panStack.TabIndex = 9;
             // 
-            // Form1
+            // Anatomil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -292,8 +292,8 @@
             this.Controls.Add(this.panLeft);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "Anatomil";
+            this.Text = "AnatomIL";
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.panLeft.ResumeLayout(false);
             this.panInstructions.ResumeLayout(false);

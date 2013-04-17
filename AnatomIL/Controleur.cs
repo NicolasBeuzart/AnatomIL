@@ -13,6 +13,7 @@ namespace AnatomIL
         Compilator _compilator;
         List<CodeOpRoot> _operations;
         string[] _instructions;
+        Environment _env; // registre, stack, tas
 
         public Controleur() // initialisation
         {

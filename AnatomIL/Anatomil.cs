@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace AnatomIL
 {
-    public partial class Form1 : Form
+    public partial class Anatomil : Form
     {
         Controleur c;
 
-        public Form1()
+        public Anatomil()
         {
             InitializeComponent();
             listBoxInstructions.Visible = false;
