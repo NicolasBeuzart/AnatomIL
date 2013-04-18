@@ -12,7 +12,7 @@ namespace AnatomIL
 {
     public partial class Anatomil : Form
     {
-        Controleur c;
+        IlComputer c;
 
         public Anatomil()
         {
@@ -44,11 +44,11 @@ namespace AnatomIL
                 tbCodeZone.Visible = true;
             }
             listboxStack.Items.Clear();
-            string[] s = new string[c.s.Count];
+            string[] s = new string[c.Stack.Count];
             int i = 0;
-            foreach (StackItem StIt in c.s.CurrentStack)
+            foreach (StackItem StIt in c.Stack.CurrentStack)
             {
-                s[c.s.CurrentStack.Count - i - 1] = StIt.Type.ToString().Split('.')[StIt.Type.ToString().Split('.').Count() - 1] + " : " + StIt.Value.ToString();
+                s[c.Stack.CurrentStack.Count - i - 1] = StIt.Type.ToString().Split('.')[StIt.Type.ToString().Split('.').Count() - 1] + " : " + StIt.Value.ToString();
                 i++;
             }
             listboxStack.Items.AddRange(s);
@@ -74,7 +74,7 @@ namespace AnatomIL
         private void btStart_Click(object sender, EventArgs e)
         {
             textBoxError.Visible = false;
-            c = new Controleur();
+            c = new IlComputer();
             string s = tbCodeZone.Text.Replace("\r", "");
             string[] s2 = s.Split(new char[] { '\n' });
             listBoxInstructions.Items.Clear();

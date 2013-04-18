@@ -31,7 +31,7 @@ namespace AnatomIL.test
         [Test]
         public void TestForParser()
         {
-            Controleur p = new Controleur();
+            IlComputer p = new IlComputer();
 
             // simulation de code rentré par l'utilisateur
             string[] s = new string[11];
@@ -55,58 +55,58 @@ namespace AnatomIL.test
 
             // ldc.i4.13
             p.ExecuteNextInstruction();
-            Assert.That(p.s.Count, Is.EqualTo(1), "Probleme a l'éxécution de l'instruction ldc.i4.13");
-            Assert.That(p.s.CurrentStack[p.s.Count - 1].Value, Is.EqualTo(13), "Probleme a l'éxécution de l'instruction ldc.i4.13");
+            Assert.That(p.Stack.Count, Is.EqualTo(1), "Probleme a l'éxécution de l'instruction ldc.i4.13");
+            Assert.That(p.Stack.CurrentStack[p.Stack.Count - 1].Value, Is.EqualTo(13), "Probleme a l'éxécution de l'instruction ldc.i4.13");
 
             //ldc.i4.12
             p.ExecuteNextInstruction();
-            Assert.That(p.s.Count, Is.EqualTo(2), "Probleme a l'éxécution de l'instruction ldc.i4.12");
-            Assert.That(p.s.CurrentStack[p.s.Count - 1].Value, Is.EqualTo(12), "Probleme a l'éxécution de l'instruction ldc.i4.12");
+            Assert.That(p.Stack.Count, Is.EqualTo(2), "Probleme a l'éxécution de l'instruction ldc.i4.12");
+            Assert.That(p.Stack.CurrentStack[p.Stack.Count - 1].Value, Is.EqualTo(12), "Probleme a l'éxécution de l'instruction ldc.i4.12");
 
             //add
             p.ExecuteNextInstruction();
-            Assert.That(p.s.Count, Is.EqualTo(1), "Probleme a l'éxécution de l'instruction add");
-            Assert.That(p.s.CurrentStack[p.s.Count - 1].Value, Is.EqualTo(25), "Probleme a l'éxécution de l'instruction add");
+            Assert.That(p.Stack.Count, Is.EqualTo(1), "Probleme a l'éxécution de l'instruction add");
+            Assert.That(p.Stack.CurrentStack[p.Stack.Count - 1].Value, Is.EqualTo(25), "Probleme a l'éxécution de l'instruction add");
 
             //ldc.i4.30
             p.ExecuteNextInstruction();
-            Assert.That(p.s.Count, Is.EqualTo(2), "Probleme a l'éxécution de l'instruction ldc.i4.30");
-            Assert.That(p.s.CurrentStack[p.s.Count - 1].Value, Is.EqualTo(30), "Probleme a l'éxécution de l'instruction ldc.i4.30");
+            Assert.That(p.Stack.Count, Is.EqualTo(2), "Probleme a l'éxécution de l'instruction ldc.i4.30");
+            Assert.That(p.Stack.CurrentStack[p.Stack.Count - 1].Value, Is.EqualTo(30), "Probleme a l'éxécution de l'instruction ldc.i4.30");
 
             //sub
             p.ExecuteNextInstruction();
-            Assert.That(p.s.Count, Is.EqualTo(1), "Probleme a l'éxécution de l'instruction sub");
-            Assert.That(p.s.CurrentStack[p.s.Count - 1].Value, Is.EqualTo(5), "Probleme a l'éxécution de l'instruction sub");
+            Assert.That(p.Stack.Count, Is.EqualTo(1), "Probleme a l'éxécution de l'instruction sub");
+            Assert.That(p.Stack.CurrentStack[p.Stack.Count - 1].Value, Is.EqualTo(5), "Probleme a l'éxécution de l'instruction sub");
 
             //ldc.i4.20
             p.ExecuteNextInstruction();
-            Assert.That(p.s.Count, Is.EqualTo(2), "Probleme a l'éxécution de l'instruction ldc.i4.20");
-            Assert.That(p.s.CurrentStack[p.s.Count - 1].Value, Is.EqualTo(20), "Probleme a l'éxécution de l'instruction ldc.i4.20");
+            Assert.That(p.Stack.Count, Is.EqualTo(2), "Probleme a l'éxécution de l'instruction ldc.i4.20");
+            Assert.That(p.Stack.CurrentStack[p.Stack.Count - 1].Value, Is.EqualTo(20), "Probleme a l'éxécution de l'instruction ldc.i4.20");
 
             //div
             p.ExecuteNextInstruction();
-            Assert.That(p.s.Count, Is.EqualTo(1), "Probleme a l'éxécution de l'instruction div");
-            Assert.That(p.s.CurrentStack[p.s.Count - 1].Value, Is.EqualTo(4), "Probleme a l'éxécution de l'instruction div");
+            Assert.That(p.Stack.Count, Is.EqualTo(1), "Probleme a l'éxécution de l'instruction div");
+            Assert.That(p.Stack.CurrentStack[p.Stack.Count - 1].Value, Is.EqualTo(4), "Probleme a l'éxécution de l'instruction div");
 
             //ldc.i4.5
             p.ExecuteNextInstruction();
-            Assert.That(p.s.Count, Is.EqualTo(2), "Probleme a l'éxécution de l'instruction ldc.i4.5");
-            Assert.That(p.s.CurrentStack[p.s.Count - 1].Value, Is.EqualTo(5), "Probleme a l'éxécution de l'instruction ldc.i4.5");
+            Assert.That(p.Stack.Count, Is.EqualTo(2), "Probleme a l'éxécution de l'instruction ldc.i4.5");
+            Assert.That(p.Stack.CurrentStack[p.Stack.Count - 1].Value, Is.EqualTo(5), "Probleme a l'éxécution de l'instruction ldc.i4.5");
 
             //mull
             p.ExecuteNextInstruction();
-            Assert.That(p.s.Count, Is.EqualTo(1));
-            Assert.That(p.s.CurrentStack[p.s.Count - 1].Value, Is.EqualTo(20));
+            Assert.That(p.Stack.Count, Is.EqualTo(1));
+            Assert.That(p.Stack.CurrentStack[p.Stack.Count - 1].Value, Is.EqualTo(20));
 
             //ldc.i4.5
             p.ExecuteNextInstruction();
-            Assert.That(p.s.Count, Is.EqualTo(2));
-            Assert.That(p.s.CurrentStack[p.s.Count - 1].Value, Is.EqualTo(25));
+            Assert.That(p.Stack.Count, Is.EqualTo(2));
+            Assert.That(p.Stack.CurrentStack[p.Stack.Count - 1].Value, Is.EqualTo(25));
 
             //rem
             p.ExecuteNextInstruction();
-            Assert.That(p.s.Count, Is.EqualTo(1));
-            Assert.That(p.s.CurrentStack[p.s.Count - 1].Value, Is.EqualTo(5));
+            Assert.That(p.Stack.Count, Is.EqualTo(1));
+            Assert.That(p.Stack.CurrentStack[p.Stack.Count - 1].Value, Is.EqualTo(5));
 
             p.reset();
 

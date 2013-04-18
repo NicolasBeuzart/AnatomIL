@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace AnatomIL
 {
-    public class Compilator
+    public class Compiler
     {
         List<CodeOpRoot> _operations;
         Library _lib;
 
-        public Compilator()
+        public Compiler()
         {
             _operations = new List<CodeOpRoot>();
             _lib = new Library();
@@ -23,7 +23,7 @@ namespace AnatomIL
             _lib.LibAddCodeOpRoot(new LdcCodeOpRoot());
         }
 
-        public List<CodeOpRoot> compile(string[] instructions, Stack s)
+        public List<CodeOpRoot> Compile(string[] instructions, Stack s)
         {
             for (int i = 0; i < instructions.Length; i++ )
             {
