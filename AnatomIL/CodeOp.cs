@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace AnatomIL
 {
-    public class CodeOp // classe "père" de tout les CodeOp
+    public class OpCode // classe "père" de tout les CodeOp
     {
         internal string _name;
 
-        public CodeOp()
+        public OpCode()
         {
 
         }
@@ -20,188 +20,213 @@ namespace AnatomIL
             get { return (_name); }
         }
 
-        virtual public void Execute(Stack s) { } // méthode d'éxécution des opérations
+        virtual public void Execute(Environment e) { } // méthode d'éxécution des opérations
     }
 
-    public class AddCodeOp : CodeOp
+    public class AddOpCode : OpCode
     {
         Type _t;
 
-        public AddCodeOp(Type t)
+        public AddOpCode()
         {
             base._name = "add";
-            _t = t;
         }
 
-        override public void Execute(Stack s)
+        override public void Execute(Environment e)
         {
+            _t = e.Stack.CurrentStack[e.Stack.Count - 1].Type;
+            if (_t != e.Stack.CurrentStack[e.Stack.Count - 2].Type)
+            {
+                throw new InvalidOperationException("can't add two values using different type");
+            }
+
             if (_t == typeof(Int64))
             {
-                Int64 i1 = Convert.ToInt64(s.Pop().Value);
-                Int64 i2 = Convert.ToInt64(s.Pop().Value);
-                s.Push(_t, i1 + i2);
+                Int64 i1 = Convert.ToInt64(e.Stack.Pop().Value);
+                Int64 i2 = Convert.ToInt64(e.Stack.Pop().Value);
+                e.Stack.Push(_t, i1 + i2);
             }
             else if (_t == typeof(Int32))
             {
-                Int32 i1 = Convert.ToInt32(s.Pop().Value);
-                Int32 i2 = Convert.ToInt32(s.Pop().Value);
-                s.Push(_t, i1 + i2);
+                Int32 i1 = Convert.ToInt32(e.Stack.Pop().Value);
+                Int32 i2 = Convert.ToInt32(e.Stack.Pop().Value);
+                e.Stack.Push(_t, i1 + i2);
             }
             else if (_t == typeof(Int16))
             {
-                Int16 i1 = Convert.ToInt16(s.Pop().Value);
-                Int16 i2 = Convert.ToInt16(s.Pop().Value);
-                s.Push(_t, i1 + i2);
+                Int16 i1 = Convert.ToInt16(e.Stack.Pop().Value);
+                Int16 i2 = Convert.ToInt16(e.Stack.Pop().Value);
+                e.Stack.Push(_t, i1 + i2);
             }
         }
     }
 
-    public class SubCodeOp : CodeOp
+    public class SubOpCode : OpCode
     {
          Type _t;
 
-        public SubCodeOp(Type t)
+        public SubOpCode()
         {
             base._name = "sub";
-            _t = t;
         }
 
-        override public void Execute(Stack s)
+        override public void Execute(Environment e)
         {
+            _t = e.Stack.CurrentStack[e.Stack.Count - 1].Type;
+            if (_t != e.Stack.CurrentStack[e.Stack.Count - 2].Type)
+            {
+                throw new InvalidOperationException("can't add two values using different type");
+            }
+
             if (_t == typeof(Int64))
             {
-                Int64 i1 = Convert.ToInt64(s.Pop().Value);
-                Int64 i2 = Convert.ToInt64(s.Pop().Value);
-                s.Push(_t, i1 - i2);
+                Int64 i1 = Convert.ToInt64(e.Stack.Pop().Value);
+                Int64 i2 = Convert.ToInt64(e.Stack.Pop().Value);
+                e.Stack.Push(_t, i1 - i2);
             }
             else if (_t == typeof(Int32))
             {
-                Int32 i1 = Convert.ToInt32(s.Pop().Value);
-                Int32 i2 = Convert.ToInt32(s.Pop().Value);
-                s.Push(_t, i1 - i2);
+                Int32 i1 = Convert.ToInt32(e.Stack.Pop().Value);
+                Int32 i2 = Convert.ToInt32(e.Stack.Pop().Value);
+                e.Stack.Push(_t, i1 - i2);
             }
             else if (_t == typeof(Int16))
             {
-                Int16 i1 = Convert.ToInt16(s.Pop().Value);
-                Int16 i2 = Convert.ToInt16(s.Pop().Value);
-                s.Push(_t, i1 - i2);
+                Int16 i1 = Convert.ToInt16(e.Stack.Pop().Value);
+                Int16 i2 = Convert.ToInt16(e.Stack.Pop().Value);
+                e.Stack.Push(_t, i1 - i2);
             }
         }
     }
 
-    public class MulCodeOp : CodeOp
+    public class MulOpCode : OpCode
     {
         Type _t;
 
-        public MulCodeOp(Type t)
+        public MulOpCode()
         {
-            base._name = "sub";
-            _t = t;
+            base._name = "mul";
         }
 
-        override public void Execute(Stack s)
+        override public void Execute(Environment e)
         {
+            _t = e.Stack.CurrentStack[e.Stack.Count - 1].Type;
+            if (_t != e.Stack.CurrentStack[e.Stack.Count - 2].Type)
+            {
+                throw new InvalidOperationException("can't add two values using different type");
+            }
+
             if (_t == typeof(Int64))
             {
-                Int64 i1 = Convert.ToInt64(s.Pop().Value);
-                Int64 i2 = Convert.ToInt64(s.Pop().Value);
-                s.Push(_t, i1 * i2);
+                Int64 i1 = Convert.ToInt64(e.Stack.Pop().Value);
+                Int64 i2 = Convert.ToInt64(e.Stack.Pop().Value);
+                e.Stack.Push(_t, i1 * i2);
             }
             else if (_t == typeof(Int32))
             {
-                Int32 i1 = Convert.ToInt32(s.Pop().Value);
-                Int32 i2 = Convert.ToInt32(s.Pop().Value);
-                s.Push(_t, i1 * i2);
+                Int32 i1 = Convert.ToInt32(e.Stack.Pop().Value);
+                Int32 i2 = Convert.ToInt32(e.Stack.Pop().Value);
+                e.Stack.Push(_t, i1 * i2);
             }
             else if (_t == typeof(Int16))
             {
-                Int16 i1 = Convert.ToInt16(s.Pop().Value);
-                Int16 i2 = Convert.ToInt16(s.Pop().Value);
-                s.Push(_t, i1 * i2);
+                Int16 i1 = Convert.ToInt16(e.Stack.Pop().Value);
+                Int16 i2 = Convert.ToInt16(e.Stack.Pop().Value);
+                e.Stack.Push(_t, i1 * i2);
             }
         }
     }
 
-    public class DivCodeOp : CodeOp
+    public class DivOpCode : OpCode
     {
         Type _t;
 
-        public DivCodeOp(Type t)
+        public DivOpCode()
         {
-            base._name = "sub";
-            _t = t;
+            base._name = "div";
         }
 
-        override public void Execute(Stack s)
+        override public void Execute(Environment e)
         {
+            _t = e.Stack.CurrentStack[e.Stack.Count - 1].Type;
+            if (_t != e.Stack.CurrentStack[e.Stack.Count - 2].Type)
+            {
+                throw new InvalidOperationException("can't add two values using different type");
+            }
+
             if (_t == typeof(Int64))
             {
-                Int64 i1 = Convert.ToInt64(s.Pop().Value);
-                Int64 i2 = Convert.ToInt64(s.Pop().Value);
-                s.Push(_t, i1 / i2);
+                Int64 i1 = Convert.ToInt64(e.Stack.Pop().Value);
+                Int64 i2 = Convert.ToInt64(e.Stack.Pop().Value);
+                e.Stack.Push(_t, i1 / i2);
             }
             else if (_t == typeof(Int32))
             {
-                Int32 i1 = Convert.ToInt32(s.Pop().Value);
-                Int32 i2 = Convert.ToInt32(s.Pop().Value);
-                s.Push(_t, i1 / i2);
+                Int32 i1 = Convert.ToInt32(e.Stack.Pop().Value);
+                Int32 i2 = Convert.ToInt32(e.Stack.Pop().Value);
+                e.Stack.Push(_t, i1 / i2);
             }
             else if (_t == typeof(Int16))
             {
-                Int16 i1 = Convert.ToInt16(s.Pop().Value);
-                Int16 i2 = Convert.ToInt16(s.Pop().Value);
-                s.Push(_t, i1 / i2);
+                Int16 i1 = Convert.ToInt16(e.Stack.Pop().Value);
+                Int16 i2 = Convert.ToInt16(e.Stack.Pop().Value);
+                e.Stack.Push(_t, i1 / i2);
             }
         }
     }
 
-    public class RemCodeOp : CodeOp
+    public class RemOpCode : OpCode
     {
         Type _t;
 
-        public RemCodeOp(Type t)
+        public RemOpCode()
         {
-            base._name = "sub";
-            _t = t;
+            base._name = "rem";
         }
 
-        override public void Execute(Stack s)
+        override public void Execute(Environment e)
         {
+            _t = e.Stack.CurrentStack[e.Stack.Count - 1].Type;
+            if (_t != e.Stack.CurrentStack[e.Stack.Count - 2].Type)
+            {
+                throw new InvalidOperationException("can't add two values using different type");
+            }
+
             if (_t == typeof(Int64))
             {
-                Int64 i1 = Convert.ToInt64(s.Pop().Value);
-                Int64 i2 = Convert.ToInt64(s.Pop().Value);
-                s.Push(_t, i1 % i2);
+                Int64 i1 = Convert.ToInt64(e.Stack.Pop().Value);
+                Int64 i2 = Convert.ToInt64(e.Stack.Pop().Value);
+                e.Stack.Push(_t, i1 % i2);
             }
             else if (_t == typeof(Int32))
             {
-                Int32 i1 = Convert.ToInt32(s.Pop().Value);
-                Int32 i2 = Convert.ToInt32(s.Pop().Value);
-                s.Push(_t, i1 % i2);
+                Int32 i1 = Convert.ToInt32(e.Stack.Pop().Value);
+                Int32 i2 = Convert.ToInt32(e.Stack.Pop().Value);
+                e.Stack.Push(_t, i1 % i2);
             }
             else if (_t == typeof(Int16))
             {
-                Int16 i1 = Convert.ToInt16(s.Pop().Value);
-                Int16 i2 = Convert.ToInt16(s.Pop().Value);
-                s.Push(_t, i1 % i2);
+                Int16 i1 = Convert.ToInt16(e.Stack.Pop().Value);
+                Int16 i2 = Convert.ToInt16(e.Stack.Pop().Value);
+                e.Stack.Push(_t, i1 % i2);
             }
         }
     }
 
-    public class LdcCodeOp : CodeOp
+    public class LdcOpCode : OpCode
     {
         Type _t;
         object _value;
 
-        public LdcCodeOp(Type t, object value)
+        public LdcOpCode(Type t, object value)
         {
             _t = t;
             _value = value;
         }
 
-        override public void Execute(Stack s)
+        override public void Execute(Environment e)
         {
-            s.Push(_t, _value);
+            e.Stack.Push(_t, _value);
         }
     }
 }

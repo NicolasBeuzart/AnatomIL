@@ -52,7 +52,8 @@
     <Compile Include="code.cs" />
     <Compile Include="CodeOp.cs" />
     <Compile Include="CodeOpRoot.cs" />
-    <Compile Include="compilateur.cs" />
+    <Compile Include="compiler.cs" />
+    <Compile Include="CompiledCode.cs" />
     <Compile Include="Environment.cs" />
     <Compile Include="Library.cs" />
     <Compile Include="Anatomil.cs">
@@ -61,11 +62,12 @@
     <Compile Include="Anatomil.Designer.cs">
       <DependentUpon>Anatomil.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controleur.cs" />
+    <Compile Include="IlComputer.cs" />
     <Compile Include="Node.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registre.cs" />
+    <Compile Include="SourceCode.cs" />
     <Compile Include="Stack.cs" />
     <Compile Include="StackItem.cs" />
     <Compile Include="Tas.cs" />

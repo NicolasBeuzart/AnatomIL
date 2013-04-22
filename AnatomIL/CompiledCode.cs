@@ -8,9 +8,9 @@ namespace AnatomIL
 {
     public class CompiledCode
     {
-        public IReadOnlyList<CodeOpRoot> Code { get; private set; }
+        public IReadOnlyList<OpCode> Code { get; private set; }
 
-        public CompiledCode(List<CodeOpRoot> code)
+        public CompiledCode(List<OpCode> code)
         {
             Code = code;
         }
@@ -18,6 +18,11 @@ namespace AnatomIL
         public int Count
         {
             get { return Code.Count; }
+        }
+
+        public bool IsNull(int i)
+        {
+            return (Code[i] == null);
         }
     }
 
@@ -31,7 +36,8 @@ namespace AnatomIL
         /// <summary>
         /// Null if at least one error exists in <see cref="ErrorMessages"/>.
         /// </summary>
-        private CompiledCode _code { get; private set; }
+        public CompiledCode Code;
+
 
         internal CompilerResult( List<string> errormessages)
         {
@@ -40,22 +46,9 @@ namespace AnatomIL
 
         internal CompilerResult(CompiledCode code)
         {
-            _code = code;
+            Code = code;
             ErrorMessages = new List<string>();
         }
 
-        public int Count
-        {
-            get { return _code.Count; }
-        }
-        /// <summary>
-        /// Check if the CodeOpRoot of index i is null
-        /// </summary>
-        /// <param name="i"></param>
-        /// <returns></returns>
-        public bool IsNull(int i)
-        {
-            return (_code.Code[i] == null);
-        }
     }
 }

@@ -14,18 +14,47 @@ namespace AnatomIL.test
         public void TestForLybrary()
         {
             Library lib = new Library();
-            lib.LibAddCodeOpRoot(new AddCodeOpRoot());
+            lib.LibAddCodeOpRoot(new AddOpCodeRoot());
             lib.LibAddCodeOpRoot(new SubCodeOpRoot());
 
             // on test la methode LibIsOpCodeRootExiste
             Assert.That(lib.LibIsCodeOpRootExiste("toto"), Is.False);
             Assert.That(lib.LibIsCodeOpRootExiste("add"), Is.True);
 
-            CodeOpRoot operation = lib.LibFindOpCodeRoot("sub");
+            OpCodeRoot operation = lib.LibFindOpCodeRoot("sub");
 
             // on test qu'un CodeOpRoot est crée correctement
             Assert.That(operation.Name, Is.EqualTo("sub"));
             Assert.That(operation.GetType(), Is.EqualTo(typeof(SubCodeOpRoot)));
+        }
+
+        [Test]
+        public void TestForcompiler()
+        {
+            Compiler c = new Compiler();
+            CompilerResult result;
+            string[] s = new string[1];
+            s[0] = "ldc.i4.13";
+
+            result = c.Compile(s);
+            Assert.That(result.IsSuccess, Is.True);
+
+            s[0] = "lda.i4.13";
+            result = c.Compile(s);
+            Assert.That(result.IsSuccess, Is.False);
+        }
+
+        [Test]
+        public void TestForOpCodeRoot()
+        {
+            AddOpCodeRoot add = new AddOpCodeRoot();
+            OpCodeRootResult result;
+
+            result = add.Parse("add");
+            Assert.That(result.IsSuccess, Is.True);
+
+            result = add.Parse("add.2");
+            Assert.That(result.IsSuccess, Is.False);
         }
 
         [Test]
@@ -49,7 +78,9 @@ namespace AnatomIL.test
             
             // on verifi que les méthodes on bien était ajouter a la library
 
-            p.compile(s);
+            p.LoadCode(s);
+            p.compile();
+            p.Start();
 
             // Executions des instructions
 

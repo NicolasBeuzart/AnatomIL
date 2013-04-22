@@ -12,12 +12,13 @@ namespace AnatomIL
         CompiledCode _compiledCode;
         string[] _Sourcecode;
         public List<string> ErrorMessages;
-        Environment _env; // registre, stack, tas
+        Environment _env; // Pc, Stack, Tas
 
         public IlComputer() // initialisation
         {
             _env = new Environment();
             ErrorMessages = new List<string>();
+            _compiler = new Compiler();
 
         }
 
@@ -60,7 +61,7 @@ namespace AnatomIL
 
         public void ExecuteNextInstruction()
         {
-            _compiledCode.Code[Pc].Parse(_Sourcecode[Pc],Stack).Execute(Stack);
+            _compiledCode.Code[Pc].Execute(_env);
 
             //on passe à l'instruction suivante
             Pc = GoToNextInst(Pc);

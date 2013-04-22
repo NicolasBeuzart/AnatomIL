@@ -8,15 +8,15 @@ namespace AnatomIL
 {
     public class Library
     {
-        Dictionary<string, CodeOpRoot> _library;
+        Dictionary<string, OpCodeRoot> _library;
 
         public Library()
         {
-            _library = new Dictionary<string, CodeOpRoot>();
+            _library = new Dictionary<string, OpCodeRoot>();
             
         }
 
-        public void LibAddCodeOpRoot(CodeOpRoot methode)
+        public void LibAddCodeOpRoot(OpCodeRoot methode)
         {
             _library.Add(methode.Name, methode);
         }
@@ -27,7 +27,7 @@ namespace AnatomIL
             return (result);
         }
 
-        public CodeOpRoot LibFindOpCodeRoot(string name)
+        public OpCodeRoot LibFindOpCodeRoot(string name)
         {
             return (_library[name]);
         }

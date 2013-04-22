@@ -8,14 +8,12 @@ namespace AnatomIL
 {
     public class Compiler
     {
-        List<CodeOpRoot> _operations;
         Library _lib;
 
         public Compiler()
         {
-            _operations = new List<CodeOpRoot>();
             _lib = new Library();
-            _lib.LibAddCodeOpRoot(new AddCodeOpRoot());
+            _lib.LibAddCodeOpRoot(new AddOpCodeRoot());
             _lib.LibAddCodeOpRoot(new SubCodeOpRoot());
             _lib.LibAddCodeOpRoot(new MulCodeOpRoot());
             _lib.LibAddCodeOpRoot(new DivCodeOpRoot());
@@ -23,9 +21,13 @@ namespace AnatomIL
             _lib.LibAddCodeOpRoot(new LdcCodeOpRoot());
         }
 
-        public List<CodeOpRoot> Compile(string[] instructions, Stack s)
+        public CompilerResult Compile(string[] instructions)
         {
-            for (int i = 0; i < instructions.Length; i++ )
+            List<OpCode> code = new List<OpCode>();
+            List<string> errorMessages = new List<string>();
+            OpCodeRootResult result;
+
+            for (int i = 0; i < instructions.Count(); i++ )
             {
                 // retire les espace et . en trop
                 string instruction = instructions[i];
@@ -39,18 +41,32 @@ namespace AnatomIL
                 {
                     // on recupére le nom de la méthode et les arguments
                     string operation = instruction.Split('.', ' ')[0];
-                    if (_lib.LibIsCodeOpRootExiste(operation)) _operations.Add(_lib.LibFindOpCodeRoot(operation));
+                    if (_lib.LibIsCodeOpRootExiste(operation))
+                    {
+                        result = _lib.LibFindOpCodeRoot(operation).Parse(instruction);
+
+                        if (result.IsSuccess) code.Add(result.OpCode);
+                        else errorMessages.Add("Error line " + i.ToString() + " : " + result.ErrorMessage);
+                    }
                     else
                     {
-                        throw new Exception("Compilation error : line " + (i + 1).ToString() + ", instruction : \"" + operation + "\" can't be found in library");
+                        errorMessages.Add("Compilation error : line " + (i + 1).ToString() + ", instruction : \"" + operation + "\" can't be found in library");
                     }
                 }
                 else
                 {
-                    _operations.Add(null);
+                    code.Add(null);
                 }
             }
-            return _operations;
+
+            if (errorMessages.Count == 0)
+            {
+                return new CompilerResult(new CompiledCode(code));
+            }
+            else
+            {
+                return new CompilerResult(errorMessages);
+            }
         }
     }
 }
