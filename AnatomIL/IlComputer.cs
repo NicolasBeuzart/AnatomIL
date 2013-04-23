@@ -65,7 +65,6 @@ namespace AnatomIL
 
             //on passe à l'instruction suivante
             Pc = GoToNextInst(Pc);
-            //_pc++;
         }
 
 
