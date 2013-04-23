@@ -12,7 +12,7 @@ namespace AnatomIL
 {
     public partial class Anatomil : Form
     {
-        Controleur c;
+        IlComputer computer;
 
         public Anatomil()
         {
@@ -25,16 +25,16 @@ namespace AnatomIL
         {
             try
             {
-                c.ExecuteNextInstruction();
+                computer.ExecuteNextInstruction();
             }
             catch (Exception exception)
             {
                 textBoxError.Text = exception.Message;
                 textBoxError.Visible = true;
             }
-            if (c._pc < listBoxInstructions.Items.Count)
+            if (computer.Pc < listBoxInstructions.Items.Count)
             {
-                listBoxInstructions.SelectedIndex = c._pc;
+                listBoxInstructions.SelectedIndex = computer.Pc;
             }
             else
             {
@@ -44,11 +44,11 @@ namespace AnatomIL
                 tbCodeZone.Visible = true;
             }
             listboxStack.Items.Clear();
-            string[] s = new string[c.s.Count];
+            string[] s = new string[computer.Stack.Count];
             int i = 0;
-            foreach (StackItem StIt in c.s.CurrentStack)
+            foreach (StackItem StIt in computer.Stack.CurrentStack)
             {
-                s[c.s.CurrentStack.Count - i - 1] = StIt.Type.ToString().Split('.')[StIt.Type.ToString().Split('.').Count() - 1] + " : " + StIt.Value.ToString();
+                s[computer.Stack.CurrentStack.Count - i - 1] = StIt.Type.ToString().Split('.')[StIt.Type.ToString().Split('.').Count() - 1] + " : " + StIt.Value.ToString();
                 i++;
             }
             listboxStack.Items.AddRange(s);
@@ -74,7 +74,7 @@ namespace AnatomIL
         private void btStart_Click(object sender, EventArgs e)
         {
             textBoxError.Visible = false;
-            c = new Controleur();
+            computer = new IlComputer();
             string s = tbCodeZone.Text.Replace("\r", "");
             string[] s2 = s.Split(new char[] { '\n' });
             listBoxInstructions.Items.Clear();
@@ -86,9 +86,11 @@ namespace AnatomIL
 
             listBoxInstructions.Visible = true;
             tbCodeZone.Visible = false;
+
+            computer.LoadCode(s2);
             try
             {
-                c.compile(s2);
+                computer.compile();
             }
             catch (Exception exception)
             {
@@ -99,7 +101,9 @@ namespace AnatomIL
                 listBoxInstructions.Visible = false;
                 tbCodeZone.Visible = true;
             }
-            listBoxInstructions.SelectedIndex = c._pc;
+
+            computer.Start();
+            listBoxInstructions.SelectedIndex = computer.Pc;
         }
 
         private void btStop_Click(object sender, EventArgs e)

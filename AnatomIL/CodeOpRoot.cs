@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace AnatomIL
 {
-    public class CodeOpRoot // classe "père" de toute les OpCodeRoot
+    public class OpCodeRoot // classe "père" de toute les OpCodeRoot
     {
         internal string _name;
 
-        public CodeOpRoot()
+        public OpCodeRoot()
         {
             _name = "none";
         }
@@ -20,33 +20,46 @@ namespace AnatomIL
             get { return _name; }
         }
 
-        virtual public CodeOp Parse(string args, Stack s) { return null; } // methode de parse des opérations qui retourne un CodeOp pres a être Executer correctement
+        virtual public OpCodeRootResult Parse(string args) { return null; } // methode de parse des opérations qui retourne un CodeOp pres a être Executer correctement
     }
-    
-    public class AddCodeOpRoot : CodeOpRoot
+
+    public class OpCodeRootResult
+    {
+        public string ErrorMessage { get; internal set; }
+        public OpCode OpCode { get; internal set; }
+
+        public bool IsSuccess { get { return ErrorMessage == ""; } }
+
+        public OpCodeRootResult(string errorMessage, OpCode opCode)
+        {
+            ErrorMessage = errorMessage;
+            OpCode = opCode;
+        }
+    }
+
+    public class AddOpCodeRoot : OpCodeRoot
     {
 
-        public AddCodeOpRoot()
+        public AddOpCodeRoot()
         {
             base._name = "add";
         }
 
-        override public CodeOp Parse(string args, Stack s)
+        override public OpCodeRootResult Parse(string args)
         {
-            Type t;
+            string errorMessage = "";
 
-            t = s.CurrentStack[s.Count - 1].Type;
-
-            if (t != s.CurrentStack[s.Count - 2].Type)
+            string[] instruction = args.Split('.');
+            if (instruction.Count() != 1 && (instruction.Count() != 2 || instruction[1] != ""))
             {
-                throw new InvalidOperationException("can't add two values using different type");
+                errorMessage = "Bad arguments in Operation" + base._name;
             }
 
-            return new AddCodeOp(t);
+            return new OpCodeRootResult(errorMessage, new AddOpCode());
         }
     }
 
-    public class SubCodeOpRoot : CodeOpRoot
+    public class SubCodeOpRoot : OpCodeRoot
     {
 
         public SubCodeOpRoot()
@@ -54,22 +67,21 @@ namespace AnatomIL
             base._name = "sub";
         }
 
-        override public CodeOp Parse(string args, Stack s)
+        override public OpCodeRootResult Parse(string args)
         {
-            Type t;
+            string errorMessage = "";
 
-            t = s.CurrentStack[s.Count - 1].Type;
-
-            if (t != s.CurrentStack[s.Count - 2].Type)
+            string[] instruction = args.Split('.');
+            if (instruction.Count() != 1 && (instruction.Count() != 2 || instruction[1] != ""))
             {
-                throw new InvalidOperationException("can't sub two values using different type");
+                errorMessage = "Bad arguments in Operation" + base._name;
             }
 
-            return new SubCodeOp(t);
+            return new OpCodeRootResult(errorMessage, new SubOpCode());
         }
     }
 
-    public class MulCodeOpRoot : CodeOpRoot
+    public class MulCodeOpRoot : OpCodeRoot
     {
 
         public MulCodeOpRoot()
@@ -77,22 +89,21 @@ namespace AnatomIL
             base._name = "mul";
         }
 
-        override public CodeOp Parse(string args, Stack s)
+        override public OpCodeRootResult Parse(string args)
         {
-            Type t;
+            string errorMessage = "";
 
-            t = s.CurrentStack[s.Count - 1].Type;
-
-            if (t != s.CurrentStack[s.Count - 2].Type)
+            string[] instruction = args.Split('.');
+            if (instruction.Count() != 1 && (instruction.Count() != 2 || instruction[1] != ""))
             {
-                throw new InvalidOperationException("can't mul two values using different type");
+                errorMessage = "Bad arguments in Operation" + base._name;
             }
 
-            return new MulCodeOp(t);
+            return new OpCodeRootResult(errorMessage, new MulOpCode());
         }
     }
 
-    public class DivCodeOpRoot : CodeOpRoot
+    public class DivCodeOpRoot : OpCodeRoot
     {
 
         public DivCodeOpRoot()
@@ -100,22 +111,21 @@ namespace AnatomIL
             base._name = "div";
         }
 
-        override public CodeOp Parse(string args, Stack s)
+        override public OpCodeRootResult Parse(string args)
         {
-            Type t;
+            string errorMessage = "";
 
-            t = s.CurrentStack[s.Count - 1].Type;
-
-            if (t != s.CurrentStack[s.Count - 2].Type)
+            string[] instruction = args.Split('.');
+            if (instruction.Count() != 1 && (instruction.Count() != 2 || instruction[1] != ""))
             {
-                throw new InvalidOperationException("can't div two values using different type");
+                errorMessage = "Bad arguments in Operation" + base._name;
             }
 
-            return new DivCodeOp(t);
+            return new OpCodeRootResult(errorMessage, new DivOpCode());
         }
     }
 
-    public class RemCodeOpRoot : CodeOpRoot
+    public class RemCodeOpRoot : OpCodeRoot
     {
 
         public RemCodeOpRoot()
@@ -123,22 +133,21 @@ namespace AnatomIL
             base._name = "rem";
         }
 
-        override public CodeOp Parse(string args, Stack s)
+        override public OpCodeRootResult Parse(string args)
         {
-            Type t;
+            string errorMessage = "";
 
-            t = s.CurrentStack[s.Count - 1].Type;
-
-            if (t != s.CurrentStack[s.Count - 2].Type)
+            string[] instruction = args.Split('.');
+            if (instruction.Count() != 1 && (instruction.Count() != 2 || instruction[1] != ""))
             {
-                throw new InvalidOperationException("can't rem two values using different type");
+                errorMessage = "Bad arguments in Operation" + base._name;
             }
 
-            return new RemCodeOp(t);
+            return new OpCodeRootResult(errorMessage, new RemOpCode());
         }
     }
 
-    public class LdcCodeOpRoot : CodeOpRoot
+    public class LdcCodeOpRoot : OpCodeRoot
     {
 
         public LdcCodeOpRoot()
@@ -146,33 +155,48 @@ namespace AnatomIL
             base._name = "ldc";
         }
 
-        override public CodeOp Parse(string args, Stack s)
+        override public OpCodeRootResult Parse(string args)
         {
             string[] instruction = args.Split('.');
-            Type t;
-            object Value;
+            Type t = null;
+            object Value = null;
+            string errorMessage = "";
 
-            if (instruction[1].Equals("i8"))
+            if (instruction.Count() != 3)
             {
-                t = typeof(Int64);
-                Value = Convert.ToInt64(instruction[2]);
+                errorMessage = "Bad arguments in Operation" + base._name;
+            }
+
+            else if (instruction[1].Equals("i8"))
+            {
+                Int64 tmp;
+                if (!Int64.TryParse(instruction[2], out tmp)) errorMessage = "2nd argument isn't Int64 in Operation" + base._name;
+                else
+                {
+                    t = typeof(Int64);
+                    Value = Convert.ToInt64(instruction[2]);
+                }
             }
             else if (instruction[1].Equals("i4"))
             {
+                Int32 tmp;
+                if (!Int32.TryParse(instruction[2], out tmp)) errorMessage = "2nd argument isn't Int32 in Operation" + base._name;
                 t = typeof(Int32);
                 Value = Convert.ToInt32(instruction[2]);
             }
             else if (instruction[1].Equals("i2"))
             {
+                Int16 tmp;
+                if (!Int16.TryParse(instruction[2], out tmp)) errorMessage = "2nd argument isn't Int16 in Operation" + base._name;
                 t = typeof(Int16);
                 Value = Convert.ToInt16(instruction[2]);
             }
             else
             {
-                throw new Exception("lcd operation can't have first argument : " + instruction[1]);
+                errorMessage = "lcd operation can't have first argument : " + instruction[1];
             }
 
-            return (new LdcCodeOp(t, Value));
+            return (new OpCodeRootResult(errorMessage, new LdcOpCode(t, Value)));
         }
     }
 

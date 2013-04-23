@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace AnatomIL
 {
-    public class Heap
+    public class SourceCode
     {
-
+        public string Title;
+        public string[] Code;
     }
 }
