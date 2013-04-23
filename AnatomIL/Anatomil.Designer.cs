@@ -67,6 +67,7 @@
             this.tbCodeZone.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbCodeZone.Size = new System.Drawing.Size(339, 443);
             this.tbCodeZone.TabIndex = 0;
+            this.tbCodeZone.TextChanged += new System.EventHandler(this.tbCodeZone_TextChanged_1);
             // 
             // lbInstructions
             // 

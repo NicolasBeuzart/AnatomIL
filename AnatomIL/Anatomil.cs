@@ -120,6 +120,16 @@ namespace AnatomIL
 
         }
 
+        private void tbCodeZone_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void userControl1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         
     }
 }
