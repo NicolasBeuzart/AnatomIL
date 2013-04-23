@@ -52,7 +52,7 @@ namespace AnatomIL
         public int GoToNextInst(int pc)
         {
             int result = pc + 1;
-            while (result < _compiledCode.Count && _compiledCode.IsNull(result))
+            while (result < _compiledCode.Count && _compiledCode.IsNull(result) && !_compiledCode.IsExecutable(result))
             {
                 result++;
             }

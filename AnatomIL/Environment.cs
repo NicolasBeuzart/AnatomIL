@@ -11,6 +11,7 @@ namespace AnatomIL
         public Stack Stack;
         public int Pc;
         public Heap Heap;
+        public CompiledCode CompiledCode;
 
         public Environment()
         {

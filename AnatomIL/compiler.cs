@@ -19,6 +19,8 @@ namespace AnatomIL
             _lib.LibAddCodeOpRoot(new DivCodeOpRoot());
             _lib.LibAddCodeOpRoot(new RemCodeOpRoot());
             _lib.LibAddCodeOpRoot(new LdcCodeOpRoot());
+            _lib.LibAddCodeOpRoot(new BrCodeOpRoot());
+            _lib.LibAddCodeOpRoot(new LabelOpCodeRoot());
         }
 
         public CompilerResult Compile(string[] instructions)

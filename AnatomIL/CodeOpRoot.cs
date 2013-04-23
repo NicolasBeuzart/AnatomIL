@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -197,6 +197,51 @@ namespace AnatomIL
             }
 
             return (new OpCodeRootResult(errorMessage, new LdcOpCode(t, Value)));
+        }
+    }
+
+    public class BrCodeOpRoot : OpCodeRoot
+    {
+
+        public BrCodeOpRoot()
+        {
+            base._name = "br";
+        }
+
+        override public OpCodeRootResult Parse(string args)
+        {
+            string errorMessage = "";
+
+            string[] instruction = args.Split('.');
+
+            if (instruction.Count() != 2 && (instruction.Count() != 3 || instruction[2] != ""))
+            {
+                errorMessage = "Bad arguments in Operation" + base._name;
+            }
+
+            return new OpCodeRootResult(errorMessage, new BrOpCode(instruction[1]));
+        }
+    }
+
+    public class LabelOpCodeRoot : OpCodeRoot
+    {
+        public LabelOpCodeRoot()
+        {
+            base._name = ":";
+        }
+
+        override public OpCodeRootResult Parse(string args)
+        {
+            string errorMessage = "";
+
+            string[] instruction = args.Split('.');
+
+            if (instruction.Count() != 2 && (instruction.Count() != 3 || instruction[2] != ""))
+            {
+                errorMessage = "Bad label declaration";
+            }
+
+            return new OpCodeRootResult(errorMessage, new LabelOpCode(instruction[1]));
         }
     }
 

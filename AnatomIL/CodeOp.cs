@@ -9,11 +9,14 @@ namespace AnatomIL
     public class OpCode // classe "père" de tout les CodeOp
     {
         internal string _name;
+        internal bool _executable;
 
         public OpCode()
         {
 
         }
+
+        public bool IsExecutable { get { return _executable; } }
 
         public string Name
         {
@@ -30,6 +33,7 @@ namespace AnatomIL
         public AddOpCode()
         {
             base._name = "add";
+            base._executable = true;
         }
 
         override public void Execute(Environment e)
@@ -68,6 +72,7 @@ namespace AnatomIL
         public SubOpCode()
         {
             base._name = "sub";
+            base._executable = true;
         }
 
         override public void Execute(Environment e)
@@ -106,6 +111,7 @@ namespace AnatomIL
         public MulOpCode()
         {
             base._name = "mul";
+            base._executable = true;
         }
 
         override public void Execute(Environment e)
@@ -144,6 +150,7 @@ namespace AnatomIL
         public DivOpCode()
         {
             base._name = "div";
+            base._executable = true;
         }
 
         override public void Execute(Environment e)
@@ -182,6 +189,7 @@ namespace AnatomIL
         public RemOpCode()
         {
             base._name = "rem";
+            base._executable = true;
         }
 
         override public void Execute(Environment e)
@@ -220,13 +228,46 @@ namespace AnatomIL
 
         public LdcOpCode(Type t, object value)
         {
+            base._name = "ldc";
             _t = t;
             _value = value;
+            base._executable = true;
         }
 
         override public void Execute(Environment e)
         {
             e.Stack.Push(_t, _value);
+        }
+    }
+
+    public class BrOpCode : OpCode
+    {
+        string _label;
+
+        public BrOpCode(string label)
+        {
+            base._name = "br";
+            _label = label;
+            base._executable = true;
+        }
+
+        public override void Execute(Environment e)
+        {
+           e.Pc = e.CompiledCode.IndexLabel(_label);
+        }
+    }
+
+    public class LabelOpCode : OpCode
+    {
+        string _label;
+
+        public string Label { get { return _label; } }
+
+        public LabelOpCode(string label)
+        {
+            base._name = "br";
+            base._executable = false;
+            _label = label;
         }
     }
 }

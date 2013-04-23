@@ -10,6 +10,11 @@ namespace AnatomIL
     {
         public IReadOnlyList<OpCode> Code { get; private set; }
 
+        public bool IsExecutable(int i)
+        {
+            return (Code[i].IsExecutable);
+        }
+
         public CompiledCode(List<OpCode> code)
         {
             Code = code;
@@ -24,6 +29,15 @@ namespace AnatomIL
         {
             return (Code[i] == null);
         }
+
+        public int IndexLabel(string label)
+        {
+            int result = 0;
+
+            for (result = 0; (result < Code.Count()) && (Code[result]._name != ":" + label); result++) ;
+
+            return (result);
+        }
     }
 
     public class CompilerResult
@@ -32,6 +46,7 @@ namespace AnatomIL
         public bool IsSuccess { get { return ErrorMessages.Count == 0; } }
 
         public IReadOnlyList<string> ErrorMessages { get; internal set; }
+
 
         /// <summary>
         /// Null if at least one error exists in <see cref="ErrorMessages"/>.
