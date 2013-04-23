@@ -31,6 +31,7 @@
             this.btExecuteOneStep = new System.Windows.Forms.Button();
             this.btGo = new System.Windows.Forms.Button();
             this.btStop = new System.Windows.Forms.Button();
+            this.btCompile = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btExecuteOneStep
@@ -63,15 +64,26 @@
             this.btStop.UseVisualStyleBackColor = true;
             this.btStop.Click += new System.EventHandler(this.btStop_Click);
             // 
+            // btCompile
+            // 
+            this.btCompile.Location = new System.Drawing.Point(297, 14);
+            this.btCompile.Name = "btCompile";
+            this.btCompile.Size = new System.Drawing.Size(92, 47);
+            this.btCompile.TabIndex = 3;
+            this.btCompile.Text = "Compile";
+            this.btCompile.UseVisualStyleBackColor = true;
+            this.btCompile.Click += new System.EventHandler(this.btCompile_Click);
+            // 
             // UsercontrolButtons
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btCompile);
             this.Controls.Add(this.btStop);
             this.Controls.Add(this.btGo);
             this.Controls.Add(this.btExecuteOneStep);
             this.Name = "UsercontrolButtons";
-            this.Size = new System.Drawing.Size(296, 72);
+            this.Size = new System.Drawing.Size(395, 72);
             this.ResumeLayout(false);
 
         }
@@ -81,5 +93,6 @@
         private System.Windows.Forms.Button btExecuteOneStep;
         private System.Windows.Forms.Button btGo;
         private System.Windows.Forms.Button btStop;
+        private System.Windows.Forms.Button btCompile;
     }
 }

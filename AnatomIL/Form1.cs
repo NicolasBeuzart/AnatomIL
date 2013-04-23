@@ -16,5 +16,10 @@ namespace AnatomIL
         {
             InitializeComponent();
         }
+
+        private void panelNbrLine_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

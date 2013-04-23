@@ -55,9 +55,9 @@
             this.lbInstructions.AutoSize = true;
             this.lbInstructions.Location = new System.Drawing.Point(3, 4);
             this.lbInstructions.Name = "lbInstructions";
-            this.lbInstructions.Size = new System.Drawing.Size(61, 13);
+            this.lbInstructions.Size = new System.Drawing.Size(67, 13);
             this.lbInstructions.TabIndex = 0;
-            this.lbInstructions.Text = "Instructions";
+            this.lbInstructions.Text = "Instructions :";
             // 
             // UserControlCodeZone
             // 

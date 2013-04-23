@@ -29,8 +29,12 @@ namespace AnatomIL
 
         private void btStop_Click(object sender, EventArgs e)
         {
-            btGo.Visible = true;
-            btExecuteOneStep.Visible = false;
+
+        }
+
+        private void btCompile_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
