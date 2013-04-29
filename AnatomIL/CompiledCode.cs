@@ -34,7 +34,7 @@ namespace AnatomIL
         {
             int result = 0;
 
-            for (result = 0; (result < Code.Count()) && (Code[result]._name != ":" + label); result++) ;
+            for (result = 0; (result < Code.Count()) && Code[result] != null && (Code[result].Name != label); result++) ;
 
             return (result);
         }

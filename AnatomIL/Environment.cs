@@ -12,10 +12,12 @@ namespace AnatomIL
         public int Pc;
         public Heap Heap;
         public CompiledCode CompiledCode;
+        public Dictionary<string, int> _nbLocals= new Dictionary<string, int>();
 
         public Environment()
         {
             Stack = new Stack();
+            _nbLocals.Add("main", 0);
             Pc = -1;
         }
 

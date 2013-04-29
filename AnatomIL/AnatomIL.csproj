@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BranchOpCode.cs" />
+    <Compile Include="BranchOpCodeRoot.cs" />
     <Compile Include="code.cs" />
     <Compile Include="CodeOp.cs" />
     <Compile Include="CodeOpRoot.cs" />

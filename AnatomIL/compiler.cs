@@ -13,14 +13,6 @@ namespace AnatomIL
         public Compiler()
         {
             _lib = new Library();
-            _lib.LibAddCodeOpRoot(new AddOpCodeRoot());
-            _lib.LibAddCodeOpRoot(new SubCodeOpRoot());
-            _lib.LibAddCodeOpRoot(new MulCodeOpRoot());
-            _lib.LibAddCodeOpRoot(new DivCodeOpRoot());
-            _lib.LibAddCodeOpRoot(new RemCodeOpRoot());
-            _lib.LibAddCodeOpRoot(new LdcCodeOpRoot());
-            _lib.LibAddCodeOpRoot(new BrCodeOpRoot());
-            _lib.LibAddCodeOpRoot(new LabelOpCodeRoot());
         }
 
         public CompilerResult Compile(string[] instructions)
@@ -33,22 +25,84 @@ namespace AnatomIL
             {
                 // retire les espace et . en trop
                 string instruction = instructions[i];
-                instruction.Replace(' ', '.');
-                while (instruction.Contains(".."))
+
+                instruction.Trim();
+
+                while (instruction.Contains("  "))
                 {
-                    instruction.Replace("..", ".");
+                    instruction = instruction.Replace("  ", " ");
                 }
+                
+                instruction = instruction.Replace(". ", ".");
+
+                // on recupére le nom de la méthode et les arguments
+                string operation = instruction.Split('.', ' ')[0];
+
+                List<string> options = instruction.Split('.').ToList();
+
+                List<string> args = options[options.Count() - 1].Split(' ').ToList();
+                if (args[0] == "") args.RemoveAt(0);
+                args.RemoveAt(0);
+
+
+                options[options.Count() - 1] = options[options.Count() - 1].Split(' ')[0];
+                options.RemoveAt(0);
 
                 if (instruction != "")
                 {
-                    // on recupére le nom de la méthode et les arguments
-                    string operation = instruction.Split('.', ' ')[0];
+                    if ( operation == "") operation = instruction.Split('.', ' ')[1];
+
                     if (_lib.LibIsCodeOpRootExiste(operation))
                     {
-                        result = _lib.LibFindOpCodeRoot(operation).Parse(instruction);
+                        result = _lib.LibFindOpCodeRoot(operation).Parse(options, args);
 
                         if (result.IsSuccess) code.Add(result.OpCode);
                         else errorMessages.Add("Error line " + i.ToString() + " : " + result.ErrorMessage);
+                    }
+                    else if (instruction[0] == ':')
+                    {
+                        List<string> label = new List<string>();
+                        label.Add(instruction);
+                        result = _lib.LibFindOpCodeRoot("label").Parse(label, args);
+
+                        if (result.IsSuccess) code.Add(result.OpCode);
+                        else errorMessages.Add("Error line " + i.ToString() + " : " + result.ErrorMessage);
+                    }
+                    else if (operation == "locals")
+                    {
+                        if (args[0] == "init" && args[1][0] == '(')
+                        {
+                            args[1] = args[1].Remove(0,1);
+                            options = new List<string>();
+
+                            options.Add(args[1].Remove(args[1].Length - 1, 1));
+                            int j = i;
+                            j++;
+
+                            while ((instructions[j][instructions[j].Length - 1] == ')'  || instructions[j][instructions[j].Length - 1] == ',')
+                                    && j < instructions.Count())
+                            {
+                                instruction = instructions[j];
+                                instruction.Trim();
+                                options.Add(instruction.Remove(instruction.Length - 1, 1));
+                                j++;
+                            }
+
+                            result = _lib.LibFindOpCodeRoot("localsInit").Parse(options, args);
+
+                            if (result.IsSuccess) code.Add(result.OpCode);
+                            else errorMessages.Add("Error line " + i.ToString() + " : " + result.ErrorMessage);
+
+                            while (j - 1 > i)
+                            {
+                                code.Add(null);
+                                i++;
+                            }
+                        }
+                        else
+                        {
+                            errorMessages.Add("Compilation error : line " + (i + 1).ToString());
+                        }
                     }
                     else
                     {

@@ -240,22 +240,7 @@ namespace AnatomIL
         }
     }
 
-    public class BrOpCode : OpCode
-    {
-        string _label;
-
-        public BrOpCode(string label)
-        {
-            base._name = "br";
-            _label = label;
-            base._executable = true;
-        }
-
-        public override void Execute(Environment e)
-        {
-           e.Pc = e.CompiledCode.IndexLabel(_label);
-        }
-    }
+    
 
     public class LabelOpCode : OpCode
     {
@@ -265,9 +250,34 @@ namespace AnatomIL
 
         public LabelOpCode(string label)
         {
-            base._name = "br";
+            base._name = label;
             base._executable = false;
             _label = label;
+        }
+    }
+
+    public class LocalsInitOpCode : OpCode
+    {
+        List<string> _locals;
+
+        public LocalsInitOpCode(List<string> locals)
+        {
+            base._name = "localsInit";
+            _locals = locals;
+            base._executable = true;
+        }
+
+        override public void Execute(Environment e)
+        {
+            for (int i = 0; i < _locals.Count(); i++)
+            {
+                if (_locals[i] == "int16") e.Stack.Push(typeof(Int16), 0);
+                else if (_locals[i] == "int32") e.Stack.Push(typeof(Int32), 0);
+                else if (_locals[i] == "int64") e.Stack.Push(typeof(Int64), 0);
+                else if (_locals[i] == "bool") e.Stack.Push(typeof(bool), null);
+
+                e._nbLocals["main"]++;
+            }
         }
     }
 }
