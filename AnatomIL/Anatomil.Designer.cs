@@ -1,6 +1,6 @@
 ﻿namespace AnatomIL
 {
-    partial class Anatomil
+    partial class AnatomIL
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
@@ -35,6 +35,7 @@
             this.panInstructions = new System.Windows.Forms.Panel();
             this.listBoxInstructions = new System.Windows.Forms.ListBox();
             this.panMarginLeftInstructions = new System.Windows.Forms.Panel();
+            this.splitter1 = new System.Windows.Forms.Splitter();
             this.panToolbar = new System.Windows.Forms.Panel();
             this.btStop = new System.Windows.Forms.Button();
             this.btStart = new System.Windows.Forms.Button();
@@ -52,6 +53,7 @@
             this.panStack = new System.Windows.Forms.Panel();
             this.panLeft.SuspendLayout();
             this.panInstructions.SuspendLayout();
+            this.panMarginLeftInstructions.SuspendLayout();
             this.panToolbar.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panMarginLeftStack.SuspendLayout();
@@ -129,11 +131,20 @@
             // 
             // panMarginLeftInstructions
             // 
+            this.panMarginLeftInstructions.Controls.Add(this.splitter1);
             this.panMarginLeftInstructions.Dock = System.Windows.Forms.DockStyle.Left;
             this.panMarginLeftInstructions.Location = new System.Drawing.Point(0, 0);
             this.panMarginLeftInstructions.Name = "panMarginLeftInstructions";
             this.panMarginLeftInstructions.Size = new System.Drawing.Size(19, 456);
             this.panMarginLeftInstructions.TabIndex = 6;
+            // 
+            // splitter1
+            // 
+            this.splitter1.Location = new System.Drawing.Point(0, 0);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(3, 456);
+            this.splitter1.TabIndex = 0;
+            this.splitter1.TabStop = false;
             // 
             // panToolbar
             // 
@@ -281,7 +292,7 @@
             this.panStack.Size = new System.Drawing.Size(134, 471);
             this.panStack.TabIndex = 9;
             // 
-            // Anatomil
+            // AnatomIL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -293,12 +304,13 @@
             this.Controls.Add(this.panLeft);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Anatomil";
+            this.Name = "AnatomIL";
             this.Text = "AnatomIL";
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.panLeft.ResumeLayout(false);
             this.panInstructions.ResumeLayout(false);
             this.panInstructions.PerformLayout();
+            this.panMarginLeftInstructions.ResumeLayout(false);
             this.panToolbar.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -335,6 +347,7 @@
         private System.Windows.Forms.TextBox textBoxError;
         private System.Windows.Forms.Panel panLeftStack;
         private System.Windows.Forms.Panel panStack;
+        private System.Windows.Forms.Splitter splitter1;
     }
 }
 

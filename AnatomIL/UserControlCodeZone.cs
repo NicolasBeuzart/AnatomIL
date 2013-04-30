@@ -17,9 +17,5 @@ namespace AnatomIL
             InitializeComponent();
         }
 
-        private void UserControlCodeZone_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

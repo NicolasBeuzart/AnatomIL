@@ -16,7 +16,7 @@ namespace AnatomIL
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Anatomil());
+            Application.Run(new Interface());
         }
     }
 }

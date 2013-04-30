@@ -1,6 +1,6 @@
 ﻿namespace AnatomIL
 {
-    partial class UserControlCodeZone
+    public partial class UserControlCodeZone
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,19 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBoxCode = new System.Windows.Forms.TextBox();
             this.panInstruction = new System.Windows.Forms.Panel();
             this.lbInstructions = new System.Windows.Forms.Label();
+            this.textBoxCode = new System.Windows.Forms.TextBox();
+            this.listBoxInstructions = new System.Windows.Forms.ListBox();
             this.panInstruction.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // textBoxCode
-            // 
-            this.textBoxCode.Location = new System.Drawing.Point(3, 17);
-            this.textBoxCode.Multiline = true;
-            this.textBoxCode.Name = "textBoxCode";
-            this.textBoxCode.Size = new System.Drawing.Size(301, 307);
-            this.textBoxCode.TabIndex = 0;
             // 
             // panInstruction
             // 
@@ -55,19 +48,36 @@
             this.lbInstructions.AutoSize = true;
             this.lbInstructions.Location = new System.Drawing.Point(3, 4);
             this.lbInstructions.Name = "lbInstructions";
-            this.lbInstructions.Size = new System.Drawing.Size(61, 13);
+            this.lbInstructions.Size = new System.Drawing.Size(67, 13);
             this.lbInstructions.TabIndex = 0;
-            this.lbInstructions.Text = "Instructions";
+            this.lbInstructions.Text = "Instructions :";
+            // 
+            // textBoxCode
+            // 
+            this.textBoxCode.Location = new System.Drawing.Point(0, 23);
+            this.textBoxCode.Multiline = true;
+            this.textBoxCode.Name = "textBoxCode";
+            this.textBoxCode.Size = new System.Drawing.Size(307, 304);
+            this.textBoxCode.TabIndex = 2;
+            // 
+            // listBoxInstructions
+            // 
+            this.listBoxInstructions.Enabled = false;
+            this.listBoxInstructions.FormattingEnabled = true;
+            this.listBoxInstructions.Location = new System.Drawing.Point(0, 23);
+            this.listBoxInstructions.Name = "listBoxInstructions";
+            this.listBoxInstructions.Size = new System.Drawing.Size(304, 303);
+            this.listBoxInstructions.TabIndex = 3;
             // 
             // UserControlCodeZone
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.panInstruction);
             this.Controls.Add(this.textBoxCode);
+            this.Controls.Add(this.panInstruction);
+            this.Controls.Add(this.listBoxInstructions);
             this.Name = "UserControlCodeZone";
             this.Size = new System.Drawing.Size(307, 327);
-            this.Load += new System.EventHandler(this.UserControlCodeZone_Load);
             this.panInstruction.ResumeLayout(false);
             this.panInstruction.PerformLayout();
             this.ResumeLayout(false);
@@ -77,8 +87,9 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBoxCode;
         private System.Windows.Forms.Panel panInstruction;
         private System.Windows.Forms.Label lbInstructions;
+        public System.Windows.Forms.TextBox textBoxCode;
+        public System.Windows.Forms.ListBox listBoxInstructions;
     }
 }
