@@ -48,9 +48,19 @@ namespace AnatomIL
             int i = 0;
             foreach (StackItem StIt in computer.Stack.CurrentStack)
             {
-                s[computer.Stack.CurrentStack.Count - i - 1] = StIt.Type.ToString().Split('.')[StIt.Type.ToString().Split('.').Count() - 1] + " : " + StIt.Value.ToString();
+                if (StIt.Value != null)
+                    s[computer.Stack.CurrentStack.Count - i - 1] = StIt.Type.ToString().Split('.')[StIt.Type.ToString().Split('.').Count() - 1] + " : " + StIt.Value.ToString();
+                else
+                    s[computer.Stack.CurrentStack.Count - i - 1] = StIt.Type.ToString().Split('.')[StIt.Type.ToString().Split('.').Count() - 1] + " : null";
+
+                if (i < computer.NbLocals["main"])
+                {
+                    s[computer.Stack.CurrentStack.Count - i - 1] = "loc" + (computer.Stack.CurrentStack.Count - i - 1) + " " + s[computer.Stack.CurrentStack.Count - i - 1];
+                }
+
                 i++;
             }
+
             listboxStack.Items.AddRange(s);
             panTopOfStack.Height = panMarginLeftStack.Height - (listboxStack.ItemHeight * (listboxStack.Items.Count + 1));
         }

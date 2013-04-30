@@ -22,6 +22,8 @@ namespace AnatomIL
 
         }
 
+        public Dictionary<string, int> NbLocals { get { return _env._nbLocals; } }
+
         public int Pc { get { return _env.Pc; } internal set { _env.Pc = value; } }
 
         public Stack Stack { get { return _env.Stack; } }
@@ -37,6 +39,7 @@ namespace AnatomIL
             if (compilerResult.IsSuccess)
             {
                 _compiledCode = compilerResult.Code;
+                _env.CompiledCode = _compiledCode;
             }
             else
             {
@@ -52,7 +55,7 @@ namespace AnatomIL
         public int GoToNextInst(int pc)
         {
             int result = pc + 1;
-            while (result < _compiledCode.Count && _compiledCode.IsNull(result))
+            while (result < _compiledCode.Count && (_compiledCode.IsNull(result) || !_compiledCode.IsExecutable(result)))
             {
                 result++;
             }

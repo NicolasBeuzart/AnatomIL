@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BranchOpCode.cs" />
+    <Compile Include="BranchOpCodeRoot.cs" />
     <Compile Include="code.cs" />
     <Compile Include="CodeOp.cs" />
     <Compile Include="CodeOpRoot.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="Interface.Designer.cs">
       <DependentUpon>Interface.cs</DependentUpon>
     </Compile>
+    <Compile Include="IlComputer.cs" />
     <Compile Include="Library.cs" />
     <Compile Include="Node.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
@@ -139,7 +142,6 @@
     <None Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
     <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

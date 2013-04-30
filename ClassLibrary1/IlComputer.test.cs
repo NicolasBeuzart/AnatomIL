@@ -14,8 +14,6 @@ namespace AnatomIL.test
         public void TestForLybrary()
         {
             Library lib = new Library();
-            lib.LibAddCodeOpRoot(new AddOpCodeRoot());
-            lib.LibAddCodeOpRoot(new SubCodeOpRoot());
 
             // on test la methode LibIsOpCodeRootExiste
             Assert.That(lib.LibIsCodeOpRootExiste("toto"), Is.False);
@@ -34,7 +32,7 @@ namespace AnatomIL.test
             Compiler c = new Compiler();
             CompilerResult result;
             string[] s = new string[1];
-            s[0] = "ldc.i4.13";
+            s[0] = "ldc.i4 13";
 
             result = c.Compile(s);
             Assert.That(result.IsSuccess, Is.True);
@@ -44,18 +42,6 @@ namespace AnatomIL.test
             Assert.That(result.IsSuccess, Is.False);
         }
 
-        [Test]
-        public void TestForOpCodeRoot()
-        {
-            AddOpCodeRoot add = new AddOpCodeRoot();
-            OpCodeRootResult result;
-
-            result = add.Parse("add");
-            Assert.That(result.IsSuccess, Is.True);
-
-            result = add.Parse("add.2");
-            Assert.That(result.IsSuccess, Is.False);
-        }
 
         [Test]
         public void TestForParser()
@@ -64,16 +50,16 @@ namespace AnatomIL.test
 
             // simulation de code rentré par l'utilisateur
             string[] s = new string[11];
-            s[0] = "ldc.i4.13";
-            s[1] = "ldc.i4.12";
+            s[0] = "ldc.i4 13";
+            s[1] = "ldc.i4 12";
             s[2] = "add";
-            s[3] = "ldc.i4.30";
+            s[3] = "ldc.i4 30";
             s[4] = "sub";
-            s[5] = "ldc.i4.20";
+            s[5] = "ldc.i4 20";
             s[6] = "div";
-            s[7] = "ldc.i4.5";
+            s[7] = "ldc.i4 5";
             s[8] = "mul";
-            s[9] = "ldc.i4.25";
+            s[9] = "ldc.i4 25";
             s[10] = "rem";
             
             // on verifi que les méthodes on bien était ajouter a la library
