@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
+            this.textBoxError = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -40,13 +41,24 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Error Box :";
             // 
+            // textBoxError
+            // 
+            this.textBoxError.Location = new System.Drawing.Point(0, 16);
+            this.textBoxError.Multiline = true;
+            this.textBoxError.Name = "textBoxError";
+            this.textBoxError.Size = new System.Drawing.Size(218, 157);
+            this.textBoxError.TabIndex = 0;
+            this.textBoxError.Visible = false;
+            // 
             // UserControlTextBoxError
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.textBoxError);
             this.Controls.Add(this.label1);
             this.Name = "UserControlTextBoxError";
             this.Size = new System.Drawing.Size(218, 176);
+            this.VisibleChanged += new System.EventHandler(this.UserControlTextBoxError_VisibleChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -55,5 +67,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBoxError;
     }
 }

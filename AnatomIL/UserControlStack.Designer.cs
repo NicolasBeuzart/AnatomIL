@@ -72,7 +72,6 @@
             this.Controls.Add(this.panelTopOfStack);
             this.Name = "UserControlStack";
             this.Size = new System.Drawing.Size(136, 233);
-            this.ParentChanged += new System.EventHandler(this.UserControlStack_ParentChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -80,7 +79,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox listboxStack;
+        public System.Windows.Forms.ListBox listboxStack;
         private System.Windows.Forms.Label labStack;
         private System.Windows.Forms.Panel panelTopOfStack;
     }

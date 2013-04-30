@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace AnatomIL
 {
-    public partial class Anatomil : Form
+    public partial class AnatomIL : Form
     {
         IlComputer computer;
 
-        public Anatomil()
+        public AnatomIL()
         {
             InitializeComponent();
             listBoxInstructions.Visible = false;
@@ -130,6 +130,11 @@ namespace AnatomIL
         }
 
         private void userControl1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxError_TextChanged(object sender, EventArgs e)
         {
 
         }

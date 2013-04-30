@@ -1,6 +1,6 @@
 ﻿namespace AnatomIL
 {
-    partial class UsercontrolButtons
+    partial class UserControlButtons
     {
         /// <summary> 
         /// Required designer variable.
@@ -42,6 +42,7 @@
             this.btExecuteOneStep.TabIndex = 0;
             this.btExecuteOneStep.Text = "Pas à pas";
             this.btExecuteOneStep.UseVisualStyleBackColor = true;
+            this.btExecuteOneStep.Visible = false;
             this.btExecuteOneStep.Click += new System.EventHandler(this.btExecuteOneStep_Click);
             // 
             // btGo
@@ -52,6 +53,7 @@
             this.btGo.TabIndex = 1;
             this.btGo.Text = "Go";
             this.btGo.UseVisualStyleBackColor = true;
+            this.btGo.Visible = false;
             this.btGo.Click += new System.EventHandler(this.btGo_Click);
             // 
             // btStop
@@ -74,7 +76,7 @@
             this.btCompile.UseVisualStyleBackColor = true;
             this.btCompile.Click += new System.EventHandler(this.btCompile_Click);
             // 
-            // UsercontrolButtons
+            // UserControlButtons
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -82,15 +84,15 @@
             this.Controls.Add(this.btStop);
             this.Controls.Add(this.btGo);
             this.Controls.Add(this.btExecuteOneStep);
-            this.Name = "UsercontrolButtons";
-            this.Size = new System.Drawing.Size(395, 72);
+            this.Name = "UserControlButtons";
+            this.Size = new System.Drawing.Size(397, 72);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button btExecuteOneStep;
+        public System.Windows.Forms.Button btExecuteOneStep;
         private System.Windows.Forms.Button btGo;
         private System.Windows.Forms.Button btStop;
         private System.Windows.Forms.Button btCompile;
