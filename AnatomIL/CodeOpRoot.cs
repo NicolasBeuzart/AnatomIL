@@ -262,4 +262,28 @@ namespace AnatomIL
         }
     }
 
+    public class DupOpCodeRoot : OpCodeRoot
+    {
+
+        public DupOpCodeRoot()
+        {
+            base._name = "dup";
+        }
+
+        override public OpCodeRootResult Parse(List<string> options, List<string> args)
+        {
+            string errorMessage = "";
+
+            if (options.Count() != 0)
+            {
+                errorMessage = "Bad options in Operation" + base._name;
+            }
+            if (args.Count() != 0 && args[0] != "")
+            {
+                errorMessage = "Bad arguments in Operation" + base._name;
+            }
+
+            return new OpCodeRootResult(errorMessage, new DupOpCode());
+        }
+    }
 }

@@ -42,18 +42,6 @@ namespace AnatomIL.test
             Assert.That(result.IsSuccess, Is.False);
         }
 
-        [Test]
-        public void TestForOpCodeRoot()
-        {
-            //AddOpCodeRoot add = new AddOpCodeRoot();
-            //OpCodeRootResult result;
-
-            //result = add.Parse("add");
-            //Assert.That(result.IsSuccess, Is.True);
-
-            //result = add.Parse("add.2");
-            //Assert.That(result.IsSuccess, Is.False);
-        }
 
         [Test]
         public void TestForParser()

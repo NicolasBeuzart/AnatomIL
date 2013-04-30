@@ -16,17 +16,45 @@ namespace AnatomIL.test
         {
             BgeOpCodeRoot t = new BgeOpCodeRoot();
 
-            //OpCodeRootResult r = t.Parse("bge.un label");
-            //Assert.That(r.IsSuccess, Is.True);
+            List<string> options = new List<string>();
+            List<string> args = new List<string>();
 
-            //r = t.Parse("bge label");
-            //Assert.That(r.IsSuccess, Is.True);
+            args.Add("label");
 
-            //r = t.Parse("bge.un. label");
-            //Assert.That(r.IsSuccess, Is.False);
+            OpCodeRootResult r = t.Parse(options, args);
+            Assert.That(r.IsSuccess, Is.True);
 
-            //r = t.Parse("bge. label");
-            //Assert.That(r.IsSuccess, Is.False);
+            options.Add("un");
+
+            r = t.Parse(options, args);
+            Assert.That(r.IsSuccess, Is.True);
+
+            options.Add("");
+            r = t.Parse(options, args);
+            Assert.That(r.IsSuccess, Is.False);
+
+            options.Clear();
+            options.Add("");
+            r = t.Parse(options, args);
+            Assert.That(r.IsSuccess, Is.False);
         }
+
+
+        [Test]
+        public void TestForOpCodeRoot()
+        {
+            AddOpCodeRoot add = new AddOpCodeRoot();
+            OpCodeRootResult result;
+            List<string> options = new List<string>();
+            List<string> args = new List<string>();
+
+            result = add.Parse(options, args);
+            Assert.That(result.IsSuccess, Is.True);
+
+            options.Add("");
+            result = add.Parse(options, args);
+            Assert.That(result.IsSuccess, Is.False);
+        }
+
     }
 }

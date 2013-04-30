@@ -280,4 +280,22 @@ namespace AnatomIL
             }
         }
     }
+
+    public class DupOpCode : OpCode
+    {
+        Type _t;
+
+        public DupOpCode()
+        {
+            base._name = "dup";
+            base._executable = true;
+        }
+
+        override public void Execute(Environment e)
+        {
+            StackItem s = e.Stack.Pop();
+            e.Stack.Push(s.Type,s.Value);
+            e.Stack.Push(s.Type,s.Value);
+        }
+    }
 }

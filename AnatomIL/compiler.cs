@@ -23,35 +23,29 @@ namespace AnatomIL
 
             for (int i = 0; i < instructions.Count(); i++ )
             {
-                // retire les espace et . en trop
+                
                 string instruction = instructions[i];
 
+                // retire les espace en trop
                 instruction.Trim();
-
                 while (instruction.Contains("  "))
                 {
                     instruction = instruction.Replace("  ", " ");
                 }
-                
                 instruction = instruction.Replace(". ", ".");
 
-                // on recupére le nom de la méthode et les arguments
+                // on recupére le nom de la méthode, les options et les arguments
                 string operation = instruction.Split('.', ' ')[0];
-
+                if (operation == "") operation = instruction.Split('.', ' ')[1];
                 List<string> options = instruction.Split('.').ToList();
-
                 List<string> args = options[options.Count() - 1].Split(' ').ToList();
                 if (args[0] == "") args.RemoveAt(0);
                 args.RemoveAt(0);
-
-
                 options[options.Count() - 1] = options[options.Count() - 1].Split(' ')[0];
                 options.RemoveAt(0);
 
                 if (instruction != "")
                 {
-                    if ( operation == "") operation = instruction.Split('.', ' ')[1];
-
                     if (_lib.LibIsCodeOpRootExiste(operation))
                     {
                         result = _lib.LibFindOpCodeRoot(operation).Parse(options, args);

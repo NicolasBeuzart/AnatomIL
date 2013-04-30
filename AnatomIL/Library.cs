@@ -32,6 +32,7 @@ namespace AnatomIL
             this.LibAddCodeOpRoot(new BrnullOpCodeRoot());
             this.LibAddCodeOpRoot(new BrinstOpCodeRoot());
             this.LibAddCodeOpRoot(new LocalsInitOpCodeRoot());
+            this.LibAddCodeOpRoot(new DupOpCodeRoot());
         }
 
         public void LibAddCodeOpRoot(OpCodeRoot methode)
