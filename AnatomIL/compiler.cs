@@ -17,9 +17,24 @@ namespace AnatomIL
 
         public CompilerResult Compile(string[] instructions)
         {
+            Tokeniser t = new Tokeniser(instructions);
             List<OpCode> code = new List<OpCode>();
             List<string> errorMessages = new List<string>();
             OpCodeRootResult result;
+
+            if (t.MatchNextToken())
+            {
+                t.MatchSpace();
+                if (t.MatchDot())
+                {
+
+                }
+            }
+
+            while (t.MatchNextToken())
+            {
+                t.MatchSpace();
+            }
 
             for (int i = 0; i < instructions.Count(); i++ )
             {

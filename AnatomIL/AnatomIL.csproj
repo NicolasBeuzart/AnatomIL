@@ -57,7 +57,6 @@
     <Compile Include="CompiledCode.cs" />
     <Compile Include="compiler.cs" />
     <Compile Include="Environment.cs" />
-    <Compile Include="IlComputer.cs" />
     <Compile Include="Interface.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +79,7 @@
     <Compile Include="Stack.cs" />
     <Compile Include="StackItem.cs" />
     <Compile Include="Tas.cs" />
+    <Compile Include="Tokeniser.cs" />
     <Compile Include="UserControlButtons.cs">
       <SubType>UserControl</SubType>
     </Compile>

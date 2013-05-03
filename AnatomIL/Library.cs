@@ -40,6 +40,34 @@ namespace AnatomIL
             _library.Add(methode.Name, methode);
         }
 
+        public void LoadInstructionLib()
+        {
+            this.LibAddCodeOpRoot(new AddOpCodeRoot());
+            this.LibAddCodeOpRoot(new SubCodeOpRoot());
+            this.LibAddCodeOpRoot(new MulCodeOpRoot());
+            this.LibAddCodeOpRoot(new DivCodeOpRoot());
+            this.LibAddCodeOpRoot(new RemCodeOpRoot());
+            this.LibAddCodeOpRoot(new LdcCodeOpRoot());
+            this.LibAddCodeOpRoot(new BrOpCodeRoot());
+            this.LibAddCodeOpRoot(new LabelOpCodeRoot());
+            this.LibAddCodeOpRoot(new BeqOpCodeRoot());
+            this.LibAddCodeOpRoot(new BgeOpCodeRoot());
+            this.LibAddCodeOpRoot(new BgtOpCodeRoot());
+            this.LibAddCodeOpRoot(new BleOpCodeRoot());
+            this.LibAddCodeOpRoot(new BltOpCodeRoot());
+            this.LibAddCodeOpRoot(new BrfalseOpCodeRoot());
+            this.LibAddCodeOpRoot(new BrtrueOpCodeRoot());
+            this.LibAddCodeOpRoot(new BrzeroOpCodeRoot());
+            this.LibAddCodeOpRoot(new BrnullOpCodeRoot());
+            this.LibAddCodeOpRoot(new BrinstOpCodeRoot());
+            this.LibAddCodeOpRoot(new DupOpCodeRoot());
+        }
+
+        public void LoadDirectiveLib()
+        {
+            this.LibAddCodeOpRoot(new LocalsInitOpCodeRoot());
+        }
+
         public bool LibIsCodeOpRootExiste(string name)
         {
             bool result = _library.ContainsKey(name);
