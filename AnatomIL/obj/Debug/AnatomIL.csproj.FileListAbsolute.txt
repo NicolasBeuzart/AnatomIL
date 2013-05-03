@@ -25,3 +25,4 @@ C:\Users\Corentin\Documents\GitExtensions\AnatomIL\AnatomIL\obj\Debug\AnatomIL.U
 C:\Users\Corentin\Documents\GitExtensions\AnatomIL\AnatomIL\obj\Debug\AnatomIL.UserControlTextBoxError.resources
 C:\Users\Corentin\Documents\GitExtensions\AnatomIL\AnatomIL\obj\Debug\AnatomIL.Interface.resources
 C:\Users\Corentin\Documents\GitExtensions\AnatomIL\AnatomIL\obj\Debug\AnatomIL.csprojResolveAssemblyReference.cache
+C:\Users\Corentin\Documents\GitExtensions\AnatomIL\AnatomIL\obj\Debug\AnatomIL.UserControlMenu.resources
