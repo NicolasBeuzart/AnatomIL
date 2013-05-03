@@ -283,8 +283,6 @@ namespace AnatomIL
 
     public class DupOpCode : OpCode
     {
-        Type _t;
-
         public DupOpCode()
         {
             base._name = "dup";
