@@ -17,4 +17,11 @@ namespace AnatomIL
             Value = o;
         }
     }
+
+    public class StackItemFrame : StackItem
+    {
+
+
+
+    }
 }
