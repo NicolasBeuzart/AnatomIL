@@ -6,13 +6,13 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace AnatomIL
 {
     public partial class UserControlButtons : UserControl
     {
-   
         public UserControlButtons()
         {
             InitializeComponent();
@@ -25,12 +25,11 @@ namespace AnatomIL
         IlComputer computer = new IlComputer();
         public IlComputer CurrentComputer { get { return computer; } }
 
+
         private void btGo_Click(object sender, EventArgs e)
         {
-
             while (computer.Pc < Code.listBoxInstructions.Items.Count)
             {
-
                 computer.ExecuteNextInstruction();
 
                 if (computer.Pc < Code.listBoxInstructions.Items.Count)
@@ -47,12 +46,11 @@ namespace AnatomIL
 
                 Stack.ShowStack();
             }
-
+                
         }
 
         private void btExecuteOneStep_Click(object sender, EventArgs e)
         {
-
             computer.ExecuteNextInstruction();
 
             if (computer.Pc < Code.listBoxInstructions.Items.Count)
@@ -68,7 +66,7 @@ namespace AnatomIL
             }
 
             Stack.ShowStack();
-           
+            
         }
 
         private void btStop_Click(object sender, EventArgs e)

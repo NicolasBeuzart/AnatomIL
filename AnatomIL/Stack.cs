@@ -30,6 +30,7 @@ namespace AnatomIL
             else if (tmp is StackItemValue)
             {
                 StV = new StackItemValue(tmp.Type, tmp.Value);
+                _currentstack.Remove(tmp);
                 return (true);
             }
             return (false);
