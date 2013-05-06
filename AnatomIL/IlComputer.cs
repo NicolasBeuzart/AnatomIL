@@ -59,7 +59,13 @@ namespace AnatomIL
             {
                 result++;
             }
-            return result;
+
+            if (_compiledCode.Count > result && _compiledCode.IsDirective(result))
+            {
+                _compiledCode.Code[result].Execute(_env);
+                return GoToNextInst(result);
+            }
+            else return result;
         }
 
         public void ExecuteNextInstruction()

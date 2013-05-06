@@ -9,12 +9,14 @@ namespace AnatomIL
     public class OpCodeRoot // classe "père" de toute les OpCodeRoot
     {
         internal string _name;
+        internal string _type;
 
         public OpCodeRoot()
         {
             _name = "none";
         }
 
+        public string Type { get { return _type; } }
         public string Name
         {
             get { return _name; }
@@ -43,6 +45,7 @@ namespace AnatomIL
         public AddOpCodeRoot()
         {
             base._name = "add";
+            base._type = "operation";
         }
 
         override public OpCodeRootResult Parse(Tokeniser t)
@@ -65,6 +68,7 @@ namespace AnatomIL
         public SubCodeOpRoot()
         {
             base._name = "sub";
+            base._type = "operation";
         }
 
         override public OpCodeRootResult Parse(Tokeniser t)
@@ -87,6 +91,7 @@ namespace AnatomIL
         public MulCodeOpRoot()
         {
             base._name = "mul";
+            base._type = "operation";
         }
 
         override public OpCodeRootResult Parse(Tokeniser t)
@@ -109,6 +114,7 @@ namespace AnatomIL
         public DivCodeOpRoot()
         {
             base._name = "div";
+            base._type = "operation";
         }
 
         override public OpCodeRootResult Parse(Tokeniser t)
@@ -131,6 +137,7 @@ namespace AnatomIL
         public RemCodeOpRoot()
         {
             base._name = "rem";
+            base._type = "operation";
         }
 
         override public OpCodeRootResult Parse(Tokeniser t)
@@ -153,6 +160,7 @@ namespace AnatomIL
         public LdcCodeOpRoot()
         {
             base._name = "ldc";
+            base._type = "operation";
         }
 
         override public OpCodeRootResult Parse(Tokeniser t)
@@ -203,6 +211,7 @@ namespace AnatomIL
         public LabelOpCodeRoot()
         {
             base._name = "label";
+            base._type = "label";
         }
 
         override public OpCodeRootResult Parse(Tokeniser t)
@@ -221,6 +230,7 @@ namespace AnatomIL
         public LocalsInitOpCodeRoot()
         {
             base._name = "locals";
+            base._type = "directive";
         }
 
         override public OpCodeRootResult Parse(Tokeniser t)
@@ -254,6 +264,7 @@ namespace AnatomIL
         public DupOpCodeRoot()
         {
             base._name = "dup";
+            base._type = "operation";
         }
 
         override public OpCodeRootResult Parse(Tokeniser t)

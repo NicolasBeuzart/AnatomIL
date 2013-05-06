@@ -12,6 +12,7 @@ namespace AnatomIL
         public BrOpCodeRoot()
         {
             base._name = "br";
+            base._type = "operation";
         }
 
         override public OpCodeRootResult Parse(Tokeniser t)
@@ -33,6 +34,7 @@ namespace AnatomIL
         public BeqOpCodeRoot()
         {
             base._name = "beq";
+            base._type = "operation";
         }
 
         override public OpCodeRootResult Parse(Tokeniser t)
@@ -54,6 +56,7 @@ namespace AnatomIL
         public BgeOpCodeRoot()
         {
             base._name = "bge";
+            base._type = "operation";
         }
 
         override public OpCodeRootResult Parse(Tokeniser t)
@@ -81,6 +84,7 @@ namespace AnatomIL
         public BgtOpCodeRoot()
         {
             base._name = "bgt";
+            base._type = "operation";
         }
 
         override public OpCodeRootResult Parse(Tokeniser t)
@@ -108,6 +112,7 @@ namespace AnatomIL
         public BleOpCodeRoot()
         {
             base._name = "ble";
+            base._type = "operation";
         }
 
         override public OpCodeRootResult Parse(Tokeniser t)
@@ -135,6 +140,7 @@ namespace AnatomIL
         public BltOpCodeRoot()
         {
             base._name = "blt";
+            base._type = "operation";
         }
 
         override public OpCodeRootResult Parse(Tokeniser t)
@@ -161,7 +167,8 @@ namespace AnatomIL
     {
         public BneOpCodeRoot()
         {
-            base._name = "blt";
+            base._name = "bne";
+            base._type = "operation";
         }
 
         override public OpCodeRootResult Parse(Tokeniser t)
@@ -189,6 +196,7 @@ namespace AnatomIL
         public BrfalseOpCodeRoot()
         {
             base._name = "brfalse";
+            base._type = "operation";
         }
 
         override public OpCodeRootResult Parse(Tokeniser t)
@@ -210,6 +218,7 @@ namespace AnatomIL
         public BrtrueOpCodeRoot()
         {
             base._name = "brtrue";
+            base._type = "operation";
         }
 
         override public OpCodeRootResult Parse(Tokeniser t)
@@ -231,6 +240,7 @@ namespace AnatomIL
         public BrzeroOpCodeRoot()
         {
             base._name = "brzero";
+            base._type = "operation";
         }
 
         override public OpCodeRootResult Parse(Tokeniser t)
@@ -252,6 +262,7 @@ namespace AnatomIL
         public BrnullOpCodeRoot()
         {
             base._name = "brnull";
+            base._type = "operation";
         }
 
         override public OpCodeRootResult Parse(Tokeniser t)
@@ -273,6 +284,7 @@ namespace AnatomIL
         public BrinstOpCodeRoot()
         {
             base._name = "brinst";
+            base._type = "operation";
         }
 
         override public OpCodeRootResult Parse(Tokeniser t)

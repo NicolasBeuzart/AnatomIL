@@ -10,12 +10,14 @@ namespace AnatomIL
     {
         internal string _name;
         internal bool _executable;
+        internal string _type;
 
         public OpCode()
         {
 
         }
 
+        public string Type { get { return _type; } }
         public bool IsExecutable { get { return _executable; } }
 
         public string Name
@@ -34,6 +36,7 @@ namespace AnatomIL
         {
             base._name = "add";
             base._executable = true;
+            base._type = "operation";
         }
 
         override public void Execute(Environment e)
@@ -73,6 +76,7 @@ namespace AnatomIL
         {
             base._name = "sub";
             base._executable = true;
+            base._type = "operation";
         }
 
         override public void Execute(Environment e)
@@ -112,6 +116,7 @@ namespace AnatomIL
         {
             base._name = "mul";
             base._executable = true;
+            base._type = "operation";
         }
 
         override public void Execute(Environment e)
@@ -151,6 +156,7 @@ namespace AnatomIL
         {
             base._name = "div";
             base._executable = true;
+            base._type = "operation";
         }
 
         override public void Execute(Environment e)
@@ -190,6 +196,7 @@ namespace AnatomIL
         {
             base._name = "rem";
             base._executable = true;
+            base._type = "operation";
         }
 
         override public void Execute(Environment e)
@@ -229,6 +236,7 @@ namespace AnatomIL
         public LdcOpCode(Type t, object value)
         {
             base._name = "ldc";
+            base._type = "operation";
             _t = t;
             _value = value;
             base._executable = true;
@@ -252,6 +260,7 @@ namespace AnatomIL
         {
             base._name = label;
             base._executable = false;
+            base._type = "label";
             _label = label;
         }
     }
@@ -263,6 +272,7 @@ namespace AnatomIL
         public LocalsInitOpCode(List<string> locals)
         {
             base._name = "localsInit";
+            base._type = "directive";
             _locals = locals;
             base._executable = true;
         }
@@ -286,6 +296,7 @@ namespace AnatomIL
         public DupOpCode()
         {
             base._name = "dup";
+            base._type = "operation";
             base._executable = true;
         }
 

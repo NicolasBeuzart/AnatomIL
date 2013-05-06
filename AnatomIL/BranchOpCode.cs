@@ -13,6 +13,7 @@ namespace AnatomIL
         public BrOpCode(string label)
         {
             base._name = "br";
+            base._type = "operation";
             _label = label;
             base._executable = true;
         }
@@ -30,6 +31,7 @@ namespace AnatomIL
         public BeqOpCode(string label)
         {
             base._name = "beq";
+            base._type = "operation";
             _label = label;
             base._executable = true;
         }
@@ -53,6 +55,7 @@ namespace AnatomIL
         public BgeOpCode(string label, bool unsigned)
         {
             base._name = "bge";
+            base._type = "operation";
             _label = label;
             base._executable = true;
             _unsigned = unsigned;
@@ -89,6 +92,7 @@ namespace AnatomIL
         public BgtOpCode(string label, bool unsigned)
         {
             base._name = "bgt";
+            base._type = "operation";
             _label = label;
             base._executable = true;
             _unsigned = unsigned;
@@ -125,6 +129,7 @@ namespace AnatomIL
         public BleOpCode(string label, bool unsigned)
         {
             base._name = "ble";
+            base._type = "operation";
             _label = label;
             base._executable = true;
             _unsigned = unsigned;
@@ -161,6 +166,7 @@ namespace AnatomIL
         public BltOpCode(string label, bool unsigned)
         {
             base._name = "blt";
+            base._type = "operation";
             _label = label;
             base._executable = true;
             _unsigned = unsigned;
@@ -197,6 +203,7 @@ namespace AnatomIL
         public BneOpCode(string label, bool unsigned)
         {
             base._name = "beq";
+            base._type = "operation";
             _label = label;
             base._executable = true;
             _unsigned = unsigned;
@@ -232,6 +239,7 @@ namespace AnatomIL
         public BrfalseOpCode(string label)
         {
             base._name = "brfalse";
+            base._type = "operation";
             _label = label;
             base._executable = true;
         }
@@ -254,6 +262,7 @@ namespace AnatomIL
         public BrtrueOpCode(string label)
         {
             base._name = "brtrue";
+            base._type = "operation";
             _label = label;
             base._executable = true;
         }
@@ -276,6 +285,7 @@ namespace AnatomIL
         public BrzeroOpCode(string label)
         {
             base._name = "brzero";
+            base._type = "operation";
             _label = label;
             base._executable = true;
         }
@@ -300,6 +310,7 @@ namespace AnatomIL
         public BrnullOpCode(string label)
         {
             base._name = "brnull";
+            base._type = "operation";
             _label = label;
             base._executable = true;
         }
@@ -322,6 +333,7 @@ namespace AnatomIL
         public BrinstOpCode(string label)
         {
             base._name = "brinst";
+            base._type = "operation";
             _label = label;
             base._executable = true;
         }

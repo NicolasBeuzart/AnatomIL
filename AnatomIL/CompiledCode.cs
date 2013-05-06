@@ -25,6 +25,11 @@ namespace AnatomIL
             get { return Code.Count; }
         }
 
+        public bool IsDirective(int i)
+        {
+            return (Code[i].Type == "directive");
+        }
+
         public bool IsNull(int i)
         {
             return (Code[i] == null);
