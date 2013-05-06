@@ -14,6 +14,7 @@ namespace AnatomIL.test
         public void TestForLybrary()
         {
             Library lib = new Library();
+            lib.LoadInstructionLib();
 
             // on test la methode LibIsOpCodeRootExiste
             Assert.That(lib.LibIsCodeOpRootExiste("toto"), Is.False);
@@ -32,7 +33,7 @@ namespace AnatomIL.test
             Compiler c = new Compiler();
             CompilerResult result;
             string[] s = new string[1];
-            s[0] = "ldc.i4 13";
+            s[0] = "   ldc.i4 13    ";
 
             result = c.Compile(s);
             Assert.That(result.IsSuccess, Is.True);

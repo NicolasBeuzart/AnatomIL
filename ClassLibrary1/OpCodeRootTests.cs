@@ -14,28 +14,24 @@ namespace AnatomIL.test
         [Test]
         public void bgeOpCodeRootTest()
         {
-            BgeOpCodeRoot t = new BgeOpCodeRoot();
+            BgeOpCodeRoot Op = new BgeOpCodeRoot();
+            string[] code = { " label", ".un label", ".un. label", ". label" };
+            Tokeniser tok = new Tokeniser(code);
 
-            List<string> options = new List<string>();
-            List<string> args = new List<string>();
-
-            args.Add("label");
-
-            OpCodeRootResult r = t.Parse(options, args);
+            tok.MatchNextToken();
+            OpCodeRootResult r = Op.Parse(tok);
             Assert.That(r.IsSuccess, Is.True);
 
-            options.Add("un");
-
-            r = t.Parse(options, args);
+            tok.MatchNextToken();
+            r = Op.Parse(tok);
             Assert.That(r.IsSuccess, Is.True);
 
-            options.Add("");
-            r = t.Parse(options, args);
+            tok.MatchNextToken();
+            r = Op.Parse(tok);
             Assert.That(r.IsSuccess, Is.False);
 
-            options.Clear();
-            options.Add("");
-            r = t.Parse(options, args);
+            tok.MatchNextToken();
+            r = Op.Parse(tok);
             Assert.That(r.IsSuccess, Is.False);
         }
 
@@ -45,14 +41,17 @@ namespace AnatomIL.test
         {
             AddOpCodeRoot add = new AddOpCodeRoot();
             OpCodeRootResult result;
+            string[] code = {"", "."};
             List<string> options = new List<string>();
             List<string> args = new List<string>();
+            Tokeniser t = new Tokeniser(code);
 
-            result = add.Parse(options, args);
+            t.MatchNextToken();
+            result = add.Parse(t);
             Assert.That(result.IsSuccess, Is.True);
 
-            options.Add("");
-            result = add.Parse(options, args);
+            t.MatchNextToken();
+            result = add.Parse(t);
             Assert.That(result.IsSuccess, Is.False);
         }
 

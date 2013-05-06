@@ -20,7 +20,7 @@ namespace AnatomIL
             get { return _name; }
         }
 
-        virtual public OpCodeRootResult Parse(List<string> options, List<string> args) { return null; } // methode de parse des opérations qui retourne un CodeOp pres a être Executer correctement
+        virtual public OpCodeRootResult Parse(Tokeniser t) { return null; } // methode de parse des opérations qui retourne un CodeOp pres a être Executer correctement
     }
 
     public class OpCodeRootResult
@@ -45,17 +45,14 @@ namespace AnatomIL
             base._name = "add";
         }
 
-        override public OpCodeRootResult Parse(List<string> options, List<string> args)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
 
-            if (options.Count() != 0)
+            t.MatchSpace();
+            if (!t.IsEnd)
             {
-                errorMessage = "Bad options in Operation" + base._name;
-            }
-            if (args.Count() != 0 && args[0] != "")
-            {
-                errorMessage = "Bad arguments in Operation" + base._name;
+                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
             return new OpCodeRootResult(errorMessage, new AddOpCode());
@@ -70,17 +67,14 @@ namespace AnatomIL
             base._name = "sub";
         }
 
-        override public OpCodeRootResult Parse(List<string> options, List<string> args)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
 
-            if (options.Count() != 0)
+            t.MatchSpace();
+            if (!t.IsEnd)
             {
-                errorMessage = "Bad options in Operation" + base._name;
-            }
-            if (args.Count() != 0 && args[0] != "")
-            {
-                errorMessage = "Bad arguments in Operation" + base._name;
+                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
             return new OpCodeRootResult(errorMessage, new SubOpCode());
@@ -95,17 +89,14 @@ namespace AnatomIL
             base._name = "mul";
         }
 
-        override public OpCodeRootResult Parse(List<string> options, List<string> args)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
 
-            if (options.Count() != 0)
+            t.MatchSpace();
+            if (!t.IsEnd)
             {
-                errorMessage = "Bad options in Operation" + base._name;
-            }
-            if (args.Count() != 0 && args[0] != "")
-            {
-                errorMessage = "Bad arguments in Operation" + base._name;
+                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
             return new OpCodeRootResult(errorMessage, new MulOpCode());
@@ -120,17 +111,14 @@ namespace AnatomIL
             base._name = "div";
         }
 
-        override public OpCodeRootResult Parse(List<string> options, List<string> args)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
 
-            if (options.Count() != 0)
+            t.MatchSpace();
+            if (!t.IsEnd)
             {
-                errorMessage = "Bad options in Operation" + base._name;
-            }
-            if (args.Count() != 0 && args[0] != "")
-            {
-                errorMessage = "Bad arguments in Operation" + base._name;
+                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
             return new OpCodeRootResult(errorMessage, new DivOpCode());
@@ -145,17 +133,14 @@ namespace AnatomIL
             base._name = "rem";
         }
 
-        override public OpCodeRootResult Parse(List<string> options, List<string> args)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
 
-            if (options.Count() != 0)
+            t.MatchSpace();
+            if (!t.IsEnd)
             {
-                errorMessage = "Bad options in Operation" + base._name;
-            }
-            if (args.Count() != 0 && args[0] != "")
-            {
-                errorMessage = "Bad arguments in Operation" + base._name;
+                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
             return new OpCodeRootResult(errorMessage, new RemOpCode());
@@ -170,52 +155,46 @@ namespace AnatomIL
             base._name = "ldc";
         }
 
-        override public OpCodeRootResult Parse(List<string> options, List<string> args)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
-            Type t = null;
+            Type type = null;
             object Value = null;
+            string option;
+            string argument;
 
-            if (args.Count() < 1 || (args.Count() > 1 && args[1] != ""))
-            {
-                errorMessage = "Bad options/operations in Operation" + base._name;
-            }
-
-            if (options.Count() != 1)
-            {
-                errorMessage = "Bad options in Operation" + base._name;
-            }
-
-            else if (options[0].Equals("i8"))
+            if (!(t.IsOption(out option) && t.IsArgument(out argument) && t.IsEnd))
+                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
+            else if (option.Equals("i8"))
             {
                 Int64 tmp;
-                if (!Int64.TryParse(args[0], out tmp)) errorMessage = "argument isn't Int64 in Operation" + base._name;
+                if (!Int64.TryParse(argument, out tmp)) errorMessage = "Argument isn't Int64 in Operation" + base._name;
                 else
                 {
-                    t = typeof(Int64);
-                    Value = Convert.ToInt64(args[0]);
+                    type = typeof(Int64);
+                    Value = Convert.ToInt64(argument);
                 }
             }
-            else if (options[0].Equals("i4"))
+            else if (option.Equals("i4"))
             {
                 Int32 tmp;
-                if (!Int32.TryParse(args[0], out tmp)) errorMessage = "argument isn't Int32 in Operation" + base._name;
-                t = typeof(Int32);
-                Value = Convert.ToInt32(args[0]);
+                if (!Int32.TryParse(argument, out tmp)) errorMessage = "Argument isn't Int32 in Operation" + base._name;
+                type = typeof(Int32);
+                Value = Convert.ToInt32(argument);
             }
-            else if (options[0].Equals("i2"))
+            else if (option.Equals("i2"))
             {
                 Int16 tmp;
-                if (!Int16.TryParse(args[0], out tmp)) errorMessage = "argument isn't Int16 in Operation" + base._name;
-                t = typeof(Int16);
-                Value = Convert.ToInt16(args[0]);
+                if (!Int16.TryParse(argument, out tmp)) errorMessage = "Argument isn't Int16 in Operation" + base._name;
+                type = typeof(Int16);
+                Value = Convert.ToInt16(argument);
             }
             else
             {
-                errorMessage = "lcd operation can't have first argument : " + args[0];
+                errorMessage = "lcd operation can't have option : " + option;
             }
 
-            return (new OpCodeRootResult(errorMessage, new LdcOpCode(t, Value)));
+            return (new OpCodeRootResult(errorMessage, new LdcOpCode(type, Value)));
         }
     }
 
@@ -226,11 +205,14 @@ namespace AnatomIL
             base._name = "label";
         }
 
-        override public OpCodeRootResult Parse(List<string> options, List<string> args)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
+            string label;
 
-            return new OpCodeRootResult(errorMessage, new LabelOpCode(options[0].Replace(":", "")));
+            if (!(t.IsString(out label) && t.IsEnd)) errorMessage = "Bad label declaration in line : " + t.CurentLigne;
+
+            return new OpCodeRootResult(errorMessage, new LabelOpCode(label));
         }
     }
 
@@ -238,25 +220,29 @@ namespace AnatomIL
     {
         public LocalsInitOpCodeRoot()
         {
-            base._name = "localsInit";
+            base._name = "locals";
         }
 
-        override public OpCodeRootResult Parse(List<string> options, List<string> args)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
             List<string> locals = new List<string>();
+            string type;
+            string s;
 
-            for (int i = 0; i < options.Count(); i++)
+            t.MatchSpace();
+            t.MatchOpenPar();
+
+            do
             {
-                if (options[i] == "int16" || options[i] == "int32" || options[i] == "int64" || options[i] == "bool")
-                {
-                    locals.Add(options[i]);
-                }
-                else
-                {
-                    errorMessage = "bad declaration of local variable";
-                }
-            }
+                t.MatchSpace();
+                if (t.IsType(out type)) locals.Add(type);
+                else errorMessage = "Bad declaration of local variable, \"" + type + "\" is not a type in line : " + t.CurentLigne;
+                t.MatchSpace();
+                t.IsString(out s);
+            } while (t.MatchComma());
+
+            if (!t.MatchClosePar()) errorMessage = "miss ')' in locals declaration line : " + t.CurentLigne;
 
             return new OpCodeRootResult(errorMessage, new LocalsInitOpCode(locals));
         }
@@ -270,17 +256,14 @@ namespace AnatomIL
             base._name = "dup";
         }
 
-        override public OpCodeRootResult Parse(List<string> options, List<string> args)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
 
-            if (options.Count() != 0)
+            t.MatchSpace();
+            if (!t.IsEnd)
             {
-                errorMessage = "Bad options in Operation" + base._name;
-            }
-            if (args.Count() != 0 && args[0] != "")
-            {
-                errorMessage = "Bad arguments in Operation" + base._name;
+                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
             return new OpCodeRootResult(errorMessage, new DupOpCode());
