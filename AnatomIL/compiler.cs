@@ -39,7 +39,7 @@ namespace AnatomIL
                 if (operation == "") operation = instruction.Split('.', ' ')[1];
                 List<string> options = instruction.Split('.').ToList();
                 List<string> args = options[options.Count() - 1].Split(' ').ToList();
-                if (args[0] == "") args.RemoveAt(0);
+                if (args[0] == "") { args.RemoveAt(0); }
                 args.RemoveAt(0);
                 options[options.Count() - 1] = options[options.Count() - 1].Split(' ')[0];
                 options.RemoveAt(0);

@@ -36,11 +36,17 @@ namespace AnatomIL
 
         public override void Execute(Environment e)
         {
-            StackItem s1 = e.Stack.Pop();
-            StackItem s2 = e.Stack.Pop();
-            if (s1.Type == s2.Type && s1.Value.Equals(s2.Value))
+            StackItemValue s1;
+            StackItemValue s2;
+            if (e.Stack.Pop(out s1))
             {
-                e.Pc = e.CompiledCode.IndexLabel(_label);
+                if (e.Stack.Pop(out s2))
+                {
+                    if (s1.Type == s2.Type && s1.Value.Equals(s2.Value))
+                    {
+                        e.Pc = e.CompiledCode.IndexLabel(_label);
+                    }
+                }
             }
         }
     }
@@ -60,22 +66,29 @@ namespace AnatomIL
 
         public override void Execute(Environment e)
         {
-            StackItem s1 = e.Stack.Pop();
-            StackItem s2 = e.Stack.Pop();
-            if (s1.Type == s2.Type && (s1.Type == typeof(Int64) || s1.Type == typeof(Int32) || s1.Type == typeof(Int16)))
+            StackItemValue s1;
+            StackItemValue s2;
+
+            if (e.Stack.Pop(out s1))
             {
-                Int64 i1 = Convert.ToInt64(s1.Value);
-                Int64 i2 = Convert.ToInt64(s2.Value);
-
-                if (_unsigned)
+                if (e.Stack.Pop(out s2))
                 {
-                    if (i1 < 0) i1 = i1 * -1;
-                    if (i2 < 0) i2 = i2 * -1;
-                }
+                    if (s1.Type == s2.Type && (s1.Type == typeof(Int64) || s1.Type == typeof(Int32) || s1.Type == typeof(Int16)))
+                    {
+                        Int64 i1 = Convert.ToInt64(s1.Value);
+                        Int64 i2 = Convert.ToInt64(s2.Value);
 
-                if (i1 == i2 || i1 > i2)
-                {
-                    e.Pc = e.CompiledCode.IndexLabel(_label);
+                        if (_unsigned)
+                        {
+                            if (i1 < 0) i1 = i1 * -1;
+                            if (i2 < 0) i2 = i2 * -1;
+                        }
+
+                        if (i1 == i2 || i1 > i2)
+                        {
+                            e.Pc = e.CompiledCode.IndexLabel(_label);
+                        }
+                    }
                 }
             }
         }
@@ -96,22 +109,29 @@ namespace AnatomIL
 
         public override void Execute(Environment e)
         {
-            StackItem s1 = e.Stack.Pop();
-            StackItem s2 = e.Stack.Pop();
-            if (s1.Type == s2.Type && (s1.Type == typeof(Int64) || s1.Type == typeof(Int32) || s1.Type == typeof(Int16)))
+            StackItemValue s1;
+            StackItemValue s2;
+
+            if (e.Stack.Pop(out s1))
             {
-                Int64 i1 = Convert.ToInt64(s1.Value);
-                Int64 i2 = Convert.ToInt64(s2.Value);
-
-                if (_unsigned)
+                if (e.Stack.Pop(out s2))
                 {
-                    if (i1 < 0) i1 = i1 * -1;
-                    if (i2 < 0) i2 = i2 * -1;
-                }
+                    if (s1.Type == s2.Type && (s1.Type == typeof(Int64) || s1.Type == typeof(Int32) || s1.Type == typeof(Int16)))
+                    {
+                        Int64 i1 = Convert.ToInt64(s1.Value);
+                        Int64 i2 = Convert.ToInt64(s2.Value);
 
-                if (i1 > i2)
-                {
-                    e.Pc = e.CompiledCode.IndexLabel(_label);
+                        if (_unsigned)
+                        {
+                            if (i1 < 0) i1 = i1 * -1;
+                            if (i2 < 0) i2 = i2 * -1;
+                        }
+
+                        if (i1 > i2)
+                        {
+                            e.Pc = e.CompiledCode.IndexLabel(_label);
+                        }
+                    }
                 }
             }
         }
@@ -132,22 +152,29 @@ namespace AnatomIL
 
         public override void Execute(Environment e)
         {
-            StackItem s1 = e.Stack.Pop();
-            StackItem s2 = e.Stack.Pop();
-            if (s1.Type == s2.Type && (s1.Type == typeof(Int64) || s1.Type == typeof(Int32) || s1.Type == typeof(Int16)))
+            StackItemValue s1;
+            StackItemValue s2;
+
+            if (e.Stack.Pop(out s1))
             {
-                Int64 i1 = Convert.ToInt64(s1.Value);
-                Int64 i2 = Convert.ToInt64(s2.Value);
-
-                if (_unsigned)
+                if (e.Stack.Pop(out s2))
                 {
-                    if (i1 < 0) i1 = i1 * -1;
-                    if (i2 < 0) i2 = i2 * -1;
-                }
+                    if (s1.Type == s2.Type && (s1.Type == typeof(Int64) || s1.Type == typeof(Int32) || s1.Type == typeof(Int16)))
+                    {
+                        Int64 i1 = Convert.ToInt64(s1.Value);
+                        Int64 i2 = Convert.ToInt64(s2.Value);
 
-                if (i1 == i2 || i1 < i2)
-                {
-                    e.Pc = e.CompiledCode.IndexLabel(_label);
+                        if (_unsigned)
+                        {
+                            if (i1 < 0) i1 = i1 * -1;
+                            if (i2 < 0) i2 = i2 * -1;
+                        }
+
+                        if (i1 == i2 || i1 < i2)
+                        {
+                            e.Pc = e.CompiledCode.IndexLabel(_label);
+                        }
+                    }
                 }
             }
         }
@@ -168,22 +195,29 @@ namespace AnatomIL
 
         public override void Execute(Environment e)
         {
-            StackItem s1 = e.Stack.Pop();
-            StackItem s2 = e.Stack.Pop();
-            if (s1.Type == s2.Type && (s1.Type == typeof(Int64) || s1.Type == typeof(Int32) || s1.Type == typeof(Int16)))
+            StackItemValue s1;
+            StackItemValue s2;
+
+            if (e.Stack.Pop(out s1))
             {
-                Int64 i1 = Convert.ToInt64(s1.Value);
-                Int64 i2 = Convert.ToInt64(s2.Value);
-
-                if (_unsigned)
+                if (e.Stack.Pop(out s2))
                 {
-                    if (i1 < 0) i1 = i1 * -1;
-                    if (i2 < 0) i2 = i2 * -1;
-                }
+                    if (s1.Type == s2.Type && (s1.Type == typeof(Int64) || s1.Type == typeof(Int32) || s1.Type == typeof(Int16)))
+                    {
+                        Int64 i1 = Convert.ToInt64(s1.Value);
+                        Int64 i2 = Convert.ToInt64(s2.Value);
 
-                if (i1 < i2)
-                {
-                    e.Pc = e.CompiledCode.IndexLabel(_label);
+                        if (_unsigned)
+                        {
+                            if (i1 < 0) i1 = i1 * -1;
+                            if (i2 < 0) i2 = i2 * -1;
+                        }
+
+                        if (i1 < i2)
+                        {
+                            e.Pc = e.CompiledCode.IndexLabel(_label);
+                        }
+                    }
                 }
             }
         }
@@ -204,22 +238,29 @@ namespace AnatomIL
 
         public override void Execute(Environment e)
         {
-            StackItem s1 = e.Stack.Pop();
-            StackItem s2 = e.Stack.Pop();
-            if (s1.Type == s2.Type && (s1.Type == typeof(Int64) || s1.Type == typeof(Int32) || s1.Type == typeof(Int16)))
+            StackItemValue s1;
+            StackItemValue s2;
+
+            if (e.Stack.Pop(out s1))
             {
-                Int64 i1 = Convert.ToInt64(s1.Value);
-                Int64 i2 = Convert.ToInt64(s2.Value);
-
-                if (_unsigned)
+                if (e.Stack.Pop(out s2))
                 {
-                    if (i1 < 0) i1 = i1 * -1;
-                    if (i2 < 0) i2 = i2 * -1;
-                }
+                    if (s1.Type == s2.Type && (s1.Type == typeof(Int64) || s1.Type == typeof(Int32) || s1.Type == typeof(Int16)))
+                    {
+                        Int64 i1 = Convert.ToInt64(s1.Value);
+                        Int64 i2 = Convert.ToInt64(s2.Value);
 
-                if (i1 != i2)
-                {
-                    e.Pc = e.CompiledCode.IndexLabel(_label);
+                        if (_unsigned)
+                        {
+                            if (i1 < 0) i1 = i1 * -1;
+                            if (i2 < 0) i2 = i2 * -1;
+                        }
+
+                        if (i1 != i2)
+                        {
+                            e.Pc = e.CompiledCode.IndexLabel(_label);
+                        }
+                    }
                 }
             }
         }
@@ -238,11 +279,14 @@ namespace AnatomIL
 
         public override void Execute(Environment e)
         {
-            StackItem s1 = e.Stack.Pop();
+            StackItemValue s1;
 
-            if (s1.Type == typeof(bool) && s1.Value.Equals(false))
+            if (e.Stack.Pop(out s1))
             {
-                e.Pc = e.CompiledCode.IndexLabel(_label);
+                if (s1.Type == typeof(bool) && s1.Value.Equals(false))
+                {
+                    e.Pc = e.CompiledCode.IndexLabel(_label);
+                }
             }
         }
     }
@@ -260,11 +304,14 @@ namespace AnatomIL
 
         public override void Execute(Environment e)
         {
-            StackItem s1 = e.Stack.Pop();
+            StackItemValue s1;
 
-            if (s1.Type == typeof(bool) && s1.Value.Equals(true))
+            if (e.Stack.Pop(out s1))
             {
-                e.Pc = e.CompiledCode.IndexLabel(_label);
+                if (s1.Type == typeof(bool) && s1.Value.Equals(true))
+                {
+                    e.Pc = e.CompiledCode.IndexLabel(_label);
+                }
             }
         }
     }
@@ -282,13 +329,16 @@ namespace AnatomIL
 
         public override void Execute(Environment e)
         {
-            StackItem s1 = e.Stack.Pop();
+            StackItemValue s1;
             Int64 i64 = 0;
             Int16 i16 = 0;
 
-            if (s1.Value.Equals(0) || s1.Value.Equals(i64) || s1.Value.Equals(i16))
+            if (e.Stack.Pop(out s1))
             {
-                e.Pc = e.CompiledCode.IndexLabel(_label);
+                if (s1.Value.Equals(0) || s1.Value.Equals(i64) || s1.Value.Equals(i16))
+                {
+                    e.Pc = e.CompiledCode.IndexLabel(_label);
+                }
             }
         }
     }
@@ -306,11 +356,14 @@ namespace AnatomIL
 
         public override void Execute(Environment e)
         {
-            StackItem s1 = e.Stack.Pop();
+            StackItemValue s1;
 
-            if (s1.Value.Equals(null))
+            if (e.Stack.Pop(out s1))
             {
-                e.Pc = e.CompiledCode.IndexLabel(_label);
+                if (s1.Value.Equals(null))
+                {
+                    e.Pc = e.CompiledCode.IndexLabel(_label);
+                }
             }
         }
     }
@@ -328,11 +381,14 @@ namespace AnatomIL
 
         public override void Execute(Environment e)
         {
-            StackItem s1 = e.Stack.Pop();
+            StackItemValue s1;
 
-            if (!s1.Value.Equals(null))
+            if (e.Stack.Pop(out s1))
             {
-                e.Pc = e.CompiledCode.IndexLabel(_label);
+                if (!s1.Value.Equals(null))
+                {
+                    e.Pc = e.CompiledCode.IndexLabel(_label);
+                }
             }
         }
     }

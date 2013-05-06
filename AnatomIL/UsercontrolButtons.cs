@@ -45,7 +45,7 @@ namespace AnatomIL
                     btGo.Visible = false;
                 }
 
-                Stack.ShowStack(this, e);
+                Stack.ShowStack();
             }
 
         }
@@ -67,7 +67,7 @@ namespace AnatomIL
                 btGo.Visible = false;
             }
 
-            Stack.ShowStack(this, e);
+            Stack.ShowStack();
            
         }
 
