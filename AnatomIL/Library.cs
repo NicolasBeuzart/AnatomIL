@@ -13,6 +13,15 @@ namespace AnatomIL
         public Library()
         {
             _library = new Dictionary<string, OpCodeRoot>();
+        }
+
+        public void LibAddCodeOpRoot(OpCodeRoot methode)
+        {
+            _library.Add(methode.Name, methode);
+        }
+
+        public void LoadInstructionLib()
+        {
             this.LibAddCodeOpRoot(new AddOpCodeRoot());
             this.LibAddCodeOpRoot(new SubCodeOpRoot());
             this.LibAddCodeOpRoot(new MulCodeOpRoot());
@@ -31,13 +40,12 @@ namespace AnatomIL
             this.LibAddCodeOpRoot(new BrzeroOpCodeRoot());
             this.LibAddCodeOpRoot(new BrnullOpCodeRoot());
             this.LibAddCodeOpRoot(new BrinstOpCodeRoot());
-            this.LibAddCodeOpRoot(new LocalsInitOpCodeRoot());
             this.LibAddCodeOpRoot(new DupOpCodeRoot());
         }
 
-        public void LibAddCodeOpRoot(OpCodeRoot methode)
+        public void LoadDirectiveLib()
         {
-            _library.Add(methode.Name, methode);
+            this.LibAddCodeOpRoot(new LocalsInitOpCodeRoot());
         }
 
         public bool LibIsCodeOpRootExiste(string name)
