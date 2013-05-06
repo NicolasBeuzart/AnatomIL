@@ -10,19 +10,29 @@ namespace AnatomIL
     {
         private List<StackItem> _currentstack = new List<StackItem>();
 
-        public StackItem Pop()  // Return first element from stack and delete it from stack
+
+        public bool Pop(out StackItemValue StV)  // Return first element from stack and delete it from stack
         {
             StackItem tmp;
+            StV = null;
 
             if (_currentstack.Count == 0)
             {
-                throw new InvalidOperationException("Empty Stack");
+                return(false);
             }
+
             tmp = _currentstack[_currentstack.Count - 1];
 
-            _currentstack.Remove(tmp);
-
-            return tmp;
+            if (tmp is StackItemFrame)
+            {
+                return (false);
+            }
+            else if (tmp is StackItemValue)
+            {
+                StV = new StackItemValue(tmp.Type, tmp.Value);
+                return (true);
+            }
+            return (false);
         }
 
         public List<StackItem> CurrentStack
@@ -32,17 +42,27 @@ namespace AnatomIL
 
         public void Push(Type t, object value) // Add 1 element on stack
         {
-            StackItem elt = new StackItem(t, value);
+            StackItemValue elt = new StackItemValue(t, value);
             _currentstack.Add(elt);
         }
 
-        public StackItem FirstElement()
+        public bool FirstElement(out StackItemValue StV)
         {
+            StV = null;
+
             if (_currentstack.Count == 0)
             {
-                throw new InvalidOperationException("Empty Stack");
+                return false;
             }
-            return (_currentstack[_currentstack.Count - 1]);
+            if (_currentstack[_currentstack.Count - 1] is StackItemValue)
+            {
+                StV = new StackItemValue(_currentstack[_currentstack.Count - 1].Type, _currentstack[_currentstack.Count - 1].Value);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool IsEmpty
@@ -57,6 +77,7 @@ namespace AnatomIL
                 return _currentstack.Count;
             }
         }
+
 
 
     }
