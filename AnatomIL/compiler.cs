@@ -17,95 +17,43 @@ namespace AnatomIL
 
         public CompilerResult Compile(string[] instructions)
         {
+            Tokeniser t = new Tokeniser(instructions);
             List<OpCode> code = new List<OpCode>();
             List<string> errorMessages = new List<string>();
             OpCodeRootResult result;
+            OpCodeRoot _opCodeRoot;
 
-            for (int i = 0; i < instructions.Count(); i++ )
+            while (t.MatchNextToken())
             {
-                
-                string instruction = instructions[i];
-
-                // retire les espace en trop
-                instruction.Trim();
-                while (instruction.Contains("  "))
+                t.MatchSpace();
+                if (t.IsEnd)
                 {
-                    instruction = instruction.Replace("  ", " ");
+                    code.Add(null);
                 }
-                instruction = instruction.Replace(". ", ".");
-
-                // on recupére le nom de la méthode, les options et les arguments
-                string operation = instruction.Split('.', ' ')[0];
-                if (operation == "") operation = instruction.Split('.', ' ')[1];
-                List<string> options = instruction.Split('.').ToList();
-                List<string> args = options[options.Count() - 1].Split(' ').ToList();
-                if (args[0] == "") args.RemoveAt(0);
-                args.RemoveAt(0);
-                options[options.Count() - 1] = options[options.Count() - 1].Split(' ')[0];
-                options.RemoveAt(0);
-
-                if (instruction != "")
+                else if (t.IsDirective(out _opCodeRoot))
                 {
-                    if (_lib.LibIsCodeOpRootExiste(operation))
-                    {
-                        result = _lib.LibFindOpCodeRoot(operation).Parse(options, args);
 
-                        if (result.IsSuccess) code.Add(result.OpCode);
-                        else errorMessages.Add("Error line " + i.ToString() + " : " + result.ErrorMessage);
-                    }
-                    else if (instruction[0] == ':')
-                    {
-                        List<string> label = new List<string>();
-                        label.Add(instruction);
-                        result = _lib.LibFindOpCodeRoot("label").Parse(label, args);
+                    result = _opCodeRoot.Parse(t);
 
-                        if (result.IsSuccess) code.Add(result.OpCode);
-                        else errorMessages.Add("Error line " + i.ToString() + " : " + result.ErrorMessage);
-                    }
-                    else if (operation == "locals")
-                    {
-                        if (args[0] == "init" && args[1][0] == '(')
-                        {
-                            args[1] = args[1].Remove(0,1);
-                            options = new List<string>();
+                    if (result.IsSuccess) code.Add(result.OpCode);
+                    else errorMessages.Add(result.ErrorMessage);
+                }
+                else if (t.IsInstruction(out _opCodeRoot))
+                {
+                    result = _opCodeRoot.Parse(t);
 
-                            options.Add(args[1].Remove(args[1].Length - 1, 1));
-                            int j = i;
-                            j++;
-
-                            while ((instructions[j][instructions[j].Length - 1] == ')'  || instructions[j][instructions[j].Length - 1] == ',')
-                                    && j < instructions.Count())
-                            {
-                                instruction = instructions[j];
-                                instruction.Trim();
-                                options.Add(instruction.Remove(instruction.Length - 1, 1));
-                                j++;
-                            }
-
-                            result = _lib.LibFindOpCodeRoot("localsInit").Parse(options, args);
-
-                            if (result.IsSuccess) code.Add(result.OpCode);
-                            else errorMessages.Add("Error line " + i.ToString() + " : " + result.ErrorMessage);
-
-                            while (j - 1 > i)
-                            {
-                                code.Add(null);
-                                i++;
-                            }
-                        }
-                        else
-                        {
-                            errorMessages.Add("Compilation error : line " + (i + 1).ToString());
-                        }
-                    }
-                    else
-                    {
-                        errorMessages.Add("Compilation error : line " + (i + 1).ToString() + ", instruction : \"" + operation + "\" can't be found in library");
-                    }
+                    if (result.IsSuccess) code.Add(result.OpCode);
+                    else errorMessages.Add(result.ErrorMessage);
+                }
+                else if (t.IsLabel(out _opCodeRoot))
+                {
+                    result = _opCodeRoot.Parse(t);
+                    if (result.IsSuccess) code.Add(result.OpCode);
+                    else errorMessages.Add(result.ErrorMessage);
                 }
                 else
                 {
-                    code.Add(null);
+                    errorMessages.Add("Error line " + t.CurentLigne + " : Syntaxe Error");
                 }
             }
 

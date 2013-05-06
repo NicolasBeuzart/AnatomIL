@@ -14,16 +14,17 @@ namespace AnatomIL
             base._name = "br";
         }
 
-        override public OpCodeRootResult Parse(List<string> options, List<string> args)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
+            string label;
 
-            if (options.Count() != 0 && (args.Count() < 1 || (args.Count() > 1 && args[1] != "")))
+            if (!(t.IsArgument(out label) && t.IsEnd))
             {
-                errorMessage = "Bad arguments in Operation" + base._name;
+                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
-            return new OpCodeRootResult(errorMessage, new BrOpCode(args[0]));
+            return new OpCodeRootResult(errorMessage, new BrOpCode(label));
         }
     }
 
@@ -34,16 +35,17 @@ namespace AnatomIL
             base._name = "beq";
         }
 
-        override public OpCodeRootResult Parse(List<string> options, List<string> args)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
+            string label;
 
-            if (options.Count() != 0 && (args.Count() < 1 || (args.Count() > 1 && args[1] != "")))
+            if (!(t.IsArgument(out label) && t.IsEnd))
             {
-                errorMessage = "Bad arguments in Operation" + base._name;
+                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
-            return new OpCodeRootResult(errorMessage, new BeqOpCode(args[0]));
+            return new OpCodeRootResult(errorMessage, new BeqOpCode(label));
         }
     }
 
@@ -54,16 +56,23 @@ namespace AnatomIL
             base._name = "bge";
         }
 
-        override public OpCodeRootResult Parse(List<string> options, List<string> args)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
+            string option;
+            string label;
 
-            if (options.Count() != 0 && (options.Count() != 1 || options[0] != "un") ||
-                (args.Count() < 1 || (args.Count() > 1 && args[1] != "")))
+            if (t.IsOption(out option) && option != "un")
             {
-                errorMessage = "Bad arguments in Operation" + base._name;
+                errorMessage = "option \"" + option + "\" in Operation" + base._name + " don't existe.";
             }
-            return new OpCodeRootResult(errorMessage, new BgeOpCode(args[0], options.Count() == 1 && options[0] == "un"));
+
+            if (!(t.IsArgument(out label) && t.IsEnd))
+            {
+                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
+            }
+
+            return new OpCodeRootResult(errorMessage, new BgeOpCode(label, option == "un"));
         }
     }
 
@@ -74,16 +83,23 @@ namespace AnatomIL
             base._name = "bgt";
         }
 
-        override public OpCodeRootResult Parse(List<string> options, List<string> args)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
+            string option;
+            string label;
 
-            if (options.Count() != 0 && (options.Count() != 1 || options[0] != "un") ||
-               (args.Count() < 1 || (args.Count() > 1 && args[1] != "")))
+            if (t.IsOption(out option) && option != "un")
             {
-                errorMessage = "Bad arguments in Operation" + base._name;
+                errorMessage = "option \"" + option + "\" in Operation" + base._name + " don't existe.";
             }
-            return new OpCodeRootResult(errorMessage, new BgtOpCode(args[0], options.Count() == 1 && options[0] == "un"));
+
+            if (!(t.IsArgument(out label) && t.IsEnd))
+            {
+                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
+            }
+
+            return new OpCodeRootResult(errorMessage, new BgtOpCode(label, option == "un"));
         }
     }
 
@@ -94,16 +110,23 @@ namespace AnatomIL
             base._name = "ble";
         }
 
-        override public OpCodeRootResult Parse(List<string> options, List<string> args)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
+            string option;
+            string label;
 
-            if (options.Count() != 0 && (options.Count() != 1 || options[0] != "un") ||
-               (args.Count() < 1 || (args.Count() > 1 && args[1] != "")))
+            if (t.IsOption(out option) && option != "un")
             {
-                errorMessage = "Bad arguments in Operation" + base._name;
+                errorMessage = "option \"" + option + "\" in Operation" + base._name + " don't existe.";
             }
-            return new OpCodeRootResult(errorMessage, new BleOpCode(args[0], options.Count() == 1 && options[0] == "un"));
+
+            if (!(t.IsArgument(out label) && t.IsEnd))
+            {
+                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
+            }
+
+            return new OpCodeRootResult(errorMessage, new BleOpCode(label, option == "un"));
         }
     }
 
@@ -114,16 +137,23 @@ namespace AnatomIL
             base._name = "blt";
         }
 
-        override public OpCodeRootResult Parse(List<string> options, List<string> args)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
+            string option;
+            string label;
 
-            if (options.Count() != 0 && (options.Count() != 1 || options[0] != "un") ||
-               (args.Count() < 1 || (args.Count() > 1 && args[1] != "")))
+            if (t.IsOption(out option) && option != "un")
             {
-                errorMessage = "Bad arguments in Operation" + base._name;
+                errorMessage = "option \"" + option + "\" in Operation" + base._name + " don't existe.";
             }
-            return new OpCodeRootResult(errorMessage, new BltOpCode(args[0], options.Count() == 1 && options[0] == "un"));
+
+            if (!(t.IsArgument(out label) && t.IsEnd))
+            {
+                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
+            }
+
+            return new OpCodeRootResult(errorMessage, new BltOpCode(label, option == "un"));
         }
     }
 
@@ -134,16 +164,23 @@ namespace AnatomIL
             base._name = "blt";
         }
 
-        override public OpCodeRootResult Parse(List<string> options, List<string> args)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
+            string option;
+            string label;
 
-            if (options.Count() != 0 && (options.Count() != 1 || options[0] != "un") ||
-               (args.Count() < 1 || (args.Count() > 1 && args[1] != "")))
+            if (t.IsOption(out option) && option != "un")
             {
-                errorMessage = "Bad arguments in Operation" + base._name;
+                errorMessage = "option \"" + option + "\" in Operation" + base._name + " don't existe.";
             }
-            return new OpCodeRootResult(errorMessage, new BneOpCode(args[0], options.Count() == 1 && options[0] == "un"));
+
+            if (!(t.IsArgument(out label) && t.IsEnd))
+            {
+                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
+            }
+
+            return new OpCodeRootResult(errorMessage, new BneOpCode(label, option == "un"));
         }
     }
 
@@ -154,16 +191,17 @@ namespace AnatomIL
             base._name = "brfalse";
         }
 
-        override public OpCodeRootResult Parse(List<string> options, List<string> args)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
+            string label;
 
-            if (options.Count() != 0 && (args.Count() < 1 || (args.Count() > 1 && args[1] != "")))
+            if (!(t.IsArgument(out label) && t.IsEnd))
             {
-                errorMessage = "Bad arguments in Operation" + base._name;
+                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
-            return new OpCodeRootResult(errorMessage, new BrfalseOpCode(args[0]));
+            return new OpCodeRootResult(errorMessage, new BrfalseOpCode(label));
         }
     }
 
@@ -174,16 +212,17 @@ namespace AnatomIL
             base._name = "brtrue";
         }
 
-        override public OpCodeRootResult Parse(List<string> options, List<string> args)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
+            string label;
 
-            if (options.Count() != 0 && (args.Count() < 1 || (args.Count() > 1 && args[1] != "")))
+            if (!(t.IsArgument(out label) && t.IsEnd))
             {
-                errorMessage = "Bad arguments in Operation" + base._name;
+                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
-            return new OpCodeRootResult(errorMessage, new BrtrueOpCode(args[0]));
+            return new OpCodeRootResult(errorMessage, new BrtrueOpCode(label));
         }
     }
 
@@ -194,16 +233,17 @@ namespace AnatomIL
             base._name = "brzero";
         }
 
-        override public OpCodeRootResult Parse(List<string> options, List<string> args)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
+            string label;
 
-            if (options.Count() != 0 && (args.Count() < 1 || (args.Count() > 1 && args[1] != "")))
+            if (!(t.IsArgument(out label) && t.IsEnd))
             {
-                errorMessage = "Bad arguments in Operation" + base._name;
+                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
-            return new OpCodeRootResult(errorMessage, new BrzeroOpCode(args[0]));
+            return new OpCodeRootResult(errorMessage, new BrzeroOpCode(label));
         }
     }
 
@@ -214,16 +254,17 @@ namespace AnatomIL
             base._name = "brnull";
         }
 
-        override public OpCodeRootResult Parse(List<string> options, List<string> args)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
+            string label;
 
-            if (options.Count() != 0 && (args.Count() < 1 || (args.Count() > 1 && args[1] != "")))
+            if (!(t.IsArgument(out label) && t.IsEnd))
             {
-                errorMessage = "Bad arguments in Operation" + base._name;
+                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
-            return new OpCodeRootResult(errorMessage, new BrnullOpCode(args[0]));
+            return new OpCodeRootResult(errorMessage, new BrzeroOpCode(label));
         }
     }
 
@@ -234,16 +275,17 @@ namespace AnatomIL
             base._name = "brinst";
         }
 
-        override public OpCodeRootResult Parse(List<string> options, List<string> args)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
+            string label;
 
-            if (options.Count() != 0 && (args.Count() < 1 || (args.Count() > 1 && args[1] != "")))
+            if (!(t.IsArgument(out label) && t.IsEnd))
             {
-                errorMessage = "Bad arguments in Operation" + base._name;
+                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
-            return new OpCodeRootResult(errorMessage, new BrinstOpCode(args[0]));
+            return new OpCodeRootResult(errorMessage, new BrinstOpCode(label));
         }
     }
 }

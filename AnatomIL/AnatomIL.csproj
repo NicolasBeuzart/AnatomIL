@@ -79,6 +79,7 @@
     <Compile Include="Stack.cs" />
     <Compile Include="StackItem.cs" />
     <Compile Include="Tas.cs" />
+    <Compile Include="Tokeniser.cs" />
     <Compile Include="UserControlButtons.cs">
       <SubType>UserControl</SubType>
     </Compile>
