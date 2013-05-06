@@ -49,7 +49,7 @@ namespace AnatomIL
 
         public void Start()
         {
-            Pc = FirstInstruction();
+            Pc = 0;
         }
 
         public int GoToNextInst(int pc)
@@ -74,12 +74,6 @@ namespace AnatomIL
 
             //on passe à l'instruction suivante
             Pc = GoToNextInst(Pc);
-        }
-
-
-        public int FirstInstruction()
-        {
-            return GoToNextInst(-1);
         }
 
         public void reset()

@@ -43,6 +43,7 @@
             // 
             // textBoxError
             // 
+            this.textBoxError.Enabled = false;
             this.textBoxError.Location = new System.Drawing.Point(0, 16);
             this.textBoxError.Multiline = true;
             this.textBoxError.Name = "textBoxError";
