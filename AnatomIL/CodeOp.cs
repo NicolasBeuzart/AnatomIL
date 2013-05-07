@@ -344,4 +344,51 @@ namespace AnatomIL
            }
         }
     }
+
+    public class stlocOpCode : OpCode
+    {
+        internal int _localidx;
+
+        public stlocOpCode(int i)
+        {
+            base._name = "stloc";
+            base._type = "operation";
+            base._executable = true;
+            _localidx = i;
+        }
+
+        override public void Execute(Environment e)
+        {
+            StackItemValue siv;
+            if (e.Stack.Pop(out siv))
+            {
+                StackItemFrame sif = e.Stack.CurentStackItemFrame();
+                sif.VarLocals[_localidx] = siv;
+            }
+        }
+
+    }
+
+    public class ldlocOpCode : OpCode
+    {
+        internal int _localidx;
+
+        public ldlocOpCode(int i)
+        {
+            base._name = "ldloc";
+            base._type = "operation";
+            base._executable = true;
+            _localidx = i;
+        }
+
+        override public void Execute(Environment e)
+        {
+            StackItemFrame sif = e.Stack.CurentStackItemFrame();
+            if (_localidx < sif.VarLocals.Count)
+            {
+                e.Stack.Push(sif.VarLocals[_localidx].Type, sif.VarLocals[_localidx].Value);
+            }
+        }
+
+    }
 }

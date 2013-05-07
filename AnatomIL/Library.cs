@@ -41,6 +41,8 @@ namespace AnatomIL
             this.LibAddCodeOpRoot(new BrnullOpCodeRoot());
             this.LibAddCodeOpRoot(new BrinstOpCodeRoot());
             this.LibAddCodeOpRoot(new DupOpCodeRoot());
+            this.LibAddCodeOpRoot(new stlocOpCodeRoot());
+            this.LibAddCodeOpRoot(new ldlocOpCodeRoot());
         }
 
         public void LoadDirectiveLib()

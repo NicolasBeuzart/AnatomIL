@@ -39,10 +39,10 @@
             this.listboxStack.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listboxStack.FormattingEnabled = true;
             this.listboxStack.ItemHeight = 25;
-            this.listboxStack.Location = new System.Drawing.Point(1, 44);
+            this.listboxStack.Location = new System.Drawing.Point(-48, 44);
             this.listboxStack.Name = "listboxStack";
             this.listboxStack.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.listboxStack.Size = new System.Drawing.Size(135, 189);
+            this.listboxStack.Size = new System.Drawing.Size(184, 189);
             this.listboxStack.TabIndex = 1;
             // 
             // labStack

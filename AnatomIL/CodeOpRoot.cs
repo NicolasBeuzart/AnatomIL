@@ -280,4 +280,50 @@ namespace AnatomIL
             return new OpCodeRootResult(errorMessage, new DupOpCode());
         }
     }
+
+    public class stlocOpCodeRoot : OpCodeRoot
+    {
+        public stlocOpCodeRoot()
+        {
+            base._name = "stloc";
+            base._type = "operation";
+        }
+
+        public override OpCodeRootResult Parse(Tokeniser t)
+        {
+            string errorMessage = "";
+            string arg;
+            Int32 tmp = 0;
+
+            if (!(t.IsArgument(out arg) && t.IsEnd && Int32.TryParse(arg, out tmp)))
+            {
+                errorMessage = "error line " + t.CurentLigne;
+            }
+
+            return (new OpCodeRootResult(errorMessage,new stlocOpCode(tmp)));
+        }
+    }
+
+    public class ldlocOpCodeRoot : OpCodeRoot
+    {
+        public ldlocOpCodeRoot()
+        {
+            base._name = "ldloc";
+            base._type = "operation";
+        }
+
+        public override OpCodeRootResult Parse(Tokeniser t)
+        {
+            string errorMessage = "";
+            string arg;
+            Int32 tmp = 0;
+
+            if (!(t.IsArgument(out arg) && t.IsEnd && Int32.TryParse(arg, out tmp)))
+            {
+                errorMessage = "error line " + t.CurentLigne;
+            }
+
+            return (new OpCodeRootResult(errorMessage, new ldlocOpCode(tmp)));
+        }
+    }
 }
