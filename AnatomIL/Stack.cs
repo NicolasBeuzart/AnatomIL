@@ -47,6 +47,11 @@ namespace AnatomIL
             _currentstack.Add(elt);
         }
 
+        public void PushFrame(List<StackItemValue> args, List<StackItemValue> vars, Type rt, string name)
+        {
+            _currentstack.Add(new StackItemFrame(args, vars, rt, name));
+        }
+
         public bool FirstElement(out StackItemValue StV)
         {
             StV = null;
@@ -79,7 +84,18 @@ namespace AnatomIL
             }
         }
 
+        public StackItemFrame CurentStackItemFrame()
+        {
+            int i;
+            StackItemFrame s = null;
 
+            for (i = _currentstack.Count - 1; _currentstack[i].Type != typeof(StackItemFrame); i--)
+            {
+                
+            }
+            s = _currentstack[i].Convert();
+            return s;
+        }
 
     }
 }

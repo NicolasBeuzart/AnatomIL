@@ -15,7 +15,8 @@ namespace AnatomIL
 
         public Type Type;
         public object Value;
-        
+
+        virtual public StackItemFrame Convert() { return null; }
     }
 
     public class StackItemFrame : StackItem
@@ -23,10 +24,16 @@ namespace AnatomIL
 
         public StackItemFrame(List<StackItemValue> args, List<StackItemValue> vars, Type rt, string name)
         {
-            Args = args;
+            Type = typeof(StackItemFrame);
+            base.Args = args;
             VarLocals = vars;
             RetType = rt;
             FrameName = name;
+        }
+
+        public override StackItemFrame Convert()
+        {
+            return this;
         }
 
     }
@@ -36,8 +43,8 @@ namespace AnatomIL
 
         public StackItemValue(Type t, object o)
         {
-            Type = t;
-            Value = o;
+            base.Type = t;
+            base.Value = o;
         }
 
     }

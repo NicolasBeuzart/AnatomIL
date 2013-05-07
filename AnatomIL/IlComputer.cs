@@ -22,8 +22,6 @@ namespace AnatomIL
 
         }
 
-        public Dictionary<string, int> NbLocals { get { return _env._nbLocals; } }
-
         public int Pc { get { return _env.Pc; } internal set { _env.Pc = value; } }
 
         public Stack Stack { get { return _env.Stack; } }
@@ -49,7 +47,8 @@ namespace AnatomIL
 
         public void Start()
         {
-            Pc = 0;
+            _env.Stack.PushFrame(new List<StackItemValue>(), new List<StackItemValue>(), typeof(void), "main");
+            Pc = GoToNextInst(-1);
         }
 
         public int GoToNextInst(int pc)
@@ -60,7 +59,7 @@ namespace AnatomIL
                 result++;
             }
 
-            if (_compiledCode.Count > result && _compiledCode.IsDirective(result))
+            if (_compiledCode.Count - 1> result && _compiledCode.IsDirective(result))
             {
                 _compiledCode.Code[result].Execute(_env);
                 return GoToNextInst(result);

@@ -47,23 +47,29 @@ namespace AnatomIL
                 throw new InvalidOperationException("can't add two values using different type");
             }
 
-            if (_t == typeof(Int64))
+            StackItemValue StV1;
+            StackItemValue StV2;
+
+            if (e.Stack.Pop(out StV1) && e.Stack.Pop(out StV2))
             {
-                Int64 i1 = Convert.ToInt64(e.Stack.Pop().Value);
-                Int64 i2 = Convert.ToInt64(e.Stack.Pop().Value);
-                e.Stack.Push(_t, i1 + i2);
-            }
-            else if (_t == typeof(Int32))
-            {
-                Int32 i1 = Convert.ToInt32(e.Stack.Pop().Value);
-                Int32 i2 = Convert.ToInt32(e.Stack.Pop().Value);
-                e.Stack.Push(_t, i1 + i2);
-            }
-            else if (_t == typeof(Int16))
-            {
-                Int16 i1 = Convert.ToInt16(e.Stack.Pop().Value);
-                Int16 i2 = Convert.ToInt16(e.Stack.Pop().Value);
-                e.Stack.Push(_t, i1 + i2);
+                if (_t == typeof(Int64))
+                {
+                    Int64 i1 = Convert.ToInt64(StV1.Value);
+                    Int64 i2 = Convert.ToInt64(StV2.Value);
+                    e.Stack.Push(_t, i1 + i2);
+                }
+                else if (_t == typeof(Int32))
+                {
+                    Int32 i1 = Convert.ToInt32(StV1.Value);
+                    Int32 i2 = Convert.ToInt32(StV2.Value);
+                    e.Stack.Push(_t, i1 + i2);
+                }
+                else if (_t == typeof(Int16))
+                {
+                    Int16 i1 = Convert.ToInt16(StV1.Value);
+                    Int16 i2 = Convert.ToInt16(StV2.Value);
+                    e.Stack.Push(_t, i1 + i2);
+                }
             }
         }
     }
@@ -87,23 +93,29 @@ namespace AnatomIL
                 throw new InvalidOperationException("can't add two values using different type");
             }
 
-            if (_t == typeof(Int64))
+            StackItemValue StV1;
+            StackItemValue StV2;
+
+            if (e.Stack.Pop(out StV1) && e.Stack.Pop(out StV2))
             {
-                Int64 i1 = Convert.ToInt64(e.Stack.Pop().Value);
-                Int64 i2 = Convert.ToInt64(e.Stack.Pop().Value);
-                e.Stack.Push(_t, i1 - i2);
-            }
-            else if (_t == typeof(Int32))
-            {
-                Int32 i1 = Convert.ToInt32(e.Stack.Pop().Value);
-                Int32 i2 = Convert.ToInt32(e.Stack.Pop().Value);
-                e.Stack.Push(_t, i1 - i2);
-            }
-            else if (_t == typeof(Int16))
-            {
-                Int16 i1 = Convert.ToInt16(e.Stack.Pop().Value);
-                Int16 i2 = Convert.ToInt16(e.Stack.Pop().Value);
-                e.Stack.Push(_t, i1 - i2);
+                if (_t == typeof(Int64))
+                {
+                    Int64 i1 = Convert.ToInt64(StV1.Value);
+                    Int64 i2 = Convert.ToInt64(StV2.Value);
+                    e.Stack.Push(_t, i1 - i2);
+                }
+                else if (_t == typeof(Int32))
+                {
+                    Int32 i1 = Convert.ToInt32(StV1.Value);
+                    Int32 i2 = Convert.ToInt32(StV2.Value);
+                    e.Stack.Push(_t, i1 - i2);
+                }
+                else if (_t == typeof(Int16))
+                {
+                    Int16 i1 = Convert.ToInt16(StV1.Value);
+                    Int16 i2 = Convert.ToInt16(StV2.Value);
+                    e.Stack.Push(_t, i1 - i2);
+                }
             }
         }
     }
@@ -127,23 +139,29 @@ namespace AnatomIL
                 throw new InvalidOperationException("can't add two values using different type");
             }
 
-            if (_t == typeof(Int64))
+            StackItemValue StV1;
+            StackItemValue StV2;
+
+            if (e.Stack.Pop(out StV1) && e.Stack.Pop(out StV2))
             {
-                Int64 i1 = Convert.ToInt64(e.Stack.Pop().Value);
-                Int64 i2 = Convert.ToInt64(e.Stack.Pop().Value);
-                e.Stack.Push(_t, i1 * i2);
-            }
-            else if (_t == typeof(Int32))
-            {
-                Int32 i1 = Convert.ToInt32(e.Stack.Pop().Value);
-                Int32 i2 = Convert.ToInt32(e.Stack.Pop().Value);
-                e.Stack.Push(_t, i1 * i2);
-            }
-            else if (_t == typeof(Int16))
-            {
-                Int16 i1 = Convert.ToInt16(e.Stack.Pop().Value);
-                Int16 i2 = Convert.ToInt16(e.Stack.Pop().Value);
-                e.Stack.Push(_t, i1 * i2);
+                if (_t == typeof(Int64))
+                {
+                    Int64 i1 = Convert.ToInt64(StV1.Value);
+                    Int64 i2 = Convert.ToInt64(StV2.Value);
+                    e.Stack.Push(_t, i1 * i2);
+                }
+                else if (_t == typeof(Int32))
+                {
+                    Int32 i1 = Convert.ToInt32(StV1.Value);
+                    Int32 i2 = Convert.ToInt32(StV2.Value);
+                    e.Stack.Push(_t, i1 * i2);
+                }
+                else if (_t == typeof(Int16))
+                {
+                    Int16 i1 = Convert.ToInt16(StV1.Value);
+                    Int16 i2 = Convert.ToInt16(StV2.Value);
+                    e.Stack.Push(_t, i1 * i2);
+                }
             }
         }
     }
@@ -167,23 +185,29 @@ namespace AnatomIL
                 throw new InvalidOperationException("can't add two values using different type");
             }
 
-            if (_t == typeof(Int64))
+            StackItemValue StV1;
+            StackItemValue StV2;
+
+            if (e.Stack.Pop(out StV1) && e.Stack.Pop(out StV2))
             {
-                Int64 i1 = Convert.ToInt64(e.Stack.Pop().Value);
-                Int64 i2 = Convert.ToInt64(e.Stack.Pop().Value);
-                e.Stack.Push(_t, i1 / i2);
-            }
-            else if (_t == typeof(Int32))
-            {
-                Int32 i1 = Convert.ToInt32(e.Stack.Pop().Value);
-                Int32 i2 = Convert.ToInt32(e.Stack.Pop().Value);
-                e.Stack.Push(_t, i1 / i2);
-            }
-            else if (_t == typeof(Int16))
-            {
-                Int16 i1 = Convert.ToInt16(e.Stack.Pop().Value);
-                Int16 i2 = Convert.ToInt16(e.Stack.Pop().Value);
-                e.Stack.Push(_t, i1 / i2);
+                if (_t == typeof(Int64))
+                {
+                    Int64 i1 = Convert.ToInt64(StV1.Value);
+                    Int64 i2 = Convert.ToInt64(StV2.Value);
+                    e.Stack.Push(_t, i1 / i2);
+                }
+                else if (_t == typeof(Int32))
+                {
+                    Int32 i1 = Convert.ToInt32(StV1.Value);
+                    Int32 i2 = Convert.ToInt32(StV2.Value);
+                    e.Stack.Push(_t, i1 / i2);
+                }
+                else if (_t == typeof(Int16))
+                {
+                    Int16 i1 = Convert.ToInt16(StV1.Value);
+                    Int16 i2 = Convert.ToInt16(StV2.Value);
+                    e.Stack.Push(_t, i1 / i2);
+                }
             }
         }
     }
@@ -207,23 +231,29 @@ namespace AnatomIL
                 throw new InvalidOperationException("can't add two values using different type");
             }
 
-            if (_t == typeof(Int64))
+            StackItemValue StV1;
+            StackItemValue StV2;
+
+            if (e.Stack.Pop(out StV1) && e.Stack.Pop(out StV2))
             {
-                Int64 i1 = Convert.ToInt64(e.Stack.Pop().Value);
-                Int64 i2 = Convert.ToInt64(e.Stack.Pop().Value);
-                e.Stack.Push(_t, i1 % i2);
-            }
-            else if (_t == typeof(Int32))
-            {
-                Int32 i1 = Convert.ToInt32(e.Stack.Pop().Value);
-                Int32 i2 = Convert.ToInt32(e.Stack.Pop().Value);
-                e.Stack.Push(_t, i1 % i2);
-            }
-            else if (_t == typeof(Int16))
-            {
-                Int16 i1 = Convert.ToInt16(e.Stack.Pop().Value);
-                Int16 i2 = Convert.ToInt16(e.Stack.Pop().Value);
-                e.Stack.Push(_t, i1 % i2);
+                if (_t == typeof(Int64))
+                {
+                    Int64 i1 = Convert.ToInt64(StV1.Value);
+                    Int64 i2 = Convert.ToInt64(StV2.Value);
+                    e.Stack.Push(_t, i1 % i2);
+                }
+                else if (_t == typeof(Int32))
+                {
+                    Int32 i1 = Convert.ToInt32(StV1.Value);
+                    Int32 i2 = Convert.ToInt32(StV2.Value);
+                    e.Stack.Push(_t, i1 % i2);
+                }
+                else if (_t == typeof(Int16))
+                {
+                    Int16 i1 = Convert.ToInt16(StV1.Value);
+                    Int16 i2 = Convert.ToInt16(StV2.Value);
+                    e.Stack.Push(_t, i1 % i2);
+                }
             }
         }
     }
@@ -268,6 +298,8 @@ namespace AnatomIL
     public class LocalsInitOpCode : OpCode
     {
         List<string> _locals;
+        List<StackItemValue> _stv = new List<StackItemValue>();
+
 
         public LocalsInitOpCode(List<string> locals)
         {
@@ -281,13 +313,15 @@ namespace AnatomIL
         {
             for (int i = 0; i < _locals.Count(); i++)
             {
-                if (_locals[i] == "int16") e.Stack.Push(typeof(Int16), 0);
-                else if (_locals[i] == "int32") e.Stack.Push(typeof(Int32), 0);
-                else if (_locals[i] == "int64") e.Stack.Push(typeof(Int64), 0);
-                else if (_locals[i] == "bool") e.Stack.Push(typeof(bool), null);
+                if (_locals[i] == "int16") _stv.Add(new StackItemValue(typeof(Int16), 0));
+                else if (_locals[i] == "int32") _stv.Add(new StackItemValue(typeof(Int32), 0));
+                else if (_locals[i] == "int64") _stv.Add(new StackItemValue(typeof(Int64), 0));
+                else if (_locals[i] == "bool") _stv.Add(new StackItemValue(typeof(bool), 0));
 
-                e._nbLocals["main"]++;
+                StackItemFrame s = e.Stack.CurentStackItemFrame();
+                s.VarLocals = _stv;
             }
+
         }
     }
 
@@ -302,9 +336,12 @@ namespace AnatomIL
 
         override public void Execute(Environment e)
         {
-            StackItem s = e.Stack.Pop();
-            e.Stack.Push(s.Type,s.Value);
-            e.Stack.Push(s.Type,s.Value);
+           StackItemValue s;
+           if (e.Stack.Pop(out s))
+           {
+               e.Stack.Push(s.Type, s.Value);
+               e.Stack.Push(s.Type, s.Value);
+           }
         }
     }
 }
