@@ -17,7 +17,7 @@ namespace AnatomIL
 
         public CompilerResult Compile(string[] instructions)
         {
-            Tokeniser t = new Tokeniser(instructions);
+            FunctionTokeniser t = new FunctionTokeniser(instructions);
             List<OpCode> code = new List<OpCode>();
             List<string> errorMessages = new List<string>();
             OpCodeRootResult result;

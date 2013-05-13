@@ -8,6 +8,67 @@ namespace AnatomIL
 {
     public class Tokeniser
     {
+        string _code;
+        int _idxCode;
+        string _prototype;
+        string _curentToken;
+
+
+        public string Prototype { get { return _prototype; } }
+        public string CurentToken { get { return _curentToken; } }
+
+        public Tokeniser(string code)
+        {
+            _code = code;
+        }
+
+        public bool MatchNextToken()
+        {
+            _curentToken = "";
+            _prototype = "";
+
+            while (_idxCode < _code.Length && (_code[_idxCode] == ' ' || _code[_idxCode] == '\n')) _idxCode++;
+
+            while (_idxCode < _code.Length && _code[_idxCode] != '{')
+            {
+                _prototype += _code[_idxCode];
+                _idxCode++;
+            }
+
+            _prototype = _prototype.Replace("\n", "");
+            _idxCode++;
+
+            while (_idxCode < _code.Length && _code[_idxCode] != '}')
+            {
+                _curentToken += _code[_idxCode];
+                _idxCode++;
+            }
+
+            if (_idxCode >= _code.Length) return false;
+            else return true;
+        }
+
+        public bool IsSquare()
+        {
+            int par = 0;
+            int aco = 0;
+
+            for (int i = 0; i < _code.Length; i++)
+            {
+                if (par < 0 || aco < 0) return false;
+                if (_code[i] == '(') par++;
+                else if (_code[i] == ')') par--;
+                else if (_code[i] == '{') aco++;
+                else if (_code[i] == '}') aco--;
+            }
+
+            if (par == 0 && aco == 0) return true;
+            else return false;
+        }
+    }
+
+    public class FunctionTokeniser
+    {
         Library _libDirective;
         Library _libInstructions;
         string _curentToken;
@@ -20,7 +81,7 @@ namespace AnatomIL
 
         public int CurentLigne { get { return _curentligne; } }
 
-        public Tokeniser(string[] code)
+        public FunctionTokeniser(string[] code)
         {
             _libDirective = new Library();
             _libInstructions = new Library();

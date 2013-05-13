@@ -14,7 +14,14 @@ namespace AnatomIL.test
         [Test]
         public void TokenTest()
         {
-           // Tokeniser t = new Tokeniser("");
+            Tokeniser t = new Tokeniser("void main()\n{\nldc.i4 12\nldc.i4 12\nadd\n}");
+
+            Assert.That(t.MatchNextToken(), Is.True);
+            Assert.That(t.Prototype,  Is.EquivalentTo("void main()"));
+            Assert.That(t.CurentToken, Is.EquivalentTo("\nldc.i4 12\nldc.i4 12\nadd\n"));
+
+
+            Assert.That(t.MatchNextToken(), Is.False);
 
         }
     }
