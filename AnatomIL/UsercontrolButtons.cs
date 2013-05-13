@@ -25,11 +25,28 @@ namespace AnatomIL
         IlComputer computer = new IlComputer();
         public IlComputer CurrentComputer { get { return computer; } }
 
+        public System.Windows.Forms.Timer GoTimer;
 
         private void btGo_Click(object sender, EventArgs e)
         {
-            while (computer.Pc < Code.listBoxInstructions.Items.Count)
+            btCompile.Visible = false;
+            btStop.Visible = true;
+            btGo.Visible = false;
+            timeBox.Visible = false;
+
+            int intervalTime = Convert.ToInt32(timeBox.Text);
+            GoTimer = new System.Windows.Forms.Timer();
+
+            GoTimer.Interval = intervalTime;
+            GoTimer.Tick += new EventHandler(btExecuteOneStep_Click);
+            GoTimer.Start();
+        }
+
+        private void btExecuteOneStep_Click(object sender, EventArgs e)
+        {
+            if (computer.Pc < Code.listBoxInstructions.Items.Count)
             {
+
                 computer.ExecuteNextInstruction();
 
                 if (computer.Pc < Code.listBoxInstructions.Items.Count)
@@ -42,31 +59,17 @@ namespace AnatomIL
                     Code.textBoxCode.Visible = true;
                     btExecuteOneStep.Visible = false;
                     btGo.Visible = false;
+                    timeBox.Visible = false;
+                    btCompile.Visible = true;
+                    btStop.Visible = false;
                 }
 
                 Stack.ShowStack();
             }
-                
-        }
-
-        private void btExecuteOneStep_Click(object sender, EventArgs e)
-        {
-            computer.ExecuteNextInstruction();
-
-            if (computer.Pc < Code.listBoxInstructions.Items.Count)
-            {
-                Code.listBoxInstructions.SelectedIndex = computer.Pc;
-            }
             else
             {
-                Code.listBoxInstructions.Visible = false;
-                Code.textBoxCode.Visible = true;
-                btExecuteOneStep.Visible = false;
-                btGo.Visible = false;
+                btStop_Click(this, e);
             }
-
-            Stack.ShowStack();
-            
         }
 
         private void btStop_Click(object sender, EventArgs e)
@@ -75,15 +78,22 @@ namespace AnatomIL
             Code.textBoxCode.Visible = true;
             btExecuteOneStep.Visible = false;
             btGo.Visible = false;
+            timeBox.Visible = false;
+            btCompile.Visible = true;
+            btStop.Visible = false;
+            GoTimer.Stop();
         }
 
         private void btCompile_Click(object sender, EventArgs e)
         {
+
                Error.Visible = false;
                Stack.listboxStack.Items.Clear();
 
                btExecuteOneStep.Visible = true;
                btGo.Visible = true;
+               timeBox.Visible = true;
+
 
                computer.reset();
 
@@ -104,7 +114,9 @@ namespace AnatomIL
                {
                    Error.Visible = true;
                    btGo.Visible = false;
+                   timeBox.Visible = false;
                    btExecuteOneStep.Visible = false;
+                   btStop.Visible = false;
                    Code.listBoxInstructions.Visible = false;
                    Code.textBoxCode.Visible = true;
                }
@@ -112,6 +124,7 @@ namespace AnatomIL
                computer.Start();
                Code.listBoxInstructions.SelectedIndex = computer.Pc;
         }
+
 
     }
 }

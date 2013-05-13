@@ -32,8 +32,8 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.userControlMenu1 = new AnatomIL.UserControlMenu();
-            this._buttonBar = new AnatomIL.UserControlButtons();
             this._code = new AnatomIL.UserControlCodeZone();
+            this._buttonBar = new AnatomIL.UserControlButtons();
             this._errors = new AnatomIL.UserControlTextBoxError();
             this._stack = new AnatomIL.UserControlStack();
             this.userControlHeap1 = new AnatomIL.UserControlHeap();
@@ -54,7 +54,7 @@
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 103);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 119);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -64,8 +64,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(803, 390);
-            this.splitContainer1.SplitterDistance = 290;
+            this.splitContainer1.Size = new System.Drawing.Size(803, 374);
+            this.splitContainer1.SplitterDistance = 372;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
@@ -81,8 +81,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this._stack);
-            this.splitContainer2.Size = new System.Drawing.Size(509, 390);
-            this.splitContainer2.SplitterDistance = 254;
+            this.splitContainer2.Size = new System.Drawing.Size(427, 374);
+            this.splitContainer2.SplitterDistance = 180;
             this.splitContainer2.TabIndex = 0;
             // 
             // splitContainer3
@@ -99,8 +99,8 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.userControlHeap1);
-            this.splitContainer3.Size = new System.Drawing.Size(254, 390);
-            this.splitContainer3.SplitterDistance = 180;
+            this.splitContainer3.Size = new System.Drawing.Size(180, 374);
+            this.splitContainer3.SplitterDistance = 172;
             this.splitContainer3.TabIndex = 0;
             // 
             // userControlMenu1
@@ -111,23 +111,23 @@
             this.userControlMenu1.Size = new System.Drawing.Size(736, 32);
             this.userControlMenu1.TabIndex = 2;
             // 
+            // _code
+            // 
+            this._code.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._code.Location = new System.Drawing.Point(0, 0);
+            this._code.Name = "_code";
+            this._code.Size = new System.Drawing.Size(372, 374);
+            this._code.TabIndex = 0;
+            // 
             // _buttonBar
             // 
             this._buttonBar.Code = this._code;
             this._buttonBar.Error = this._errors;
             this._buttonBar.Location = new System.Drawing.Point(0, 25);
             this._buttonBar.Name = "_buttonBar";
-            this._buttonBar.Size = new System.Drawing.Size(399, 72);
+            this._buttonBar.Size = new System.Drawing.Size(454, 72);
             this._buttonBar.Stack = this._stack;
             this._buttonBar.TabIndex = 1;
-            // 
-            // _code
-            // 
-            this._code.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._code.Location = new System.Drawing.Point(0, 0);
-            this._code.Name = "_code";
-            this._code.Size = new System.Drawing.Size(290, 390);
-            this._code.TabIndex = 0;
             // 
             // _errors
             // 
@@ -135,7 +135,7 @@
             this._errors.Dock = System.Windows.Forms.DockStyle.Fill;
             this._errors.Location = new System.Drawing.Point(0, 0);
             this._errors.Name = "_errors";
-            this._errors.Size = new System.Drawing.Size(254, 180);
+            this._errors.Size = new System.Drawing.Size(180, 172);
             this._errors.TabIndex = 0;
             this._errors.Visible = false;
             // 
@@ -145,7 +145,7 @@
             this._stack.Dock = System.Windows.Forms.DockStyle.Fill;
             this._stack.Location = new System.Drawing.Point(0, 0);
             this._stack.Name = "_stack";
-            this._stack.Size = new System.Drawing.Size(251, 390);
+            this._stack.Size = new System.Drawing.Size(243, 374);
             this._stack.TabIndex = 0;
             // 
             // userControlHeap1
@@ -153,7 +153,7 @@
             this.userControlHeap1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.userControlHeap1.Location = new System.Drawing.Point(0, 0);
             this.userControlHeap1.Name = "userControlHeap1";
-            this.userControlHeap1.Size = new System.Drawing.Size(254, 206);
+            this.userControlHeap1.Size = new System.Drawing.Size(180, 198);
             this.userControlHeap1.TabIndex = 0;
             // 
             // Interface

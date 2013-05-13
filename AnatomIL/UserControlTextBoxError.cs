@@ -19,11 +19,11 @@ namespace AnatomIL
 
         public UserControlButtons ButtonsBar { get; set; }
 
-        private void UserControlTextBoxError_VisibleChanged(object sender, EventArgs e)
+        private void textBoxError_VisibleChanged(object sender, EventArgs e)
         {
             textBoxError.Visible = true;
             textBoxError.Clear();
-            foreach(string ErrorMsg in ButtonsBar.CurrentComputer.ErrorMessages)
+            foreach (string ErrorMsg in ButtonsBar.CurrentComputer.ErrorMessages)
             {
                 textBoxError.Text = textBoxError.Text + ErrorMsg + "\r";
             }
