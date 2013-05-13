@@ -57,6 +57,12 @@
     <Compile Include="CompiledCode.cs" />
     <Compile Include="compiler.cs" />
     <Compile Include="Environment.cs" />
+    <Compile Include="Inter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inter.Designer.cs">
+      <DependentUpon>Inter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interface.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +121,9 @@
     <Compile Include="UserControlTextBoxError.Designer.cs">
       <DependentUpon>UserControlTextBoxError.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Inter.resx">
+      <DependentUpon>Inter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Interface.resx">
       <DependentUpon>Interface.cs</DependentUpon>
     </EmbeddedResource>

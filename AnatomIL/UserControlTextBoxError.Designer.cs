@@ -43,13 +43,17 @@
             // 
             // textBoxError
             // 
+            this.textBoxError.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxError.Enabled = false;
-            this.textBoxError.Location = new System.Drawing.Point(0, 16);
+            this.textBoxError.Location = new System.Drawing.Point(3, 19);
             this.textBoxError.Multiline = true;
             this.textBoxError.Name = "textBoxError";
             this.textBoxError.Size = new System.Drawing.Size(218, 157);
             this.textBoxError.TabIndex = 0;
             this.textBoxError.Visible = false;
+            this.textBoxError.VisibleChanged += new System.EventHandler(this.textBoxError_VisibleChanged);
             // 
             // UserControlTextBoxError
             // 
@@ -59,7 +63,6 @@
             this.Controls.Add(this.label1);
             this.Name = "UserControlTextBoxError";
             this.Size = new System.Drawing.Size(218, 176);
-            this.VisibleChanged += new System.EventHandler(this.UserControlTextBoxError_VisibleChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
 

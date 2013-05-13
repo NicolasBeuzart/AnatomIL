@@ -35,14 +35,15 @@
             // 
             // listboxStack
             // 
-            this.listboxStack.Dock = System.Windows.Forms.DockStyle.Right;
+            this.listboxStack.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listboxStack.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listboxStack.FormattingEnabled = true;
+            this.listboxStack.HorizontalScrollbar = true;
             this.listboxStack.ItemHeight = 25;
-            this.listboxStack.Location = new System.Drawing.Point(-48, 44);
+            this.listboxStack.Location = new System.Drawing.Point(0, 44);
             this.listboxStack.Name = "listboxStack";
             this.listboxStack.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.listboxStack.Size = new System.Drawing.Size(184, 189);
+            this.listboxStack.Size = new System.Drawing.Size(136, 189);
             this.listboxStack.TabIndex = 1;
             // 
             // labStack
