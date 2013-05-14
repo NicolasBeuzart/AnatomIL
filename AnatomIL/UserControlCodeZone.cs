@@ -17,5 +17,15 @@ namespace AnatomIL
             InitializeComponent();
         }
 
+        private void BreakPointList_VisibleChanged(object sender, EventArgs e)
+        {
+            int NbrLines = textBoxCode.Lines.Length;
+            int i;
+            for (i = 0; i < NbrLines; i++)
+            {
+                BreakPointList.Items.Add(i + 1);
+            }
+        }
+
     }
 }

@@ -35,6 +35,7 @@
             this.timeBox = new System.Windows.Forms.TextBox();
             this.ShowPc = new System.Windows.Forms.CheckBox();
             this.ShowStack = new System.Windows.Forms.CheckBox();
+            this.bt_restart = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btExecuteOneStep
@@ -116,10 +117,22 @@
             this.ShowStack.UseVisualStyleBackColor = true;
             this.ShowStack.Visible = false;
             // 
+            // bt_restart
+            // 
+            this.bt_restart.Location = new System.Drawing.Point(101, 14);
+            this.bt_restart.Name = "bt_restart";
+            this.bt_restart.Size = new System.Drawing.Size(92, 24);
+            this.bt_restart.TabIndex = 8;
+            this.bt_restart.Text = "Restart";
+            this.bt_restart.UseVisualStyleBackColor = true;
+            this.bt_restart.Visible = false;
+            this.bt_restart.Click += new System.EventHandler(this.bt_restart_Click);
+            // 
             // UserControlButtons
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.bt_restart);
             this.Controls.Add(this.ShowStack);
             this.Controls.Add(this.ShowPc);
             this.Controls.Add(this.timeBox);
@@ -143,5 +156,6 @@
         private System.Windows.Forms.TextBox timeBox;
         private System.Windows.Forms.CheckBox ShowPc;
         private System.Windows.Forms.CheckBox ShowStack;
+        private System.Windows.Forms.Button bt_restart;
     }
 }

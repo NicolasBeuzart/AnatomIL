@@ -25,7 +25,7 @@ namespace AnatomIL
             textBoxError.Clear();
             foreach (string ErrorMsg in ButtonsBar.CurrentComputer.ErrorMessages)
             {
-                textBoxError.Text = textBoxError.Text + ErrorMsg + "\r";
+                textBoxError.Text = textBoxError.Text + ErrorMsg + "\r\n";
             }
         }
 

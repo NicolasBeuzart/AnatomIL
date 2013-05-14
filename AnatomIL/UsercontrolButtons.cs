@@ -36,6 +36,8 @@ namespace AnatomIL
             ShowPc.Visible = false;
             ShowStack.Visible = false;
 
+            Code.BreakPointList.Enabled = false;
+
             if (!ShowPc.Checked)
             {
                 Code.listBoxInstructions.Visible = false;
@@ -55,27 +57,35 @@ namespace AnatomIL
         {
             if (computer.Pc < Code.listBoxInstructions.Items.Count)
             {
-
-                computer.ExecuteNextInstruction();
-
-                if (computer.Pc < Code.listBoxInstructions.Items.Count)
+                if (Code.BreakPointList.CheckedItems.Contains(computer.Pc + 1))
                 {
-                    Code.listBoxInstructions.SelectedIndex = computer.Pc;
+                    GoTimer.Stop();
+                    bt_restart.Visible = true;
                 }
                 else
                 {
-                    Code.listBoxInstructions.Visible = false;
-                    Code.textBoxCode.Visible = true;
-                    btExecuteOneStep.Visible = false;
-                    btGo.Visible = false;
-                    timeBox.Visible = false;
-                    ShowPc.Visible = false;
-                    ShowStack.Visible = false;
-                    btCompile.Visible = true;
-                    btStop.Visible = false;
+                    computer.ExecuteNextInstruction();
+
+                    if (computer.Pc < Code.listBoxInstructions.Items.Count)
+                    {
+                        Code.listBoxInstructions.SelectedIndex = computer.Pc;
+                    }
+                    else
+                    {
+                        Code.listBoxInstructions.Visible = false;
+                        Code.textBoxCode.Visible = true;
+                        Code.BreakPointList.Visible = false;
+                        btExecuteOneStep.Visible = false;
+                        btGo.Visible = false;
+                        timeBox.Visible = false;
+                        ShowPc.Visible = false;
+                        ShowStack.Visible = false;
+                        btCompile.Visible = true;
+                        btStop.Visible = false;
+                    }
+                    if (ShowStack.Checked)
+                        Stack.ShowStack();
                 }
-                if(ShowStack.Checked)
-                Stack.ShowStack();
             }
             else
             {
@@ -87,6 +97,7 @@ namespace AnatomIL
         {
             Code.listBoxInstructions.Visible = false;
             Code.textBoxCode.Visible = true;
+            Code.BreakPointList.Visible = false;
             btExecuteOneStep.Visible = false;
             btGo.Visible = false;
             timeBox.Visible = false;
@@ -108,12 +119,15 @@ namespace AnatomIL
                timeBox.Visible = true;
                ShowPc.Visible = true;
                ShowStack.Visible = true;
-
-
+               
                computer.reset();
 
                Code.listBoxInstructions.Visible = true;
                Code.textBoxCode.Visible = false;
+
+               Code.BreakPointList.Items.Clear();
+               Code.BreakPointList.Visible = true;
+               Code.BreakPointList.Enabled = true;
 
                string s = Code.textBoxCode.Text.Replace("\r", "");
                string[] s2 = s.Split(new char[] { '\n' });
@@ -124,7 +138,7 @@ namespace AnatomIL
                computer.LoadCode(s2);
             
                computer.compile();
-
+                
                if (computer.ErrorMessages.Count > 0)
                {
                    Error.Visible = true;
@@ -136,10 +150,40 @@ namespace AnatomIL
                    btStop.Visible = false;
                    Code.listBoxInstructions.Visible = false;
                    Code.textBoxCode.Visible = true;
+                   Code.BreakPointList.Visible = false;
                }
 
                computer.Start();
                Code.listBoxInstructions.SelectedIndex = computer.Pc;
+        }
+
+        private void bt_restart_Click(object sender, EventArgs e)
+        {
+            bt_restart.Visible = false;
+
+            computer.ExecuteNextInstruction();
+
+            if (computer.Pc < Code.listBoxInstructions.Items.Count)
+            {
+                Code.listBoxInstructions.SelectedIndex = computer.Pc;
+            }
+            else
+            {
+                Code.listBoxInstructions.Visible = false;
+                Code.textBoxCode.Visible = true;
+                Code.BreakPointList.Visible = false;
+                btExecuteOneStep.Visible = false;
+                btGo.Visible = false;
+                timeBox.Visible = false;
+                ShowPc.Visible = false;
+                ShowStack.Visible = false;
+                btCompile.Visible = true;
+                btStop.Visible = false;
+            }
+            if (ShowStack.Checked)
+                Stack.ShowStack();
+
+            btGo_Click(this, e);
         }
 
 
