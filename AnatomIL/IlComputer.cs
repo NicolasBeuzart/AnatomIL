@@ -48,7 +48,7 @@ namespace AnatomIL
         public void Start()
         {
             _env.Stack.PushFrame(new List<StackItemValue>(), new List<StackItemValue>(), typeof(void), "main");
-            Pc = GoToNextInst(-1);
+            Pc = 0;
         }
 
         public int GoToNextInst(int pc)

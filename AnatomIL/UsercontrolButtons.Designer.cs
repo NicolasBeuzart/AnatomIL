@@ -33,6 +33,8 @@
             this.btStop = new System.Windows.Forms.Button();
             this.btCompile = new System.Windows.Forms.Button();
             this.timeBox = new System.Windows.Forms.TextBox();
+            this.ShowPc = new System.Windows.Forms.CheckBox();
+            this.ShowStack = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btExecuteOneStep
@@ -59,7 +61,7 @@
             // 
             // btStop
             // 
-            this.btStop.Location = new System.Drawing.Point(260, 13);
+            this.btStop.Location = new System.Drawing.Point(411, 12);
             this.btStop.Name = "btStop";
             this.btStop.Size = new System.Drawing.Size(92, 24);
             this.btStop.TabIndex = 2;
@@ -70,7 +72,7 @@
             // 
             // btCompile
             // 
-            this.btCompile.Location = new System.Drawing.Point(358, 13);
+            this.btCompile.Location = new System.Drawing.Point(509, 12);
             this.btCompile.Name = "btCompile";
             this.btCompile.Size = new System.Drawing.Size(92, 24);
             this.btCompile.TabIndex = 3;
@@ -80,25 +82,53 @@
             // 
             // timeBox
             // 
-            this.timeBox.Location = new System.Drawing.Point(199, 17);
+            this.timeBox.Location = new System.Drawing.Point(199, 18);
             this.timeBox.Name = "timeBox";
-            this.timeBox.Size = new System.Drawing.Size(38, 20);
+            this.timeBox.Size = new System.Drawing.Size(37, 20);
             this.timeBox.TabIndex = 4;
             this.timeBox.Tag = "";
             this.timeBox.Text = "500";
             this.timeBox.Visible = false;
             // 
+            // ShowPc
+            // 
+            this.ShowPc.AutoSize = true;
+            this.ShowPc.Checked = true;
+            this.ShowPc.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ShowPc.Location = new System.Drawing.Point(245, 20);
+            this.ShowPc.Name = "ShowPc";
+            this.ShowPc.Size = new System.Drawing.Size(70, 17);
+            this.ShowPc.TabIndex = 6;
+            this.ShowPc.Text = "Show PC";
+            this.ShowPc.UseVisualStyleBackColor = true;
+            this.ShowPc.Visible = false;
+            // 
+            // ShowStack
+            // 
+            this.ShowStack.AutoSize = true;
+            this.ShowStack.Checked = true;
+            this.ShowStack.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ShowStack.Location = new System.Drawing.Point(321, 19);
+            this.ShowStack.Name = "ShowStack";
+            this.ShowStack.Size = new System.Drawing.Size(84, 17);
+            this.ShowStack.TabIndex = 7;
+            this.ShowStack.Text = "Show Stack";
+            this.ShowStack.UseVisualStyleBackColor = true;
+            this.ShowStack.Visible = false;
+            // 
             // UserControlButtons
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.ShowStack);
+            this.Controls.Add(this.ShowPc);
             this.Controls.Add(this.timeBox);
             this.Controls.Add(this.btCompile);
             this.Controls.Add(this.btStop);
             this.Controls.Add(this.btGo);
             this.Controls.Add(this.btExecuteOneStep);
             this.Name = "UserControlButtons";
-            this.Size = new System.Drawing.Size(460, 47);
+            this.Size = new System.Drawing.Size(618, 54);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -111,5 +141,7 @@
         private System.Windows.Forms.Button btStop;
         private System.Windows.Forms.Button btCompile;
         private System.Windows.Forms.TextBox timeBox;
+        private System.Windows.Forms.CheckBox ShowPc;
+        private System.Windows.Forms.CheckBox ShowStack;
     }
 }

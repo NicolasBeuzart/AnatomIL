@@ -33,6 +33,15 @@ namespace AnatomIL
             btStop.Visible = true;
             btGo.Visible = false;
             timeBox.Visible = false;
+            ShowPc.Visible = false;
+            ShowStack.Visible = false;
+
+            if (!ShowPc.Checked)
+            {
+                Code.listBoxInstructions.Visible = false;
+                Code.textBoxCode.Visible = true;
+            }
+
 
             int intervalTime = Convert.ToInt32(timeBox.Text);
             GoTimer = new System.Windows.Forms.Timer();
@@ -60,10 +69,12 @@ namespace AnatomIL
                     btExecuteOneStep.Visible = false;
                     btGo.Visible = false;
                     timeBox.Visible = false;
+                    ShowPc.Visible = false;
+                    ShowStack.Visible = false;
                     btCompile.Visible = true;
                     btStop.Visible = false;
                 }
-
+                if(ShowStack.Checked)
                 Stack.ShowStack();
             }
             else
@@ -79,6 +90,8 @@ namespace AnatomIL
             btExecuteOneStep.Visible = false;
             btGo.Visible = false;
             timeBox.Visible = false;
+            ShowPc.Visible = false;
+            ShowStack.Visible = false;
             btCompile.Visible = true;
             btStop.Visible = false;
             GoTimer.Stop();
@@ -93,6 +106,8 @@ namespace AnatomIL
                btExecuteOneStep.Visible = true;
                btGo.Visible = true;
                timeBox.Visible = true;
+               ShowPc.Visible = true;
+               ShowStack.Visible = true;
 
 
                computer.reset();
@@ -115,6 +130,8 @@ namespace AnatomIL
                    Error.Visible = true;
                    btGo.Visible = false;
                    timeBox.Visible = false;
+                   ShowPc.Visible = false;
+                   ShowStack.Visible = false;
                    btExecuteOneStep.Visible = false;
                    btStop.Visible = false;
                    Code.listBoxInstructions.Visible = false;

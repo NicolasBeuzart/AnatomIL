@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.userControlCodeZone1 = new AnatomIL.UserControlCodeZone();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.userControlTextBoxError1 = new AnatomIL.UserControlTextBoxError();
-            this.userControlHeap1 = new AnatomIL.UserControlHeap();
-            this.userControlStack1 = new AnatomIL.UserControlStack();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-            this.userControlButtons1 = new AnatomIL.UserControlButtons();
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
             this.userControlMenu1 = new AnatomIL.UserControlMenu();
+            this.userControlCodeZone1 = new AnatomIL.UserControlCodeZone();
+            this.userControlButtons1 = new AnatomIL.UserControlButtons();
+            this.userControlTextBoxError1 = new AnatomIL.UserControlTextBoxError();
+            this.userControlStack1 = new AnatomIL.UserControlStack();
+            this.userControlHeap1 = new AnatomIL.UserControlHeap();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -71,23 +71,15 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.userControlCodeZone1);
+            this.splitContainer1.Panel1MinSize = 80;
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(741, 405);
-            this.splitContainer1.SplitterDistance = 304;
+            this.splitContainer1.Panel2MinSize = 160;
+            this.splitContainer1.Size = new System.Drawing.Size(741, 414);
+            this.splitContainer1.SplitterDistance = 168;
             this.splitContainer1.TabIndex = 0;
-            // 
-            // userControlCodeZone1
-            // 
-            this.userControlCodeZone1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.userControlCodeZone1.Location = new System.Drawing.Point(0, 0);
-            this.userControlCodeZone1.Name = "userControlCodeZone1";
-            this.userControlCodeZone1.Size = new System.Drawing.Size(300, 401);
-            this.userControlCodeZone1.TabIndex = 0;
             // 
             // splitContainer2
             // 
@@ -99,12 +91,14 @@
             // splitContainer2.Panel1
             // 
             this.splitContainer2.Panel1.Controls.Add(this.splitContainer3);
+            this.splitContainer2.Panel1MinSize = 80;
             // 
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.userControlStack1);
-            this.splitContainer2.Size = new System.Drawing.Size(433, 405);
-            this.splitContainer2.SplitterDistance = 278;
+            this.splitContainer2.Panel2MinSize = 80;
+            this.splitContainer2.Size = new System.Drawing.Size(569, 414);
+            this.splitContainer2.SplitterDistance = 256;
             this.splitContainer2.TabIndex = 0;
             // 
             // splitContainer3
@@ -118,40 +112,15 @@
             // splitContainer3.Panel1
             // 
             this.splitContainer3.Panel1.Controls.Add(this.userControlTextBoxError1);
+            this.splitContainer3.Panel1MinSize = 50;
             // 
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.userControlHeap1);
-            this.splitContainer3.Size = new System.Drawing.Size(278, 405);
-            this.splitContainer3.SplitterDistance = 198;
+            this.splitContainer3.Panel2MinSize = 50;
+            this.splitContainer3.Size = new System.Drawing.Size(256, 414);
+            this.splitContainer3.SplitterDistance = 172;
             this.splitContainer3.TabIndex = 0;
-            // 
-            // userControlTextBoxError1
-            // 
-            this.userControlTextBoxError1.ButtonsBar = this.userControlButtons1;
-            this.userControlTextBoxError1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userControlTextBoxError1.Location = new System.Drawing.Point(0, 0);
-            this.userControlTextBoxError1.Name = "userControlTextBoxError1";
-            this.userControlTextBoxError1.Size = new System.Drawing.Size(274, 194);
-            this.userControlTextBoxError1.TabIndex = 0;
-            this.userControlTextBoxError1.Visible = false;
-            // 
-            // userControlHeap1
-            // 
-            this.userControlHeap1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userControlHeap1.Location = new System.Drawing.Point(0, 0);
-            this.userControlHeap1.Name = "userControlHeap1";
-            this.userControlHeap1.Size = new System.Drawing.Size(274, 199);
-            this.userControlHeap1.TabIndex = 0;
-            // 
-            // userControlStack1
-            // 
-            this.userControlStack1.ButtonsBar = this.userControlButtons1;
-            this.userControlStack1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userControlStack1.Location = new System.Drawing.Point(0, 0);
-            this.userControlStack1.Name = "userControlStack1";
-            this.userControlStack1.Size = new System.Drawing.Size(147, 401);
-            this.userControlStack1.TabIndex = 0;
             // 
             // splitContainer4
             // 
@@ -164,25 +133,15 @@
             // splitContainer4.Panel1
             // 
             this.splitContainer4.Panel1.Controls.Add(this.userControlButtons1);
+            this.splitContainer4.Panel1MinSize = 40;
             // 
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.splitContainer1);
-            this.splitContainer4.Size = new System.Drawing.Size(741, 453);
-            this.splitContainer4.SplitterDistance = 44;
+            this.splitContainer4.Panel2MinSize = 100;
+            this.splitContainer4.Size = new System.Drawing.Size(741, 458);
+            this.splitContainer4.SplitterDistance = 40;
             this.splitContainer4.TabIndex = 1;
-            // 
-            // userControlButtons1
-            // 
-            this.userControlButtons1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.userControlButtons1.Code = this.userControlCodeZone1;
-            this.userControlButtons1.Error = this.userControlTextBoxError1;
-            this.userControlButtons1.Location = new System.Drawing.Point(3, -2);
-            this.userControlButtons1.Name = "userControlButtons1";
-            this.userControlButtons1.Size = new System.Drawing.Size(733, 38);
-            this.userControlButtons1.Stack = this.userControlStack1;
-            this.userControlButtons1.TabIndex = 0;
             // 
             // splitContainer5
             // 
@@ -199,8 +158,9 @@
             // splitContainer5.Panel2
             // 
             this.splitContainer5.Panel2.Controls.Add(this.splitContainer4);
+            this.splitContainer5.Panel2MinSize = 300;
             this.splitContainer5.Size = new System.Drawing.Size(741, 487);
-            this.splitContainer5.SplitterDistance = 30;
+            this.splitContainer5.SplitterDistance = 25;
             this.splitContainer5.TabIndex = 2;
             // 
             // userControlMenu1
@@ -209,8 +169,55 @@
             this.userControlMenu1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.userControlMenu1.Location = new System.Drawing.Point(0, 0);
             this.userControlMenu1.Name = "userControlMenu1";
-            this.userControlMenu1.Size = new System.Drawing.Size(737, 26);
+            this.userControlMenu1.Size = new System.Drawing.Size(737, 21);
             this.userControlMenu1.TabIndex = 0;
+            // 
+            // userControlCodeZone1
+            // 
+            this.userControlCodeZone1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControlCodeZone1.Location = new System.Drawing.Point(0, 0);
+            this.userControlCodeZone1.Name = "userControlCodeZone1";
+            this.userControlCodeZone1.Size = new System.Drawing.Size(164, 410);
+            this.userControlCodeZone1.TabIndex = 0;
+            // 
+            // userControlButtons1
+            // 
+            this.userControlButtons1.Code = this.userControlCodeZone1;
+            this.userControlButtons1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControlButtons1.Error = this.userControlTextBoxError1;
+            this.userControlButtons1.Location = new System.Drawing.Point(0, 0);
+            this.userControlButtons1.Name = "userControlButtons1";
+            this.userControlButtons1.Size = new System.Drawing.Size(737, 36);
+            this.userControlButtons1.Stack = this.userControlStack1;
+            this.userControlButtons1.TabIndex = 0;
+            // 
+            // userControlTextBoxError1
+            // 
+            this.userControlTextBoxError1.ButtonsBar = this.userControlButtons1;
+            this.userControlTextBoxError1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControlTextBoxError1.Location = new System.Drawing.Point(0, 0);
+            this.userControlTextBoxError1.Name = "userControlTextBoxError1";
+            this.userControlTextBoxError1.Size = new System.Drawing.Size(252, 168);
+            this.userControlTextBoxError1.TabIndex = 0;
+            this.userControlTextBoxError1.Visible = false;
+            // 
+            // userControlStack1
+            // 
+            this.userControlStack1.ButtonsBar = this.userControlButtons1;
+            this.userControlStack1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControlStack1.Location = new System.Drawing.Point(0, 0);
+            this.userControlStack1.Name = "userControlStack1";
+            this.userControlStack1.Size = new System.Drawing.Size(305, 410);
+            this.userControlStack1.TabIndex = 0;
+            // 
+            // userControlHeap1
+            // 
+            this.userControlHeap1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControlHeap1.Location = new System.Drawing.Point(0, 0);
+            this.userControlHeap1.Name = "userControlHeap1";
+            this.userControlHeap1.Size = new System.Drawing.Size(252, 234);
+            this.userControlHeap1.TabIndex = 0;
+            this.userControlHeap1.Visible = false;
             // 
             // Inter
             // 

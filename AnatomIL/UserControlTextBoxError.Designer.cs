@@ -52,7 +52,6 @@
             this.textBoxError.Name = "textBoxError";
             this.textBoxError.Size = new System.Drawing.Size(218, 157);
             this.textBoxError.TabIndex = 0;
-            this.textBoxError.Visible = false;
             this.textBoxError.VisibleChanged += new System.EventHandler(this.textBoxError_VisibleChanged);
             // 
             // UserControlTextBoxError
