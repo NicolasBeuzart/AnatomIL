@@ -60,7 +60,7 @@ namespace AnatomIL
                 if (Code.BreakPointList.CheckedItems.Contains(computer.Pc + 1))
                 {
                     GoTimer.Stop();
-                    bt_restart.Visible = true;
+                    bt_continue.Visible = true;
                 }
                 else
                 {
@@ -159,7 +159,7 @@ namespace AnatomIL
 
         private void bt_restart_Click(object sender, EventArgs e)
         {
-            bt_restart.Visible = false;
+            bt_continue.Visible = false;
 
             computer.ExecuteNextInstruction();
 
