@@ -15,7 +15,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(Tokeniser t)
+        override public OpCodeRootResult Parse(FunctionTokeniser t)
         {
             string errorMessage = "";
             string label;
@@ -37,7 +37,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(Tokeniser t)
+        override public OpCodeRootResult Parse(FunctionTokeniser t)
         {
             string errorMessage = "";
             string label;
@@ -59,7 +59,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(Tokeniser t)
+        override public OpCodeRootResult Parse(FunctionTokeniser t)
         {
             string errorMessage = "";
             string option;
@@ -87,7 +87,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(Tokeniser t)
+        override public OpCodeRootResult Parse(FunctionTokeniser t)
         {
             string errorMessage = "";
             string option;
@@ -115,7 +115,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(Tokeniser t)
+        override public OpCodeRootResult Parse(FunctionTokeniser t)
         {
             string errorMessage = "";
             string option;
@@ -143,7 +143,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(Tokeniser t)
+        override public OpCodeRootResult Parse(FunctionTokeniser t)
         {
             string errorMessage = "";
             string option;
@@ -171,7 +171,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(Tokeniser t)
+        override public OpCodeRootResult Parse(FunctionTokeniser t)
         {
             string errorMessage = "";
             string option;
@@ -199,7 +199,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(Tokeniser t)
+        override public OpCodeRootResult Parse(FunctionTokeniser t)
         {
             string errorMessage = "";
             string label;
@@ -221,7 +221,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(Tokeniser t)
+        override public OpCodeRootResult Parse(FunctionTokeniser t)
         {
             string errorMessage = "";
             string label;
@@ -243,7 +243,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(Tokeniser t)
+        override public OpCodeRootResult Parse(FunctionTokeniser t)
         {
             string errorMessage = "";
             string label;
@@ -265,7 +265,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(Tokeniser t)
+        override public OpCodeRootResult Parse(FunctionTokeniser t)
         {
             string errorMessage = "";
             string label;
@@ -287,7 +287,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(Tokeniser t)
+        override public OpCodeRootResult Parse(FunctionTokeniser t)
         {
             string errorMessage = "";
             string label;
