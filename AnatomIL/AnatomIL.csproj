@@ -57,6 +57,7 @@
     <Compile Include="CompiledCode.cs" />
     <Compile Include="compiler.cs" />
     <Compile Include="Environment.cs" />
+    <Compile Include="FunctionAnnexe.cs" />
     <Compile Include="Inter.cs">
       <SubType>Form</SubType>
     </Compile>

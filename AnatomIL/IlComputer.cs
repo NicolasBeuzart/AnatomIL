@@ -10,6 +10,7 @@ namespace AnatomIL
     {
         Compiler _compiler;
         CompiledCode _compiledCode;
+        CompiledCode _compiledFunctionCode;
         string[] _Sourcecode;
         public List<string> ErrorMessages;
         Environment _env; // Pc, Stack, Tas
@@ -33,7 +34,7 @@ namespace AnatomIL
 
         public void compile()
         {
-            CompilerResult compilerResult = _compiler.Compile(_Sourcecode);
+            CompilerResult compilerResult = _compiler.Compile(new Tokeniser(_Sourcecode));
             if (compilerResult.IsSuccess)
             {
                 _compiledCode = compilerResult.Code;
@@ -47,8 +48,14 @@ namespace AnatomIL
 
         public void Start()
         {
-            _env.Stack.PushFrame(new List<StackItemValue>(), new List<StackItemValue>(), typeof(void), "main");
-            Pc = GoToNextInst(-1);
+            int i = -1;
+            foreach (OpCode o in _compiledCode.Code)
+            {
+                if (o != null && o._name == "main") Pc = i;
+                i++;
+            }
+            _env.Stack.PushFrame(new List<StackItemValue>(), new List<StackItemValue>(), null, null);
+            Pc = GoToNextInst(Pc);
         }
 
         public int GoToNextInst(int pc)
@@ -59,7 +66,7 @@ namespace AnatomIL
                 result++;
             }
 
-            if (_compiledCode.Count - 1> result && _compiledCode.IsDirective(result))
+            if (_compiledCode.Count - 1 > result && _compiledCode.IsDirective(result))
             {
                 _compiledCode.Code[result].Execute(_env);
                 return GoToNextInst(result);

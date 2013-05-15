@@ -10,8 +10,9 @@ namespace AnatomIL
     {
         string _label;
 
-        public BrOpCode(string label)
+        public BrOpCode(string label, int line)
         {
+            _line = line;
             base._name = "br";
             base._type = "operation";
             _label = label;
@@ -28,8 +29,9 @@ namespace AnatomIL
     {
         string _label;
 
-        public BeqOpCode(string label)
+        public BeqOpCode(string label, int line)
         {
+            _line = line;
             base._name = "beq";
             base._type = "operation";
             _label = label;
@@ -58,8 +60,9 @@ namespace AnatomIL
         string _label;
         bool _unsigned;
 
-        public BgeOpCode(string label, bool unsigned)
+        public BgeOpCode(string label, bool unsigned, int line)
         {
+            _line = line;
             base._name = "bge";
             base._type = "operation";
             _label = label;
@@ -102,8 +105,9 @@ namespace AnatomIL
         string _label;
         bool _unsigned;
 
-        public BgtOpCode(string label, bool unsigned)
+        public BgtOpCode(string label, bool unsigned, int line)
         {
+            _line = line;
             base._name = "bgt";
             base._type = "operation";
             _label = label;
@@ -146,8 +150,9 @@ namespace AnatomIL
         string _label;
         bool _unsigned;
 
-        public BleOpCode(string label, bool unsigned)
+        public BleOpCode(string label, bool unsigned, int line)
         {
+            _line = line;
             base._name = "ble";
             base._type = "operation";
             _label = label;
@@ -190,8 +195,9 @@ namespace AnatomIL
         string _label;
         bool _unsigned;
 
-        public BltOpCode(string label, bool unsigned)
+        public BltOpCode(string label, bool unsigned, int line)
         {
+            _line = line;
             base._name = "blt";
             base._type = "operation";
             _label = label;
@@ -234,8 +240,9 @@ namespace AnatomIL
         string _label;
         bool _unsigned;
 
-        public BneOpCode(string label, bool unsigned)
+        public BneOpCode(string label, bool unsigned, int line)
         {
+            _line = line;
             base._name = "beq";
             base._type = "operation";
             _label = label;
@@ -277,8 +284,9 @@ namespace AnatomIL
     {
         string _label;
 
-        public BrfalseOpCode(string label)
+        public BrfalseOpCode(string label, int line)
         {
+            _line = line;
             base._name = "brfalse";
             base._type = "operation";
             _label = label;
@@ -303,8 +311,9 @@ namespace AnatomIL
     {
         string _label;
 
-        public BrtrueOpCode(string label)
+        public BrtrueOpCode(string label, int line)
         {
+            _line = line;
             base._name = "brtrue";
             base._type = "operation";
             _label = label;
@@ -329,8 +338,9 @@ namespace AnatomIL
     {
         string _label;
 
-        public BrzeroOpCode(string label)
+        public BrzeroOpCode(string label, int line)
         {
+            _line = line;
             base._name = "brzero";
             base._type = "operation";
             _label = label;
@@ -357,8 +367,9 @@ namespace AnatomIL
     {
         string _label;
 
-        public BrnullOpCode(string label)
+        public BrnullOpCode(string label, int line)
         {
+            _line = line;
             base._name = "brnull";
             base._type = "operation";
             _label = label;
@@ -383,8 +394,9 @@ namespace AnatomIL
     {
         string _label;
 
-        public BrinstOpCode(string label)
+        public BrinstOpCode(string label, int line)
         {
+            _line = line;
             base._name = "brinst";
             base._type = "operation";
             _label = label;

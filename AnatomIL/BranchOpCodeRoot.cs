@@ -15,7 +15,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(FunctionTokeniser t)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
             string label;
@@ -25,7 +25,7 @@ namespace AnatomIL
                 errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
-            return new OpCodeRootResult(errorMessage, new BrOpCode(label));
+            return new OpCodeRootResult(errorMessage, new BrOpCode(label, t.CurentLigne));
         }
     }
 
@@ -37,7 +37,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(FunctionTokeniser t)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
             string label;
@@ -47,7 +47,7 @@ namespace AnatomIL
                 errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
-            return new OpCodeRootResult(errorMessage, new BeqOpCode(label));
+            return new OpCodeRootResult(errorMessage, new BeqOpCode(label, t.CurentLigne));
         }
     }
 
@@ -59,7 +59,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(FunctionTokeniser t)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
             string option;
@@ -75,7 +75,7 @@ namespace AnatomIL
                 errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
-            return new OpCodeRootResult(errorMessage, new BgeOpCode(label, option == "un"));
+            return new OpCodeRootResult(errorMessage, new BgeOpCode(label, option == "un", t.CurentLigne));
         }
     }
 
@@ -87,7 +87,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(FunctionTokeniser t)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
             string option;
@@ -103,7 +103,7 @@ namespace AnatomIL
                 errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
-            return new OpCodeRootResult(errorMessage, new BgtOpCode(label, option == "un"));
+            return new OpCodeRootResult(errorMessage, new BgtOpCode(label, option == "un", t.CurentLigne));
         }
     }
 
@@ -115,7 +115,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(FunctionTokeniser t)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
             string option;
@@ -131,7 +131,7 @@ namespace AnatomIL
                 errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
-            return new OpCodeRootResult(errorMessage, new BleOpCode(label, option == "un"));
+            return new OpCodeRootResult(errorMessage, new BleOpCode(label, option == "un", t.CurentLigne));
         }
     }
 
@@ -143,7 +143,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(FunctionTokeniser t)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
             string option;
@@ -159,7 +159,7 @@ namespace AnatomIL
                 errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
-            return new OpCodeRootResult(errorMessage, new BltOpCode(label, option == "un"));
+            return new OpCodeRootResult(errorMessage, new BltOpCode(label, option == "un", t.CurentLigne));
         }
     }
 
@@ -171,7 +171,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(FunctionTokeniser t)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
             string option;
@@ -187,7 +187,7 @@ namespace AnatomIL
                 errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
-            return new OpCodeRootResult(errorMessage, new BneOpCode(label, option == "un"));
+            return new OpCodeRootResult(errorMessage, new BneOpCode(label, option == "un", t.CurentLigne));
         }
     }
 
@@ -199,7 +199,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(FunctionTokeniser t)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
             string label;
@@ -209,7 +209,7 @@ namespace AnatomIL
                 errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
-            return new OpCodeRootResult(errorMessage, new BrfalseOpCode(label));
+            return new OpCodeRootResult(errorMessage, new BrfalseOpCode(label, t.CurentLigne));
         }
     }
 
@@ -221,7 +221,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(FunctionTokeniser t)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
             string label;
@@ -231,7 +231,7 @@ namespace AnatomIL
                 errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
-            return new OpCodeRootResult(errorMessage, new BrtrueOpCode(label));
+            return new OpCodeRootResult(errorMessage, new BrtrueOpCode(label, t.CurentLigne));
         }
     }
 
@@ -243,7 +243,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(FunctionTokeniser t)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
             string label;
@@ -253,7 +253,7 @@ namespace AnatomIL
                 errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
-            return new OpCodeRootResult(errorMessage, new BrzeroOpCode(label));
+            return new OpCodeRootResult(errorMessage, new BrzeroOpCode(label, t.CurentLigne));
         }
     }
 
@@ -265,7 +265,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(FunctionTokeniser t)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
             string label;
@@ -275,7 +275,7 @@ namespace AnatomIL
                 errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
-            return new OpCodeRootResult(errorMessage, new BrzeroOpCode(label));
+            return new OpCodeRootResult(errorMessage, new BrzeroOpCode(label, t.CurentLigne));
         }
     }
 
@@ -287,7 +287,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(FunctionTokeniser t)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
             string label;
@@ -297,7 +297,7 @@ namespace AnatomIL
                 errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
-            return new OpCodeRootResult(errorMessage, new BrinstOpCode(label));
+            return new OpCodeRootResult(errorMessage, new BrinstOpCode(label, t.CurentLigne));
         }
     }
 }

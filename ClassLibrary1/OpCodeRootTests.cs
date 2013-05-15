@@ -16,7 +16,7 @@ namespace AnatomIL.test
         {
             BgeOpCodeRoot Op = new BgeOpCodeRoot();
             string[] code = { " label", ".un label", ".un. label", ". label" };
-            FunctionTokeniser tok = new FunctionTokeniser(code);
+            Tokeniser tok = new Tokeniser(code);
 
             tok.MatchNextToken();
             OpCodeRootResult r = Op.Parse(tok);
@@ -44,7 +44,7 @@ namespace AnatomIL.test
             string[] code = {"", "."};
             List<string> options = new List<string>();
             List<string> args = new List<string>();
-            FunctionTokeniser t = new FunctionTokeniser(code);
+            Tokeniser t = new Tokeniser(code);
 
             t.MatchNextToken();
             result = add.Parse(t);

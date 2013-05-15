@@ -52,6 +52,29 @@ namespace AnatomIL
             _currentstack.Add(new StackItemFrame(args, vars, rt, name));
         }
 
+        public bool PopFrame()
+        {
+            StackItem tmp;
+
+            if (_currentstack.Count == 0)
+            {
+                return (false);
+            }
+
+            tmp = _currentstack[_currentstack.Count - 1];
+
+            if (tmp is StackItemFrame)
+            {
+                _currentstack.Remove(tmp);
+                return (true);
+            }
+            else if (tmp is StackItemValue)
+            {
+                return (false);
+            }
+            return (false);
+        }
+
         public bool FirstElement(out StackItemValue StV)
         {
             StV = null;

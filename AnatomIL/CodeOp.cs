@@ -11,6 +11,7 @@ namespace AnatomIL
         internal string _name;
         internal bool _executable;
         internal string _type;
+        internal int _line;
 
         public OpCode()
         {
@@ -19,6 +20,7 @@ namespace AnatomIL
 
         public string Type { get { return _type; } }
         public bool IsExecutable { get { return _executable; } }
+        public int Line { get { return _line; } }
 
         public string Name
         {
@@ -32,8 +34,9 @@ namespace AnatomIL
     {
         Type _t;
 
-        public AddOpCode()
+        public AddOpCode(int line)
         {
+            _line = line;
             base._name = "add";
             base._executable = true;
             base._type = "operation";
@@ -78,8 +81,9 @@ namespace AnatomIL
     {
          Type _t;
 
-        public SubOpCode()
+        public SubOpCode(int line)
         {
+            _line = line;
             base._name = "sub";
             base._executable = true;
             base._type = "operation";
@@ -124,8 +128,9 @@ namespace AnatomIL
     {
         Type _t;
 
-        public MulOpCode()
+        public MulOpCode(int line)
         {
+            _line = line;
             base._name = "mul";
             base._executable = true;
             base._type = "operation";
@@ -170,8 +175,9 @@ namespace AnatomIL
     {
         Type _t;
 
-        public DivOpCode()
+        public DivOpCode(int line)
         {
+            _line = line;
             base._name = "div";
             base._executable = true;
             base._type = "operation";
@@ -216,8 +222,9 @@ namespace AnatomIL
     {
         Type _t;
 
-        public RemOpCode()
+        public RemOpCode(int line)
         {
+            _line = line;
             base._name = "rem";
             base._executable = true;
             base._type = "operation";
@@ -263,8 +270,9 @@ namespace AnatomIL
         Type _t;
         object _value;
 
-        public LdcOpCode(Type t, object value)
+        public LdcOpCode(Type t, object value, int line)
         {
+            _line = line;
             base._name = "ldc";
             base._type = "operation";
             _t = t;
@@ -286,8 +294,9 @@ namespace AnatomIL
 
         public string Label { get { return _label; } }
 
-        public LabelOpCode(string label)
+        public LabelOpCode(string label, int line)
         {
+            _line = line;
             base._name = label;
             base._executable = false;
             base._type = "label";
@@ -301,8 +310,9 @@ namespace AnatomIL
         List<StackItemValue> _stv = new List<StackItemValue>();
 
 
-        public LocalsInitOpCode(List<string> locals)
+        public LocalsInitOpCode(List<string> locals, int line)
         {
+            _line = line;
             base._name = "localsInit";
             base._type = "directive";
             _locals = locals;
@@ -327,8 +337,9 @@ namespace AnatomIL
 
     public class DupOpCode : OpCode
     {
-        public DupOpCode()
+        public DupOpCode(int line)
         {
+            _line = line;
             base._name = "dup";
             base._type = "operation";
             base._executable = true;
@@ -349,8 +360,9 @@ namespace AnatomIL
     {
         internal int _localidx;
 
-        public stlocOpCode(int i)
+        public stlocOpCode(int i, int line)
         {
+            _line = line;
             base._name = "stloc";
             base._type = "operation";
             base._executable = true;
@@ -373,8 +385,9 @@ namespace AnatomIL
     {
         internal int _localidx;
 
-        public ldlocOpCode(int i)
+        public ldlocOpCode(int i, int line)
         {
+            _line = line;
             base._name = "ldloc";
             base._type = "operation";
             base._executable = true;
@@ -390,5 +403,87 @@ namespace AnatomIL
             }
         }
 
+    }
+
+    public class PrototypeOpCode : OpCode
+    {
+        List<StackItemValue> _args;
+        Type _type2;
+        public PrototypeOpCode(string name, Type type, List<StackItemValue> args, int line)
+        {
+            _line = line;
+            base._type = "directive";
+            base._executable = true;
+            _name = name;
+            _type2 = type;
+            _args = args;
+        }
+
+        override public void Execute(Environment e)
+        {
+            e.Stack.CurentStackItemFrame().VarLocals = _args;
+            e.Stack.CurentStackItemFrame().RetType = _type2;
+            e.Stack.CurentStackItemFrame().FrameName = _name;
+        }
+
+    }
+
+    public class CallOpCode : OpCode
+    {
+        string _name2;
+        List<StackItemValue> _args;
+
+        public CallOpCode(string name,List<StackItemValue> args, int line)
+        {
+            _line = line;
+            base._name = "prototype";
+            base._type = "operation";
+            base._executable = true;
+            _name2 = name;
+            _args = args;
+        }
+
+        override public void Execute(Environment e)
+        {
+            e.Stack.CurentStackItemFrame().Line = _line;
+            foreach (OpCode o in e.CompiledCode.Code)
+            {
+                if (o != null && o.Name == _name2) e.Pc = o.Line - 1;
+            }
+
+            e.Stack.PushFrame(_args, new List<StackItemValue>(), null, null);
+        }
+    }
+
+    public class RetOpCode : OpCode
+    {
+        public RetOpCode(int line)
+        {
+            _line = line;
+            base._name = "ret";
+            base._type = "operation";
+            base._executable = true;
+        }
+
+        public override void Execute(Environment e)
+        {
+            StackItemValue s;
+            if (e.Stack.CurentStackItemFrame().FrameName == "main") e.Pc = e.CompiledCode.Count;
+            else
+            {
+                if (e.Stack.CurentStackItemFrame().RetType != typeof(void))
+                {
+                    e.Stack.Pop(out s);
+                    if (!e.Stack.PopFrame()) ;
+                    e.Stack.Push(s.Type, s.Value);
+                }
+                else
+                {
+                    if (!e.Stack.PopFrame()) ;
+                }
+                e.Pc = e.Stack.CurentStackItemFrame().Line;
+            }
+
+        }
     }
 }

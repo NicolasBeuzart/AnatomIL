@@ -15,45 +15,60 @@ namespace AnatomIL
             _lib = new Library();
         }
 
-        public CompilerResult Compile(string[] instructions)
+
+        public CompilerResult Compile(Tokeniser t)
         {
-            FunctionTokeniser t = new FunctionTokeniser(instructions);
             List<OpCode> code = new List<OpCode>();
             List<string> errorMessages = new List<string>();
             OpCodeRootResult result;
             OpCodeRoot _opCodeRoot;
+            List<string> args = new List<string>();
+            PrototypeOpCodeRoot prototype = new PrototypeOpCodeRoot();
+
 
             while (t.MatchNextToken())
             {
-                t.MatchSpace();
-                if (t.IsEnd)
+                if (t.SquareBraket)
                 {
-                    code.Add(null);
-                }
-                else if (t.IsDirective(out _opCodeRoot))
-                {
-
-                    result = _opCodeRoot.Parse(t);
-
+                    result = prototype.Parse(t);
                     if (result.IsSuccess) code.Add(result.OpCode);
                     else errorMessages.Add(result.ErrorMessage);
-                }
-                else if (t.IsInstruction(out _opCodeRoot))
-                {
-                    result = _opCodeRoot.Parse(t);
 
-                    if (result.IsSuccess) code.Add(result.OpCode);
-                    else errorMessages.Add(result.ErrorMessage);
-                }
-                else if (t.IsLabel(out _opCodeRoot))
-                {
-                    result = _opCodeRoot.Parse(t);
-                    if (result.IsSuccess) code.Add(result.OpCode);
-                    else errorMessages.Add(result.ErrorMessage);
+                    if (result.OpCode != null && !(t.MatchNextToken() && t.MatchOpenBraket())) errorMessages.Add("missing '{' line :" + t.CurentLigne);
+                    else if (result.OpCode != null) code.Add(null);
                 }
                 else
                 {
-                    errorMessages.Add("Error line " + t.CurentLigne + " : Syntaxe Error");
+                    if (t.MatchcloseBraket())
+                    {
+                        if (!t.IsEnd) errorMessages.Add("syntaxe error line :" + t.CurentLigne);
+                        else code.Add(new RetOpCode(t.CurentLigne));
+                    }
+                    else if (t.IsDirective(out _opCodeRoot))
+                    {
+
+                        result = _opCodeRoot.Parse(t);
+
+                        if (result.IsSuccess) code.Add(result.OpCode);
+                        else errorMessages.Add(result.ErrorMessage);
+                    }
+                    else if (t.IsInstruction(out _opCodeRoot))
+                    {
+                        result = _opCodeRoot.Parse(t);
+
+                        if (result.IsSuccess) code.Add(result.OpCode);
+                        else errorMessages.Add(result.ErrorMessage);
+                    }
+                    else if (t.IsLabel(out _opCodeRoot))
+                    {
+                        result = _opCodeRoot.Parse(t);
+                        if (result.IsSuccess) code.Add(result.OpCode);
+                        else errorMessages.Add(result.ErrorMessage);
+                    }
+                    else
+                    {
+                        errorMessages.Add("Error line " + t.CurentLigne + " : Syntaxe Error");
+                    }
                 }
             }
 
