@@ -9,30 +9,29 @@ namespace AnatomIL
     public class OpCode // classe "père" de tout les CodeOp
     {
         internal string _name;
+        internal string _nameFrame = "";
         internal bool _executable;
         internal string _type;
         internal int _line;
+        internal List<StackItemValue> _args;
 
         public OpCode()
         {
 
         }
 
+        public List<StackItemValue> Args { get { return _args; } }
         public string Type { get { return _type; } }
         public bool IsExecutable { get { return _executable; } }
         public int Line { get { return _line; } }
+        public string NameFrame { get { return (_nameFrame); } }
+        public string Name { get { return (_name); } }
 
-        public string Name
-        {
-            get { return (_name); }
-        }
-
-        virtual public void Execute(Environment e) { } // méthode d'éxécution des opérations
+        virtual public OpCodeResult Execute(Environment e) { return null; } // méthode d'éxécution des opérations
     }
 
     public class AddOpCode : OpCode
     {
-        Type _t;
 
         public AddOpCode(int line)
         {
@@ -42,44 +41,43 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public void Execute(Environment e)
+        override public OpCodeResult Execute(Environment e)
         {
-            _t = e.Stack.CurrentStack[e.Stack.Count - 1].Type;
-            if (_t != e.Stack.CurrentStack[e.Stack.Count - 2].Type)
-            {
-                throw new InvalidOperationException("can't add two values using different type");
-            }
+            string errorMessage = "";
 
             StackItemValue StV1;
             StackItemValue StV2;
 
             if (e.Stack.Pop(out StV1) && e.Stack.Pop(out StV2))
             {
-                if (_t == typeof(Int64))
+                Type t = StV1.Type;
+                if (StV1.Type != StV2.Type) errorMessage = "can't add two values using different type line :" + (Line + 1);
+                else if (t == typeof(Int64))
                 {
                     Int64 i1 = Convert.ToInt64(StV1.Value);
                     Int64 i2 = Convert.ToInt64(StV2.Value);
-                    e.Stack.Push(_t, i1 + i2);
+                    e.Stack.Push(t, i1 + i2);
                 }
-                else if (_t == typeof(Int32))
+                else if (t == typeof(Int32))
                 {
                     Int32 i1 = Convert.ToInt32(StV1.Value);
                     Int32 i2 = Convert.ToInt32(StV2.Value);
-                    e.Stack.Push(_t, i1 + i2);
+                    e.Stack.Push(t, i1 + i2);
                 }
-                else if (_t == typeof(Int16))
+                else if (t == typeof(Int16))
                 {
                     Int16 i1 = Convert.ToInt16(StV1.Value);
                     Int16 i2 = Convert.ToInt16(StV2.Value);
-                    e.Stack.Push(_t, i1 + i2);
+                    e.Stack.Push(t, i1 + i2);
                 }
             }
+            else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
+            return new OpCodeResult(errorMessage);
         }
     }
 
     public class SubOpCode : OpCode
     {
-         Type _t;
 
         public SubOpCode(int line)
         {
@@ -89,44 +87,43 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public void Execute(Environment e)
+        override public OpCodeResult Execute(Environment e)
         {
-            _t = e.Stack.CurrentStack[e.Stack.Count - 1].Type;
-            if (_t != e.Stack.CurrentStack[e.Stack.Count - 2].Type)
-            {
-                throw new InvalidOperationException("can't add two values using different type");
-            }
+            string errorMessage = "";
 
             StackItemValue StV1;
             StackItemValue StV2;
 
             if (e.Stack.Pop(out StV1) && e.Stack.Pop(out StV2))
             {
-                if (_t == typeof(Int64))
+                Type t = StV1.Type;
+                if (StV1.Type != StV2.Type) errorMessage = "can't " + _name + " two values using different type line :" + (Line + 1);
+                else if (t == typeof(Int64))
                 {
                     Int64 i1 = Convert.ToInt64(StV1.Value);
                     Int64 i2 = Convert.ToInt64(StV2.Value);
-                    e.Stack.Push(_t, i1 - i2);
+                    e.Stack.Push(t, i1 - i2);
                 }
-                else if (_t == typeof(Int32))
+                else if (t == typeof(Int32))
                 {
                     Int32 i1 = Convert.ToInt32(StV1.Value);
                     Int32 i2 = Convert.ToInt32(StV2.Value);
-                    e.Stack.Push(_t, i1 - i2);
+                    e.Stack.Push(t, i1 - i2);
                 }
-                else if (_t == typeof(Int16))
+                else if (t == typeof(Int16))
                 {
                     Int16 i1 = Convert.ToInt16(StV1.Value);
                     Int16 i2 = Convert.ToInt16(StV2.Value);
-                    e.Stack.Push(_t, i1 - i2);
+                    e.Stack.Push(t, i1 - i2);
                 }
             }
+            else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
+            return new OpCodeResult(errorMessage);
         }
     }
 
     public class MulOpCode : OpCode
     {
-        Type _t;
 
         public MulOpCode(int line)
         {
@@ -136,44 +133,44 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public void Execute(Environment e)
+        override public OpCodeResult Execute(Environment e)
         {
-            _t = e.Stack.CurrentStack[e.Stack.Count - 1].Type;
-            if (_t != e.Stack.CurrentStack[e.Stack.Count - 2].Type)
-            {
-                throw new InvalidOperationException("can't add two values using different type");
-            }
+            string errorMessage = "";
+
 
             StackItemValue StV1;
             StackItemValue StV2;
 
             if (e.Stack.Pop(out StV1) && e.Stack.Pop(out StV2))
             {
-                if (_t == typeof(Int64))
+                Type t = StV1.Type;
+                if (StV1.Type != StV2.Type) errorMessage = "can't " + _name + " two values using different type line :" + (Line + 1);
+                else if (t == typeof(Int64))
                 {
                     Int64 i1 = Convert.ToInt64(StV1.Value);
                     Int64 i2 = Convert.ToInt64(StV2.Value);
-                    e.Stack.Push(_t, i1 * i2);
+                    e.Stack.Push(t, i1 * i2);
                 }
-                else if (_t == typeof(Int32))
+                else if (t == typeof(Int32))
                 {
                     Int32 i1 = Convert.ToInt32(StV1.Value);
                     Int32 i2 = Convert.ToInt32(StV2.Value);
-                    e.Stack.Push(_t, i1 * i2);
+                    e.Stack.Push(t, i1 * i2);
                 }
-                else if (_t == typeof(Int16))
+                else if (t == typeof(Int16))
                 {
                     Int16 i1 = Convert.ToInt16(StV1.Value);
                     Int16 i2 = Convert.ToInt16(StV2.Value);
-                    e.Stack.Push(_t, i1 * i2);
+                    e.Stack.Push(t, i1 * i2);
                 }
             }
+            else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
+            return new OpCodeResult(errorMessage);
         }
     }
 
     public class DivOpCode : OpCode
     {
-        Type _t;
 
         public DivOpCode(int line)
         {
@@ -183,44 +180,42 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public void Execute(Environment e)
+        override public OpCodeResult Execute(Environment e)
         {
-            _t = e.Stack.CurrentStack[e.Stack.Count - 1].Type;
-            if (_t != e.Stack.CurrentStack[e.Stack.Count - 2].Type)
-            {
-                throw new InvalidOperationException("can't add two values using different type");
-            }
-
+            string errorMessage = "";
             StackItemValue StV1;
             StackItemValue StV2;
 
             if (e.Stack.Pop(out StV1) && e.Stack.Pop(out StV2))
             {
-                if (_t == typeof(Int64))
+                Type t = StV1.Type;
+                if (StV1.Type != StV2.Type) errorMessage = "can't " + _name + " two values using different type line :" + (Line + 1);
+                else if (t == typeof(Int64))
                 {
                     Int64 i1 = Convert.ToInt64(StV1.Value);
                     Int64 i2 = Convert.ToInt64(StV2.Value);
-                    e.Stack.Push(_t, i1 / i2);
+                    e.Stack.Push(t, i1 / i2);
                 }
-                else if (_t == typeof(Int32))
+                else if (t == typeof(Int32))
                 {
                     Int32 i1 = Convert.ToInt32(StV1.Value);
                     Int32 i2 = Convert.ToInt32(StV2.Value);
-                    e.Stack.Push(_t, i1 / i2);
+                    e.Stack.Push(t, i1 / i2);
                 }
-                else if (_t == typeof(Int16))
+                else if (t == typeof(Int16))
                 {
                     Int16 i1 = Convert.ToInt16(StV1.Value);
                     Int16 i2 = Convert.ToInt16(StV2.Value);
-                    e.Stack.Push(_t, i1 / i2);
+                    e.Stack.Push(t, i1 / i2);
                 }
             }
+            else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
+            return new OpCodeResult(errorMessage);
         }
     }
 
     public class RemOpCode : OpCode
     {
-        Type _t;
 
         public RemOpCode(int line)
         {
@@ -230,39 +225,40 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public void Execute(Environment e)
+        override public OpCodeResult Execute(Environment e)
         {
-            _t = e.Stack.CurrentStack[e.Stack.Count - 1].Type;
-            if (_t != e.Stack.CurrentStack[e.Stack.Count - 2].Type)
-            {
-                throw new InvalidOperationException("can't add two values using different type");
-            }
+            string errorMessage = "";
 
             StackItemValue StV1;
             StackItemValue StV2;
 
             if (e.Stack.Pop(out StV1) && e.Stack.Pop(out StV2))
             {
-                if (_t == typeof(Int64))
+                Type t = StV1.Type;
+                if (StV1.Type != StV2.Type) errorMessage = "can't " + _name + " two values using different type line :" + (Line + 1);
+                else if (t == typeof(Int64))
                 {
                     Int64 i1 = Convert.ToInt64(StV1.Value);
                     Int64 i2 = Convert.ToInt64(StV2.Value);
-                    e.Stack.Push(_t, i1 % i2);
+                    e.Stack.Push(t, i1 % i2);
                 }
-                else if (_t == typeof(Int32))
+                else if (t == typeof(Int32))
                 {
                     Int32 i1 = Convert.ToInt32(StV1.Value);
                     Int32 i2 = Convert.ToInt32(StV2.Value);
-                    e.Stack.Push(_t, i1 % i2);
+                    e.Stack.Push(t, i1 % i2);
                 }
-                else if (_t == typeof(Int16))
+                else if (t == typeof(Int16))
                 {
                     Int16 i1 = Convert.ToInt16(StV1.Value);
                     Int16 i2 = Convert.ToInt16(StV2.Value);
-                    e.Stack.Push(_t, i1 % i2);
+                    e.Stack.Push(t, i1 % i2);
                 }
             }
+            else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
+            return new OpCodeResult(errorMessage);
         }
+       
     }
 
     public class LdcOpCode : OpCode
@@ -280,9 +276,11 @@ namespace AnatomIL
             base._executable = true;
         }
 
-        override public void Execute(Environment e)
+        override public OpCodeResult Execute(Environment e)
         {
+            string errorMessage = "";
             e.Stack.Push(_t, _value);
+            return new OpCodeResult(errorMessage);
         }
     }
 
@@ -307,7 +305,7 @@ namespace AnatomIL
     public class LocalsInitOpCode : OpCode
     {
         List<string> _locals;
-        List<StackItemValue> _stv = new List<StackItemValue>();
+        List<StackItemValue> _siv = new List<StackItemValue>();
 
 
         public LocalsInitOpCode(List<string> locals, int line)
@@ -319,19 +317,21 @@ namespace AnatomIL
             base._executable = true;
         }
 
-        override public void Execute(Environment e)
+        override public OpCodeResult Execute(Environment e)
         {
+            string errorMessage = "";
             for (int i = 0; i < _locals.Count(); i++)
             {
-                if (_locals[i] == "int16") _stv.Add(new StackItemValue(typeof(Int16), 0));
-                else if (_locals[i] == "int32") _stv.Add(new StackItemValue(typeof(Int32), 0));
-                else if (_locals[i] == "int64") _stv.Add(new StackItemValue(typeof(Int64), 0));
-                else if (_locals[i] == "bool") _stv.Add(new StackItemValue(typeof(bool), 0));
+                if (_locals[i] == "int16") _siv.Add(new StackItemValue(typeof(Int16), 0));
+                else if (_locals[i] == "int32") _siv.Add(new StackItemValue(typeof(Int32), 0));
+                else if (_locals[i] == "int64") _siv.Add(new StackItemValue(typeof(Int64), 0));
+                else if (_locals[i] == "bool") _siv.Add(new StackItemValue(typeof(bool), 0));
+                else errorMessage = "error line :" + (_line + 1);
 
                 StackItemFrame s = e.Stack.CurentStackItemFrame();
-                s.VarLocals = _stv;
+                s.VarLocals = _siv;
             }
-
+            return new OpCodeResult(errorMessage);
         }
     }
 
@@ -345,14 +345,17 @@ namespace AnatomIL
             base._executable = true;
         }
 
-        override public void Execute(Environment e)
+        override public OpCodeResult Execute(Environment e)
         {
+            string errorMessage = "";
            StackItemValue s;
            if (e.Stack.Pop(out s))
            {
                e.Stack.Push(s.Type, s.Value);
                e.Stack.Push(s.Type, s.Value);
            }
+           else errorMessage = "stack is empty can't execute the operation 'dup' in line :" + (_line + 1);
+           return new OpCodeResult(errorMessage);
         }
     }
 
@@ -369,14 +372,18 @@ namespace AnatomIL
             _localidx = i;
         }
 
-        override public void Execute(Environment e)
+        override public OpCodeResult Execute(Environment e)
         {
+            string errorMessage = "";
             StackItemValue siv;
             if (e.Stack.Pop(out siv))
             {
                 StackItemFrame sif = e.Stack.CurentStackItemFrame();
-                sif.VarLocals[_localidx] = siv;
+                if (sif.VarLocals.Count <= _localidx) errorMessage = "local variable " + _localidx + " does not exist in function " + sif.FrameName + " line : " + (_line + 1);
+                else sif.VarLocals[_localidx] = siv;
             }
+            else errorMessage = "stack is empty can't execute the operation 'stloc' line :" + (_line + 1);
+            return new OpCodeResult(errorMessage);
         }
 
     }
@@ -394,64 +401,82 @@ namespace AnatomIL
             _localidx = i;
         }
 
-        override public void Execute(Environment e)
+        override public OpCodeResult Execute(Environment e)
         {
+            string errorMessage = "";
             StackItemFrame sif = e.Stack.CurentStackItemFrame();
             if (_localidx < sif.VarLocals.Count)
             {
                 e.Stack.Push(sif.VarLocals[_localidx].Type, sif.VarLocals[_localidx].Value);
             }
+            else errorMessage = "local variable " + _localidx + " does not exist in function " + sif.FrameName + " line : " + (_line + 1);
+            return new OpCodeResult(errorMessage);
         }
 
     }
 
     public class PrototypeOpCode : OpCode
     {
-        List<StackItemValue> _args;
-        Type _type2;
+        Type _typeFrame;
+
         public PrototypeOpCode(string name, Type type, List<StackItemValue> args, int line)
         {
             _line = line;
             base._type = "directive";
             base._executable = true;
-            _name = name;
-            _type2 = type;
+            _name = "prototype";
+            _nameFrame = name;
+            _typeFrame = type;
             _args = args;
         }
 
-        override public void Execute(Environment e)
+        override public OpCodeResult Execute(Environment e)
         {
-            e.Stack.CurentStackItemFrame().VarLocals = _args;
-            e.Stack.CurentStackItemFrame().RetType = _type2;
-            e.Stack.CurentStackItemFrame().FrameName = _name;
+            string errorMessage = "";
+            e.Stack.CurentStackItemFrame().Args = _args;
+            e.Stack.CurentStackItemFrame().RetType = _typeFrame;
+            e.Stack.CurentStackItemFrame().FrameName = _nameFrame;
+            return new OpCodeResult(errorMessage);
         }
 
     }
 
     public class CallOpCode : OpCode
     {
-        string _name2;
-        List<StackItemValue> _args;
-
+        string _target;
         public CallOpCode(string name,List<StackItemValue> args, int line)
         {
             _line = line;
             base._name = "prototype";
             base._type = "operation";
             base._executable = true;
-            _name2 = name;
+            _target = name;
             _args = args;
         }
 
-        override public void Execute(Environment e)
+        override public OpCodeResult Execute(Environment e)
         {
+            _args = new List<StackItemValue>();
+            string errorMessage = "";
             e.Stack.CurentStackItemFrame().Line = _line;
+            StackItemValue stv;
+
             foreach (OpCode o in e.CompiledCode.Code)
             {
-                if (o != null && o.Name == _name2) e.Pc = o.Line - 1;
+                if (o != null && o.NameFrame == _target)
+                {
+                    e.Pc = o.Line - 1;
+                    for (int i = o.Args.Count - 1; i >= 0; i--)
+                    {
+                        if (!e.Stack.Pop(out stv)) errorMessage = "stack is empty can't execute the operation 'call' line :" + (_line + 1);
+                        else if (stv.Type != o.Args[i].Type) errorMessage = "Function " + _target + " excepted argument type of " + o.Args[i].Type.ToString() + " but given " + stv.Type.ToString() + " type line : " + (_line + 1);
+                        else _args.Add(new StackItemValue(stv.Type, stv.Value));
+                    }
+                }
             }
 
             e.Stack.PushFrame(_args, new List<StackItemValue>(), null, null);
+            return new OpCodeResult(errorMessage);
         }
     }
 
@@ -465,8 +490,9 @@ namespace AnatomIL
             base._executable = true;
         }
 
-        public override void Execute(Environment e)
+        public override OpCodeResult Execute(Environment e)
         {
+            string errorMessage = "";
             StackItemValue s;
             if (e.Stack.CurentStackItemFrame().FrameName == "main") e.Pc = e.CompiledCode.Count;
             else
@@ -474,16 +500,22 @@ namespace AnatomIL
                 if (e.Stack.CurentStackItemFrame().RetType != typeof(void))
                 {
                     e.Stack.Pop(out s);
-                    if (!e.Stack.PopFrame()) ;
-                    e.Stack.Push(s.Type, s.Value);
+                    if (s.Type != e.Stack.CurentStackItemFrame().RetType) errorMessage = "Function " + e.Stack.CurentStackItemFrame().FrameName + " excepted return type of " + e.Stack.CurentStackItemFrame().RetType.ToString() + " but given " + s.Type.ToString() + " type line : " + (_line + 1);
+                    else if (!e.Stack.PopFrame()) errorMessage = "stack is not empty can't execute the operation 'ret' line :" + (_line + 1);
+                    else
+                    {
+                        e.Stack.Push(s.Type, s.Value);
+                        e.Pc = e.Stack.CurentStackItemFrame().Line;
+                    }
                 }
                 else
                 {
-                    if (!e.Stack.PopFrame()) ;
+                    if (!e.Stack.PopFrame()) errorMessage = "stack is not empty can't execute the operation 'ret' line :" + (_line + 1);
+                    e.Pc = e.Stack.CurentStackItemFrame().Line;
                 }
-                e.Pc = e.Stack.CurentStackItemFrame().Line;
+                
             }
-
+            return new OpCodeResult(errorMessage);
         }
     }
 }

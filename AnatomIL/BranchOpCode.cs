@@ -19,9 +19,11 @@ namespace AnatomIL
             base._executable = true;
         }
 
-        public override void Execute(Environment e)
+        public override OpCodeResult Execute(Environment e)
         {
+            string errorMessage = "";
             e.Pc = e.CompiledCode.IndexLabel(_label);
+            return (new OpCodeResult(errorMessage));
         }
     }
 
@@ -38,8 +40,9 @@ namespace AnatomIL
             base._executable = true;
         }
 
-        public override void Execute(Environment e)
+        public override OpCodeResult Execute(Environment e)
         {
+            string errorMessage = "";
             StackItemValue s1;
             StackItemValue s2;
             if (e.Stack.Pop(out s1))
@@ -51,7 +54,10 @@ namespace AnatomIL
                         e.Pc = e.CompiledCode.IndexLabel(_label);
                     }
                 }
+                else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
             }
+            else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
+            return (new OpCodeResult(errorMessage));
         }
     }
 
@@ -70,8 +76,9 @@ namespace AnatomIL
             _unsigned = unsigned;
         }
 
-        public override void Execute(Environment e)
+        public override OpCodeResult Execute(Environment e)
         {
+            string errorMessage = "";
             StackItemValue s1;
             StackItemValue s2;
 
@@ -96,7 +103,10 @@ namespace AnatomIL
                         }
                     }
                 }
+                else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
             }
+            else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
+            return (new OpCodeResult(errorMessage));
         }
     }
 
@@ -115,8 +125,9 @@ namespace AnatomIL
             _unsigned = unsigned;
         }
 
-        public override void Execute(Environment e)
+        public override OpCodeResult Execute(Environment e)
         {
+            string errorMessage = "";
             StackItemValue s1;
             StackItemValue s2;
 
@@ -141,7 +152,11 @@ namespace AnatomIL
                         }
                     }
                 }
+                else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
             }
+            else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
+
+            return (new OpCodeResult(errorMessage));
         }
     }
 
@@ -160,8 +175,9 @@ namespace AnatomIL
             _unsigned = unsigned;
         }
 
-        public override void Execute(Environment e)
+        public override OpCodeResult Execute(Environment e)
         {
+            string errorMessage = "";
             StackItemValue s1;
             StackItemValue s2;
 
@@ -186,7 +202,10 @@ namespace AnatomIL
                         }
                     }
                 }
+                else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
             }
+            else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
+            return (new OpCodeResult(errorMessage));
         }
     }
 
@@ -205,8 +224,9 @@ namespace AnatomIL
             _unsigned = unsigned;
         }
 
-        public override void Execute(Environment e)
+        public override OpCodeResult Execute(Environment e)
         {
+            string errorMessage = "";
             StackItemValue s1;
             StackItemValue s2;
 
@@ -231,7 +251,10 @@ namespace AnatomIL
                         }
                     }
                 }
+                else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
             }
+            else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
+            return (new OpCodeResult(errorMessage));
         }
     }
 
@@ -250,8 +273,9 @@ namespace AnatomIL
             _unsigned = unsigned;
         }
 
-        public override void Execute(Environment e)
+        public override OpCodeResult Execute(Environment e)
         {
+            string errorMessage = "";
             StackItemValue s1;
             StackItemValue s2;
 
@@ -276,7 +300,10 @@ namespace AnatomIL
                         }
                     }
                 }
+                else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
             }
+            else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
+            return (new OpCodeResult(errorMessage));
         }
     }
 
@@ -293,8 +320,9 @@ namespace AnatomIL
             base._executable = true;
         }
 
-        public override void Execute(Environment e)
+        public override OpCodeResult Execute(Environment e)
         {
+            string errorMessage = "";
             StackItemValue s1;
 
             if (e.Stack.Pop(out s1))
@@ -304,6 +332,8 @@ namespace AnatomIL
                     e.Pc = e.CompiledCode.IndexLabel(_label);
                 }
             }
+            else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
+            return (new OpCodeResult(errorMessage));
         }
     }
 
@@ -320,8 +350,9 @@ namespace AnatomIL
             base._executable = true;
         }
 
-        public override void Execute(Environment e)
+        public override OpCodeResult Execute(Environment e)
         {
+            string errorMessage = "";
             StackItemValue s1;
 
             if (e.Stack.Pop(out s1))
@@ -331,6 +362,8 @@ namespace AnatomIL
                     e.Pc = e.CompiledCode.IndexLabel(_label);
                 }
             }
+            else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
+            return (new OpCodeResult(errorMessage));
         }
     }
 
@@ -347,8 +380,9 @@ namespace AnatomIL
             base._executable = true;
         }
 
-        public override void Execute(Environment e)
+        public override OpCodeResult Execute(Environment e)
         {
+            string errorMessage = "";
             StackItemValue s1;
             Int64 i64 = 0;
             Int16 i16 = 0;
@@ -360,6 +394,8 @@ namespace AnatomIL
                     e.Pc = e.CompiledCode.IndexLabel(_label);
                 }
             }
+            else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
+            return (new OpCodeResult(errorMessage));
         }
     }
 
@@ -376,8 +412,9 @@ namespace AnatomIL
             base._executable = true;
         }
 
-        public override void Execute(Environment e)
+        public override OpCodeResult Execute(Environment e)
         {
+            string errorMessage = "";
             StackItemValue s1;
 
             if (e.Stack.Pop(out s1))
@@ -387,6 +424,8 @@ namespace AnatomIL
                     e.Pc = e.CompiledCode.IndexLabel(_label);
                 }
             }
+            else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
+            return (new OpCodeResult(errorMessage));
         }
     }
 
@@ -403,8 +442,9 @@ namespace AnatomIL
             base._executable = true;
         }
 
-        public override void Execute(Environment e)
+        public override OpCodeResult Execute(Environment e)
         {
+            string errorMessage = "";
             StackItemValue s1;
 
             if (e.Stack.Pop(out s1))
@@ -414,6 +454,8 @@ namespace AnatomIL
                     e.Pc = e.CompiledCode.IndexLabel(_label);
                 }
             }
+            else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
+            return (new OpCodeResult(errorMessage));
         }
     }
 }

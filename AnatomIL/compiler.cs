@@ -31,11 +31,15 @@ namespace AnatomIL
                 if (t.SquareBraket)
                 {
                     result = prototype.Parse(t);
-                    if (result.IsSuccess) code.Add(result.OpCode);
+                    if (result.IsSuccess)
+                    {
+                        if (result.OpCode != null && !(t.MatchNextToken() && t.MatchOpenBraket())) errorMessages.Add("missing '{' line :" + t.CurentLigne);
+                        else if (result.OpCode != null) code.Add(null);
+                        code.Add(result.OpCode);
+                    }
                     else errorMessages.Add(result.ErrorMessage);
 
-                    if (result.OpCode != null && !(t.MatchNextToken() && t.MatchOpenBraket())) errorMessages.Add("missing '{' line :" + t.CurentLigne);
-                    else if (result.OpCode != null) code.Add(null);
+                    
                 }
                 else
                 {
@@ -65,6 +69,7 @@ namespace AnatomIL
                         if (result.IsSuccess) code.Add(result.OpCode);
                         else errorMessages.Add(result.ErrorMessage);
                     }
+                    else if (t.IsEnd) code.Add(null);
                     else
                     {
                         errorMessages.Add("Error line " + t.CurentLigne + " : Syntaxe Error");

@@ -66,25 +66,43 @@ namespace AnatomIL
                 {
                     computer.ExecuteNextInstruction();
 
-                    if (computer.Pc < Code.listBoxInstructions.Items.Count)
+                    if (computer.ErrorMessages.Count > 0)
                     {
-                        Code.listBoxInstructions.SelectedIndex = computer.Pc;
-                    }
-                    else
-                    {
-                        Code.listBoxInstructions.Visible = false;
-                        Code.textBoxCode.Visible = true;
-                        Code.BreakPointList.Visible = false;
-                        btExecuteOneStep.Visible = false;
+                        GoTimer.Stop();
+                        btCompile.Visible = true;
+                        Error.Visible = true;
                         btGo.Visible = false;
                         timeBox.Visible = false;
                         ShowPc.Visible = false;
                         ShowStack.Visible = false;
-                        btCompile.Visible = true;
+                        btExecuteOneStep.Visible = false;
                         btStop.Visible = false;
+                        Code.listBoxInstructions.Visible = false;
+                        Code.textBoxCode.Visible = true;
+                        Code.BreakPointList.Visible = false;
                     }
-                    if (ShowStack.Checked)
-                        Stack.ShowStack();
+                    else
+                    {
+                        if (computer.Pc < Code.listBoxInstructions.Items.Count)
+                        {
+                            Code.listBoxInstructions.SelectedIndex = computer.Pc;
+                        }
+                        else
+                        {
+                            Code.listBoxInstructions.Visible = false;
+                            Code.textBoxCode.Visible = true;
+                            Code.BreakPointList.Visible = false;
+                            btExecuteOneStep.Visible = false;
+                            btGo.Visible = false;
+                            timeBox.Visible = false;
+                            ShowPc.Visible = false;
+                            ShowStack.Visible = false;
+                            btCompile.Visible = true;
+                            btStop.Visible = false;
+                        }
+                        if (ShowStack.Checked)
+                            Stack.ShowStack();
+                    }
                 }
             }
             else
@@ -138,7 +156,7 @@ namespace AnatomIL
                computer.LoadCode(s2);
             
                computer.compile();
-                
+
                if (computer.ErrorMessages.Count > 0)
                {
                    Error.Visible = true;
@@ -152,9 +170,11 @@ namespace AnatomIL
                    Code.textBoxCode.Visible = true;
                    Code.BreakPointList.Visible = false;
                }
-
-               computer.Start();
-               Code.listBoxInstructions.SelectedIndex = computer.Pc;
+               else
+               {
+                   computer.Start();
+                   Code.listBoxInstructions.SelectedIndex = computer.Pc;
+               }
         }
 
         private void bt_restart_Click(object sender, EventArgs e)

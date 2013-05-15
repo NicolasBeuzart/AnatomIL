@@ -23,11 +23,11 @@ namespace AnatomIL
         public void LoadInstructionLib()
         {
             this.LibAddCodeOpRoot(new AddOpCodeRoot());
-            this.LibAddCodeOpRoot(new SubCodeOpRoot());
-            this.LibAddCodeOpRoot(new MulCodeOpRoot());
-            this.LibAddCodeOpRoot(new DivCodeOpRoot());
-            this.LibAddCodeOpRoot(new RemCodeOpRoot());
-            this.LibAddCodeOpRoot(new LdcCodeOpRoot());
+            this.LibAddCodeOpRoot(new SubOpCodeRoot());
+            this.LibAddCodeOpRoot(new MulOpCodeRoot());
+            this.LibAddCodeOpRoot(new DivOpCodeRoot());
+            this.LibAddCodeOpRoot(new RemOpCodeRoot());
+            this.LibAddCodeOpRoot(new LdcOpCodeRoot());
             this.LibAddCodeOpRoot(new BrOpCodeRoot());
             this.LibAddCodeOpRoot(new LabelOpCodeRoot());
             this.LibAddCodeOpRoot(new BeqOpCodeRoot());

@@ -51,7 +51,7 @@ namespace AnatomIL
             int i = -1;
             foreach (OpCode o in _compiledCode.Code)
             {
-                if (o != null && o._name == "main") Pc = i;
+                if (o != null && o.NameFrame == "main") Pc = i;
                 i++;
             }
             _env.Stack.PushFrame(new List<StackItemValue>(), new List<StackItemValue>(), null, null);
@@ -76,8 +76,10 @@ namespace AnatomIL
 
         public void ExecuteNextInstruction()
         {
-            _compiledCode.Code[Pc].Execute(_env);
+            OpCodeResult o;
+            o = _compiledCode.Code[Pc].Execute(_env);
 
+            if (o.ErrorMessage != "") ErrorMessages.Add(o.ErrorMessage);
             //on passe à l'instruction suivante
             Pc = GoToNextInst(Pc);
         }

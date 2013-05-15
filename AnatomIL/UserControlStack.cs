@@ -42,13 +42,13 @@ namespace AnatomIL
                     int NumberArgs = 0;
                     int NumberLocals = 0;
 
-                    string BaseFrame = StIt.RetType.ToString().Split('.')[StIt.RetType.ToString().Split('.').Count() - 1] + " : " + StIt.FrameName;
+                    string BaseFrame = StIt.RetType.ToString().Split('.')[StIt.RetType.ToString().Split('.').Count() - 1] + " : " + StIt.FrameName + "()";
                     s1.Add(BaseFrame);
                     foreach(StackItemValue args in StIt.Args)
                     {
                         ListArgs += "A" + NumberArgs.ToString() + " --> " + args.Type.ToString() + " : " + args.Value.ToString() + "\r";
-                        
-                        s1.Add("A" + NumberArgs.ToString() + " --> " + args.Type.ToString() + " : " + args.Value.ToString());
+
+                        s1.Add("A" + NumberArgs.ToString() + " --> " + args.Type.ToString().Split('.')[StIt.Type.ToString().Split('.').Count() - 1] + " : " + args.Value.ToString());
                         NumberArgs++;
                     }
 

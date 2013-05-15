@@ -24,7 +24,7 @@ namespace AnatomIL.test
 
             // on test qu'un CodeOpRoot est crée correctement
             Assert.That(operation.Name, Is.EqualTo("sub"));
-            Assert.That(operation.GetType(), Is.EqualTo(typeof(SubCodeOpRoot)));
+            Assert.That(operation.GetType(), Is.EqualTo(typeof(SubOpCodeRoot)));
         }
 
         [Test]

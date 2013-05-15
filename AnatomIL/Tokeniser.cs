@@ -15,7 +15,7 @@ namespace AnatomIL
         int _idxToken;
         int _idxCode;
         int _curentligne;
-        string[] _code;
+        public string[] _code;
         char[] _delimiter = { ' ', '.', ':', ')', '(', '{', '}', ',' };
         string[] _types = { "int", "int16", "int32", "int64", "char", "bool" };
         int _braket;

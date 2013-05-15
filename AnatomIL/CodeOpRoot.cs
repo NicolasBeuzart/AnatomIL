@@ -62,10 +62,10 @@ namespace AnatomIL
         }
     }
 
-    public class SubCodeOpRoot : OpCodeRoot
+    public class SubOpCodeRoot : OpCodeRoot
     {
 
-        public SubCodeOpRoot()
+        public SubOpCodeRoot()
         {
             base._name = "sub";
             base._type = "operation";
@@ -85,10 +85,10 @@ namespace AnatomIL
         }
     }
 
-    public class MulCodeOpRoot : OpCodeRoot
+    public class MulOpCodeRoot : OpCodeRoot
     {
 
-        public MulCodeOpRoot()
+        public MulOpCodeRoot()
         {
             base._name = "mul";
             base._type = "operation";
@@ -108,10 +108,10 @@ namespace AnatomIL
         }
     }
 
-    public class DivCodeOpRoot : OpCodeRoot
+    public class DivOpCodeRoot : OpCodeRoot
     {
 
-        public DivCodeOpRoot()
+        public DivOpCodeRoot()
         {
             base._name = "div";
             base._type = "operation";
@@ -131,10 +131,10 @@ namespace AnatomIL
         }
     }
 
-    public class RemCodeOpRoot : OpCodeRoot
+    public class RemOpCodeRoot : OpCodeRoot
     {
 
-        public RemCodeOpRoot()
+        public RemOpCodeRoot()
         {
             base._name = "rem";
             base._type = "operation";
@@ -154,10 +154,10 @@ namespace AnatomIL
         }
     }
 
-    public class LdcCodeOpRoot : OpCodeRoot
+    public class LdcOpCodeRoot : OpCodeRoot
     {
 
-        public LdcCodeOpRoot()
+        public LdcOpCodeRoot()
         {
             base._name = "ldc";
             base._type = "operation";
@@ -187,15 +187,21 @@ namespace AnatomIL
             {
                 Int32 tmp;
                 if (!Int32.TryParse(argument, out tmp)) errorMessage = "Argument isn't Int32 in Operation" + base._name;
-                type = typeof(Int32);
-                Value = Convert.ToInt32(argument);
+                else
+                {
+                    type = typeof(Int32);
+                    Value = Convert.ToInt32(argument);
+                }
             }
             else if (option.Equals("i2"))
             {
                 Int16 tmp;
                 if (!Int16.TryParse(argument, out tmp)) errorMessage = "Argument isn't Int16 in Operation" + base._name;
-                type = typeof(Int16);
-                Value = Convert.ToInt16(argument);
+                else
+                {
+                    type = typeof(Int16);
+                    Value = Convert.ToInt16(argument);
+                }
             }
             else
             {
@@ -240,7 +246,7 @@ namespace AnatomIL
             string s;
 
             t.MatchSpace();
-            t.MatchOpenPar();
+            if (!t.MatchOpenPar()) errorMessage = "missing '(' in line : " + (t.CurentLigne + 1);
 
             do
             {
@@ -350,15 +356,17 @@ namespace AnatomIL
             {
                 if (!f.IsType(argsName, out type)) errorMessage = "type " + argsName + " not existing line :" + t.CurentLigne;
                 t.MatchSpace();
-                while (t.IsString(out argsName))
+                do
                 {
-                    if (!f.IsType(argsName, out argsType)) errorMessage = "type " + argsName + " not existing line :" + t.CurentLigne;
-                    if (!(t.MatchSpace() && t.IsString(out argsName))) errorMessage = "syntaxe error in declaration of function " + name;
-                    args.Add(new StackItemValue(argsType, null));
+                    if (t.IsString(out argsName))
+                    {
+                        if (!f.IsType(argsName, out argsType)) errorMessage = "type " + argsName + " not existing line :" + t.CurentLigne;
+                        if (!(t.MatchSpace() && t.IsString(out argsName))) errorMessage = "syntaxe error in declaration of function " + name;
+                        args.Add(new StackItemValue(argsType, ""));
 
-                    t.MatchSpace();
-                    if (!t.MatchComma()) errorMessage = "syntaxe error in declaration of function " + name;
-                }
+                        t.MatchSpace();
+                    }
+                } while (t.MatchComma());
 
                 if (!t.MatchClosePar()) errorMessage = "syntaxe error in declaration of function " + name;
             }
