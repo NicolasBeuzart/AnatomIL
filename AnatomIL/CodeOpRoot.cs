@@ -22,7 +22,7 @@ namespace AnatomIL
             get { return _name; }
         }
 
-        virtual public OpCodeRootResult Parse(FunctionTokeniser t) { return null; } // methode de parse des opérations qui retourne un CodeOp pres a être Executer correctement
+        virtual public OpCodeRootResult Parse(Tokeniser t) { return null; } // methode de parse des opérations qui retourne un CodeOp pres a être Executer correctement
     }
 
     public class OpCodeRootResult
@@ -48,7 +48,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(FunctionTokeniser t)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
 
@@ -58,7 +58,7 @@ namespace AnatomIL
                 errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
-            return new OpCodeRootResult(errorMessage, new AddOpCode());
+            return new OpCodeRootResult(errorMessage, new AddOpCode(t.CurentLigne));
         }
     }
 
@@ -71,7 +71,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(FunctionTokeniser t)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
 
@@ -81,7 +81,7 @@ namespace AnatomIL
                 errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
-            return new OpCodeRootResult(errorMessage, new SubOpCode());
+            return new OpCodeRootResult(errorMessage, new SubOpCode(t.CurentLigne));
         }
     }
 
@@ -94,7 +94,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(FunctionTokeniser t)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
 
@@ -104,7 +104,7 @@ namespace AnatomIL
                 errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
-            return new OpCodeRootResult(errorMessage, new MulOpCode());
+            return new OpCodeRootResult(errorMessage, new MulOpCode(t.CurentLigne));
         }
     }
 
@@ -117,7 +117,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(FunctionTokeniser t)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
 
@@ -127,7 +127,7 @@ namespace AnatomIL
                 errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
-            return new OpCodeRootResult(errorMessage, new DivOpCode());
+            return new OpCodeRootResult(errorMessage, new DivOpCode(t.CurentLigne));
         }
     }
 
@@ -140,7 +140,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(FunctionTokeniser t)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
 
@@ -150,7 +150,7 @@ namespace AnatomIL
                 errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
-            return new OpCodeRootResult(errorMessage, new RemOpCode());
+            return new OpCodeRootResult(errorMessage, new RemOpCode(t.CurentLigne));
         }
     }
 
@@ -163,7 +163,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(FunctionTokeniser t)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
             Type type = null;
@@ -202,7 +202,7 @@ namespace AnatomIL
                 errorMessage = "lcd operation can't have option : " + option;
             }
 
-            return (new OpCodeRootResult(errorMessage, new LdcOpCode(type, Value)));
+            return (new OpCodeRootResult(errorMessage, new LdcOpCode(type, Value, t.CurentLigne)));
         }
     }
 
@@ -214,14 +214,13 @@ namespace AnatomIL
             base._type = "label";
         }
 
-        override public OpCodeRootResult Parse(FunctionTokeniser t)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
             string label;
 
             if (!(t.IsString(out label) && t.IsEnd)) errorMessage = "Bad label declaration in line : " + t.CurentLigne;
-
-            return new OpCodeRootResult(errorMessage, new LabelOpCode(label));
+            return new OpCodeRootResult(errorMessage, new LabelOpCode(label, t.CurentLigne));
         }
     }
 
@@ -233,7 +232,7 @@ namespace AnatomIL
             base._type = "directive";
         }
 
-        override public OpCodeRootResult Parse(FunctionTokeniser t)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
             List<string> locals = new List<string>();
@@ -254,7 +253,7 @@ namespace AnatomIL
 
             if (!t.MatchClosePar()) errorMessage = "miss ')' in locals declaration line : " + t.CurentLigne;
 
-            return new OpCodeRootResult(errorMessage, new LocalsInitOpCode(locals));
+            return new OpCodeRootResult(errorMessage, new LocalsInitOpCode(locals, t.CurentLigne));
         }
     }
 
@@ -267,7 +266,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        override public OpCodeRootResult Parse(FunctionTokeniser t)
+        override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
 
@@ -277,7 +276,7 @@ namespace AnatomIL
                 errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
             }
 
-            return new OpCodeRootResult(errorMessage, new DupOpCode());
+            return new OpCodeRootResult(errorMessage, new DupOpCode(t.CurentLigne));
         }
     }
 
@@ -289,7 +288,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        public override OpCodeRootResult Parse(FunctionTokeniser t)
+        public override OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
             string arg;
@@ -300,7 +299,7 @@ namespace AnatomIL
                 errorMessage = "error line " + t.CurentLigne;
             }
 
-            return (new OpCodeRootResult(errorMessage,new stlocOpCode(tmp)));
+            return (new OpCodeRootResult(errorMessage,new stlocOpCode(tmp, t.CurentLigne)));
         }
     }
 
@@ -312,7 +311,7 @@ namespace AnatomIL
             base._type = "operation";
         }
 
-        public override OpCodeRootResult Parse(FunctionTokeniser t)
+        public override OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
             string arg;
@@ -323,7 +322,87 @@ namespace AnatomIL
                 errorMessage = "error line " + t.CurentLigne;
             }
 
-            return (new OpCodeRootResult(errorMessage, new ldlocOpCode(tmp)));
+            return (new OpCodeRootResult(errorMessage, new ldlocOpCode(tmp, t.CurentLigne)));
+        }
+    }
+
+    public class PrototypeOpCodeRoot : OpCodeRoot
+    {
+        public PrototypeOpCodeRoot()
+        {
+            base._name = "prototype";
+            base._type = "directive";
+        }
+
+        public override OpCodeRootResult Parse(Tokeniser t)
+        {
+            FunctionAnnexe f = new FunctionAnnexe();
+            string errorMessage = "";
+            string name = "";
+            Type type = null;
+            List<StackItemValue> args = new List<StackItemValue>();
+            Type argsType;
+            string argsName;
+
+            if (t.IsEnd) return (new OpCodeRootResult(errorMessage, null));
+
+            if (t.IsString(out argsName) && t.MatchSpace() && t.IsString(out name) && t.MatchOpenPar())
+            {
+                if (!f.IsType(argsName, out type)) errorMessage = "type " + argsName + " not existing line :" + t.CurentLigne;
+                t.MatchSpace();
+                while (t.IsString(out argsName))
+                {
+                    if (!f.IsType(argsName, out argsType)) errorMessage = "type " + argsName + " not existing line :" + t.CurentLigne;
+                    if (!(t.MatchSpace() && t.IsString(out argsName))) errorMessage = "syntaxe error in declaration of function " + name;
+                    args.Add(new StackItemValue(argsType, null));
+
+                    t.MatchSpace();
+                    if (!t.MatchComma()) errorMessage = "syntaxe error in declaration of function " + name;
+                }
+
+                if (!t.MatchClosePar()) errorMessage = "syntaxe error in declaration of function " + name;
+            }
+            else errorMessage = "syntaxe error line :" + t.CurentLigne;
+
+            return (new OpCodeRootResult(errorMessage, new PrototypeOpCode(name, type, args, t.CurentLigne)));
+        }
+    }
+
+    public class CallOpCodeRoot : OpCodeRoot
+    {
+        public CallOpCodeRoot()
+        {
+            base._name = "call";
+            base._type = "operation";
+        }
+
+        public override OpCodeRootResult Parse(Tokeniser t)
+        {
+            FunctionAnnexe f = new FunctionAnnexe();
+            string errorMessage = "";
+            string name = "";
+            List<StackItemValue> args = new List<StackItemValue>();
+            Type argsType;
+            string argsName;
+
+            if (t.MatchSpace() && t.IsString(out name) && t.MatchOpenPar())
+            {
+                t.MatchSpace();
+                while (t.IsString(out argsName))
+                {
+                    if (!f.IsType(argsName, out argsType)) errorMessage = "type " + argsName + " not existing line :" + t.CurentLigne;
+                    if (!(t.MatchSpace() && t.IsString(out argsName))) errorMessage = "syntaxe error in declaration of function " + name;
+                    args.Add(new StackItemValue(argsType, null));
+
+                    t.MatchSpace();
+                    if (!t.MatchComma()) errorMessage = "syntaxe error in declaration of function " + name;
+                }
+
+                if (!t.MatchClosePar()) errorMessage = "syntaxe error in declaration of function " + name;
+            }
+            else errorMessage = "syntaxe error line :" + t.CurentLigne;
+
+            return (new OpCodeRootResult(errorMessage,new CallOpCode(name, args, t.CurentLigne)));
         }
     }
 }

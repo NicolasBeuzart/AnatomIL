@@ -35,11 +35,12 @@ namespace AnatomIL.test
             string[] s = new string[1];
             s[0] = "   ldc.i4 13    ";
 
-            result = c.Compile(s);
-            Assert.That(result.IsSuccess, Is.True);
+
+            result = c.Compile(new Tokeniser(s));
+            Assert.That(result.IsSuccess, Is.False);
 
             s[0] = "lda.i4.13";
-            result = c.Compile(s);
+            result = c.Compile(new Tokeniser(s));
             Assert.That(result.IsSuccess, Is.False);
         }
 
@@ -50,23 +51,28 @@ namespace AnatomIL.test
             IlComputer p = new IlComputer();
 
             // simulation de code rentré par l'utilisateur
-            string[] s = new string[11];
-            s[0] = "ldc.i4 13";
-            s[1] = "ldc.i4 12";
-            s[2] = "add";
-            s[3] = "ldc.i4 30";
-            s[4] = "sub";
-            s[5] = "ldc.i4 20";
-            s[6] = "div";
-            s[7] = "ldc.i4 5";
-            s[8] = "mul";
-            s[9] = "ldc.i4 25";
-            s[10] = "rem";
+            string[] s = new string[14];
+            s[0] = "void main()";
+            s[1] = "{";
+            s[2] = "ldc.i4 13";
+            s[3] = "ldc.i4 12";
+            s[4] = "add";
+            s[5] = "ldc.i4 30";
+            s[6] = "sub";
+            s[7] = "ldc.i4 20";
+            s[8] = "div";
+            s[9] = "ldc.i4 5";
+            s[10] = "mul";
+            s[11] = "ldc.i4 25";
+            s[12] = "rem";
+            s[13] = "}";
             
             // on verifi que les méthodes on bien était ajouter a la library
 
             p.LoadCode(s);
             p.compile();
+            Assert.That(p.ErrorMessages.Count, Is.EqualTo(0));
+
             p.Start();
 
             // Executions des instructions

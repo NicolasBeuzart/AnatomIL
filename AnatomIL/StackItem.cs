@@ -15,6 +15,7 @@ namespace AnatomIL
 
         public Type Type;
         public object Value;
+        public int Line;
 
         virtual public StackItemFrame Convert() { return null; }
     }
