@@ -274,5 +274,90 @@ namespace AnatomIL.test
 
         }
 
+        [Test]
+        public void StlocOpCodeRootTest()
+        {
+            stlocOpCodeRoot stloc = new stlocOpCodeRoot();
+            OpCodeRootResult result;
+            string[] code = { " 1", ".1", " az", "" };
+            List<string> options = new List<string>();
+            List<string> args = new List<string>();
+            Tokeniser t = new Tokeniser(code);
+
+            t.MatchNextToken();
+            result = stloc.Parse(t);
+            Assert.That(result.IsSuccess, Is.True);
+
+            t.MatchNextToken();
+            result = stloc.Parse(t);
+            Assert.That(result.IsSuccess, Is.False);
+
+            t.MatchNextToken();
+            result = stloc.Parse(t);
+            Assert.That(result.IsSuccess, Is.False);
+
+            t.MatchNextToken();
+            result = stloc.Parse(t);
+            Assert.That(result.IsSuccess, Is.False);
+
+        }
+
+
+        [Test]
+        public void LdlocOpCodeRootTest()
+        {
+            ldlocOpCodeRoot ldloc = new ldlocOpCodeRoot();
+            OpCodeRootResult result;
+            string[] code = { " 1", ".1", " az", "" };
+            List<string> options = new List<string>();
+            List<string> args = new List<string>();
+            Tokeniser t = new Tokeniser(code);
+
+            t.MatchNextToken();
+            result = ldloc.Parse(t);
+            Assert.That(result.IsSuccess, Is.True);
+
+            t.MatchNextToken();
+            result = ldloc.Parse(t);
+            Assert.That(result.IsSuccess, Is.False);
+
+            t.MatchNextToken();
+            result = ldloc.Parse(t);
+            Assert.That(result.IsSuccess, Is.False);
+
+            t.MatchNextToken();
+            result = ldloc.Parse(t);
+            Assert.That(result.IsSuccess, Is.False);
+
+        }
+
+
+        [Test]
+        public void prototypeOpCodeRootTest()
+        {
+            PrototypeOpCodeRoot prototype = new PrototypeOpCodeRoot();
+            OpCodeRootResult result;
+            string[] code = { "void main()", "int32 tutu(int32, int16)", "main()", "pouet pouet()" };
+            List<string> options = new List<string>();
+            List<string> args = new List<string>();
+            Tokeniser t = new Tokeniser(code);
+
+            t.MatchNextToken();
+            result = prototype.Parse(t);
+            Assert.That(result.IsSuccess, Is.True);
+
+            t.MatchNextToken();
+            result = prototype.Parse(t);
+            Assert.That(result.IsSuccess, Is.True);
+
+            t.MatchNextToken();
+            result = prototype.Parse(t);
+            Assert.That(result.IsSuccess, Is.False);
+
+            t.MatchNextToken();
+            result = prototype.Parse(t);
+            Assert.That(result.IsSuccess, Is.False);
+
+        }
     }
 }

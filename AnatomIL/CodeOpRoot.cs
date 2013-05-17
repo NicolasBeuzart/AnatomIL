@@ -355,13 +355,15 @@ namespace AnatomIL
             if (t.IsString(out argsName) && t.MatchSpace() && t.IsString(out name) && t.MatchOpenPar())
             {
                 if (!f.IsType(argsName, out type)) errorMessage = "type " + argsName + " not existing line :" + t.CurentLigne;
-                t.MatchSpace();
                 do
                 {
+                    t.MatchSpace();
                     if (t.IsString(out argsName))
                     {
+
                         if (!f.IsType(argsName, out argsType)) errorMessage = "type " + argsName + " not existing line :" + t.CurentLigne;
-                        if (!(t.MatchSpace() && t.IsString(out argsName))) errorMessage = "syntaxe error in declaration of function " + name;
+                        t.MatchSpace();
+                        t.IsString(out argsName);
                         args.Add(new StackItemValue(argsType, ""));
 
                         t.MatchSpace();
