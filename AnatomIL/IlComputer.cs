@@ -10,7 +10,6 @@ namespace AnatomIL
     {
         Compiler _compiler;
         CompiledCode _compiledCode;
-        CompiledCode _compiledFunctionCode;
         string[] _Sourcecode;
         public List<string> ErrorMessages;
         Environment _env; // Pc, Stack, Tas
