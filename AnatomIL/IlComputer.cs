@@ -26,6 +26,8 @@ namespace AnatomIL
 
         public Stack Stack { get { return _env.Stack; } }
 
+        public Graph Graph { get { return _env.Graph; } }
+
         public void LoadCode(string[] Sourcecode)
         {
             _Sourcecode = Sourcecode;

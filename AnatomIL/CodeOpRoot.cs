@@ -17,6 +17,7 @@ namespace AnatomIL
         }
 
         public string Type { get { return _type; } }
+
         public string Name
         {
             get { return _name; }

@@ -6,30 +6,56 @@ using System.Threading.Tasks;
 
 namespace AnatomIL
 {
-    public class DrawLineOpCode : OpCode
+    public class MoveToOpCode : OpCode
     {
-        int _x1;
-        int _y1;
-        int _x2;
-        int _y2;
+        int _x;
+        int _y;
 
-        public DrawLineOpCode(string color, int x1, int y1, int x2, int y2, int line)
+        public MoveToOpCode(int x, int y, int line)
         {
             _line = line;
-            base._name = "drawline";
+            base._name = "moveto";
             base._type = "draw";
             base._executable = true;
-            _x1 = x1;
-            _y1 = y1;
-            _x2 = x2;
-            _y2 = y2;
+            _x = x;
+            _y = y;
+
         }
 
         override public OpCodeResult Execute(Environment e)
         {
             string errorMessage = "";
-
+            e.Graph.MoveTo(_x, _y);
             return new OpCodeResult(errorMessage);
         }
+    }
+
+    public class LineToOpCode : OpCode
+    {
+
+        int _x;
+        int _y;
+        System.Drawing.Color _color;
+
+        public LineToOpCode(System.Drawing.Color color, int x, int y, int line)
+        {
+            _line = line;
+            base._name = "lineto";
+            base._type = "draw";
+            base._executable = true;
+            _x = x;
+            _y = y;
+            _color = color;
+
+        }
+
+        override public OpCodeResult Execute(Environment e)
+        {
+            string errorMessage = "";
+            e.Graph.LineTo(_color, _x, _y);
+            return new OpCodeResult(errorMessage);
+        }
+
+
     }
 }

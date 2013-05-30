@@ -12,16 +12,19 @@ namespace AnatomIL
         public int Pc;
         public Heap Heap;
         public CompiledCode CompiledCode;
+        public Graph Graph;
 
         public Environment()
         {
             Stack = new Stack();
+            Graph = new Graph();
             Pc = -1;
         }
 
         public void Reset()
         {
             Stack = new Stack();
+            Graph = new Graph();
             Pc = -1;
         }
     }

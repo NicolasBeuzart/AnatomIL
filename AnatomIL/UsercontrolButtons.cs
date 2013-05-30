@@ -102,6 +102,7 @@ namespace AnatomIL
                         }
                         if (ShowStack.Checked)
                             Stack.ShowStack();
+                        
                     }
                 }
             }
