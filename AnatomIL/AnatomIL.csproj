@@ -158,6 +158,7 @@
     </EmbeddedResource>
     <None Include="bin\Debug\AnatomIL.vshost.exe.config" />
     <None Include="bin\Release\AnatomIL.exe.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
     <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />

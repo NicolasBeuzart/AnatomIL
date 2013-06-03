@@ -8,11 +8,9 @@ namespace AnatomIL
 {
     public class Compiler
     {
-        Library _lib;
 
         public Compiler()
         {
-            _lib = new Library();
         }
 
 
@@ -43,7 +41,8 @@ namespace AnatomIL
                 }
                 else
                 {
-                    if (t.MatchcloseBraket())
+                    if (t.IsEnd) code.Add(null);
+                    else if (t.MatchcloseBraket())
                     {
                         if (!t.IsEnd) errorMessages.Add("syntaxe error line :" + t.CurentLigne);
                         else code.Add(new RetOpCode(t.CurentLigne));
@@ -69,10 +68,9 @@ namespace AnatomIL
                         if (result.IsSuccess) code.Add(result.OpCode);
                         else errorMessages.Add(result.ErrorMessage);
                     }
-                    else if (t.IsEnd) code.Add(null);
                     else
                     {
-                        errorMessages.Add("Error line " + t.CurentLigne + " : Syntaxe Error");
+                        errorMessages.Add("Error line " + (t.CurentLigne + 1) + " : Syntaxe Error");
                     }
                 }
             }

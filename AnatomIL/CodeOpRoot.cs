@@ -391,28 +391,56 @@ namespace AnatomIL
             FunctionAnnexe f = new FunctionAnnexe();
             string errorMessage = "";
             string name = "";
-            List<StackItemValue> args = new List<StackItemValue>();
-            Type argsType;
-            string argsName;
 
-            if (t.MatchSpace() && t.IsString(out name) && t.MatchOpenPar())
+            if (!(t.MatchSpace() && t.IsString(out name))) errorMessage = "syntaxe error line :" + t.CurentLigne;
+
+            return (new OpCodeRootResult(errorMessage,new CallOpCode(name, t.CurentLigne)));
+        }
+    }
+
+    public class stargOpCodeRoot : OpCodeRoot
+    {
+        public stargOpCodeRoot()
+        {
+            base._name = "starg";
+            base._type = "operation";
+        }
+
+        public override OpCodeRootResult Parse(Tokeniser t)
+        {
+            string errorMessage = "";
+            string arg;
+            Int32 tmp = 0;
+
+            if (!(t.IsArgument(out arg) && t.IsEnd && Int32.TryParse(arg, out tmp)))
             {
-                t.MatchSpace();
-                while (t.IsString(out argsName))
-                {
-                    if (!f.IsType(argsName, out argsType)) errorMessage = "type " + argsName + " not existing line :" + t.CurentLigne;
-                    if (!(t.MatchSpace() && t.IsString(out argsName))) errorMessage = "syntaxe error in declaration of function " + name;
-                    args.Add(new StackItemValue(argsType, null));
-
-                    t.MatchSpace();
-                    if (!t.MatchComma()) errorMessage = "syntaxe error in declaration of function " + name;
-                }
-
-                if (!t.MatchClosePar()) errorMessage = "syntaxe error in declaration of function " + name;
+                errorMessage = "error line " + t.CurentLigne;
             }
-            else errorMessage = "syntaxe error line :" + t.CurentLigne;
 
-            return (new OpCodeRootResult(errorMessage,new CallOpCode(name, args, t.CurentLigne)));
+            return (new OpCodeRootResult(errorMessage, new stargOpCode(tmp, t.CurentLigne)));
+        }
+    }
+
+    public class ldargOpCodeRoot : OpCodeRoot
+    {
+        public ldargOpCodeRoot()
+        {
+            base._name = "ldarg";
+            base._type = "operation";
+        }
+
+        public override OpCodeRootResult Parse(Tokeniser t)
+        {
+            string errorMessage = "";
+            string arg;
+            Int32 tmp = 0;
+
+            if (!(t.IsArgument(out arg) && t.IsEnd && Int32.TryParse(arg, out tmp)))
+            {
+                errorMessage = "error line " + t.CurentLigne;
+            }
+
+            return (new OpCodeRootResult(errorMessage, new ldargOpCode(tmp, t.CurentLigne)));
         }
     }
 }
