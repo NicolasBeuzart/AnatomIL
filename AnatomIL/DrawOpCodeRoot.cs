@@ -18,27 +18,25 @@ namespace AnatomIL
         override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
+
             int x = 0;
             int y = 0;
-            string arg1;
-            string arg2;
+            string arg1, arg2;
             Int32 tmp;
-
 
             if (!(t.MatchOpenPar() && t.IsArgument(out arg1) && t.MatchComma() && t.IsArgument(out arg2) && t.MatchClosePar() && t.IsEnd))
                 errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
-            else if (!Int32.TryParse(arg1, out tmp))
-            {
-                errorMessage = "x argument isn't Int32 in Operation" + base._name;
-            }
-            else if (!Int32.TryParse(arg2, out tmp))
-            {
-                errorMessage = "y argument isn't Int32 in Operation" + base._name;
-            }
             else
             {
-                x = Convert.ToInt32(arg1);
-                y = Convert.ToInt32(arg2);
+                if (!Int32.TryParse(arg1, out tmp))
+                    errorMessage = "Argument x isn't Int32 in Operation" + base._name + "in line : " + t.CurentLigne;
+                else
+                    x = Convert.ToInt32(arg1);
+
+                if (!Int32.TryParse(arg2, out tmp))
+                    errorMessage = "Argument y isn't Int32 in Operation" + base._name + "in line : " + t.CurentLigne;
+                else
+                    y = Convert.ToInt32(arg2);
             }
 
             return (new OpCodeRootResult(errorMessage, new MoveToOpCode(x, y, t.CurentLigne)));
@@ -57,36 +55,35 @@ namespace AnatomIL
         override public OpCodeRootResult Parse(Tokeniser t)
         {
             string errorMessage = "";
+
             int x = 0;
             int y = 0;
-            System.Drawing.Color color = System.Drawing.Color.Black;
-            string arg1;
-            string arg2;
-            string argcolor;
+            string color = null;
+
+            string arg1, arg2, argc;
+
             Int32 tmp;
 
-            if (!(t.MatchOpenPar() && t.IsArgument(out argcolor) && t.MatchComma() && t.IsArgument(out arg1) && t.MatchComma() && t.IsArgument(out arg2) && t.MatchClosePar() && t.IsEnd))
-                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
-            else if (!Int32.TryParse(arg1, out tmp))
-            {
-                errorMessage = "x argument isn't Int32 in Operation" + base._name;
-            }
-            else if (!Int32.TryParse(arg2, out tmp))
-            {
-                errorMessage = "y argument isn't Int32 in Operation" + base._name;
-            }
-            else if(!System.Drawing.Color.FromName(argcolor).IsKnownColor)
-            {
-                errorMessage = "color argument isn't valid color in Operation" + base._name;
-            }
+            if (!(t.MatchOpenPar() && t.IsArgument(out arg1) && t.MatchComma() && t.IsArgument(out arg2) && t.MatchComma() && t.IsArgument(out argc) && t.MatchClosePar() && t.IsEnd))
+                errorMessage = "Bad utilisation of Operation " + base._name + " in line : " + t.CurentLigne;
             else
             {
-                x = Convert.ToInt32(arg1);
-                y = Convert.ToInt32(arg2);
-                color = System.Drawing.Color.FromName(argcolor);
-            }
+                if (!Int32.TryParse(arg1, out tmp))
+                    errorMessage = "Argument x isn't Int32 in Operation " + base._name + " in line : " + t.CurentLigne;
+                else
+                    x = Convert.ToInt32(arg1);
 
-            return (new OpCodeRootResult(errorMessage, new LineToOpCode(color, x, y, t.CurentLigne)));
+                if (!Int32.TryParse(arg2, out tmp))
+                    errorMessage = "Argument y isn't Int32 in Operation " + base._name + " in line : " + t.CurentLigne;
+                else
+                    y = Convert.ToInt32(arg2);
+
+                if (!System.Drawing.Color.FromName(argc).IsKnownColor)
+                    errorMessage = "Argument color isn't a valid color in Operation " + base._name + " in line : " + t.CurentLigne;
+                else
+                    color = argc;
+            }
+            return (new OpCodeRootResult(errorMessage, new LineToOpCode(x, y, color, t.CurentLigne)));
         }
 
     }

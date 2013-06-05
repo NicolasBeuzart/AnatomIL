@@ -6,56 +6,56 @@ using System.Threading.Tasks;
 
 namespace AnatomIL
 {
-    public class MoveToOpCode : OpCode
+    public class MoveToOpCode :OpCode
     {
         int _x;
         int _y;
 
+
         public MoveToOpCode(int x, int y, int line)
         {
+            _x = x;
+            _y = y;
             _line = line;
             base._name = "moveto";
             base._type = "draw";
             base._executable = true;
-            _x = x;
-            _y = y;
-
         }
 
         override public OpCodeResult Execute(Environment e)
         {
             string errorMessage = "";
+
             e.Graph.MoveTo(_x, _y);
+            
             return new OpCodeResult(errorMessage);
         }
     }
 
     public class LineToOpCode : OpCode
     {
-
         int _x;
         int _y;
-        System.Drawing.Color _color;
+        string _color;
 
-        public LineToOpCode(System.Drawing.Color color, int x, int y, int line)
+        public LineToOpCode(int x, int y, string color, int line)
         {
+            _x = x;
+            _y = y;
+            _color = color;
             _line = line;
             base._name = "lineto";
             base._type = "draw";
             base._executable = true;
-            _x = x;
-            _y = y;
-            _color = color;
-
         }
 
         override public OpCodeResult Execute(Environment e)
         {
             string errorMessage = "";
-            e.Graph.LineTo(_color, _x, _y);
+
+            e.Graph.LineTo(_x, _y, _color);
+
             return new OpCodeResult(errorMessage);
         }
-
-
     }
 }

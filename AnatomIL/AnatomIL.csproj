@@ -56,12 +56,14 @@
     <Compile Include="CodeOpRoot.cs" />
     <Compile Include="CompiledCode.cs" />
     <Compile Include="compiler.cs" />
-    <Compile Include="DrawItem.cs" />
     <Compile Include="DrawOpCode.cs" />
     <Compile Include="DrawOpCodeRoot.cs" />
     <Compile Include="Environment.cs" />
     <Compile Include="FunctionAnnexe.cs" />
     <Compile Include="Graph.cs" />
+    <Compile Include="GraphPanel\GraphControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Inter.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -77,9 +77,11 @@ namespace AnatomIL
 
         public void ExecuteNextInstruction()
         {
-            OpCodeResult o;
-            o = _compiledCode.Code[Pc].Execute(_env);
 
+            OpCodeResult o;
+
+            o = _compiledCode.Code[Pc].Execute(_env);
+           
             if (o.ErrorMessage != "") ErrorMessages.Add(o.ErrorMessage);
             //on passe à l'instruction suivante
             Pc = GoToNextInst(Pc);

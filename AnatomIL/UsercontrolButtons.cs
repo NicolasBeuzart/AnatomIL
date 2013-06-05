@@ -16,12 +16,14 @@ namespace AnatomIL
         public UserControlButtons()
         {
             InitializeComponent();
+
         }
 
         public UserControlCodeZone Code { get; set; }
         public UserControlTextBoxError Error { get; set; }
         public UserControlStack Stack { get; set; }
-
+        public GraphPanel.GraphControl GraphController { get; set; }
+        
         IlComputer computer = new IlComputer();
         public IlComputer CurrentComputer { get { return computer; } }
 
@@ -29,6 +31,7 @@ namespace AnatomIL
 
         private void btGo_Click(object sender, EventArgs e)
         {
+            
             btCompile.Visible = false;
             btStop.Visible = true;
             btGo.Visible = false;
@@ -79,7 +82,6 @@ namespace AnatomIL
                         btStop.Visible = false;
                         Code.listBoxInstructions.Visible = false;
                         Code.textBoxCode.Visible = true;
-                        Code.BreakPointList.Visible = false;
                     }
                     else
                     {
@@ -91,7 +93,6 @@ namespace AnatomIL
                         {
                             Code.listBoxInstructions.Visible = false;
                             Code.textBoxCode.Visible = true;
-                            Code.BreakPointList.Visible = false;
                             btExecuteOneStep.Visible = false;
                             btGo.Visible = false;
                             timeBox.Visible = false;
@@ -102,7 +103,9 @@ namespace AnatomIL
                         }
                         if (ShowStack.Checked)
                             Stack.ShowStack();
-                        
+
+                        GraphController.Invalidate();
+                       
                     }
                 }
             }
@@ -144,20 +147,23 @@ namespace AnatomIL
                Code.listBoxInstructions.Visible = true;
                Code.textBoxCode.Visible = false;
 
-               Code.BreakPointList.Items.Clear();
-               Code.BreakPointList.Visible = true;
-               Code.BreakPointList.Enabled = true;
+
 
                string s = Code.textBoxCode.Text.Replace("\r", "");
                string[] s2 = s.Split(new char[] { '\n' });
 
                Code.listBoxInstructions.Items.Clear();
                Code.listBoxInstructions.Items.AddRange(s2);
-
+               
                computer.LoadCode(s2);
-            
+              
                computer.compile();
 
+               Code.BreakPointList.Enabled = !Code.BreakPointList.Enabled;
+               
+               Code.BreakPointList.Visible = true;
+               
+               
                if (computer.ErrorMessages.Count > 0)
                {
                    Error.Visible = true;
@@ -169,12 +175,13 @@ namespace AnatomIL
                    btStop.Visible = false;
                    Code.listBoxInstructions.Visible = false;
                    Code.textBoxCode.Visible = true;
-                   Code.BreakPointList.Visible = false;
+                   Code.BreakPointList.Enabled = false;
                }
                else
                {
                    computer.Start();
                    Code.listBoxInstructions.SelectedIndex = computer.Pc;
+                   Code.BreakPointList.Enabled = true;
                }
         }
 
