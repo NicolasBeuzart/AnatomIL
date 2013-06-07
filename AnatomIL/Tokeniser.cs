@@ -17,7 +17,7 @@ namespace AnatomIL
         int _curentligne;
         public string[] _code;
         char[] _delimiter = { ' ', '.', ':', ')', '(', '{', '}', ',' };
-        string[] _types = { "int", "int16", "int32", "int64", "char", "bool" };
+        string[] _types = { "int", "int16", "int32", "int64", "char", "bool", "void" };
         int _braket;
 
         public int CurentLigne { get { return _curentligne; } }

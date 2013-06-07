@@ -433,7 +433,6 @@ namespace AnatomIL
         override public OpCodeResult Execute(Environment e)
         {
             string errorMessage = "";
-            e.Stack.CurentStackItemFrame().Args = _args;
             e.Stack.CurentStackItemFrame().RetType = _typeFrame;
             e.Stack.CurentStackItemFrame().FrameName = _nameFrame;
             return new OpCodeResult(errorMessage);
@@ -444,14 +443,13 @@ namespace AnatomIL
     public class CallOpCode : OpCode
     {
         string _target;
-        public CallOpCode(string name,List<StackItemValue> args, int line)
+        public CallOpCode(string name, int line)
         {
             _line = line;
             base._name = "prototype";
             base._type = "operation";
             base._executable = true;
             _target = name;
-            _args = args;
         }
 
         override public OpCodeResult Execute(Environment e)
@@ -475,7 +473,7 @@ namespace AnatomIL
                 }
             }
 
-            e.Stack.PushFrame(_args, new List<StackItemValue>(), null, null);
+            e.Stack.PushFrame(_args, new List<StackItemValue>(), null, _target);
             return new OpCodeResult(errorMessage);
         }
     }
@@ -499,8 +497,8 @@ namespace AnatomIL
             {
                 if (e.Stack.CurentStackItemFrame().RetType != typeof(void))
                 {
-                    e.Stack.Pop(out s);
-                    if (s.Type != e.Stack.CurentStackItemFrame().RetType) errorMessage = "Function " + e.Stack.CurentStackItemFrame().FrameName + " excepted return type of " + e.Stack.CurentStackItemFrame().RetType.ToString() + " but given " + s.Type.ToString() + " type line : " + (_line + 1);
+                    if (!e.Stack.Pop(out s)) errorMessage = "Function " + e.Stack.CurentStackItemFrame().FrameName + " excepted return type of " + e.Stack.CurentStackItemFrame().RetType.ToString().Split('.')[1] + " but given void type line : " + (_line + 1);
+                    else if (s.Type != e.Stack.CurentStackItemFrame().RetType) errorMessage = "Function " + e.Stack.CurentStackItemFrame().FrameName + " excepted return type of " + e.Stack.CurentStackItemFrame().RetType.ToString().Split('.')[1] + " but given " + s.Type.ToString().Split('.')[1] + " type line : " + (_line + 1);
                     else if (!e.Stack.PopFrame()) errorMessage = "stack is not empty can't execute the operation 'ret' line :" + (_line + 1);
                     else
                     {
@@ -517,5 +515,61 @@ namespace AnatomIL
             }
             return new OpCodeResult(errorMessage);
         }
+    }
+
+    public class stargOpCode : OpCode
+    {
+        internal int _argidx;
+
+        public stargOpCode(int i, int line)
+        {
+            _line = line;
+            base._name = "starg";
+            base._type = "operation";
+            base._executable = true;
+            _argidx = i;
+        }
+
+        override public OpCodeResult Execute(Environment e)
+        {
+            string errorMessage = "";
+            StackItemValue siv;
+            if (e.Stack.Pop(out siv))
+            {
+                StackItemFrame sif = e.Stack.CurentStackItemFrame();
+                if (sif.Args.Count <= _argidx) errorMessage = "Argument " + _argidx + " does not exist in function " + sif.FrameName + " line : " + (_line + 1);
+                else sif.Args[_argidx] = siv;
+            }
+            else errorMessage = "stack is empty can't execute the operation 'starg' line :" + (_line + 1);
+            return new OpCodeResult(errorMessage);
+        }
+
+    }
+
+    public class ldargOpCode : OpCode
+    {
+        internal int _argidx;
+
+        public ldargOpCode(int i, int line)
+        {
+            _line = line;
+            base._name = "ldarg";
+            base._type = "operation";
+            base._executable = true;
+            _argidx = i;
+        }
+
+        override public OpCodeResult Execute(Environment e)
+        {
+            string errorMessage = "";
+            StackItemFrame sif = e.Stack.CurentStackItemFrame();
+            if (_argidx < sif.Args.Count)
+            {
+                e.Stack.Push(sif.Args[_argidx].Type, sif.Args[_argidx].Value);
+            }
+            else errorMessage = "Argument " + _argidx + " does not exist in function " + sif.FrameName + " line : " + (_line + 1);
+            return new OpCodeResult(errorMessage);
+        }
+
     }
 }
