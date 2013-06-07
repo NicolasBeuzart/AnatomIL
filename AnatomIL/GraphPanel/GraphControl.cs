@@ -16,7 +16,7 @@ namespace AnatomIL.GraphPanel
             base.OnPaint(e);
 
             ButtonsBar.CurrentComputer.Graph.Draw(e.Graphics);
-          
+
         }
     }
 }

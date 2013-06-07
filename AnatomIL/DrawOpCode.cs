@@ -58,4 +58,31 @@ namespace AnatomIL
             return new OpCodeResult(errorMessage);
         }
     }
+
+    public class EllipseToOpCode : OpCode
+    {
+        int _x;
+        int _y;
+        string _color;
+
+        public EllipseToOpCode(int x, int y, string color, int line)
+        {
+            _x = x;
+            _y = y;
+            _color = color;
+            _line = line;
+            base._name = "ellipseto";
+            base._type = "draw";
+            base._executable = true;
+        }
+
+        override public OpCodeResult Execute(Environment e)
+        {
+            string errorMessage = "";
+
+            e.Graph.EllipseTo(_x, _y, _color);
+
+            return new OpCodeResult(errorMessage);
+        }
+    }
 }

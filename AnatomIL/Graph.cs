@@ -60,6 +60,30 @@ namespace AnatomIL
         }
     }
 
+    public class EllipseToItem : DrwItem
+    {
+        readonly int _x;
+        readonly int _y;
+        readonly string _color;
+
+        public EllipseToItem(int x, int y, string color)
+        {
+            _x = x;
+            _y = y;
+            _color = color;
+        }
+
+        public override void Draw(DrwContext ctx, Graphics g)
+        {
+            Pen UserPen = new Pen(System.Drawing.Color.FromName(_color));
+
+            g.DrawEllipse(UserPen, ctx.CurrentX, ctx.CurrentY, _x, _y);
+
+            ctx.CurrentX = _x;
+            ctx.CurrentY = _y;
+        }
+    }
+
     public class Graph
     {
         List<DrwItem> _instructions;
@@ -76,6 +100,11 @@ namespace AnatomIL
         public void LineTo(int x, int y, string color)
         {
             _instructions.Add(new LineToItem(x, y, color));
+        }
+
+        public void EllipseTo(int x, int y, string color)
+        {
+            _instructions.Add(new EllipseToItem(x, y, color));
         }
 
         public void ClearScreen()
