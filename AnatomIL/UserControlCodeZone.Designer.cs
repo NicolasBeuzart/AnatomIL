@@ -60,9 +60,11 @@
             this.textBoxCode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxCode.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxCode.Location = new System.Drawing.Point(56, 17);
             this.textBoxCode.Multiline = true;
             this.textBoxCode.Name = "textBoxCode";
+            this.textBoxCode.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxCode.Size = new System.Drawing.Size(248, 307);
             this.textBoxCode.TabIndex = 2;
             // 
@@ -72,23 +74,26 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listBoxInstructions.Enabled = false;
+            this.listBoxInstructions.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxInstructions.FormattingEnabled = true;
+            this.listBoxInstructions.ItemHeight = 16;
             this.listBoxInstructions.Location = new System.Drawing.Point(56, 16);
             this.listBoxInstructions.Name = "listBoxInstructions";
-            this.listBoxInstructions.Size = new System.Drawing.Size(251, 303);
+            this.listBoxInstructions.Size = new System.Drawing.Size(251, 292);
             this.listBoxInstructions.TabIndex = 3;
             this.listBoxInstructions.Visible = false;
             // 
             // BreakPointList
             // 
             this.BreakPointList.Dock = System.Windows.Forms.DockStyle.Left;
+            this.BreakPointList.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BreakPointList.Location = new System.Drawing.Point(0, 17);
             this.BreakPointList.MinimumSize = new System.Drawing.Size(50, 4);
             this.BreakPointList.Name = "BreakPointList";
             this.BreakPointList.Size = new System.Drawing.Size(50, 310);
             this.BreakPointList.TabIndex = 4;
             this.BreakPointList.Visible = false;
-            this.BreakPointList.VisibleChanged += new System.EventHandler(this.BreakPointList_VisibleChanged);
+            this.BreakPointList.EnabledChanged += new System.EventHandler(this.BreakPointList_EnabledChanged);
             // 
             // UserControlCodeZone
             // 
@@ -96,8 +101,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.BreakPointList);
             this.Controls.Add(this.panInstruction);
-            this.Controls.Add(this.textBoxCode);
             this.Controls.Add(this.listBoxInstructions);
+            this.Controls.Add(this.textBoxCode);
             this.Name = "UserControlCodeZone";
             this.Size = new System.Drawing.Size(307, 327);
             this.panInstruction.ResumeLayout(false);

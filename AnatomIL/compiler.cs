@@ -49,7 +49,6 @@ namespace AnatomIL
                     }
                     else if (t.IsDirective(out _opCodeRoot))
                     {
-
                         result = _opCodeRoot.Parse(t);
 
                         if (result.IsSuccess) code.Add(result.OpCode);

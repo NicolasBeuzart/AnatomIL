@@ -26,6 +26,8 @@ namespace AnatomIL
 
         public Stack Stack { get { return _env.Stack; } }
 
+        public Graph Graph { get { return _env.Graph; } }
+
         public void LoadCode(string[] Sourcecode)
         {
             _Sourcecode = Sourcecode;
@@ -75,9 +77,11 @@ namespace AnatomIL
 
         public void ExecuteNextInstruction()
         {
-            OpCodeResult o;
-            o = _compiledCode.Code[Pc].Execute(_env);
 
+            OpCodeResult o;
+
+            o = _compiledCode.Code[Pc].Execute(_env);
+           
             if (o.ErrorMessage != "") ErrorMessages.Add(o.ErrorMessage);
             //on passe à l'instruction suivante
             Pc = GoToNextInst(Pc);
