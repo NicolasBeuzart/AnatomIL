@@ -75,6 +75,15 @@ namespace AnatomIL
                 }
             }
 
+            bool main = false;
+
+            foreach (var c in code)
+            {
+                if (c != null && c.NameFrame == "main") main = true;
+            }
+
+            if (!main) errorMessages.Add("Missing main function");
+
             if (errorMessages.Count == 0)
             {
                 return new CompilerResult(new CompiledCode(code));

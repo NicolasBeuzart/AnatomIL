@@ -497,8 +497,8 @@ namespace AnatomIL
             {
                 if (e.Stack.CurentStackItemFrame().RetType != typeof(void))
                 {
-                    e.Stack.Pop(out s);
-                    if (s.Type != e.Stack.CurentStackItemFrame().RetType) errorMessage = "Function " + e.Stack.CurentStackItemFrame().FrameName + " excepted return type of " + e.Stack.CurentStackItemFrame().RetType.ToString() + " but given " + s.Type.ToString() + " type line : " + (_line + 1);
+                    if (!e.Stack.Pop(out s)) errorMessage = "Function " + e.Stack.CurentStackItemFrame().FrameName + " excepted return type of " + e.Stack.CurentStackItemFrame().RetType.ToString().Split('.')[1] + " but given void type line : " + (_line + 1);
+                    else if (s.Type != e.Stack.CurentStackItemFrame().RetType) errorMessage = "Function " + e.Stack.CurentStackItemFrame().FrameName + " excepted return type of " + e.Stack.CurentStackItemFrame().RetType.ToString().Split('.')[1] + " but given " + s.Type.ToString().Split('.')[1] + " type line : " + (_line + 1);
                     else if (!e.Stack.PopFrame()) errorMessage = "stack is not empty can't execute the operation 'ret' line :" + (_line + 1);
                     else
                     {
