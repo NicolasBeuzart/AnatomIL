@@ -22,7 +22,7 @@ namespace AnatomIL
             {
                 int i = 0;
                 string myName = enumName + '.' + val.ToString();
-                _values.Add(myName, i);
+                _values.Add(myName, (int)val);
                 i++;
             }
         }
@@ -35,9 +35,9 @@ namespace AnatomIL
             if (t.IsRegex(@"^\p{L}\w*\.[a-zA-Z]\w*", out potentialEnumName))
             {
                 if (_values.TryGetValue(potentialEnumName, out value)) return true;
-                errorMessage = String.Format("At {0}: Unknow enum value ", t.ToString());
+                errorMessage = String.Format("At line {0}: Unknow enum value ", t.CurentLigne + 1);
             }
-            value = 0;
+            value = -1;
             return false;
         }
 

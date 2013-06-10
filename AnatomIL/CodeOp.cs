@@ -14,6 +14,7 @@ namespace AnatomIL
         internal string _type;
         internal int _line;
         internal List<StackItemValue> _args;
+        internal string _target;
 
 
         public OpCode()
@@ -21,6 +22,7 @@ namespace AnatomIL
 
         }
 
+        public string Target { get { return _target; } }
         public List<StackItemValue> Args { get { return _args; } }
         public string Type { get { return _type; } }
         public bool IsExecutable { get { return _executable; } }
@@ -443,11 +445,10 @@ namespace AnatomIL
 
     public class CallOpCode : OpCode
     {
-        string _target;
         public CallOpCode(string name, int line)
         {
             _line = line;
-            base._name = "prototype";
+            base._name = "call";
             base._type = "operation";
             base._executable = true;
             _target = name;

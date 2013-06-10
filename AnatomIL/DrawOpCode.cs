@@ -80,13 +80,9 @@ namespace AnatomIL
                 {
                     Int32 x = Convert.ToInt32(StV1.Value);
                     Int32 y = Convert.ToInt32(StV2.Value);
-                    Int32 v = Convert.ToInt32(StV3.Value);
 
-                    if (e.EnumManager.IsEnumValue(_t, out  v, out errorMessage))
-                    {
                         Color c = Color.FromKnownColor((KnownColor)StV3.Value);
                         e.Graph.LineTo(x, y, c);
-                    }
                 }
             }
             else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
