@@ -162,7 +162,7 @@ namespace AnatomIL
                
                Code.BreakPointList.Visible = true;
 
-               GraphController.Dispose();
+               GraphController.Invalidate();
                
                if (computer.ErrorMessages.Count > 0)
                {
