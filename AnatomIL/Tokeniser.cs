@@ -35,7 +35,19 @@ namespace AnatomIL
 
             foreach (string s in _code)
             {
-                _code[i] = s.Trim();
+                string tmp= "";
+                bool Iscoment = false;
+
+                for (int j = 0; j < s.Length - 1 && Iscoment == false; j++)
+                {
+                    if (s[j] == '/' && s[j + 1] == '/') Iscoment = true;
+                    else tmp += s[j];
+                }
+
+                if (Iscoment == false && s.Length != 0) tmp += s[s.Length - 1];
+                   
+
+                _code[i] = tmp.Trim();
                 i++;
             }
 
@@ -180,7 +192,29 @@ namespace AnatomIL
                 s += _curentToken[i];
             }
 
+            _idxToken += i;
+            MatchSpace();
             return (true);
+        }
+
+        public bool IsInt(out int i)
+        {
+            string s = "";
+            int j;
+
+            for (j = _idxToken; j < _curentToken.Length && !_delimiter.Contains(_curentToken[j]); j++)
+            {
+                s += _curentToken[j];
+            }
+            bool result = Int32.TryParse(s, out i);
+
+            if (Int32.TryParse(s, out i))
+            {
+                _idxToken += j;
+                return true;
+            }
+            else return false;
+            
         }
 
         public bool IsString(out string s)

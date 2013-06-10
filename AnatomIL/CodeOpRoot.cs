@@ -178,19 +178,22 @@ namespace AnatomIL
 
             if (!(t.IsOption(out option) && t.MatchSpace()))
                 errorMessage = "Bad utilisation of Operation " + base._name + " in line : " + (t.CurentLigne + 1);
-            else if (!(_enumManager.IsEnumValue(t, out result, out errorMessage) || t.IsArgument(out argument)))
+            else if (!((_enumManager.IsEnumValue(t, out result, out errorMessage) && t.IsEnd)))
             {
+                if (!(t.IsInt(out result) && t.IsEnd))
                 errorMessage = "Bad utilisation of Operation " + base._name + " in line : " + (t.CurentLigne + 1);
             }
+
+            if (errorMessage != "") ;
             else if (option.Equals("i8"))
             {
                 Int64 tmp;
-                if (!Int64.TryParse(argument, out tmp)) errorMessage = "Argument isn't Int64 in Operation" + base._name;
-                else
-                {
-                    type = typeof(Int64);
-                    Value = Convert.ToInt64(argument);
-                }
+                //if (!Int64.TryParse(argument, out tmp)) errorMessage = "Argument isn't Int64 in Operation" + base._name;
+                //else
+                //{
+                type = typeof(Int64);
+                Value = Convert.ToInt64(result);
+                //}
             }
             else if (option.Equals("i4"))
             {
@@ -200,23 +203,23 @@ namespace AnatomIL
                     type = typeof(Int32);
                     Value = result;
                 }
-                else if (!Int32.TryParse(argument, out tmp)) errorMessage = "Argument isn't Int32 in Operation " + base._name;
-                else
-                {
-                    type = typeof(Int32);
-                    Value = Convert.ToInt32(argument);
-                }
+                //else if (!Int32.TryParse(argument, out tmp)) errorMessage = "Argument isn't Int32 in Operation " + base._name;
+                //else
+                //{
+                type = typeof(Int32);
+                Value = Convert.ToInt32(result);
+                //}
             }
             else if (option.Equals("i2"))
             {
 
                 Int16 tmp;
-                if (!Int16.TryParse(argument, out tmp)) errorMessage = "Argument isn't Int16 in Operation" + base._name;
-                else
-                {
-                    type = typeof(Int16);
-                    Value = Convert.ToInt16(argument);
-                }
+                //if (!Int16.TryParse(argument, out tmp)) errorMessage = "Argument isn't Int16 in Operation" + base._name;
+                //else
+                //{
+                type = typeof(Int16);
+                Value = Convert.ToInt16(result);
+                //}
             }
             else
             {

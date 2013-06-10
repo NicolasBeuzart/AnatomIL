@@ -30,7 +30,7 @@ namespace AnatomIL
                     result = prototype.Parse(t);
                     if (result.IsSuccess)
                     {
-                        if (result.OpCode != null && !(t.MatchNextToken() && t.MatchOpenBraket())) errorMessages.Add("missing '{' line :" + t.CurentLigne);
+                        if (result.OpCode != null && !(t.MatchNextToken() && t.MatchOpenBraket())) errorMessages.Add("missing '{' line :" + (t.CurentLigne + 1));
                         else if (result.OpCode != null) code.Add(null);
                         code.Add(result.OpCode);
                     }
