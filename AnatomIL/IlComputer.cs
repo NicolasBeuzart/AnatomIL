@@ -19,7 +19,6 @@ namespace AnatomIL
             _env = new Environment();
             ErrorMessages = new List<string>();
             _compiler = new Compiler();
-
         }
 
         public int Pc { get { return _env.Pc; } internal set { _env.Pc = value; } }

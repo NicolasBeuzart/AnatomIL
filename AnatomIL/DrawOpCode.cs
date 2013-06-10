@@ -3,19 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace AnatomIL
 {
     public class MoveToOpCode :OpCode
     {
-        int _x;
-        int _y;
 
-
-        public MoveToOpCode(int x, int y, int line)
+        public MoveToOpCode(int line)
         {
-            _x = x;
-            _y = y;
             _line = line;
             base._name = "moveto";
             base._type = "draw";
@@ -26,24 +22,38 @@ namespace AnatomIL
         {
             string errorMessage = "";
 
-            e.Graph.MoveTo(_x, _y);
-            
+            StackItemValue StV1;
+            StackItemValue StV2;
+
+            if (e.Stack.Pop(out StV1) && e.Stack.Pop(out StV2))
+            {
+
+                if (StV1.Type != typeof(Int32)) errorMessage = "x value is not type int32 for operation" + _name + " line :" + _line;
+
+                else if (StV2.Type != typeof(Int32)) errorMessage = "y value is not type int32 for operation" + _name + " line :" + _line;
+
+                else
+                {
+                    Int32 x = Convert.ToInt32(StV1.Value);
+                    Int32 y = Convert.ToInt32(StV2.Value);
+                    e.Graph.MoveTo(x, y);
+                }
+            }
+            else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
+
+
             return new OpCodeResult(errorMessage);
         }
     }
 
     public class LineToOpCode : OpCode
     {
-        int _x;
-        int _y;
-        string _color;
+        Tokeniser _t;
 
-        public LineToOpCode(int x, int y, string color, int line)
+        public LineToOpCode(Tokeniser t, int line)
         {
-            _x = x;
-            _y = y;
-            _color = color;
             _line = line;
+            _t = t;
             base._name = "lineto";
             base._type = "draw";
             base._executable = true;
@@ -53,7 +63,33 @@ namespace AnatomIL
         {
             string errorMessage = "";
 
-            e.Graph.LineTo(_x, _y, _color);
+            StackItemValue StV1;
+            StackItemValue StV2;
+            StackItemValue StV3;
+
+            if (e.Stack.Pop(out StV1) && e.Stack.Pop(out StV2) && e.Stack.Pop(out StV3))
+            {
+
+                if (StV1.Type != typeof(Int32)) errorMessage = "x value is not type int32 for operation" + _name + " line :" + _line;
+
+                else if (StV2.Type != typeof(Int32)) errorMessage = "y value is not type int32 for operation" + _name + " line :" + _line;
+
+                else if (StV3.Type != typeof(Int32)) errorMessage = "color value is not type int32 for operation" + _name + " line :" + _line;
+
+                else
+                {
+                    Int32 x = Convert.ToInt32(StV1.Value);
+                    Int32 y = Convert.ToInt32(StV2.Value);
+                    Int32 v = Convert.ToInt32(StV3.Value);
+
+                    if (e.EnumManager.IsEnumValue(_t, out  v, out errorMessage))
+                    {
+                        Color c = Color.FromKnownColor((KnownColor)StV3.Value);
+                        e.Graph.LineTo(x, y, c);
+                    }
+                }
+            }
+            else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
 
             return new OpCodeResult(errorMessage);
         }
@@ -61,15 +97,11 @@ namespace AnatomIL
 
     public class EllipseToOpCode : OpCode
     {
-        int _x;
-        int _y;
-        string _color;
+        Tokeniser _t;
 
-        public EllipseToOpCode(int x, int y, string color, int line)
+        public EllipseToOpCode(Tokeniser t, int line)
         {
-            _x = x;
-            _y = y;
-            _color = color;
+            _t = t;
             _line = line;
             base._name = "ellipseto";
             base._type = "draw";
@@ -80,9 +112,36 @@ namespace AnatomIL
         {
             string errorMessage = "";
 
-            e.Graph.EllipseTo(_x, _y, _color);
+            StackItemValue StV1;
+            StackItemValue StV2;
+            StackItemValue StV3;
 
+            if (e.Stack.Pop(out StV1) && e.Stack.Pop(out StV2) && e.Stack.Pop(out StV3))
+            {
+
+                if (StV1.Type != typeof(Int32)) errorMessage = "x value is not type int32 for operation" + _name + " line :" + _line;
+
+                else if (StV2.Type != typeof(Int32)) errorMessage = "y value is not type int32 for operation" + _name + " line :" + _line;
+
+                else if (StV3.Type != typeof(Int32)) errorMessage = "color value is not type int32 for operation" + _name + " line :" + _line;
+
+                else
+                {
+                    Int32 x = Convert.ToInt32(StV1.Value);
+                    Int32 y = Convert.ToInt32(StV2.Value);
+                    Int32 v = Convert.ToInt32(StV3.Value);
+
+                    if (e.EnumManager.IsEnumValue(_t, out  v, out errorMessage))
+                    {
+                        Color c = Color.FromKnownColor((KnownColor)StV3.Value);
+                        e.Graph.EllipseTo(x, y, c);
+                    }
+                }
+            }
+            else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
+           
             return new OpCodeResult(errorMessage);
         }
     }
+
 }

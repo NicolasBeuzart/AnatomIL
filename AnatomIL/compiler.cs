@@ -13,7 +13,6 @@ namespace AnatomIL
         {
         }
 
-
         public CompilerResult Compile(Tokeniser t)
         {
             List<OpCode> code = new List<OpCode>();
@@ -37,7 +36,7 @@ namespace AnatomIL
                     }
                     else errorMessages.Add(result.ErrorMessage);
 
-                    
+                   
                 }
                 else
                 {
