@@ -164,6 +164,7 @@ namespace AnatomIL
 
             s = "";
             int i;
+            int tmp;
 
             for (i = _idxToken;_curentToken.Length > i && _curentToken[i] != '.' ; i++)
             {
@@ -172,7 +173,9 @@ namespace AnatomIL
 
             if (_curentToken.Length <= i) return false;
 
-            for (i = i; _curentToken.Length > i && _curentToken[i] != ' '; i++)
+            tmp = i;
+
+            for (i = tmp; _curentToken.Length > i && _curentToken[i] != ' '; i++)
             {
                 s += _curentToken[i];
             }

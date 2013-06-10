@@ -48,12 +48,10 @@ namespace AnatomIL
 
     public class LineToOpCode : OpCode
     {
-        Tokeniser _t;
 
-        public LineToOpCode(Tokeniser t, int line)
+        public LineToOpCode(int line)
         {
             _line = line;
-            _t = t;
             base._name = "lineto";
             base._type = "draw";
             base._executable = true;
@@ -81,8 +79,8 @@ namespace AnatomIL
                     Int32 x = Convert.ToInt32(StV1.Value);
                     Int32 y = Convert.ToInt32(StV2.Value);
 
-                        Color c = Color.FromKnownColor((KnownColor)StV3.Value);
-                        e.Graph.LineTo(x, y, c);
+                    Color c = Color.FromKnownColor((KnownColor)StV3.Value);
+                    e.Graph.LineTo(x, y, c);
                 }
             }
             else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
@@ -93,11 +91,9 @@ namespace AnatomIL
 
     public class EllipseToOpCode : OpCode
     {
-        Tokeniser _t;
 
-        public EllipseToOpCode(Tokeniser t, int line)
+        public EllipseToOpCode(int line)
         {
-            _t = t;
             _line = line;
             base._name = "ellipseto";
             base._type = "draw";
@@ -125,14 +121,11 @@ namespace AnatomIL
                 {
                     Int32 x = Convert.ToInt32(StV1.Value);
                     Int32 y = Convert.ToInt32(StV2.Value);
-                    Int32 v = Convert.ToInt32(StV3.Value);
 
-                    if (e.EnumManager.IsEnumValue(_t, out  v, out errorMessage))
-                    {
-                        Color c = Color.FromKnownColor((KnownColor)StV3.Value);
-                        e.Graph.EllipseTo(x, y, c);
-                    }
-                }
+                     Color c = Color.FromKnownColor((KnownColor)StV3.Value);
+                     e.Graph.EllipseTo(x, y, c);
+
+                 }
             }
             else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
            
@@ -142,12 +135,10 @@ namespace AnatomIL
 
     public class CurveToOpCode : OpCode
     {
-        Tokeniser _t;
 
-        public CurveToOpCode(Tokeniser t, int line)
+        public CurveToOpCode(int line)
         {
             _line = line;
-            _t = t;
             base._name = "curveto";
             base._type = "draw";
             base._executable = true;
@@ -160,6 +151,7 @@ namespace AnatomIL
             StackItemValue StV1;
             StackItemValue StV2;
             StackItemValue StV3;
+            StackItemValue StV4;
             Int32 NbrPts;
 
             if (e.Stack.Pop(out StV1))
@@ -175,38 +167,36 @@ namespace AnatomIL
                     for(NbrPts = 0; NbrPts < i; NbrPts++)
                     {
 
-                           if (e.Stack.Pop(out StV1) && e.Stack.Pop(out StV2))
-                           {
+                        if (e.Stack.Pop(out StV2) && e.Stack.Pop(out StV3))
+                        {
 
-                                  if (StV1.Type != typeof(Int32)) errorMessage = "x value is not type int32 for operation" + _name + " line :" + _line;
-                    
-                                  else if (StV2.Type != typeof(Int32)) errorMessage = "y value is not type int32 for operation" + _name + " line :" + _line;
+                            if (StV2.Type != typeof(Int32)) errorMessage = "x value is not type int32 for operation" + _name + " line :" + _line;
 
-                                  else
-                                  {
-                                      Int32 tmpx = Convert.ToInt32(StV1.Value);
-                                      Int32 tmpy = Convert.ToInt32(StV2.Value);
+                            else if (StV3.Type != typeof(Int32)) errorMessage = "y value is not type int32 for operation" + _name + " line :" + _line;
 
-                                     x[NbrPts] = tmpx;
-                                     y[NbrPts] = tmpy;
-                                  }
-                           }
+                            else
+                            {
+                                Int32 tmpx = Convert.ToInt32(StV2.Value);
+                                Int32 tmpy = Convert.ToInt32(StV3.Value);
+
+                                x[NbrPts] = tmpx;
+                                y[NbrPts] = tmpy;
+                            }
+                        }
+                        else
+                        {
+                            errorMessage = "Missing arguments for operation" + _name + " line :" + _line;
+                        }
                     }
 
-                    if(e.Stack.Pop(out StV3))
+                    if(e.Stack.Pop(out StV4))
                     {
-                        if (StV3.Type != typeof(Int32)) errorMessage = "color value is not type int32 for operation" + _name + " line :" + _line;
+                        if (StV4.Type != typeof(Int32)) errorMessage = "color value is not type int32 for operation" + _name + " line :" + _line;
 
                         else
                         {
-                            Int32 v = Convert.ToInt32(StV3.Value);
-
-                            if (e.EnumManager.IsEnumValue(_t, out  v, out errorMessage))
-                            {
-                                Color c = Color.FromKnownColor((KnownColor)StV3.Value);
+                                Color c = Color.FromKnownColor((KnownColor)StV4.Value);
                                 e.Graph.CurveTo(x, y, c);
-                            }
-
                         }
                     }
                 }

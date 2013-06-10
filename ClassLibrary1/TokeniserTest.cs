@@ -17,8 +17,9 @@ namespace AnatomIL.test
             string[] s = { "void main()", "{", "ldc.i4 12", "}" };
             Tokeniser t = new Tokeniser(s);
             string st;
+            EnumManager e = new EnumManager();
             OpCodeRoot r;
-            OpCodeRoot r2 = new LdcOpCodeRoot();
+            OpCodeRoot r2 = new LdcOpCodeRoot(e);
 
             Assert.That(t.MatchNextToken(), Is.True);
             Assert.That(t.IsType(out st), Is.True, "type not define");

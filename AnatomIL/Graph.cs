@@ -113,9 +113,11 @@ namespace AnatomIL
             }
 
             g.DrawCurve(UserPen, AllPoints);
+            g.DrawLines(UserPen, AllPoints);
 
-            ctx.CurrentX = _x[i-1];
-            ctx.CurrentY = _y[i-1];
+
+            ctx.CurrentX = AllPoints[i].X;
+            ctx.CurrentY = AllPoints[i].Y;
         }
     }
 

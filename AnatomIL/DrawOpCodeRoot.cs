@@ -43,7 +43,7 @@ namespace AnatomIL
             if (!(t.MatchOpenPar() && t.MatchClosePar() && t.IsEnd))
                 errorMessage = "Bad utilisation of Operation " + base._name + " in line : " + t.CurentLigne;
    
-            return (new OpCodeRootResult(errorMessage, new LineToOpCode(t, t.CurentLigne)));
+            return (new OpCodeRootResult(errorMessage, new LineToOpCode(t.CurentLigne)));
         }
 
     }
@@ -64,7 +64,7 @@ namespace AnatomIL
             if (!(t.MatchOpenPar() && t.MatchClosePar() && t.IsEnd))
                 errorMessage = "Bad utilisation of Operation " + base._name + " in line : " + t.CurentLigne;
 
-            return (new OpCodeRootResult(errorMessage, new EllipseToOpCode(t, t.CurentLigne)));
+            return (new OpCodeRootResult(errorMessage, new EllipseToOpCode(t.CurentLigne)));
         }
 
     }
@@ -86,7 +86,7 @@ namespace AnatomIL
             if (!(t.MatchOpenPar() && t.MatchClosePar() && t.IsEnd))
                 errorMessage = "Bad utilisation of Operation " + base._name + " in line : " + t.CurentLigne;
 
-            return (new OpCodeRootResult(errorMessage, new CurveToOpCode(t, t.CurentLigne)));
+            return (new OpCodeRootResult(errorMessage, new CurveToOpCode(t.CurentLigne)));
         }
 
     }

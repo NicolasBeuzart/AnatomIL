@@ -148,8 +148,6 @@ namespace AnatomIL
                Code.listBoxInstructions.Visible = true;
                Code.textBoxCode.Visible = false;
 
-
-
                string s = Code.textBoxCode.Text.Replace("\r", "");
                string[] s2 = s.Split(new char[] { '\n' });
 
@@ -163,7 +161,8 @@ namespace AnatomIL
                Code.BreakPointList.Enabled = !Code.BreakPointList.Enabled;
                
                Code.BreakPointList.Visible = true;
-               
+
+               GraphController.Dispose();
                
                if (computer.ErrorMessages.Count > 0)
                {

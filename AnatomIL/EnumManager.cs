@@ -10,7 +10,7 @@ namespace AnatomIL
     {
         readonly Dictionary<string, int> _values;
 
-        internal EnumManager()
+        public EnumManager()
         {
             _values = new Dictionary<string, int>();
         }
@@ -20,10 +20,8 @@ namespace AnatomIL
             if (!typeEnum.IsEnum) throw new ArgumentException("Must be an enum!", "typeEnum");
             foreach (var val in Enum.GetValues(typeEnum))
             {
-                int i = 0;
                 string myName = enumName + '.' + val.ToString();
                 _values.Add(myName, (int)val);
-                i++;
             }
         }
 

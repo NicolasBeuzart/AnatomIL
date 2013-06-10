@@ -146,7 +146,8 @@ namespace AnatomIL.test
         [Test]
         public void LdcOpCodeRootTest()
         {
-            LdcOpCodeRoot ldc = new LdcOpCodeRoot();
+            EnumManager e = new EnumManager();
+            LdcOpCodeRoot ldc = new LdcOpCodeRoot(e);
             OpCodeRootResult result;
             string[] code = { ".i4 12", ".i4", " 12", "", ".i2 12", ".i2 4564646456" };
             List<string> options = new List<string>();

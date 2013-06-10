@@ -174,7 +174,6 @@ namespace AnatomIL
             object Value = null;
             string option;
             string argument = "";
-            string tmp2 = null;
             int result = -1;
 
             if (!(t.IsOption(out option) && t.MatchSpace()))
