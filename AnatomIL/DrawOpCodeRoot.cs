@@ -69,5 +69,27 @@ namespace AnatomIL
 
     }
 
+    public class CurveToOpCodeRoot : OpCodeRoot
+    {
+
+        public CurveToOpCodeRoot()
+        {
+            base._name = "curveto";
+            base._type = "draw";
+        }
+
+        override public OpCodeRootResult Parse(Tokeniser t)
+        {
+            string errorMessage = "";
+
+
+            if (!(t.MatchOpenPar() && t.MatchClosePar() && t.IsEnd))
+                errorMessage = "Bad utilisation of Operation " + base._name + " in line : " + t.CurentLigne;
+
+            return (new OpCodeRootResult(errorMessage, new CurveToOpCode(t, t.CurentLigne)));
+        }
+
+    }
+
 }
 

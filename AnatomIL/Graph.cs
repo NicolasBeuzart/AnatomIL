@@ -84,6 +84,41 @@ namespace AnatomIL
         }
     }
 
+    public class CurveToItem : DrwItem
+    {
+        readonly int[] _x;
+        readonly int[] _y;
+        readonly Color _color;
+
+        public CurveToItem(int []x, int []y, Color color)
+        {
+            _x = x;
+            _y = y;
+            _color = color;
+        }
+
+        public override void Draw(DrwContext ctx, Graphics g)
+        {
+            Pen UserPen = new Pen(_color);
+            Point[] AllPoints = new Point[_x.Length + 1];
+            int i;
+
+            AllPoints[0].X = ctx.CurrentX;
+            AllPoints[0].Y = ctx.CurrentY;
+
+            for (i = 1; i < _x.Length + 1; i++)
+            {
+                AllPoints[i].X = _x[i-1];
+                AllPoints[i].Y = _y[i-1];
+            }
+
+            g.DrawCurve(UserPen, AllPoints);
+
+            ctx.CurrentX = _x[i-1];
+            ctx.CurrentY = _y[i-1];
+        }
+    }
+
     public class Graph
     {
         List<DrwItem> _instructions;
@@ -105,6 +140,11 @@ namespace AnatomIL
         public void EllipseTo(int x, int y, Color color)
         {
             _instructions.Add(new EllipseToItem(x, y, color));
+        }
+
+        public void CurveTo(int []x, int []y, Color color)
+        {
+            _instructions.Add(new CurveToItem(x, y, color));
         }
 
         public void ClearScreen()
