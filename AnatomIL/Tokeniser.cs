@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace AnatomIL
@@ -146,18 +147,33 @@ namespace AnatomIL
             else return (false);
         }
 
+        public bool IsRegex( string pattern, out string s)
+        {
+            if (pattern == null) throw new ArgumentNullException("pattern");
+            if (pattern.Length == 0) throw new ArgumentException("Must not be empty.", "pattern");
+            if (pattern[0] != '^' ) throw new ArgumentException("Must start with ^.", "pattern");
+            Regex r = new Regex(pattern);
+            Match m = r.Match(_curentToken, _idxToken);
+            if (m.Success)
+            {
+                s = m.Value;
+                _idxToken += m.Length;
+            }
+            else s = String.Empty;
+            return m.Success;
+        }
+
         public bool IsString(out string s)
         {
-            s = "";
+            StringBuilder b = new StringBuilder();
 
             while (!IsEnd && !_delimiter.Contains(_curentToken[_idxToken]))
             {
-                s += _curentToken[_idxToken];
+                b.Append(_curentToken[_idxToken]);
                 _idxToken++;
             }
-
-            if (s != "") return (true);
-            else return (false);
+            s = b.ToString();
+            return b.Length > 0;
         }
 
         public bool IsDirective(out OpCodeRoot result)

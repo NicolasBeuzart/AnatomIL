@@ -79,6 +79,15 @@ namespace AnatomIL
             foreach (var c in code)
             {
                 if (c != null && c.NameFrame == "main") main = true;
+                if (c != null && c.Name == "call")
+                {
+                    bool tmp = false;
+                    foreach (var a in code)
+                    {
+                        if (a != null && a.NameFrame == c.Target) tmp = true;
+                    }
+                    if (!tmp) errorMessages.Add("Error line " + (c.Line + 1) + " : fuction " + c.Target + " can't be call does not existe");
+                }
             }
 
             if (!main) errorMessages.Add("Missing main function");
