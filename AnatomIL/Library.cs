@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace AnatomIL
 {
     public class Library
     {
         Dictionary<string, OpCodeRoot> _library;
+        public EnumManager EnumManager = new EnumManager();
+
 
         public Library()
         {
             _library = new Dictionary<string, OpCodeRoot>();
+            EnumManager.Register(typeof(KnownColor), "Color");
         }
 
         public void LibAddCodeOpRoot(OpCodeRoot methode)
@@ -27,7 +31,7 @@ namespace AnatomIL
             this.LibAddCodeOpRoot(new MulOpCodeRoot());
             this.LibAddCodeOpRoot(new DivOpCodeRoot());
             this.LibAddCodeOpRoot(new RemOpCodeRoot());
-            this.LibAddCodeOpRoot(new LdcOpCodeRoot());
+            this.LibAddCodeOpRoot(new LdcOpCodeRoot(EnumManager));
             this.LibAddCodeOpRoot(new BrOpCodeRoot());
             this.LibAddCodeOpRoot(new LabelOpCodeRoot());
             this.LibAddCodeOpRoot(new BeqOpCodeRoot());

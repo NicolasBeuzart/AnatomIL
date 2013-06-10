@@ -157,11 +157,14 @@ namespace AnatomIL
 
     public class LdcOpCodeRoot : OpCodeRoot
     {
+        EnumManager _enumManager;
 
-        public LdcOpCodeRoot()
+
+        public LdcOpCodeRoot(EnumManager enumManager)
         {
             base._name = "ldc";
             base._type = "operation";
+            _enumManager = enumManager;
         }
 
         override public OpCodeRootResult Parse(Tokeniser t)
@@ -170,10 +173,16 @@ namespace AnatomIL
             Type type = null;
             object Value = null;
             string option;
-            string argument;
+            string argument = "";
+            string tmp2 = null;
+            int result = -1;
 
-            if (!(t.IsOption(out option) && t.IsArgument(out argument) && t.IsEnd))
-                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
+            if (!(t.IsOption(out option) && t.MatchSpace()))
+                errorMessage = "Bad utilisation of Operation " + base._name + " in line : " + (t.CurentLigne + 1);
+            else if (!(_enumManager.IsEnumValue(t, out result, out errorMessage) || t.IsArgument(out argument)))
+            {
+                errorMessage = "Bad utilisation of Operation " + base._name + " in line : " + (t.CurentLigne + 1);
+            }
             else if (option.Equals("i8"))
             {
                 Int64 tmp;
@@ -187,7 +196,12 @@ namespace AnatomIL
             else if (option.Equals("i4"))
             {
                 Int32 tmp;
-                if (!Int32.TryParse(argument, out tmp)) errorMessage = "Argument isn't Int32 in Operation" + base._name;
+                if (result > -1)
+                {
+                    type = typeof(Int32);
+                    Value = result;
+                }
+                else if (!Int32.TryParse(argument, out tmp)) errorMessage = "Argument isn't Int32 in Operation " + base._name;
                 else
                 {
                     type = typeof(Int32);
@@ -196,6 +210,7 @@ namespace AnatomIL
             }
             else if (option.Equals("i2"))
             {
+
                 Int16 tmp;
                 if (!Int16.TryParse(argument, out tmp)) errorMessage = "Argument isn't Int16 in Operation" + base._name;
                 else

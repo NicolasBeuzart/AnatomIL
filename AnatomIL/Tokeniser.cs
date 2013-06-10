@@ -45,12 +45,6 @@ namespace AnatomIL
             _curentToken = "";
         }
 
-        public bool IsRegex(string pattern, out string s)
-        {
-            s = "Color.Black";
-            return true;
-        }
-
         public bool MatchNextToken()
         {
             if (_idxCode < _code.Count() - 1)
@@ -158,15 +152,32 @@ namespace AnatomIL
             if (pattern == null) throw new ArgumentNullException("pattern");
             if (pattern.Length == 0) throw new ArgumentException("Must not be empty.", "pattern");
             if (pattern[0] != '^' ) throw new ArgumentException("Must start with ^.", "pattern");
-            Regex r = new Regex(pattern);
-            Match m = r.Match(_curentToken, _idxToken);
-            if (m.Success)
+            //Regex r = new Regex(pattern);
+            //Match m = r.Match(_curentToken, _idxToken);
+            //if (m.Success)
+            //{
+            //    s = m.Value;
+            //    _idxToken += m.Length;
+            //}
+            //else s = String.Empty;
+            //return m.Success;
+
+            s = "";
+            int i;
+
+            for (i = _idxToken;_curentToken.Length > i && _curentToken[i] != '.' ; i++)
             {
-                s = m.Value;
-                _idxToken += m.Length;
+                s += _curentToken[i];
             }
-            else s = String.Empty;
-            return m.Success;
+
+            if (_curentToken.Length <= i) return false;
+
+            for (i = i; _curentToken.Length > i && _curentToken[i] != ' '; i++)
+            {
+                s += _curentToken[i];
+            }
+
+            return (true);
         }
 
         public bool IsString(out string s)
