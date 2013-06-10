@@ -40,9 +40,9 @@ namespace AnatomIL
     {
         readonly int _x;
         readonly int _y;
-        readonly string _color;
+        readonly Color _color;
 
-        public LineToItem(int x, int y, string color)
+        public LineToItem(int x, int y, Color color)
         {
             _x = x;
             _y = y;
@@ -51,7 +51,7 @@ namespace AnatomIL
 
         public override void Draw(DrwContext ctx, Graphics g)
         {
-            Pen UserPen = new Pen(System.Drawing.Color.FromName(_color));
+            Pen UserPen = new Pen(_color);
 
             g.DrawLine(UserPen, ctx.CurrentX, ctx.CurrentY, _x, _y);
 
@@ -64,9 +64,9 @@ namespace AnatomIL
     {
         readonly int _x;
         readonly int _y;
-        readonly string _color;
+        readonly Color _color;
 
-        public EllipseToItem(int x, int y, string color)
+        public EllipseToItem(int x, int y, Color color)
         {
             _x = x;
             _y = y;
@@ -75,7 +75,7 @@ namespace AnatomIL
 
         public override void Draw(DrwContext ctx, Graphics g)
         {
-            Pen UserPen = new Pen(System.Drawing.Color.FromName(_color));
+            Pen UserPen = new Pen(_color);
 
             g.DrawEllipse(UserPen, ctx.CurrentX, ctx.CurrentY, _x, _y);
 
@@ -97,12 +97,12 @@ namespace AnatomIL
             _instructions.Add(new MoveToItem(x, y));
         }
 
-        public void LineTo(int x, int y, string color)
+        public void LineTo(int x, int y, Color color)
         {
             _instructions.Add(new LineToItem(x, y, color));
         }
 
-        public void EllipseTo(int x, int y, string color)
+        public void EllipseTo(int x, int y, Color color)
         {
             _instructions.Add(new EllipseToItem(x, y, color));
         }

@@ -25,6 +25,7 @@ namespace AnatomIL
         public GraphPanel.GraphControl GraphController { get; set; }
         
         IlComputer computer = new IlComputer();
+
         public IlComputer CurrentComputer { get { return computer; } }
 
         public System.Windows.Forms.Timer GoTimer;

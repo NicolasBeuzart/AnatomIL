@@ -44,6 +44,12 @@ namespace AnatomIL
             _curentToken = "";
         }
 
+        public bool IsRegex(string pattern, out string s)
+        {
+            s = "Color.Black";
+            return true;
+        }
+
         public bool MatchNextToken()
         {
             if (_idxCode < _code.Count() - 1)

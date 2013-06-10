@@ -15,6 +15,7 @@ namespace AnatomIL
         internal int _line;
         internal List<StackItemValue> _args;
 
+
         public OpCode()
         {
 

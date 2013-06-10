@@ -58,6 +58,7 @@
     <Compile Include="compiler.cs" />
     <Compile Include="DrawOpCode.cs" />
     <Compile Include="DrawOpCodeRoot.cs" />
+    <Compile Include="EnumManager.cs" />
     <Compile Include="Environment.cs" />
     <Compile Include="FunctionAnnexe.cs" />
     <Compile Include="Graph.cs" />
