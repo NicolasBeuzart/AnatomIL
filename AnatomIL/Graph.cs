@@ -91,6 +91,37 @@ namespace AnatomIL
         }
     }
 
+    public class RectangleToItem : DrwItem
+    {
+        readonly int _x;
+        readonly int _y;
+        readonly Color _color;
+
+        public RectangleToItem(int x, int y, Color color)
+        {
+            _x = x;
+            _y = y;
+            _color = color;
+        }
+
+        public override void Draw(DrwContext ctx, Graphics g)
+        {
+            Pen UserPen = new Pen(_color);
+            int width;
+            int lenght;
+
+            width = _x - ctx.CurrentX;
+            lenght = _y - ctx.CurrentY;
+
+
+
+            g.DrawRectangle(UserPen, ctx.CurrentX, ctx.CurrentY, width, lenght);
+
+            ctx.CurrentX = _x;
+            ctx.CurrentY = _y;
+        }
+    }
+
     public class LinesToItem : DrwItem
     {
         readonly List<int> _x;
@@ -161,15 +192,21 @@ namespace AnatomIL
             _instructions.Add(new EllipseToItem(x, y, color));
         }
 
-        public void ClearScreen()
+        public void RectangleTo(int x, int y, Color color)
         {
-            _instructions.Clear();
+            _instructions.Add(new RectangleToItem(x, y, color));
         }
 
         public void LinesTo(List<int> x, List<int> y, Color color)
         {
             _instructions.Add(new LinesToItem(x, y, color));
         }
+
+        public void ClearScreen()
+        {
+            _instructions.Clear();
+        }
+
 
         public void Draw(Graphics g)
         {
