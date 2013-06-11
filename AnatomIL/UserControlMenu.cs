@@ -19,6 +19,8 @@ namespace AnatomIL
         }
 
         public UserControlCodeZone Code { get; set; }
+        public UserControlButtons ButtonsBar { get; set; }
+        public GraphPanel.GraphControl GraphController { get; set; }
 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -43,6 +45,32 @@ namespace AnatomIL
                 string name = saveCode.FileName + ".txt";
                 File.WriteAllText(name, Code.textBoxCode.Text);
             }
+        }
+
+        private void loadToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog loadImg = new OpenFileDialog();
+            loadImg.Filter = "Bianry Files (*.dat)|*.dat";
+            loadImg.Title = "Load Graph";
+
+            DialogResult dr = loadImg.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                string filePath = loadImg.FileName;
+                ButtonsBar.CurrentComputer.Graph.Load(filePath);
+            }
+        }
+
+        private void saveToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveImg = new SaveFileDialog();
+
+            if (saveImg.ShowDialog() == DialogResult.OK)
+            {
+                string ImgName = saveImg.FileName + ".dat";
+                ButtonsBar.CurrentComputer.Graph.Save(ImgName);
+            }
+            GraphController.Invalidate();
         }
     }
 }

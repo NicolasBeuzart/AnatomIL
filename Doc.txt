@@ -1,0 +1,263 @@
+			*///	INSTRUCTIONS LIST :     ///*
+
+
+
+
+
+/// add ///
+
+
+Pop two values of the stack and push the addition of those two values.
+
+
+Exceptions : -values aren't of the same type
+
+	     -Empty stack or only one element
+
+///////////
+
+
+
+beq
+bge
+bgt
+ble
+blt
+br
+brfalse
+brtrue
+brzero
+brnull
+brinst
+call
+
+
+
+/// div ///
+
+Pop two values of the stack and push the division of those two values.
+
+
+Exceptions : -values aren't of the same type
+
+	     -Empty stack or only one element
+
+///////////
+
+
+
+/// dup ///
+
+Duplicate the first element of the stack.
+
+
+Exceptions : -Empty stack
+
+//////////
+
+
+
+/// ellipseto ///
+
+Pop three elements of the stack and draw an ellipse between currentcursor and an other point define by the popped elements.
+
+The first and second popped elements are x and y coordinates of the other point.
+The third is the color.
+
+
+Exceptions : - x or y aren't Int32 values
+
+             - The color doesn't exist
+
+
+Example : The following code draw a red ellipse between the initial cursor(0,0) and (100,200).
+
+	void main()
+	{
+		ldc.i4 Color.Red
+		ldc.i4 200
+		ldc.i4 100
+		ellipseto()
+	}
+
+//////////
+
+
+
+
+/// :label ///
+
+The label transfer program control directly to a given statement, the statement must be labeled.
+
+
+Example : The following code is an infinite loop with a label and a br.
+
+	void main()
+	{
+		:lab
+
+		br lab
+	}
+
+//////////
+
+
+
+ldarg
+
+
+
+
+/// ldc ///
+
+Push an int on the stack. ldc must have an option.
+
+
+options : - .i2  :  push an int16
+
+	  - .i4  :  push an int32
+  
+	  - .i8  :  push an int64
+
+
+Exceptions : - The push value isn't an int.
+
+
+Example : The following code push 15 as an int32 and 20 as an int64 on the stack.
+
+	void main()
+	{
+		ldc.i4 15
+		ldc.i8 20
+	}
+	     
+//////////
+
+
+
+
+
+ldloc
+
+
+
+
+/// lineto ///
+
+Pop three elements of the stack and draw a line between currentcursor and an other point define by the popped elements.
+
+The first and second popped elements are x and y coordinates of the other point.
+The third is the color.
+
+
+Exceptions : - x or y aren't Int32 values
+
+             - The color doesn't exist
+
+
+Example : The following code draw a red line between the initial cursor(0,0) and (100,200).
+
+	void main()
+	{
+		ldc.i4 Color.Red
+		ldc.i4 200
+		ldc.i4 100
+		lineto()
+	}
+
+//////////
+
+
+
+/// moveto ///
+
+Pop two elements of the stack and set the currentcursor to the popped coordinates.
+
+The first popped element is x coordinate and the second is y.
+
+
+Exceptions : - x or y aren't Int32 values
+
+
+Example : The following code set the initial cursor(0,0) to a new position(100,200). This will not draw anything on the graph.
+
+	void main()
+	{
+		ldc.i4 200
+		ldc.i4 100
+		moveto()
+	}
+
+//////////
+
+
+
+/// mul ///
+
+Pop two values of the stack and push the multiplication of those two values.
+
+
+Exceptions : -values aren't of the same type
+
+	     -Empty stack or only one element
+
+///////////
+
+
+
+/// rectangleto ///
+
+Pop three elements of the stack and draw a rectangle from currentcursor to an other point define by the popped elements.
+
+The first and second popped elements are x and y coordinates of the other point.
+The third is the color.
+
+
+Exceptions : - x or y aren't Int32 values
+
+             - The color doesn't exist
+
+
+Example : The following code draw a red rectangle from the initial cursor(0,0) to (100,200).
+
+	void main()
+	{
+		ldc.i4 Color.Red
+		ldc.i4 200
+		ldc.i4 100
+		rectangleto()
+	}
+
+//////////
+
+
+/// rem ///
+
+Pop two values of the stack and push the remainder of the division of those two values.
+
+
+Exceptions : -values aren't of the same type
+
+	     -Empty stack or only one element
+
+///////////
+
+
+
+
+starg
+stloc
+
+
+
+
+/// sub ///
+
+Pop two values of the stack and push the subtraction of those two values.
+
+
+Exceptions : -values aren't of the same type
+
+	     -Empty stack or only one element
+
+///////////

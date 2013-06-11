@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace AnatomIL.GraphPanel
 {
@@ -18,5 +19,6 @@ namespace AnatomIL.GraphPanel
             ButtonsBar.CurrentComputer.Graph.Draw(e.Graphics);
 
         }
+
     }
 }
