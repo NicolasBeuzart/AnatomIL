@@ -36,6 +36,7 @@
             this.ShowPc = new System.Windows.Forms.CheckBox();
             this.ShowStack = new System.Windows.Forms.CheckBox();
             this.bt_continue = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btExecuteOneStep
@@ -128,10 +129,21 @@
             this.bt_continue.Visible = false;
             this.bt_continue.Click += new System.EventHandler(this.bt_restart_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(607, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(92, 24);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "Reset Graph";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // UserControlButtons
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.bt_continue);
             this.Controls.Add(this.ShowStack);
             this.Controls.Add(this.ShowPc);
@@ -141,7 +153,7 @@
             this.Controls.Add(this.btGo);
             this.Controls.Add(this.btExecuteOneStep);
             this.Name = "UserControlButtons";
-            this.Size = new System.Drawing.Size(618, 54);
+            this.Size = new System.Drawing.Size(766, 57);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -157,5 +169,6 @@
         private System.Windows.Forms.CheckBox ShowPc;
         private System.Windows.Forms.CheckBox ShowStack;
         private System.Windows.Forms.Button bt_continue;
+        private System.Windows.Forms.Button button1;
     }
 }

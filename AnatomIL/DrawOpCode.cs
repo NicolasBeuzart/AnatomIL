@@ -133,13 +133,13 @@ namespace AnatomIL
         }
     }
 
-    public class CurveToOpCode : OpCode
+    public class LinesToOpCode : OpCode
     {
-
-        public CurveToOpCode(int line)
+        
+        public LinesToOpCode(int line)
         {
             _line = line;
-            base._name = "curveto";
+            base._name = "linesto";
             base._type = "draw";
             base._executable = true;
         }
@@ -150,58 +150,47 @@ namespace AnatomIL
 
             StackItemValue StV1;
             StackItemValue StV2;
-            StackItemValue StV3;
-            StackItemValue StV4;
-            Int32 NbrPts;
 
-            if (e.Stack.Pop(out StV1))
+            List<int> x = new List<int>();
+            List<int> y = new List<int>();
+
+
+            if (e.Stack.FirstElement(out StV1))
             {
-                if (StV1.Type != typeof(Int32)) 
-                    errorMessage = "Number of points value is not type int32 for operation" + _name + " line :" + _line;
+
+
+                while (e.Stack.Pop(out StV1) && e.Stack.Pop(out StV2))
+                {
+                    if (StV1.Type != typeof(Int32)) errorMessage = "x value is not type int32 for operation" + _name + " line :" + _line;
+
+                    else if (StV2.Type != typeof(Int32)) errorMessage = "y value is not type int32 for operation" + _name + " line :" + _line;
+
+                    else
+                    {
+                        Int32 tmpx = Convert.ToInt32(StV1.Value);
+                        Int32 tmpy = Convert.ToInt32(StV2.Value);
+
+                        x.Add(tmpx);
+                        y.Add(tmpy);
+                    }
+                }
+
+                if (StV1 == null)
+                    errorMessage = "Missing color argument for operation" + _name + " line :" + _line;
                 else
-                { 
-                    Int32 i = Convert.ToInt32(StV1.Value); 
-                    Int32[] x = new Int32 [i];
-                    Int32[] y = new Int32 [i];
-
-                    for(NbrPts = 0; NbrPts < i; NbrPts++)
+                {
+                    if (StV1.Type != typeof(Int32)) errorMessage = "color value is not type int32 for operation" + _name + " line :" + _line;
+                    else
                     {
-
-                        if (e.Stack.Pop(out StV2) && e.Stack.Pop(out StV3))
-                        {
-
-                            if (StV2.Type != typeof(Int32)) errorMessage = "x value is not type int32 for operation" + _name + " line :" + _line;
-
-                            else if (StV3.Type != typeof(Int32)) errorMessage = "y value is not type int32 for operation" + _name + " line :" + _line;
-
-                            else
-                            {
-                                Int32 tmpx = Convert.ToInt32(StV2.Value);
-                                Int32 tmpy = Convert.ToInt32(StV3.Value);
-
-                                x[NbrPts] = tmpx;
-                                y[NbrPts] = tmpy;
-                            }
-                        }
-                        else
-                        {
-                            errorMessage = "Missing arguments for operation" + _name + " line :" + _line;
-                        }
+                        Color c = Color.FromKnownColor((KnownColor)StV1.Value);
+                        e.Graph.LinesTo(x, y, c);
                     }
 
-                    if(e.Stack.Pop(out StV4))
-                    {
-                        if (StV4.Type != typeof(Int32)) errorMessage = "color value is not type int32 for operation" + _name + " line :" + _line;
-
-                        else
-                        {
-                                Color c = Color.FromKnownColor((KnownColor)StV4.Value);
-                                e.Graph.CurveTo(x, y, c);
-                        }
-                    }
                 }
             }
             else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
+
+            
 
             return new OpCodeResult(errorMessage);
         }

@@ -76,21 +76,28 @@ namespace AnatomIL
         public override void Draw(DrwContext ctx, Graphics g)
         {
             Pen UserPen = new Pen(_color);
+            int width;
+            int lenght;
 
-            g.DrawEllipse(UserPen, ctx.CurrentX, ctx.CurrentY, _x, _y);
+            width = _x - ctx.CurrentX;
+            lenght = _y - ctx.CurrentY;
+
+
+
+            g.DrawEllipse(UserPen, ctx.CurrentX, ctx.CurrentY, width, lenght);
 
             ctx.CurrentX = _x;
             ctx.CurrentY = _y;
         }
     }
 
-    public class CurveToItem : DrwItem
+    public class LinesToItem : DrwItem
     {
-        readonly int[] _x;
-        readonly int[] _y;
+        readonly List<int> _x;
+        readonly List<int> _y;
         readonly Color _color;
 
-        public CurveToItem(int []x, int []y, Color color)
+        public LinesToItem(List<int> x, List<int> y, Color color)
         {
             _x = x;
             _y = y;
@@ -100,26 +107,36 @@ namespace AnatomIL
         public override void Draw(DrwContext ctx, Graphics g)
         {
             Pen UserPen = new Pen(_color);
-            Point[] AllPoints = new Point[_x.Length + 1];
-            int i;
+            Point[] AllPoints = new Point[_x.Count];
 
-            AllPoints[0].X = ctx.CurrentX;
-            AllPoints[0].Y = ctx.CurrentY;
 
-            for (i = 1; i < _x.Length + 1; i++)
+
+            _x[0] = ctx.CurrentX;
+            _y[0] = ctx.CurrentY;
+
+
+            int i = 0;
+            int j = 0;
+
+            foreach (int argx in _x)
             {
-                AllPoints[i].X = _x[i-1];
-                AllPoints[i].Y = _y[i-1];
+                AllPoints[i].X = argx;
+                i++;
             }
 
-            g.DrawCurve(UserPen, AllPoints);
+            foreach (int argy in _y)
+            {
+                AllPoints[j].Y = argy;
+                j++;
+            }
+
             g.DrawLines(UserPen, AllPoints);
 
-
-            ctx.CurrentX = AllPoints[i].X;
-            ctx.CurrentY = AllPoints[i].Y;
+            ctx.CurrentX = AllPoints[i-1].X;
+            ctx.CurrentY = AllPoints[j-1].Y;
         }
     }
+
 
     public class Graph
     {
@@ -144,14 +161,14 @@ namespace AnatomIL
             _instructions.Add(new EllipseToItem(x, y, color));
         }
 
-        public void CurveTo(int []x, int []y, Color color)
-        {
-            _instructions.Add(new CurveToItem(x, y, color));
-        }
-
         public void ClearScreen()
         {
             _instructions.Clear();
+        }
+
+        public void LinesTo(List<int> x, List<int> y, Color color)
+        {
+            _instructions.Add(new LinesToItem(x, y, color));
         }
 
         public void Draw(Graphics g)

@@ -42,7 +42,7 @@ namespace AnatomIL
 
             if (!(t.MatchOpenPar() && t.MatchClosePar() && t.IsEnd))
                 errorMessage = "Bad utilisation of Operation " + base._name + " in line : " + t.CurentLigne;
-   
+
             return (new OpCodeRootResult(errorMessage, new LineToOpCode(t.CurentLigne)));
         }
 
@@ -69,12 +69,12 @@ namespace AnatomIL
 
     }
 
-    public class CurveToOpCodeRoot : OpCodeRoot
+    public class LinesToOpCodeRoot : OpCodeRoot
     {
 
-        public CurveToOpCodeRoot()
+        public LinesToOpCodeRoot()
         {
-            base._name = "curveto";
+            base._name = "linesto";
             base._type = "draw";
         }
 
@@ -86,10 +86,9 @@ namespace AnatomIL
             if (!(t.MatchOpenPar() && t.MatchClosePar() && t.IsEnd))
                 errorMessage = "Bad utilisation of Operation " + base._name + " in line : " + t.CurentLigne;
 
-            return (new OpCodeRootResult(errorMessage, new CurveToOpCode(t.CurentLigne)));
+            return (new OpCodeRootResult(errorMessage, new LinesToOpCode(t.CurentLigne)));
         }
 
     }
-
 }
 

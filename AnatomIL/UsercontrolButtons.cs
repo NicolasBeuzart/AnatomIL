@@ -40,7 +40,7 @@ namespace AnatomIL
             ShowPc.Visible = false;
             ShowStack.Visible = false;
 
-            Code.BreakPointList.Enabled = false;
+           // Code.BreakPointList.Enabled = false;
 
             if (!ShowPc.Checked)
             {
@@ -145,6 +145,8 @@ namespace AnatomIL
                
                computer.reset();
 
+               GraphController.Refresh();
+
                Code.listBoxInstructions.Visible = true;
                Code.textBoxCode.Visible = false;
 
@@ -161,8 +163,6 @@ namespace AnatomIL
                Code.BreakPointList.Enabled = !Code.BreakPointList.Enabled;
                
                Code.BreakPointList.Visible = true;
-
-               GraphController.Dispose();
                
                if (computer.ErrorMessages.Count > 0)
                {
@@ -212,6 +212,12 @@ namespace AnatomIL
                 Stack.ShowStack();
 
             btGo_Click(this, e);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            computer.Graph.ClearScreen();
+            GraphController.Refresh();
         }
 
 
