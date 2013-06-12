@@ -72,7 +72,7 @@ namespace AnatomIL
 
                     if (computer.ErrorMessages.Count > 0)
                     {
-                       // GoTimer.Stop();
+                        GoTimer.Stop();
                         btCompile.Visible = true;
                         Error.Visible = true;
                         btGo.Visible = false;
