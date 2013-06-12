@@ -13,12 +13,15 @@ namespace AnatomIL
 {
     public partial class UserControlButtons : UserControl
     {
+        Graph g;
+
         public UserControlButtons()
         {
             InitializeComponent();
 
         }
 
+        
         public UserControlCodeZone Code { get; set; }
         public UserControlTextBoxError Error { get; set; }
         public UserControlStack Stack { get; set; }
@@ -105,7 +108,12 @@ namespace AnatomIL
                         if (ShowStack.Checked)
                             Stack.ShowStack();
 
-                        GraphController.Invalidate();
+
+                        if (g != CurrentComputer.Graph)
+                        {
+                            g = CurrentComputer.Graph;
+                            GraphController.Invalidate();
+                        }
                        
                     }
                 }
@@ -133,7 +141,7 @@ namespace AnatomIL
 
         private void btCompile_Click(object sender, EventArgs e)
         {
-
+            g = CurrentComputer.Graph;
                Error.Visible = false;
                Stack.listboxStack.Items.Clear();
 
