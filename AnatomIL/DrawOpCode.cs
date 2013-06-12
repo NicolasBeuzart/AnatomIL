@@ -133,6 +133,50 @@ namespace AnatomIL
         }
     }
 
+    public class RectangleToOpCode : OpCode
+    {
+
+        public RectangleToOpCode(int line)
+        {
+            _line = line;
+            base._name = "rectangleto";
+            base._type = "draw";
+            base._executable = true;
+        }
+
+        override public OpCodeResult Execute(Environment e)
+        {
+            string errorMessage = "";
+
+            StackItemValue StV1;
+            StackItemValue StV2;
+            StackItemValue StV3;
+
+            if (e.Stack.Pop(out StV1) && e.Stack.Pop(out StV2) && e.Stack.Pop(out StV3))
+            {
+
+                if (StV1.Type != typeof(Int32)) errorMessage = "x value is not type int32 for operation" + _name + " line :" + _line;
+
+                else if (StV2.Type != typeof(Int32)) errorMessage = "y value is not type int32 for operation" + _name + " line :" + _line;
+
+                else if (StV3.Type != typeof(Int32)) errorMessage = "color value is not type int32 for operation" + _name + " line :" + _line;
+
+                else
+                {
+                    Int32 x = Convert.ToInt32(StV1.Value);
+                    Int32 y = Convert.ToInt32(StV2.Value);
+
+                    Color c = Color.FromKnownColor((KnownColor)StV3.Value);
+                    e.Graph.RectangleTo(x, y, c);
+
+                }
+            }
+            else errorMessage = "Can't execute operation " + _name + " empty stack line :" + (_line + 1);
+
+            return new OpCodeResult(errorMessage);
+        }
+    }
+
     public class LinesToOpCode : OpCode
     {
         

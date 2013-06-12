@@ -27,3 +27,4 @@ C:\Users\Corentin\Documents\GitExtensions\AnatomIL\AnatomIL\obj\Debug\AnatomIL.I
 C:\Users\Corentin\Documents\GitExtensions\AnatomIL\AnatomIL\obj\Debug\AnatomIL.csprojResolveAssemblyReference.cache
 C:\Users\Corentin\Documents\GitExtensions\AnatomIL\AnatomIL\obj\Debug\AnatomIL.UserControlMenu.resources
 C:\Users\Corentin\Documents\GitExtensions\AnatomIL\AnatomIL\obj\Debug\AnatomIL.Inter.resources
+C:\Users\Corentin\Documents\GitExtensions\AnatomIL\AnatomIL\obj\Debug\AnatomIL.Help.resources

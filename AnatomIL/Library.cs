@@ -54,6 +54,7 @@ namespace AnatomIL
             this.LibAddCodeOpRoot(new LineToOpCodeRoot());
             this.LibAddCodeOpRoot(new EllipseToOpCodeRoot());
             this.LibAddCodeOpRoot(new LinesToOpCodeRoot());
+            this.LibAddCodeOpRoot(new RectangleToOpCodeRoot());
         }
 
         public void LoadDirectiveLib()

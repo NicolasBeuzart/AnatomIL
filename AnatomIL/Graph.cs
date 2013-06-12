@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,11 +15,13 @@ namespace AnatomIL
         public int CurrentY { get; set; }
     }
 
+    [Serializable]
     public abstract class DrwItem
     {
         public abstract void Draw(DrwContext ctx, Graphics g);
     }
 
+    [Serializable]
     public class MoveToItem : DrwItem
     {
         readonly int _x;
@@ -36,6 +40,7 @@ namespace AnatomIL
         }
     }
 
+    [Serializable]
     public class LineToItem : DrwItem
     {
         readonly int _x;
@@ -60,6 +65,7 @@ namespace AnatomIL
         }
     }
 
+    [Serializable]
     public class EllipseToItem : DrwItem
     {
         readonly int _x;
@@ -82,7 +88,17 @@ namespace AnatomIL
             width = _x - ctx.CurrentX;
             lenght = _y - ctx.CurrentY;
 
+            if (width < 0)
+            {
+                width = ctx.CurrentX;
+                ctx.CurrentX = _x;
+            }
 
+            if (lenght < 0)
+            {
+                lenght = ctx.CurrentY;
+                ctx.CurrentY = _y;
+            }
 
             g.DrawEllipse(UserPen, ctx.CurrentX, ctx.CurrentY, width, lenght);
 
@@ -91,6 +107,49 @@ namespace AnatomIL
         }
     }
 
+    [Serializable]
+    public class RectangleToItem : DrwItem
+    {
+        readonly int _x;
+        readonly int _y;
+        readonly Color _color;
+
+        public RectangleToItem(int x, int y, Color color)
+        {
+            _x = x;
+            _y = y;
+            _color = color;
+        }
+
+        public override void Draw(DrwContext ctx, Graphics g)
+        {
+            Pen UserPen = new Pen(_color);
+            int width;
+            int lenght;
+
+            width = _x - ctx.CurrentX;
+            lenght = _y - ctx.CurrentY;
+
+            if (width < 0)
+            {
+                width = ctx.CurrentX;
+                ctx.CurrentX = _x;
+            }
+
+            if (lenght < 0)
+            {
+                lenght = ctx.CurrentY;
+                ctx.CurrentY = _y;
+            }
+
+            g.DrawRectangle(UserPen, ctx.CurrentX, ctx.CurrentY, width, lenght);
+
+            ctx.CurrentX = _x;
+            ctx.CurrentY = _y;
+        }
+    }
+
+    [Serializable]
     public class LinesToItem : DrwItem
     {
         readonly List<int> _x;
@@ -140,12 +199,18 @@ namespace AnatomIL
 
     public class Graph
     {
-        List<DrwItem> _instructions;
+        readonly List<DrwItem> _instructions;
 
         public Graph()
         {
             _instructions = new List<DrwItem>();
         }
+
+        public List<DrwItem> CurrentGraph
+        {
+            get { return _instructions; }
+        }
+
         public void MoveTo(int x, int y)
         {
             _instructions.Add(new MoveToItem(x, y));
@@ -161,9 +226,9 @@ namespace AnatomIL
             _instructions.Add(new EllipseToItem(x, y, color));
         }
 
-        public void ClearScreen()
+        public void RectangleTo(int x, int y, Color color)
         {
-            _instructions.Clear();
+            _instructions.Add(new RectangleToItem(x, y, color));
         }
 
         public void LinesTo(List<int> x, List<int> y, Color color)
@@ -171,10 +236,36 @@ namespace AnatomIL
             _instructions.Add(new LinesToItem(x, y, color));
         }
 
+        public void ClearScreen()
+        {
+            _instructions.Clear();
+        }
+        
         public void Draw(Graphics g)
         {
             DrwContext ctx = new DrwContext();
             foreach (var i in _instructions) i.Draw(ctx, g);
+        }
+
+        public void Save(string path)
+        {
+            using (FileStream output = File.Create(path))
+            {
+                BinaryFormatter f = new BinaryFormatter();
+                f.Serialize(output, _instructions);
+            }
+        }
+
+        public void Load(string path)
+        {
+            using (FileStream input = File.OpenRead(path))
+            {
+                BinaryFormatter f = new BinaryFormatter();
+                var newList = (List<DrwItem>)f.Deserialize(input);
+                _instructions.Clear();
+                foreach (var i in newList) _instructions.Add(i);
+            }
+            
         }
 
     }

@@ -34,8 +34,8 @@
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
             this.userControlMenu1 = new AnatomIL.UserControlMenu();
-            this.userControlCodeZone1 = new AnatomIL.UserControlCodeZone();
             this.userControlButtons1 = new AnatomIL.UserControlButtons();
+            this.userControlCodeZone1 = new AnatomIL.UserControlCodeZone();
             this.userControlTextBoxError1 = new AnatomIL.UserControlTextBoxError();
             this.graphControl1 = new AnatomIL.GraphPanel.GraphControl();
             this.userControlStack1 = new AnatomIL.UserControlStack();
@@ -99,7 +99,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.userControlStack1);
             this.splitContainer2.Panel2MinSize = 80;
             this.splitContainer2.Size = new System.Drawing.Size(560, 411);
-            this.splitContainer2.SplitterDistance = 250;
+            this.splitContainer2.SplitterDistance = 249;
             this.splitContainer2.TabIndex = 0;
             // 
             // splitContainer3
@@ -120,7 +120,7 @@
             this.splitContainer3.Panel2.Controls.Add(this.graphControl1);
             this.splitContainer3.Panel2.Controls.Add(this.userControlHeap1);
             this.splitContainer3.Panel2MinSize = 50;
-            this.splitContainer3.Size = new System.Drawing.Size(250, 411);
+            this.splitContainer3.Size = new System.Drawing.Size(249, 411);
             this.splitContainer3.SplitterDistance = 170;
             this.splitContainer3.TabIndex = 0;
             // 
@@ -167,20 +167,14 @@
             // 
             // userControlMenu1
             // 
+            this.userControlMenu1.ButtonsBar = this.userControlButtons1;
             this.userControlMenu1.Code = this.userControlCodeZone1;
             this.userControlMenu1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControlMenu1.GraphController = this.graphControl1;
             this.userControlMenu1.Location = new System.Drawing.Point(0, 0);
             this.userControlMenu1.Name = "userControlMenu1";
             this.userControlMenu1.Size = new System.Drawing.Size(871, 21);
             this.userControlMenu1.TabIndex = 0;
-            // 
-            // userControlCodeZone1
-            // 
-            this.userControlCodeZone1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userControlCodeZone1.Location = new System.Drawing.Point(0, 0);
-            this.userControlCodeZone1.Name = "userControlCodeZone1";
-            this.userControlCodeZone1.Size = new System.Drawing.Size(307, 407);
-            this.userControlCodeZone1.TabIndex = 0;
             // 
             // userControlButtons1
             // 
@@ -194,13 +188,21 @@
             this.userControlButtons1.Stack = this.userControlStack1;
             this.userControlButtons1.TabIndex = 0;
             // 
+            // userControlCodeZone1
+            // 
+            this.userControlCodeZone1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControlCodeZone1.Location = new System.Drawing.Point(0, 0);
+            this.userControlCodeZone1.Name = "userControlCodeZone1";
+            this.userControlCodeZone1.Size = new System.Drawing.Size(307, 407);
+            this.userControlCodeZone1.TabIndex = 0;
+            // 
             // userControlTextBoxError1
             // 
             this.userControlTextBoxError1.ButtonsBar = this.userControlButtons1;
             this.userControlTextBoxError1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.userControlTextBoxError1.Location = new System.Drawing.Point(0, 0);
             this.userControlTextBoxError1.Name = "userControlTextBoxError1";
-            this.userControlTextBoxError1.Size = new System.Drawing.Size(246, 166);
+            this.userControlTextBoxError1.Size = new System.Drawing.Size(245, 166);
             this.userControlTextBoxError1.TabIndex = 0;
             this.userControlTextBoxError1.Visible = false;
             // 
@@ -210,7 +212,7 @@
             this.graphControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.graphControl1.Location = new System.Drawing.Point(0, 0);
             this.graphControl1.Name = "graphControl1";
-            this.graphControl1.Size = new System.Drawing.Size(246, 233);
+            this.graphControl1.Size = new System.Drawing.Size(245, 233);
             this.graphControl1.TabIndex = 1;
             this.graphControl1.Text = "graphControl1";
             // 
@@ -220,7 +222,7 @@
             this.userControlStack1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.userControlStack1.Location = new System.Drawing.Point(0, 0);
             this.userControlStack1.Name = "userControlStack1";
-            this.userControlStack1.Size = new System.Drawing.Size(302, 407);
+            this.userControlStack1.Size = new System.Drawing.Size(303, 407);
             this.userControlStack1.TabIndex = 0;
             // 
             // userControlHeap1
@@ -228,7 +230,7 @@
             this.userControlHeap1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.userControlHeap1.Location = new System.Drawing.Point(0, 0);
             this.userControlHeap1.Name = "userControlHeap1";
-            this.userControlHeap1.Size = new System.Drawing.Size(246, 233);
+            this.userControlHeap1.Size = new System.Drawing.Size(245, 233);
             this.userControlHeap1.TabIndex = 0;
             this.userControlHeap1.Visible = false;
             // 

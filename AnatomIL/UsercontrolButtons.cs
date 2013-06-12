@@ -114,7 +114,6 @@ namespace AnatomIL
                             g = CurrentComputer.Graph;
                             GraphController.Invalidate();
                         }
-                       
                     }
                 }
             }
@@ -226,6 +225,12 @@ namespace AnatomIL
         {
             computer.Graph.ClearScreen();
             GraphController.Refresh();
+        }
+
+        private void bt_help_Click(object sender, EventArgs e)
+        {
+            Help fenetre = new Help();
+            fenetre.ShowDialog(this);
         }
 
 

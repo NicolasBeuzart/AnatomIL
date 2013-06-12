@@ -66,7 +66,26 @@ namespace AnatomIL
 
             return (new OpCodeRootResult(errorMessage, new EllipseToOpCode(t.CurentLigne)));
         }
+    }
 
+    public class RectangleToOpCodeRoot : OpCodeRoot
+    {
+
+        public RectangleToOpCodeRoot()
+        {
+            base._name = "rectangleto";
+            base._type = "draw";
+        }
+
+        override public OpCodeRootResult Parse(Tokeniser t)
+        {
+            string errorMessage = "";
+
+            if (!(t.MatchOpenPar() && t.MatchClosePar() && t.IsEnd))
+                errorMessage = "Bad utilisation of Operation " + base._name + " in line : " + t.CurentLigne;
+
+            return (new OpCodeRootResult(errorMessage, new RectangleToOpCode(t.CurentLigne)));
+        }
     }
 
     public class LinesToOpCodeRoot : OpCodeRoot
