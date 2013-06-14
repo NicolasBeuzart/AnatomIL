@@ -109,5 +109,27 @@ namespace AnatomIL
         }
 
     }
+
+    public class ClearScreenOpCodeRoot : OpCodeRoot
+    {
+
+        public ClearScreenOpCodeRoot()
+        {
+            base._name = "clearscreen";
+            base._type = "draw";
+        }
+
+        override public OpCodeRootResult Parse(Tokeniser t)
+        {
+            string errorMessage = "";
+
+
+            if (!(t.MatchOpenPar() && t.MatchClosePar() && t.IsEnd))
+                errorMessage = "Bad utilisation of Operation " + base._name + " in line : " + t.CurentLigne;
+
+            return (new OpCodeRootResult(errorMessage, new ClearScreenOpCode(t.CurentLigne)));
+        }
+
+    }
 }
 

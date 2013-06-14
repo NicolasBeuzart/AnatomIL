@@ -240,4 +240,25 @@ namespace AnatomIL
         }
     }
 
+    public class ClearScreenOpCode : OpCode
+    {
+
+        public ClearScreenOpCode(int line)
+        {
+            _line = line;
+            base._name = "clearscreen";
+            base._type = "draw";
+            base._executable = true;
+        }
+
+        override public OpCodeResult Execute(Environment e)
+        {
+            string errorMessage = "";
+
+            e.Graph.ClearScreen();
+
+            return new OpCodeResult(errorMessage);
+        }
+    }
+
 }
