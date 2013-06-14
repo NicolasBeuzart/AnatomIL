@@ -50,11 +50,23 @@ namespace AnatomIL
 
 
             int intervalTime = Convert.ToInt32(timeBox.Text);
-            GoTimer = new System.Windows.Forms.Timer();
 
-            GoTimer.Interval = intervalTime;
-            GoTimer.Tick += new EventHandler(btExecuteOneStep_Click);
-            GoTimer.Start();
+            if (intervalTime == 0)
+            {
+                GoTimer = new System.Windows.Forms.Timer();
+
+                GoTimer.Interval = 10;
+                GoTimer.Tick += new EventHandler(null_timer_execution);
+                GoTimer.Start();
+            }
+            else
+            {
+                GoTimer = new System.Windows.Forms.Timer();
+
+                GoTimer.Interval = intervalTime;
+                GoTimer.Tick += new EventHandler(btExecuteOneStep_Click);
+                GoTimer.Start();
+            }
         }
 
         private void btExecuteOneStep_Click(object sender, EventArgs e)
@@ -225,6 +237,72 @@ namespace AnatomIL
             fenetre.ShowDialog(this);
         }
 
+        private void null_timer_execution(object sender, EventArgs e)
+        {
+            int i;
+
+            for(i=0; i<100;i++)
+            {
+                if (computer.Pc < Code.listBoxInstructions.Items.Count)
+                {
+                    if (Code.BreakPointList.CheckedItems.Contains(computer.Pc + 1))
+                    {
+                        GoTimer.Stop();
+                        bt_continue.Visible = true;
+                    }
+                    else
+                    {
+                        computer.ExecuteNextInstruction();
+
+                        if (computer.ErrorMessages.Count > 0)
+                        {
+                            // GoTimer.Stop();
+                            btCompile.Visible = true;
+                            Error.Visible = true;
+                            btGo.Visible = false;
+                            timeBox.Visible = false;
+                            ShowPc.Visible = false;
+                            ShowStack.Visible = false;
+                            btExecuteOneStep.Visible = false;
+                            btStop.Visible = false;
+                            Code.listBoxInstructions.Visible = false;
+                            Code.textBoxCode.Visible = true;
+                        }
+                        else
+                        {
+                            if (computer.Pc < Code.listBoxInstructions.Items.Count)
+                            {
+                                Code.listBoxInstructions.SelectedIndex = computer.Pc;
+                            }
+                            else
+                            {
+                                Code.listBoxInstructions.Visible = false;
+                                Code.textBoxCode.Visible = true;
+                                btExecuteOneStep.Visible = false;
+                                btGo.Visible = false;
+                                timeBox.Visible = false;
+                                ShowPc.Visible = false;
+                                ShowStack.Visible = false;
+                                btCompile.Visible = true;
+                                btStop.Visible = false;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (ShowStack.Checked)
+                        Stack.ShowStack();
+                    GraphController.Invalidate();
+                    btStop_Click(this, e);
+                }
+            }
+
+            if (ShowStack.Checked)
+                Stack.ShowStack();
+
+            GraphController.Invalidate();
+        }
 
     }
 }
