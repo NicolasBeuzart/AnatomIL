@@ -56,7 +56,7 @@ namespace AnatomIL
             t.MatchSpace();
             if (!t.IsEnd)
             {
-                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
+                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + (t.CurentLigne + 1);
             }
 
             return new OpCodeRootResult(errorMessage, new AddOpCode(t.CurentLigne));
@@ -79,7 +79,7 @@ namespace AnatomIL
             t.MatchSpace();
             if (!t.IsEnd)
             {
-                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
+                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + (t.CurentLigne + 1);
             }
 
             return new OpCodeRootResult(errorMessage, new SubOpCode(t.CurentLigne));
@@ -102,7 +102,7 @@ namespace AnatomIL
             t.MatchSpace();
             if (!t.IsEnd)
             {
-                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
+                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + (t.CurentLigne + 1);
             }
 
             return new OpCodeRootResult(errorMessage, new MulOpCode(t.CurentLigne));
@@ -125,7 +125,7 @@ namespace AnatomIL
             t.MatchSpace();
             if (!t.IsEnd)
             {
-                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
+                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + (t.CurentLigne + 1);
             }
 
             return new OpCodeRootResult(errorMessage, new DivOpCode(t.CurentLigne));
@@ -148,7 +148,7 @@ namespace AnatomIL
             t.MatchSpace();
             if (!t.IsEnd)
             {
-                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
+                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + (t.CurentLigne + 1);
             }
 
             return new OpCodeRootResult(errorMessage, new RemOpCode(t.CurentLigne));
@@ -187,7 +187,6 @@ namespace AnatomIL
             if (errorMessage != "") ;
             else if (option.Equals("i8"))
             {
-                Int64 tmp;
                 //if (!Int64.TryParse(argument, out tmp)) errorMessage = "Argument isn't Int64 in Operation" + base._name;
                 //else
                 //{
@@ -223,7 +222,7 @@ namespace AnatomIL
             }
             else
             {
-                errorMessage = "lcd operation can't have option : " + option;
+                errorMessage = "lcd operation can't have option : " + option + " in line : " + (t.CurentLigne + 1);
             }
 
             return (new OpCodeRootResult(errorMessage, new LdcOpCode(type, Value, t.CurentLigne)));
@@ -243,7 +242,7 @@ namespace AnatomIL
             string errorMessage = "";
             string label;
 
-            if (!(t.IsString(out label) && t.IsEnd)) errorMessage = "Bad label declaration in line : " + t.CurentLigne;
+            if (!(t.IsString(out label) && t.IsEnd)) errorMessage = "Bad label declaration in line : " + (t.CurentLigne + 1);
             return new OpCodeRootResult(errorMessage, new LabelOpCode(label, t.CurentLigne));
         }
     }
@@ -270,12 +269,12 @@ namespace AnatomIL
             {
                 t.MatchSpace();
                 if (t.IsType(out type)) locals.Add(type);
-                else errorMessage = "Bad declaration of local variable, \"" + type + "\" is not a type in line : " + t.CurentLigne;
+                else errorMessage = "Bad declaration of local variable, \"" + type + "\" is not a type in line : " + (t.CurentLigne + 1);
                 t.MatchSpace();
                 t.IsString(out s);
             } while (t.MatchComma());
 
-            if (!t.MatchClosePar()) errorMessage = "miss ')' in locals declaration line : " + t.CurentLigne;
+            if (!t.MatchClosePar()) errorMessage = "miss ')' in locals declaration line : " + (t.CurentLigne + 1);
 
             return new OpCodeRootResult(errorMessage, new LocalsInitOpCode(locals, t.CurentLigne));
         }
@@ -297,7 +296,7 @@ namespace AnatomIL
             t.MatchSpace();
             if (!t.IsEnd)
             {
-                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + t.CurentLigne;
+                errorMessage = "Bad utilisation of Operation" + base._name + "in line : " + (t.CurentLigne + 1);
             }
 
             return new OpCodeRootResult(errorMessage, new DupOpCode(t.CurentLigne));
@@ -320,7 +319,7 @@ namespace AnatomIL
 
             if (!(t.IsArgument(out arg) && t.IsEnd && Int32.TryParse(arg, out tmp)))
             {
-                errorMessage = "error line " + t.CurentLigne;
+                errorMessage = "error line " + (t.CurentLigne + 1);
             }
 
             return (new OpCodeRootResult(errorMessage,new stlocOpCode(tmp, t.CurentLigne)));
@@ -343,7 +342,7 @@ namespace AnatomIL
 
             if (!(t.IsArgument(out arg) && t.IsEnd && Int32.TryParse(arg, out tmp)))
             {
-                errorMessage = "error line " + t.CurentLigne;
+                errorMessage = "error line " + (t.CurentLigne + 1);
             }
 
             return (new OpCodeRootResult(errorMessage, new ldlocOpCode(tmp, t.CurentLigne)));
@@ -372,14 +371,14 @@ namespace AnatomIL
 
             if (t.IsString(out argsName) && t.MatchSpace() && t.IsString(out name) && t.MatchOpenPar())
             {
-                if (!f.IsType(argsName, out type)) errorMessage = "type " + argsName + " not existing line :" + t.CurentLigne;
+                if (!f.IsType(argsName, out type)) errorMessage = "type " + argsName + " not existing line :" + (t.CurentLigne + 1);
                 do
                 {
                     t.MatchSpace();
                     if (t.IsString(out argsName))
                     {
 
-                        if (!f.IsType(argsName, out argsType)) errorMessage = "type " + argsName + " not existing line :" + t.CurentLigne;
+                        if (!f.IsType(argsName, out argsType)) errorMessage = "type " + argsName + " not existing line :" + (t.CurentLigne + 1);
                         t.MatchSpace();
                         t.IsString(out argsName);
                         args.Add(new StackItemValue(argsType, ""));
@@ -390,7 +389,7 @@ namespace AnatomIL
 
                 if (!t.MatchClosePar()) errorMessage = "syntaxe error in declaration of function " + name;
             }
-            else errorMessage = "syntaxe error line :" + t.CurentLigne;
+            else errorMessage = "syntaxe error line :" + (t.CurentLigne + 1);
 
             return (new OpCodeRootResult(errorMessage, new PrototypeOpCode(name, type, args, t.CurentLigne)));
         }
@@ -410,7 +409,7 @@ namespace AnatomIL
             string errorMessage = "";
             string name = "";
 
-            if (!(t.MatchSpace() && t.IsString(out name))) errorMessage = "syntaxe error line :" + t.CurentLigne;
+            if (!(t.MatchSpace() && t.IsString(out name) && ((t.MatchSpace() && t.IsEnd) || t.IsEnd))) errorMessage = "syntaxe error line :" + (t.CurentLigne + 1);
 
             return (new OpCodeRootResult(errorMessage,new CallOpCode(name, t.CurentLigne)));
         }

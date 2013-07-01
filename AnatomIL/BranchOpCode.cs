@@ -327,7 +327,7 @@ namespace AnatomIL
 
             if (e.Stack.Pop(out s1))
             {
-                if (s1.Type == typeof(bool) && s1.Value.Equals(false))
+                if (s1.Value.Equals(0))
                 {
                     e.Pc = e.CompiledCode.IndexLabel(_label);
                 }
@@ -357,7 +357,7 @@ namespace AnatomIL
 
             if (e.Stack.Pop(out s1))
             {
-                if (s1.Type == typeof(bool) && s1.Value.Equals(true))
+                if (!s1.Value.Equals(0))
                 {
                     e.Pc = e.CompiledCode.IndexLabel(_label);
                 }
@@ -449,7 +449,7 @@ namespace AnatomIL
 
             if (e.Stack.Pop(out s1))
             {
-                if (!s1.Value.Equals(null))
+                if (!s1.Value.Equals(0))
                 {
                     e.Pc = e.CompiledCode.IndexLabel(_label);
                 }

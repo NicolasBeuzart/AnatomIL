@@ -13,7 +13,7 @@ namespace AnatomIL
 {
     public partial class UserControlButtons : UserControl
     {
-        int g;
+        Graph g;
 
         public UserControlButtons()
         {
@@ -53,23 +53,11 @@ namespace AnatomIL
 
 
             int intervalTime = Convert.ToInt32(timeBox.Text);
+            GoTimer = new System.Windows.Forms.Timer();
 
-            if (intervalTime == 0)
-            {
-                GoTimer = new System.Windows.Forms.Timer();
-
-                GoTimer.Interval = 10;
-                GoTimer.Tick += new EventHandler(null_timer_execution);
-                GoTimer.Start();
-            }
-            else
-            {
-                GoTimer = new System.Windows.Forms.Timer();
-
-                GoTimer.Interval = intervalTime;
-                GoTimer.Tick += new EventHandler(btExecuteOneStep_Click);
-                GoTimer.Start();
-            }
+            GoTimer.Interval = intervalTime;
+            GoTimer.Tick += new EventHandler(btExecuteOneStep_Click);
+            GoTimer.Start();
         }
 
         private void btExecuteOneStep_Click(object sender, EventArgs e)
@@ -87,7 +75,6 @@ namespace AnatomIL
 
                     if (computer.ErrorMessages.Count > 0)
                     {
-                        GoTimer.Start();
                         GoTimer.Stop();
                         btCompile.Visible = true;
                         Error.Visible = true;
@@ -121,12 +108,17 @@ namespace AnatomIL
                         if (ShowStack.Checked)
                             Stack.ShowStack();
 
+<<<<<<< HEAD
 
-                        if (g != CurrentComputer.Graph.CurrentGraph.Count)
+                        if (g != CurrentComputer.Graph)
                         {
-                            g = CurrentComputer.Graph.CurrentGraph.Count;
+                            g = CurrentComputer.Graph;
                             GraphController.Invalidate();
                         }
+                       
+=======
+                        GraphController.Invalidate();
+>>>>>>> 93f792356f726fd9b807a76dbf8afb6aa4fd8865
                     }
                 }
             }
@@ -153,7 +145,7 @@ namespace AnatomIL
 
         private void btCompile_Click(object sender, EventArgs e)
         {
-            g = CurrentComputer.Graph.CurrentGraph.Count;
+            g = CurrentComputer.Graph;
                Error.Visible = false;
                Stack.listboxStack.Items.Clear();
 
@@ -246,72 +238,6 @@ namespace AnatomIL
             fenetre.ShowDialog(this);
         }
 
-        private void null_timer_execution(object sender, EventArgs e)
-        {
-            int i;
-
-            for(i=0; i<100;i++)
-            {
-                if (computer.Pc < Code.listBoxInstructions.Items.Count)
-                {
-                    if (Code.BreakPointList.CheckedItems.Contains(computer.Pc + 1))
-                    {
-                        GoTimer.Stop();
-                        bt_continue.Visible = true;
-                    }
-                    else
-                    {
-                        computer.ExecuteNextInstruction();
-
-                        if (computer.ErrorMessages.Count > 0)
-                        {
-                            // GoTimer.Stop();
-                            btCompile.Visible = true;
-                            Error.Visible = true;
-                            btGo.Visible = false;
-                            timeBox.Visible = false;
-                            ShowPc.Visible = false;
-                            ShowStack.Visible = false;
-                            btExecuteOneStep.Visible = false;
-                            btStop.Visible = false;
-                            Code.listBoxInstructions.Visible = false;
-                            Code.textBoxCode.Visible = true;
-                        }
-                        else
-                        {
-                            if (computer.Pc < Code.listBoxInstructions.Items.Count)
-                            {
-                                Code.listBoxInstructions.SelectedIndex = computer.Pc;
-                            }
-                            else
-                            {
-                                Code.listBoxInstructions.Visible = false;
-                                Code.textBoxCode.Visible = true;
-                                btExecuteOneStep.Visible = false;
-                                btGo.Visible = false;
-                                timeBox.Visible = false;
-                                ShowPc.Visible = false;
-                                ShowStack.Visible = false;
-                                btCompile.Visible = true;
-                                btStop.Visible = false;
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    if (ShowStack.Checked)
-                        Stack.ShowStack();
-                    GraphController.Invalidate();
-                    btStop_Click(this, e);
-                }
-            }
-
-            if (ShowStack.Checked)
-                Stack.ShowStack();
-
-            GraphController.Invalidate();
-        }
 
     }
 }

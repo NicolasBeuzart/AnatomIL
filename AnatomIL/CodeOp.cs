@@ -323,6 +323,7 @@ namespace AnatomIL
         override public OpCodeResult Execute(Environment e)
         {
             string errorMessage = "";
+            _siv = new List<StackItemValue>();
             for (int i = 0; i < _locals.Count(); i++)
             {
                 if (_locals[i] == "int16") _siv.Add(new StackItemValue(typeof(Int16), 0));
