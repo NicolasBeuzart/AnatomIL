@@ -13,7 +13,7 @@ namespace AnatomIL
 {
     public partial class UserControlButtons : UserControl
     {
-        Graph g;
+        int g;
 
         public UserControlButtons()
         {
@@ -75,6 +75,7 @@ namespace AnatomIL
 
                     if (computer.ErrorMessages.Count > 0)
                     {
+                        GoTimer.Start();
                         GoTimer.Stop();
                         btCompile.Visible = true;
                         Error.Visible = true;
@@ -109,9 +110,9 @@ namespace AnatomIL
                             Stack.ShowStack();
 
 
-                        if (g != CurrentComputer.Graph)
+                        if (g != CurrentComputer.Graph.CurrentGraph.Count)
                         {
-                            g = CurrentComputer.Graph;
+                            g = CurrentComputer.Graph.CurrentGraph.Count;
                             GraphController.Invalidate();
                         }
                     }
@@ -140,7 +141,7 @@ namespace AnatomIL
 
         private void btCompile_Click(object sender, EventArgs e)
         {
-            g = CurrentComputer.Graph;
+            g = CurrentComputer.Graph.CurrentGraph.Count;
                Error.Visible = false;
                Stack.listboxStack.Items.Clear();
 

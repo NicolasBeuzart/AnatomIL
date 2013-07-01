@@ -187,7 +187,6 @@ namespace AnatomIL
             if (errorMessage != "") ;
             else if (option.Equals("i8"))
             {
-                Int64 tmp;
                 //if (!Int64.TryParse(argument, out tmp)) errorMessage = "Argument isn't Int64 in Operation" + base._name;
                 //else
                 //{

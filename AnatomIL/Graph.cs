@@ -88,17 +88,17 @@ namespace AnatomIL
             width = _x - ctx.CurrentX;
             lenght = _y - ctx.CurrentY;
 
-            if (width < 0)
-            {
-                width = ctx.CurrentX;
-                ctx.CurrentX = _x;
-            }
+            //if (width < 0)
+            //{
+            //    width = ctx.CurrentX;
+            //    ctx.CurrentX = _x;
+            //}
 
-            if (lenght < 0)
-            {
-                lenght = ctx.CurrentY;
-                ctx.CurrentY = _y;
-            }
+            //if (lenght < 0)
+            //{
+            //    lenght = ctx.CurrentY;
+            //    ctx.CurrentY = _y;
+            //}
 
             g.DrawEllipse(UserPen, ctx.CurrentX, ctx.CurrentY, width, lenght);
 
