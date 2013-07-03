@@ -1,23 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="AnatomIL.Compiler">
-    <Position X="8" Y="0.75" Width="1.5" />
+    <Position X="7" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
       <FileName>compiler.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AnatomIL.Library">
-    <Position X="8" Y="3" Width="1.5" />
+    <Position X="7" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AoAAAAAIAAAAAAAAAAAEAAAQAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <HashCode>AoAAAAAIAAAAAAAAAAAEAAAQAAAAAAIAAAEAAAAAAAA=</HashCode>
       <FileName>Library.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AnatomIL.Tokeniser">
     <Position X="10.75" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAEAAwAIAAAAAkQIgAACEAIEDAABISAYQABIABGgAAI=</HashCode>
+      <HashCode>IAEAAwAIAAAAAkQIwAACEAIEDAABISAYQABYABGgAAI=</HashCode>
       <FileName>Tokeniser.cs</FileName>
     </TypeIdentifier>
   </Class>

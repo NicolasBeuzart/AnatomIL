@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace AnatomIL
 {
@@ -21,6 +22,11 @@ namespace AnatomIL
 
         }
 
+        [DllImport("user32.dll")]
+        static extern int SetScrollPos(IntPtr hWnd, int nBar, int nPos, bool bRedraw);
+
+        [DllImport("user32.dll")]
+        public static extern int GetScrollPos(IntPtr hwnd, int nBar);
         
         public UserControlCodeZone Code { get; set; }
         public UserControlTextBoxError Error { get; set; }
@@ -31,7 +37,7 @@ namespace AnatomIL
 
         public IlComputer CurrentComputer { get { return computer; } }
 
-        public System.Windows.Forms.Timer GoTimer;
+        public System.Windows.Forms.Timer GoTimer = new System.Windows.Forms.Timer();
 
         private void btGo_Click(object sender, EventArgs e)
         {
@@ -43,7 +49,7 @@ namespace AnatomIL
             ShowPc.Visible = false;
             ShowStack.Visible = false;
 
-           // Code.BreakPointList.Enabled = false;
+            Code.BreakPointList.Enabled = false;
 
             if (!ShowPc.Checked)
             {
@@ -56,7 +62,6 @@ namespace AnatomIL
 
             if (intervalTime == 0)
             {
-                GoTimer = new System.Windows.Forms.Timer();
 
                 GoTimer.Interval = 10;
                 GoTimer.Tick += new EventHandler(null_timer_execution);
@@ -64,7 +69,6 @@ namespace AnatomIL
             }
             else
             {
-                GoTimer = new System.Windows.Forms.Timer();
 
                 GoTimer.Interval = intervalTime;
                 GoTimer.Tick += new EventHandler(btExecuteOneStep_Click);
@@ -74,6 +78,7 @@ namespace AnatomIL
 
         private void btExecuteOneStep_Click(object sender, EventArgs e)
         {
+            Code.BreakPointList.Enabled = false;
             if (computer.Pc < Code.listBoxInstructions.Items.Count)
             {
                 if (Code.BreakPointList.CheckedItems.Contains(computer.Pc + 1))
@@ -153,7 +158,7 @@ namespace AnatomIL
 
         private void btCompile_Click(object sender, EventArgs e)
         {
-            g = CurrentComputer.Graph.CurrentGraph.Count;
+               g = CurrentComputer.Graph.CurrentGraph.Count;
                Error.Visible = false;
                Stack.listboxStack.Items.Clear();
 
@@ -183,7 +188,7 @@ namespace AnatomIL
                Code.BreakPointList.Enabled = !Code.BreakPointList.Enabled;
                
                Code.BreakPointList.Visible = true;
-               
+               System.Windows.Forms.Timer CheckScrollTimer = new System.Windows.Forms.Timer();
                if (computer.ErrorMessages.Count > 0)
                {
                    Error.Visible = true;
@@ -196,9 +201,16 @@ namespace AnatomIL
                    Code.listBoxInstructions.Visible = false;
                    Code.textBoxCode.Visible = true;
                    Code.BreakPointList.Enabled = false;
+
+                   
+                   CheckScrollTimer.Interval = 50;
+                   CheckScrollTimer.Tick += new EventHandler(CheckScroll);
+                   CheckScrollTimer.Start();
+
                }
                else
                {
+                   CheckScrollTimer.Stop();
                    computer.Start();
                    Code.listBoxInstructions.SelectedIndex = computer.Pc;
                    Code.BreakPointList.Enabled = true;
@@ -311,6 +323,13 @@ namespace AnatomIL
                 Stack.ShowStack();
 
             GraphController.Invalidate();
+        }
+
+        private void CheckScroll(object sender, EventArgs e)
+        {
+            int pos = GetScrollPos(Code.textBoxCode.Handle, 1);
+            SetScrollPos(Code.BreakPointList.Handle, 1, pos, true);
+            Code.BreakPointList.TopIndex = pos;
         }
 
     }

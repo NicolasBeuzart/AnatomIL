@@ -61,11 +61,13 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxCode.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxCode.Location = new System.Drawing.Point(56, 17);
+            this.textBoxCode.Location = new System.Drawing.Point(68, 17);
             this.textBoxCode.Multiline = true;
             this.textBoxCode.Name = "textBoxCode";
-            this.textBoxCode.Size = new System.Drawing.Size(248, 307);
+            this.textBoxCode.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBoxCode.Size = new System.Drawing.Size(236, 307);
             this.textBoxCode.TabIndex = 2;
+            this.textBoxCode.Text = "void main()\r\n{\r\n\r\n\r\n}";
             // 
             // listBoxInstructions
             // 
@@ -76,11 +78,13 @@
             this.listBoxInstructions.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxInstructions.FormattingEnabled = true;
             this.listBoxInstructions.ItemHeight = 16;
-            this.listBoxInstructions.Location = new System.Drawing.Point(56, 16);
+            this.listBoxInstructions.Location = new System.Drawing.Point(68, 16);
             this.listBoxInstructions.Name = "listBoxInstructions";
-            this.listBoxInstructions.Size = new System.Drawing.Size(251, 292);
+            this.listBoxInstructions.ScrollAlwaysVisible = true;
+            this.listBoxInstructions.Size = new System.Drawing.Size(239, 292);
             this.listBoxInstructions.TabIndex = 3;
             this.listBoxInstructions.Visible = false;
+            this.listBoxInstructions.SelectedIndexChanged += new System.EventHandler(this.listBoxInstructions_SelectedIndexChanged);
             // 
             // BreakPointList
             // 
@@ -89,7 +93,7 @@
             this.BreakPointList.Location = new System.Drawing.Point(0, 17);
             this.BreakPointList.MinimumSize = new System.Drawing.Size(50, 4);
             this.BreakPointList.Name = "BreakPointList";
-            this.BreakPointList.Size = new System.Drawing.Size(50, 310);
+            this.BreakPointList.Size = new System.Drawing.Size(62, 310);
             this.BreakPointList.TabIndex = 4;
             this.BreakPointList.Visible = false;
             this.BreakPointList.EnabledChanged += new System.EventHandler(this.BreakPointList_EnabledChanged);
