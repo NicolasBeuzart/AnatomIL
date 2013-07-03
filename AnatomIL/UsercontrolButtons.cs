@@ -38,10 +38,14 @@ namespace AnatomIL
         public IlComputer CurrentComputer { get { return computer; } }
 
         public System.Windows.Forms.Timer GoTimer = new System.Windows.Forms.Timer();
+        public System.Windows.Forms.Timer CheckScrollTimer_errorcompile = new System.Windows.Forms.Timer();
+        public System.Windows.Forms.Timer CheckScrollTimer_goodcompile = new System.Windows.Forms.Timer();
 
         private void btGo_Click(object sender, EventArgs e)
         {
-            
+
+            CheckScrollTimer_goodcompile.Stop();
+
             btCompile.Visible = false;
             btStop.Visible = true;
             btGo.Visible = false;
@@ -78,6 +82,8 @@ namespace AnatomIL
 
         private void btExecuteOneStep_Click(object sender, EventArgs e)
         {
+            CheckScrollTimer_goodcompile.Stop();
+
             Code.BreakPointList.Enabled = false;
             if (computer.Pc < Code.listBoxInstructions.Items.Count)
             {
@@ -188,7 +194,8 @@ namespace AnatomIL
                Code.BreakPointList.Enabled = !Code.BreakPointList.Enabled;
                
                Code.BreakPointList.Visible = true;
-               System.Windows.Forms.Timer CheckScrollTimer = new System.Windows.Forms.Timer();
+
+               CheckScrollTimer_errorcompile.Stop();
                if (computer.ErrorMessages.Count > 0)
                {
                    Error.Visible = true;
@@ -203,17 +210,20 @@ namespace AnatomIL
                    Code.BreakPointList.Enabled = false;
 
                    
-                   CheckScrollTimer.Interval = 50;
-                   CheckScrollTimer.Tick += new EventHandler(CheckScroll);
-                   CheckScrollTimer.Start();
+                   CheckScrollTimer_errorcompile.Interval = 50;
+                   CheckScrollTimer_errorcompile.Tick += new EventHandler(CheckScroll_errorcompile);
+                   CheckScrollTimer_errorcompile.Start();
 
                }
                else
                {
-                   CheckScrollTimer.Stop();
                    computer.Start();
                    Code.listBoxInstructions.SelectedIndex = computer.Pc;
                    Code.BreakPointList.Enabled = true;
+
+                   CheckScrollTimer_goodcompile.Interval = 50;
+                   CheckScrollTimer_goodcompile.Tick += new EventHandler(CheckScroll_goodcompile);
+                   CheckScrollTimer_goodcompile.Start();
                }
         }
 
@@ -325,11 +335,16 @@ namespace AnatomIL
             GraphController.Invalidate();
         }
 
-        private void CheckScroll(object sender, EventArgs e)
+        private void CheckScroll_errorcompile(object sender, EventArgs e)
         {
             int pos = GetScrollPos(Code.textBoxCode.Handle, 1);
             SetScrollPos(Code.BreakPointList.Handle, 1, pos, true);
             Code.BreakPointList.TopIndex = pos;
+        }
+
+        private void CheckScroll_goodcompile(object sender, EventArgs e)
+        {
+            Code.listBoxInstructions.TopIndex = Code.BreakPointList.TopIndex;
         }
 
     }
