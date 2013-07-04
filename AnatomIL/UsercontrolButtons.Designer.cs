@@ -46,7 +46,7 @@
             this.btExecuteOneStep.Name = "btExecuteOneStep";
             this.btExecuteOneStep.Size = new System.Drawing.Size(92, 24);
             this.btExecuteOneStep.TabIndex = 0;
-            this.btExecuteOneStep.Text = "Pas à pas";
+            this.btExecuteOneStep.Text = "Step by Step";
             this.btExecuteOneStep.UseVisualStyleBackColor = true;
             this.btExecuteOneStep.Visible = false;
             this.btExecuteOneStep.Click += new System.EventHandler(this.btExecuteOneStep_Click);

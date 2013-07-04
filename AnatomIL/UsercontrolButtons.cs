@@ -270,7 +270,8 @@ namespace AnatomIL
         private void null_timer_execution(object sender, EventArgs e)
         {
             int i;
-
+            CheckScrollTimer_errorcompile.Stop();
+            CheckScrollTimer_goodcompile.Stop();
             for(i=0; i<100;i++)
             {
                 if (computer.Pc < Code.listBoxInstructions.Items.Count)

@@ -55,8 +55,8 @@
             this.loadToolStripMenuItem,
             this.saveToolStripMenuItem});
             this.fichierToolStripMenuItem.Name = "fichierToolStripMenuItem";
-            this.fichierToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
-            this.fichierToolStripMenuItem.Text = "Fichier";
+            this.fichierToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fichierToolStripMenuItem.Text = "File";
             // 
             // loadToolStripMenuItem
             // 
@@ -84,14 +84,14 @@
             // loadToolStripMenuItem1
             // 
             this.loadToolStripMenuItem1.Name = "loadToolStripMenuItem1";
-            this.loadToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.loadToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
             this.loadToolStripMenuItem1.Text = "Load";
             this.loadToolStripMenuItem1.Click += new System.EventHandler(this.loadToolStripMenuItem1_Click);
             // 
             // saveToolStripMenuItem1
             // 
             this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
-            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
             this.saveToolStripMenuItem1.Text = "Save";
             this.saveToolStripMenuItem1.Click += new System.EventHandler(this.saveToolStripMenuItem1_Click);
             // 
