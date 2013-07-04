@@ -173,7 +173,6 @@ namespace AnatomIL
             Type type = null;
             object Value = null;
             string option;
-            string argument = "";
             int result = -1;
 
             if (!(t.IsOption(out option) && t.MatchSpace()))
@@ -196,7 +195,6 @@ namespace AnatomIL
             }
             else if (option.Equals("i4"))
             {
-                Int32 tmp;
                 if (result > -1)
                 {
                     type = typeof(Int32);
@@ -212,7 +210,6 @@ namespace AnatomIL
             else if (option.Equals("i2"))
             {
 
-                Int16 tmp;
                 //if (!Int16.TryParse(argument, out tmp)) errorMessage = "Argument isn't Int16 in Operation" + base._name;
                 //else
                 //{
