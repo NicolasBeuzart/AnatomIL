@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace AnatomIL
 {
@@ -21,6 +22,11 @@ namespace AnatomIL
 
         }
 
+        [DllImport("user32.dll")]
+        static extern int SetScrollPos(IntPtr hWnd, int nBar, int nPos, bool bRedraw);
+
+        [DllImport("user32.dll")]
+        public static extern int GetScrollPos(IntPtr hwnd, int nBar);
         
         public UserControlCodeZone Code { get; set; }
         public UserControlTextBoxError Error { get; set; }
@@ -32,10 +38,14 @@ namespace AnatomIL
         public IlComputer CurrentComputer { get { return computer; } }
 
         public System.Windows.Forms.Timer GoTimer = new System.Windows.Forms.Timer();
+        public System.Windows.Forms.Timer CheckScrollTimer_errorcompile = new System.Windows.Forms.Timer();
+        public System.Windows.Forms.Timer CheckScrollTimer_goodcompile = new System.Windows.Forms.Timer();
 
         private void btGo_Click(object sender, EventArgs e)
         {
-            
+
+            CheckScrollTimer_goodcompile.Stop();
+
             btCompile.Visible = false;
             btStop.Visible = true;
             btGo.Visible = false;
@@ -43,7 +53,7 @@ namespace AnatomIL
             ShowPc.Visible = false;
             ShowStack.Visible = false;
 
-           // Code.BreakPointList.Enabled = false;
+            Code.BreakPointList.Enabled = false;
 
             if (!ShowPc.Checked)
             {
@@ -72,6 +82,9 @@ namespace AnatomIL
 
         private void btExecuteOneStep_Click(object sender, EventArgs e)
         {
+            CheckScrollTimer_goodcompile.Stop();
+
+            Code.BreakPointList.Enabled = false;
             if (computer.Pc < Code.listBoxInstructions.Items.Count)
             {
                 if (Code.BreakPointList.CheckedItems.Contains(computer.Pc + 1))
@@ -150,7 +163,7 @@ namespace AnatomIL
 
         private void btCompile_Click(object sender, EventArgs e)
         {
-            g = CurrentComputer.Graph.CurrentGraph.Count;
+               g = CurrentComputer.Graph.CurrentGraph.Count;
                Error.Visible = false;
                Stack.listboxStack.Items.Clear();
 
@@ -180,7 +193,8 @@ namespace AnatomIL
                Code.BreakPointList.Enabled = !Code.BreakPointList.Enabled;
                
                Code.BreakPointList.Visible = true;
-               
+
+               CheckScrollTimer_errorcompile.Stop();
                if (computer.ErrorMessages.Count > 0)
                {
                    Error.Visible = true;
@@ -193,12 +207,22 @@ namespace AnatomIL
                    Code.listBoxInstructions.Visible = false;
                    Code.textBoxCode.Visible = true;
                    Code.BreakPointList.Enabled = false;
+
+                   
+                   CheckScrollTimer_errorcompile.Interval = 50;
+                   CheckScrollTimer_errorcompile.Tick += new EventHandler(CheckScroll_errorcompile);
+                   CheckScrollTimer_errorcompile.Start();
+
                }
                else
                {
                    computer.Start();
                    Code.listBoxInstructions.SelectedIndex = computer.Pc;
                    Code.BreakPointList.Enabled = true;
+
+                   CheckScrollTimer_goodcompile.Interval = 50;
+                   CheckScrollTimer_goodcompile.Tick += new EventHandler(CheckScroll_goodcompile);
+                   CheckScrollTimer_goodcompile.Start();
                }
         }
 
@@ -308,6 +332,18 @@ namespace AnatomIL
                 Stack.ShowStack();
 
             GraphController.Invalidate();
+        }
+
+        private void CheckScroll_errorcompile(object sender, EventArgs e)
+        {
+            int pos = GetScrollPos(Code.textBoxCode.Handle, 1);
+            SetScrollPos(Code.BreakPointList.Handle, 1, pos, true);
+            Code.BreakPointList.TopIndex = pos;
+        }
+
+        private void CheckScroll_goodcompile(object sender, EventArgs e)
+        {
+            Code.listBoxInstructions.TopIndex = Code.BreakPointList.TopIndex;
         }
 
     }

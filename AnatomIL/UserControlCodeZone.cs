@@ -17,6 +17,11 @@ namespace AnatomIL
             InitializeComponent();
         }
 
+        private void listBoxInstructions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BreakPointList.TopIndex = listBoxInstructions.TopIndex;
+        }
+
         private void BreakPointList_EnabledChanged(object sender, EventArgs e)
         {
             BreakPointList.Items.Clear();
