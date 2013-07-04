@@ -31,7 +31,7 @@ namespace AnatomIL
 
         public IlComputer CurrentComputer { get { return computer; } }
 
-        public System.Windows.Forms.Timer GoTimer;
+        public System.Windows.Forms.Timer GoTimer = new System.Windows.Forms.Timer();
 
         private void btGo_Click(object sender, EventArgs e)
         {
@@ -56,7 +56,6 @@ namespace AnatomIL
 
             if (intervalTime == 0)
             {
-                GoTimer = new System.Windows.Forms.Timer();
 
                 GoTimer.Interval = 10;
                 GoTimer.Tick += new EventHandler(null_timer_execution);
@@ -64,7 +63,6 @@ namespace AnatomIL
             }
             else
             {
-                GoTimer = new System.Windows.Forms.Timer();
 
                 GoTimer.Interval = intervalTime;
                 GoTimer.Tick += new EventHandler(btExecuteOneStep_Click);
@@ -87,7 +85,6 @@ namespace AnatomIL
 
                     if (computer.ErrorMessages.Count > 0)
                     {
-                        GoTimer.Start();
                         GoTimer.Stop();
                         btCompile.Visible = true;
                         Error.Visible = true;
